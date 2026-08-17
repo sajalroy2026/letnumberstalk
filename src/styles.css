@@ -73,6 +73,10 @@
   --color-oxblood: var(--oxblood);
   --color-slate-blue: var(--slate-blue);
   --color-putty: var(--putty);
+  --color-amber: var(--amber);
+  --color-plum: var(--plum);
+  --color-cyan: var(--cyan);
+  --color-lime: var(--lime);
   --font-display: "Libre Baskerville", Georgia, serif;
   --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
