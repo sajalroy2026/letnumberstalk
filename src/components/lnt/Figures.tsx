@@ -1413,21 +1413,20 @@ export function PillarArmature({ className }: { className?: string }) {
           const arc = circ * (0.22 + p.weight * 1.6);
           return (
             <g key={p.id} transform={`rotate(${i * 14 - 20})`}>
-              <circle r={r} fill="none" stroke={tone} strokeOpacity={0.14} strokeWidth={1} />
+              <circle r={r} fill="none" stroke={tone} strokeOpacity={0.3} strokeWidth={1.1} />
               <motion.circle
                 r={r}
                 fill="none"
                 stroke={tone}
-                strokeOpacity={0.7}
-                strokeWidth={2 + p.weight * 10}
+                strokeOpacity={0.85}
+                strokeWidth={3 + p.weight * 16}
                 strokeLinecap="round"
                 strokeDasharray={`${arc} ${circ}`}
-                initial={{ rotate: -140, opacity: 0, pathLength: 0 }}
-                animate={{ rotate: 220, opacity: 1, pathLength: 1 }}
+                initial={{ rotate: -140, opacity: 0 }}
+                animate={{ rotate: 220, opacity: 1 }}
                 transition={{
                   rotate: { duration: 52 + i * 11, repeat: Infinity, ease: "linear" },
                   opacity: { duration: 1.1, delay: 0.2 + i * 0.09 },
-                  pathLength: { duration: 1.8, delay: 0.2 + i * 0.09, ease },
                 }}
               />
               <motion.circle
