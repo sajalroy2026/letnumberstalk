@@ -555,8 +555,10 @@ export function ReportStage() {
         <AboutSections />
         <Disclosure />
       </div>
+      </div>
     </div>
   );
+
 }
 
 function MetricResultRow({ result }: { result: MetricResult }) {
