@@ -1,17 +1,24 @@
 # LetNumbersTalk — Build Plan
 
-I read both documents end to end. Below is my judgment on architecture, sequencing, risk, and the specific gaps I found between the two documents that need your decision before code starts.
+I re-read the regenerated Logic Specification V3.0 against my earlier findings. Every blocking gap is closed. This plan is now buildable as written.
 
-## What I verified in the documents
+## Verification of the regenerated spec
 
-- Logic Spec Sections 2–8 contain **54 metric entries**, not 57: Financial Health 17, Operational Efficiency 9, Market Position 10, Organizational Capability 5, Strategic Positioning 5, Risk Management 5, Technology & Systems 3. Section 11.1 also says "All 17" for Financial Health, confirming 17 there.
-- **26 of the 54 metrics carry an explicit `Scoring Band:` line. 28 do not** — they have sector benchmark tables and threshold readings but no point allocation.
-- Each pillar's scoring engine header allocates 100 points across sub-components, and several sub-components have **no matching metric entry** in the spec (details below).
-- Section 11.1 defines critical-minimum sets for all seven pillars. Section 11.3 defines permitted and prohibited language patterns. Section 9 defines pillar weights and the two-indicator Caution mechanism.
+- **Scope restated as 54 metrics** (was "57"). Distribution confirmed: Financial Health 17, Operational Efficiency 9, Market Position 10, Organizational Capability 5, Strategic Positioning 5, Risk Management 5, Technology & Systems 3.
+- **All 54 metrics now carry an explicit `Scoring Band` line** (was 26 of 54).
+- **All seven pillar point allocations sum to exactly 100** — I summed the per-metric maximum points in each pillar and each totals 100.
+- **Every scoring-engine sub-component now names real metrics.** The previously unmapped components (Decision speed, Model leverage, Network advantage, Digital and AI maturity, Integration and Data Flow, Contribution per customer, Share trajectory, Pricing power, Cost-structure flexibility) are gone; sub-components are now groupings of the actual 54 metrics.
+- **Caution thresholds are now explicit** in Section 9: cash runway below 3 months, top-three customer concentration above 60%, with the non-blocking rule restated.
+- **New Section 11.2a** fixes the confidence vocabulary: per-input `Stated` / `Estimated`; per-pillar `High` / `Moderate` / `Indicative` derived from coverage against the Section 11.1 tiers.
+- **New Section 11.2b** confirms qualitative metrics render as labelled selectable band cards — not dropdowns, not bare numeric fields — resolving the FR-06 / FR-08 tension.
+- **Content completeness:** all 54 metrics have Definition, Formula, sourcing guidance, What This Reading Shows, and Areas to Look Into. 49 of 54 carry sector benchmark tables; the 5 without (Process Cycle Time, Differentiation Strength, Switching Cost Assessment, Key-Person Dependency, Automation Level) are sector-neutral by nature — four are 1–4 self-assessments and cycle time is business-specific. No action needed.
+
+Only one open item remains, and it does not block the start of the build (item 1 at the end).
 
 ## Architecture — one engine, not seven implementations
 
-The 57 (54) metrics do not need 57 scoring functions. Everything in the spec reduces to four declarative scorer shapes, plus a generic evaluator.
+The 54 metrics do not need 54 scoring functions. Everything in the spec reduces to four declarative scorer shapes, plus a generic evaluator.
+
 
 ```text
 metric definition (data)          engine (code, written once)
