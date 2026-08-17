@@ -159,12 +159,10 @@ export function TierMeter({ tier, points, max }: { tier: Tier; points: number; m
       <div className="h-1.5 w-full min-w-0 bg-border/70">
         <motion.div
           className="h-full"
-          style={{ background: tierStroke[tier] }}
+          style={{ background: tierStroke[tier], transformOrigin: "left" }}
           initial={{ scaleX: 0 }}
           animate={{ scaleX: pct }}
-          style-origin="left"
           transition={{ duration: 0.9, ease }}
-          {...{ style: { background: tierStroke[tier], transformOrigin: "left" } }}
         />
       </div>
       <span className="figure shrink-0 text-xs text-muted-foreground">
