@@ -167,7 +167,7 @@ function Home() {
               initial={{ opacity: 0, scale: 0.94, filter: "blur(10px)" }}
               animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
               transition={{ duration: 1.6, ease }}
-              className="pointer-events-none relative mx-auto aspect-square w-full max-w-[34rem] lg:aspect-[4/5]"
+              className="pointer-events-none relative mx-auto aspect-square w-full max-w-[36rem] lg:aspect-[4/5] lg:max-w-none"
             >
               <PillarArmature fit="meet" />
             </motion.div>
