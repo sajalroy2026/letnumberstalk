@@ -5,19 +5,22 @@ Remove "The Business Health Instrument" from the header entirely. The top-left r
 `LetNumbersTalk — by Mr Sajal Roy`.
 
 ## 2. Replace the hero figure
-Retire the circular pillar armature (and any donut/orbit/ring figure on the home page). In its place, a seven-panel pillar composition — no percentages, no weighting bars:
+Retire the circular pillar armature (and any donut/orbit/ring figure). In its place, a prominent seven-panel emblem set — each pillar represented by its own custom symbol, no charts, no percentages:
 
 ```text
   ┌────────┬────────┬────────┬────────┬────────┬────────┬────────┐
-  │ FINAN. │  RISK  │ MARKET │  OPS   │ STRAT. │  ORG.  │  TECH  │
-  │  ▁▃▅█  │  █▅▃▁  │  ▃█▅▂  │  ▂▅█▃  │  ▅▃█▂  │  ▃▂▅█  │  █▃▂▅  │
+  │  ▙▟    │   ⛨    │   ⬗⬖   │   ⚙    │   ➤    │  ⬢⬢    │   ⬒    │
+  │ VAULT  │ SHIELD │ COMPASS│  GEAR  │ ARROW  │  CELLS │  GRID  │
+  │ Finan. │  Risk  │ Market │  Ops   │ Strat. │  Org.  │  Tech  │
   └────────┴────────┴────────┴────────┴────────┴────────┴────────┘
 ```
 
-- Seven upright panels standing side by side, one per pillar, each in its own pillar colour with a subtle 3D extrusion and depth shadow.
-- Each panel carries the pillar name and a small abstract signal motif (stepped bars / a short trace line) — indicative texture, no figures or ratios.
-- Panels rise in staggered on load, with a slow scan-line sweep crossing the set and a light drift on scroll.
-- No circles, arcs, orbits, rotation, or percentage labels anywhere in the hero.
+- Seven upright panels side by side, each in its own pillar colour with 3D extrusion and depth shadow.
+- Each panel carries a bespoke geometric symbol for its pillar — vault/ledger block (Financial), shield (Risk), compass facet (Market), interlocking gear form (Operations), directional chevron (Strategy), linked cells (Organisation), circuit grid (Technology) — drawn as angular mid-century marks, not icon-font clipart.
+- The set is scaled as the hero's dominant element: full column height, large symbols that read at a glance, pillar names as small caps beneath.
+- Symbols draw in with a stroke reveal, panels rise staggered, a slow light sweep crosses the set, and the group drifts gently on scroll.
+- No circles, arcs, orbits, rotation, bars, or percentage labels.
+
 
 
 ## 3. Multi-accent, oxblood-led
@@ -38,6 +41,6 @@ Remove the sticky positioning from the site header so it scrolls away naturally 
 
 ## Technical notes
 - `src/components/lnt/SiteChrome.tsx`: drop the instrument tagline span; remove `sticky top-0` from `<header>`.
-- `src/components/lnt/Figures.tsx`: add a `PillarPanels` figure (seven extruded upright panels with pillar names and abstract signal motifs); remove `PillarArmature` usage from the home page.
+- `src/components/lnt/Figures.tsx`: add a `PillarEmblems` figure (seven extruded panels, each with a bespoke SVG pillar symbol and stroke-reveal animation); remove `PillarArmature` usage from the home page.
 - `src/routes/index.tsx`: swap the hero figure, reassign section tone classes to the oxblood-led rotation, change the DELIVERS tile animation to a pop and reduce grid gap.
 - `src/styles.css`: make oxblood the default body accent, keep navy scoped to header/footer, verify each `.tone-*` pair retains AA contrast.
