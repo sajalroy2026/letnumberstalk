@@ -1,6 +1,8 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import { track } from "@/lib/analytics/track";
+
 import { MetricCard } from "./MetricCard";
 import { Disclosure } from "./SiteChrome";
 import { AboutSections } from "./AboutSections";
@@ -590,7 +592,10 @@ export function ReportStage() {
       <div className="no-print mt-14 flex flex-wrap gap-4">
         <button
           type="button"
-          onClick={() => window.print()}
+          onClick={() => {
+            track("report_generated");
+            window.print();
+          }}
           className="rule-copper px-8 py-2.5 text-xs uppercase tracking-[0.2em] text-primary-foreground"
         >
           Download report
@@ -674,12 +679,18 @@ function StageShell({
 }
 
 export function AssessmentFlow() {
-  const { stage } = useSession();
+  const { stage, sector } = useSession();
 
   // Every stage transition returns the reader to the top of the new chapter.
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, [stage]);
+
+  // Anonymous usage readings — event name and industry profile only.
+  useEffect(() => {
+    if (stage === "assess") track("assessment_started", sector ?? undefined);
+    if (stage === "report") track("assessment_completed", sector ?? undefined);
+  }, [stage, sector]);
 
   return (
 
