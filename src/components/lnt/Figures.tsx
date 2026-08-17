@@ -838,7 +838,10 @@ export function SectorPlate({ id, active }: { id: string; active?: boolean }) {
 
 /* -------------------------------------------------------- Display numeral */
 
-/** Oversized numeral used as a compositional anchor. */
+/**
+ * Oversized numeral used as a compositional anchor. Numeric values resolve
+ * on entry — the figure counts and settles rather than simply appearing.
+ */
 export function DisplayNumeral({
   value,
   caption,
@@ -850,22 +853,29 @@ export function DisplayNumeral({
   tone?: string;
   className?: string;
 }) {
+  const numeric = Number(value);
+  const isNumeric = value.trim() !== "" && Number.isFinite(numeric);
+  const [entered, setEntered] = useState(false);
+  const shown = useCountUp(entered && isNumeric ? numeric : 0, 1500);
+
   return (
     <div className={cn("min-w-0", className)}>
       <motion.p
-        initial={{ opacity: 0, y: 22 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 22, filter: "blur(10px)" }}
+        whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        onViewportEnter={() => setEntered(true)}
         viewport={{ once: true, margin: "-60px" }}
-        transition={{ duration: 0.8, ease }}
+        transition={{ duration: 0.9, ease }}
         className="figure text-6xl leading-none sm:text-7xl"
         style={{ color: tone }}
       >
-        {value}
+        {isNumeric ? shown : value}
       </motion.p>
       <p className="mt-3 text-xs uppercase tracking-[0.2em] text-muted-foreground">{caption}</p>
     </div>
   );
 }
+
 
 /* ---------------------------------------------------- Cinematic depth wrap */
 
