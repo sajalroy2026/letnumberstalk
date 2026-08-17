@@ -11,7 +11,7 @@ import {
   DepthReveal,
   DisplayNumeral,
   FlowGraph,
-  HeroComposition,
+  HorizonField,
   OrbitField,
   ParallaxLayer,
   PrismStack,
