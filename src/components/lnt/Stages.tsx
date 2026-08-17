@@ -592,7 +592,10 @@ export function ReportStage() {
       <div className="no-print mt-14 flex flex-wrap gap-4">
         <button
           type="button"
-          onClick={() => window.print()}
+          onClick={() => {
+            track("report_generated");
+            window.print();
+          }}
           className="rule-copper px-8 py-2.5 text-xs uppercase tracking-[0.2em] text-primary-foreground"
         >
           Download report
