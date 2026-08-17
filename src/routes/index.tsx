@@ -6,12 +6,12 @@ import { SiteFooter, SiteHeader } from "@/components/lnt/SiteChrome";
 import { METRIC_CONTENT, PILLAR_META } from "@/lib/assessment/spec.generated";
 import { SECTORS } from "@/lib/assessment/scoring";
 import {
-  BarSwarm,
-  DataLattice,
   DepthReveal,
   DisplayNumeral,
   FlowGraph,
-  HorizonField,
+  BenchmarkTerrain,
+  PillarArmature,
+  ScoreColumns,
   OrbitField,
   ParallaxLayer,
   PrismStack,
@@ -83,18 +83,18 @@ function Home() {
             initial={{ opacity: 0, scale: 1.04 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.8, ease }}
-            className="pointer-events-none absolute inset-0 -z-10"
+            className="pointer-events-none absolute inset-0 z-0"
           >
-            <HorizonField />
+            <PillarArmature />
           </motion.div>
           <ParallaxLayer
             depth={0.25}
-            className="pointer-events-none absolute inset-x-0 top-0 -z-10 opacity-25"
+            className="pointer-events-none absolute inset-x-0 top-0 z-0 opacity-25"
           >
             <SignalField />
           </ParallaxLayer>
 
-          <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-5 pb-24 pt-20 sm:px-8 sm:pt-28">
+          <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-12 px-5 pb-24 pt-20 sm:px-8 sm:pt-28">
             <div className="scrim max-w-3xl">
               <motion.p
                 initial={{ opacity: 0, y: 16 }}
@@ -102,7 +102,7 @@ function Home() {
                 transition={{ duration: 0.7, ease }}
                 className="figure text-[0.68rem] uppercase tracking-[0.32em] text-accent"
               >
-                The Business Health Instrument · by Mr Sajal Roy
+                The Business Health Instrument
               </motion.p>
               <motion.h1
                 initial={{ opacity: 0, y: 30, filter: "blur(12px)" }}
@@ -237,12 +237,12 @@ function Home() {
         <section className="mint-band tone-plum prism-wash relative overflow-hidden">
           <ParallaxLayer
             depth={0.45}
-            className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 opacity-45"
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-0 opacity-60"
           >
-            <DataLattice />
+            <BenchmarkTerrain />
           </ParallaxLayer>
 
-          <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
+          <div className="relative z-10 mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
             <p className="figure text-[0.65rem] uppercase tracking-[0.28em] text-accent">
               Structure
             </p>
@@ -332,7 +332,9 @@ function Home() {
                 transition={{ duration: 0.7, delay: 0.35, ease }}
                 className="glass flex flex-col justify-between p-6 text-amber"
               >
-                <BarSwarm />
+                <div className="h-44 w-full">
+                  <ScoreColumns className="h-full w-full" />
+                </div>
                 <p className="mt-4 text-xs leading-[1.7] text-foreground/75">
                   Each profile carries its own thresholds, so a reading is measured against the
                   economics of the business you actually operate.
