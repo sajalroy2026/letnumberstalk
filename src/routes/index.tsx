@@ -48,25 +48,21 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 const DELIVERS = [
   {
-    n: "01",
     t: "A weighted diagnosis built from your operating figures",
     d: "7 independent scoring engines convert your operating figures into pillar scores, then into a single Integrated Business Health Score under a fixed weighting — Financial Health 22%, Risk 20%, Market 18%, Operations 15%, Strategy 13%, Organisation 7%, Technology 5%.",
     tone: "var(--teal)",
   },
   {
-    n: "02",
     t: "Sector-calibrated benchmarking",
     d: "Every threshold is re-based against 1 of 5 industry profiles. A services practice is read against services economics, and a manufacturer against manufacturing economics, so each comparison holds.",
     tone: "var(--plum)",
   },
   {
-    n: "03",
     t: "Value-chain attribution",
     d: "Where a reading breaches its healthy band, the instrument names the location in the value chain, the factors that commonly contribute, and how the pattern presents in practice — diagnostic language throughout.",
     tone: "var(--ochre)",
   },
   {
-    n: "04",
     t: "Terminal-risk surveillance",
     d: "Cash runway and customer concentration are monitored as terminal indicators. A breach raises a distinct Caution disclosure in the integrated report, while scores generate in full alongside it.",
     tone: "var(--cyan)",
@@ -220,10 +216,12 @@ function Home() {
                         style={{ background: c.tone }}
                         aria-hidden
                       />
-                      <span className="figure text-[0.7rem] tracking-[0.22em]" style={{ color: c.tone }}>
-                        {c.n}
-                      </span>
-                      <h3 className="mt-3 font-display text-lg leading-snug text-foreground">{c.t}</h3>
+                      <span
+                        className="block h-[3px] w-10"
+                        style={{ background: c.tone }}
+                        aria-hidden
+                      />
+                      <h3 className="mt-4 font-display text-lg leading-snug text-foreground">{c.t}</h3>
                       <p className="mt-3 text-sm leading-[1.7] text-foreground/80">{c.d}</p>
                     </motion.article>
                   ))}
@@ -366,19 +364,16 @@ function Home() {
             <div className="mt-14 grid gap-px bg-border md:grid-cols-3">
               {[
                 {
-                  n: "01",
                   t: "Evidence before opinion",
                   d: "Every input is sourced from a named artefact — Profit and Loss statement, Stripe or QuickBooks ledger, CRM pipeline, operations log — so the diagnosis rests on instrumented figures.",
                   tone: "var(--cyan)",
                 },
                 {
-                  n: "02",
                   t: "Diagnostic language throughout",
                   d: "Where a reading falls outside its healthy range, you get where in the value chain it originates, what commonly contributes, and how it presents in practice — observation stated plainly.",
                   tone: "var(--amber)",
                 },
                 {
-                  n: "03",
                   t: "Everything stays in the browser",
                   d: "Open the instrument and begin. Every figure is held in session memory and discarded the moment the tab closes.",
                   tone: "var(--lime)",
@@ -392,10 +387,8 @@ function Home() {
                   transition={{ duration: 0.6, delay: i * 0.08, ease }}
                   className="bg-background p-7"
                 >
-                  <span className="figure text-[0.7rem] tracking-[0.2em]" style={{ color: c.tone }}>
-                    {c.n}
-                  </span>
-                  <h3 className="mt-3 font-display text-lg text-foreground">{c.t}</h3>
+                  <span className="block h-[3px] w-10" style={{ background: c.tone }} aria-hidden />
+                  <h3 className="mt-4 font-display text-lg text-foreground">{c.t}</h3>
                   <p className="mt-3 text-sm leading-[1.75] text-foreground/85">{c.d}</p>
                 </motion.div>
               ))}
