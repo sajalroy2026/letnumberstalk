@@ -399,54 +399,78 @@ export function ReportStage() {
   const shown = useCountUp(integrated, 1600);
 
   return (
-    <div className="mx-auto max-w-5xl px-5 pb-24 pt-14 sm:px-8">
-      <motion.header
-        initial={{ opacity: 0, y: 28 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease }}
-      >
-        <p className="text-xs uppercase tracking-[0.28em] text-primary">
-          Diagnostic report · {sectorName} profile
-        </p>
-        <h1 className="mt-4 font-display text-4xl leading-tight text-foreground sm:text-5xl">
-          {isFullAssessment ? "Integrated Business Health" : "Pillar readings"}
-        </h1>
-      </motion.header>
+    <div>
+      {/* ------------------------------------------------- Ink cover plate */}
+      <section className="ink grid-field print-plain relative overflow-hidden">
+        <div className="relative mx-auto max-w-5xl px-5 py-16 sm:px-8">
+          <motion.header
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease }}
+          >
+            <p className="figure text-[0.68rem] uppercase tracking-[0.28em] text-accent">
+              Diagnostic report · {sectorName} profile
+            </p>
+            <h1 className="mt-4 font-display text-4xl leading-tight text-foreground sm:text-5xl">
+              {isFullAssessment ? "Integrated Business Health" : "Pillar readings"}
+            </h1>
+            <span className="band-rule mt-6 block" aria-hidden />
+          </motion.header>
 
-      {report ? (
-        <motion.section
-          initial={{ opacity: 0, scale: 0.97, rotateX: 10 }}
-          animate={{ opacity: 1, scale: 1, rotateX: 0 }}
-          transition={{ duration: 0.9, delay: 0.15, ease }}
-          className="plate print-plain mt-10 grid items-center gap-10 p-10 md:grid-cols-[auto_minmax(0,1fr)]"
-        >
-          <div className="justify-self-center">
-            <ScoreDial
-              score={report.integratedScore}
-              tier={tierOf(report.integratedScore)}
-              label="Integrated"
-            />
-          </div>
-          <div className="min-w-0">
-            <p className="text-xs uppercase tracking-[0.28em] text-muted-foreground">
-              Integrated Business Health Score
+          {report ? (
+            <motion.section
+              initial={{ opacity: 0, scale: 0.97, rotateX: 10 }}
+              animate={{ opacity: 1, scale: 1, rotateX: 0 }}
+              transition={{ duration: 0.95, delay: 0.15, ease }}
+              className="plate print-plain mt-10 grid items-center gap-10 p-8 sm:p-10 md:grid-cols-[auto_minmax(0,1fr)]"
+            >
+              <div className="justify-self-center">
+                <ScoreDial
+                  score={report.integratedScore}
+                  tier={tierOf(report.integratedScore)}
+                  label="Integrated"
+                />
+              </div>
+              <div className="min-w-0">
+                <p className="figure text-[0.66rem] uppercase tracking-[0.26em] text-muted-foreground">
+                  Integrated Business Health Score · {shown} of 100
+                </p>
+                <p className="mt-3 measure text-sm leading-relaxed text-muted-foreground">
+                  Weighted composite across 7 pillars, each pillar contributing at its defined
+                  weight. Sector profile: {sectorName}.
+                </p>
+                <div className="mt-6">
+                  <PillarWeightRing />
+                </div>
+              </div>
+            </motion.section>
+          ) : (
+            <p className="mt-8 measure text-base leading-relaxed text-muted-foreground">
+              {assessments.length} of 7 pillars were assessed, so independent pillar scores are
+              presented without a blended figure. Assessing all 7 produces the Integrated Business
+              Health Score.
             </p>
-            <p className="mt-3 measure text-sm leading-relaxed text-muted-foreground">
-              Weighted composite across 7 pillars, each pillar contributing at its defined weight.
-              Sector profile: {sectorName}.
-            </p>
-            <div className="mt-6">
-              <PillarWeightRing />
+          )}
+
+          {assessments.some((a) => a.meetsCriticalMinimum) ? (
+            <div className="mt-10">
+              <PillarSpectrum
+                rows={assessments
+                  .filter((a) => a.meetsCriticalMinimum)
+                  .map((a) => ({
+                    name: a.name,
+                    score: a.score,
+                    weight: a.weight,
+                    tier: tierOf(a.score),
+                  }))}
+              />
             </div>
-          </div>
-        </motion.section>
-      ) : (
-        <p className="mt-8 measure text-base leading-relaxed text-muted-foreground">
-          {assessments.length} of 7 pillars were assessed, so independent pillar scores are
-          presented without a blended figure. Assessing all 7 produces the Integrated Business
-          Health Score.
-        </p>
-      )}
+          ) : null}
+        </div>
+      </section>
+
+      <div className="mx-auto max-w-5xl px-5 pb-24 pt-14 sm:px-8">
+
 
       {report?.caution.length ? (
         <motion.section
