@@ -342,15 +342,23 @@
 }
 
 /* The red band keeps only its own gentle mid-band lift. */
+.plum-band,
 .plum-band.aurora-wash,
 .plum-band.warm-wash,
 .plum-band.prism-wash {
-  background-image: linear-gradient(
-    180deg,
-    oklch(0.258 0.126 22) 0%,
-    oklch(0.288 0.132 22) 50%,
-    oklch(0.258 0.126 22) 100%
-  );
+  background-image:
+    radial-gradient(
+      120% 70% at 50% 50%,
+      oklch(0.372 0.166 24 / 0.9) 0%,
+      oklch(0.312 0.148 23 / 0.55) 42%,
+      transparent 78%
+    ),
+    linear-gradient(
+      180deg,
+      oklch(0.232 0.114 22) 0%,
+      oklch(0.336 0.152 23) 50%,
+      oklch(0.232 0.114 22) 100%
+    );
 }
 
 /* Gold band — warm, bright ground for high-energy chapters. */

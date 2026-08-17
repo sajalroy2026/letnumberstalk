@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useScroll, useSpring, useTransform } from "motion/react";
+import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
 import { PILLAR_META } from "@/lib/assessment/spec.generated";
@@ -1572,283 +1572,382 @@ export function ScoreColumns({ className }: { className?: string }) {
   );
 }
 
-/* ------------------------------------------------- Hero: seven pillar cards */
-
-/**
- * Hero composition. Seven cards — one per pillar — each carrying the pillar
- * name and its own bespoke mark, arranged as a single staggered formation on a
- * shared perspective plane. Cards enter with a depth push, marks draw in, and
- * the whole group tilts gently toward the pointer.
- */
-const PILLAR_MARKS: Record<PillarId, React.ReactNode> = {
-  financial: (
-    <>
-      <path d="M8 40 L20 40 L20 20 L8 20 Z" />
-      <path d="M24 40 L36 40 L36 12 L24 12 Z" />
-      <path d="M40 40 L52 40 L52 26 L40 26 Z" />
-      <path d="M4 46 L56 46" />
-      <path d="M8 14 L20 6 L32 12" />
-    </>
-  ),
-  risk: (
-    <>
-      <path d="M30 4 L52 13 L52 28 C52 40 42 47 30 52 C18 47 8 40 8 28 L8 13 Z" />
-      <path d="M30 16 L30 34" />
-      <path d="M20 25 L40 25" />
-    </>
-  ),
-  market: (
-    <>
-      <path d="M30 4 L54 30 L30 56 L6 30 Z" />
-      <path d="M30 4 L30 56" />
-      <path d="M18 17 L42 43" />
-      <path d="M6 30 L54 30" />
-    </>
-  ),
-  operational: (
-    <>
-      <path d="M30 8 L44 16 L44 32 L30 40 L16 32 L16 16 Z" />
-      <path d="M30 20 L38 25 L38 34" />
-      <path d="M8 48 L52 48" />
-      <path d="M18 44 L18 52" />
-      <path d="M42 44 L42 52" />
-    </>
-  ),
-  strategic: (
-    <>
-      <path d="M8 46 L30 8 L52 46" />
-      <path d="M18 46 L30 26 L42 46" />
-      <path d="M30 8 L30 2" />
-      <path d="M4 52 L56 52" />
-    </>
-  ),
-  organizational: (
-    <>
-      <path d="M30 6 L40 12 L40 24 L30 30 L20 24 L20 12 Z" />
-      <path d="M12 30 L22 36 L22 48 L12 54 L2 48 L2 36 Z" />
-      <path d="M48 30 L58 36 L58 48 L48 54 L38 48 L38 36 Z" />
-      <path d="M25 28 L17 33" />
-      <path d="M35 28 L43 33" />
-    </>
-  ),
-  technology: (
-    <>
-      <path d="M14 14 L46 14 L46 46 L14 46 Z" />
-      <path d="M24 24 L36 24 L36 36 L24 36 Z" />
-      <path d="M30 14 L30 4" />
-      <path d="M30 46 L30 56" />
-      <path d="M14 30 L4 30" />
-      <path d="M46 30 L56 30" />
-    </>
-  ),
-};
-
-/**
- * Panel grounds: each pillar owns a deep, saturated field with a lifted mark
- * colour, so the label sits in ivory at full legibility.
- */
-const PANEL: Record<PillarId, { bg: string; edge: string; mark: string; z: number }> = {
-  financial: { bg: "oklch(0.278 0.076 262)", edge: "oklch(0.42 0.09 258)", mark: "oklch(0.82 0.088 250)", z: 48 },
-  risk: { bg: "oklch(0.322 0.152 21)", edge: "oklch(0.47 0.17 22)", mark: "oklch(0.82 0.118 26)", z: 16 },
-  market: { bg: "oklch(0.352 0.062 236)", edge: "oklch(0.5 0.07 234)", mark: "oklch(0.85 0.078 224)", z: 40 },
-  operational: { bg: "oklch(0.356 0.116 48)", edge: "oklch(0.5 0.13 50)", mark: "oklch(0.86 0.104 62)", z: 8 },
-  strategic: { bg: "oklch(0.352 0.088 82)", edge: "oklch(0.5 0.1 84)", mark: "oklch(0.88 0.114 90)", z: 30 },
-  organizational: { bg: "oklch(0.322 0.078 160)", edge: "oklch(0.46 0.09 158)", mark: "oklch(0.84 0.104 156)", z: 20 },
-  technology: { bg: "oklch(0.236 0.05 268)", edge: "oklch(0.38 0.06 262)", mark: "oklch(0.82 0.07 258)", z: 44 },
-};
-
-const PANEL_LABEL = "oklch(0.972 0.008 90)";
-
-/* Short instrument labels — the ring stays legible at every width. */
-const DIAL_LABEL: Record<PillarId, string> = {
-  financial: "Financial",
-  risk: "Risk",
-  market: "Market",
-  operational: "Operations",
-  strategic: "Strategy",
-  organizational: "Organisation",
-  technology: "Technology",
-};
-
 const TAU = Math.PI * 2;
 const r2 = (n: number) => Math.round(n * 100) / 100;
 const polar = (cx: number, cy: number, r: number, deg: number) => {
   const a = ((deg - 90) * TAU) / 360;
   return [r2(cx + r * Math.cos(a)), r2(cy + r * Math.sin(a))] as const;
 };
-const arcPath = (cx: number, cy: number, r: number, a0: number, a1: number) => {
-  const [x0, y0] = polar(cx, cy, r, a0);
-  const [x1, y1] = polar(cx, cy, r, a1);
-  return `M ${x0.toFixed(2)} ${y0.toFixed(2)} A ${r} ${r} 0 ${a1 - a0 > 180 ? 1 : 0} 1 ${x1.toFixed(2)} ${y1.toFixed(2)}`;
-};
 
 /**
- * The hero instrument: one navy plate carrying a single seven-segment dial.
- * Segment arc length follows the pillar weighting; every segment is drawn in
- * its lifted pillar colour so it separates cleanly from the deep ground.
+ * OpticField — the hero instrument.
+ * A continuously running optical field: measurement rings turning at
+ * different rates, a scanning sweep, a live diagnostic curve that keeps
+ * redrawing, drifting readouts and a tick lattice. It fills its column
+ * edge to edge and never overlaps the copy.
  */
-export function PillarEmblems({ className }: { className?: string }) {
+export function OpticField({ className }: { className?: string }) {
+  const reduce = useReducedMotion();
   const rotX = useMotionValue(0);
   const rotY = useMotionValue(0);
-  const sx = useSpring(rotX, { stiffness: 70, damping: 18 });
-  const sy = useSpring(rotY, { stiffness: 70, damping: 18 });
-  const [hover, setHover] = useState<PillarId | null>(null);
+  const sx = useSpring(rotX, { stiffness: 60, damping: 20 });
+  const sy = useSpring(rotY, { stiffness: 60, damping: 20 });
 
   const C = 380;
-  const CY = 300;
-  const R = 182;
-  const GAP = 3;
+  const CY = 320;
 
-  let cursor = -90;
-  const segments = PILLAR_META.map((p) => {
-    const span = p.weight * 360;
-    const a0 = cursor + GAP / 2;
-    const a1 = cursor + span - GAP / 2;
-    cursor += span;
-    return { ...p, a0, a1, mid: (a0 + a1) / 2 };
-  });
+  const curve = (phase: number, amp: number) => {
+    const pts: string[] = [];
+    for (let i = 0; i <= 40; i++) {
+      const x = 70 + (i / 40) * 620;
+      const t = i / 40;
+      const y =
+        CY +
+        180 -
+        t * 210 -
+        Math.sin(t * 7 + phase) * amp -
+        Math.sin(t * 3.1 + phase * 0.6) * (amp * 0.7);
+      pts.push(`${x.toFixed(1)} ${y.toFixed(1)}`);
+    }
+    return `M ${pts.join(" L ")}`;
+  };
+
+  const rings = [
+    { r: 268, w: 1, o: 0.12, dur: 78, dir: 1, dash: "2 16" },
+    { r: 224, w: 1.4, o: 0.2, dur: 54, dir: -1, dash: "42 22" },
+    { r: 176, w: 1, o: 0.16, dur: 96, dir: 1, dash: "6 12" },
+    { r: 128, w: 1.6, o: 0.24, dur: 40, dir: -1, dash: "88 34" },
+  ];
+
+  const tones = [
+    "var(--gold-glow)",
+    "var(--forest-glow)",
+    "var(--burnt-glow)",
+    "var(--steel-glow)",
+    "var(--oxblood-glow)",
+  ];
+
+  const readouts = [
+    { x: 96, y: 118, k: "IBHS", v: "78.4" },
+    { x: 604, y: 152, k: "MARGIN", v: "31.2%" },
+    { x: 92, y: 486, k: "RUNWAY", v: "14 MO" },
+    { x: 596, y: 512, k: "CONCENTRATION", v: "22%" },
+  ];
 
   return (
     <div
-      className={cn("pointer-events-auto relative w-full", className)}
-      style={{ perspective: "1600px" }}
+      className={cn("pointer-events-auto relative h-full w-full", className)}
+      style={{ perspective: "1500px" }}
       onPointerMove={(e) => {
+        if (reduce) return;
         const b = e.currentTarget.getBoundingClientRect();
-        rotY.set(((e.clientX - b.left) / b.width - 0.5) * 12);
-        rotX.set(-((e.clientY - b.top) / b.height - 0.5) * 9);
+        rotY.set(((e.clientX - b.left) / b.width - 0.5) * 10);
+        rotX.set(-((e.clientY - b.top) / b.height - 0.5) * 8);
       }}
       onPointerLeave={() => {
         rotX.set(0);
         rotY.set(0);
-        setHover(null);
       }}
     >
       <motion.div
-        initial={{ opacity: 0, scale: 0.94 }}
+        initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1, ease }}
-        style={{
-          rotateX: sx,
-          rotateY: sy,
-          transformStyle: "preserve-3d",
-        }}
-        className="relative w-full overflow-visible"
+        transition={{ duration: 1.1, ease }}
+        style={{ rotateX: sx, rotateY: sy, transformStyle: "preserve-3d" }}
+        className="relative h-full w-full"
       >
-        <svg viewBox="0 0 760 600" className="block h-auto w-full" role="img" aria-label="Seven weighted pillars of the diagnostic">
+        <svg
+          viewBox="0 0 760 640"
+          preserveAspectRatio="xMidYMid meet"
+          className="block h-full w-full"
+          role="img"
+          aria-label="A continuously scanning diagnostic field of measurement rings, readouts and a rising health curve"
+        >
+          <defs>
+            <linearGradient id="of-curve" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0%" stopColor="var(--steel-glow)" />
+              <stop offset="46%" stopColor="var(--gold-glow)" />
+              <stop offset="100%" stopColor="var(--forest-glow)" />
+            </linearGradient>
+            <linearGradient id="of-sweep" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="var(--gold-glow)" stopOpacity="0.75" />
+              <stop offset="100%" stopColor="var(--gold-glow)" stopOpacity="0" />
+            </linearGradient>
+            <radialGradient id="of-core" cx="50%" cy="50%">
+              <stop offset="0%" stopColor="var(--gold-glow)" stopOpacity="0.22" />
+              <stop offset="100%" stopColor="var(--gold-glow)" stopOpacity="0" />
+            </radialGradient>
+          </defs>
 
-          {/* instrument rings */}
-          <circle cx={C} cy={CY} r={232} fill="none" stroke="oklch(0.98 0 0 / 0.1)" strokeWidth="1" />
-          <circle cx={C} cy={CY} r={R + 40} fill="none" stroke="oklch(0.98 0 0 / 0.14)" strokeWidth="1" />
-          <circle cx={C} cy={CY} r={R - 40} fill="none" stroke="oklch(0.98 0 0 / 0.14)" strokeWidth="1" />
+          <circle cx={C} cy={CY} r={250} fill="url(#of-core)" />
 
-          {/* tick ring */}
-          {Array.from({ length: 72 }).map((_, i) => {
-            const [x0, y0] = polar(C, CY, R - 48, i * 5);
-            const [x1, y1] = polar(C, CY, R - 54, i * 5);
-            return (
-              <line
-                key={i}
-                x1={x0}
-                y1={y0}
-                x2={x1}
-                y2={y1}
-                stroke="oklch(0.98 0 0 / 0.16)"
-                strokeWidth={i % 6 === 0 ? 1.6 : 0.8}
-              />
-            );
-          })}
-
-          {segments.map((s, i) => {
-            const tone = PANEL[s.id].mark;
-            const on = hover === s.id;
-            const [lx, ly] = polar(C, CY, R + 52, s.mid);
-            const [gx, gy] = polar(C, CY, R, s.mid);
-            const anchor = Math.abs(s.mid % 360) < 8 || Math.abs((s.mid % 360) - 180) < 8
-              ? "middle"
-              : (s.mid % 360 + 360) % 360 < 180
-                ? "start"
-                : "end";
-            return (
-              <g
-                key={s.id}
-                onPointerEnter={() => setHover(s.id)}
-                style={{ cursor: "default" }}
-              >
-                <title>{s.name}</title>
-                <motion.path
-                  d={arcPath(C, CY, R, s.a0, s.a1)}
-                  fill="none"
-                  stroke={tone}
-                  strokeLinecap="butt"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  animate={{ pathLength: 1, opacity: on ? 1 : 0.86 }}
-                  transition={{ duration: 0.9, delay: 0.15 + i * 0.12, ease }}
-                  style={{ strokeWidth: on ? 72 : 60 }}
+          {/* tick lattice */}
+          <g opacity="0.34">
+            {Array.from({ length: 96 }).map((_, i) => {
+              const [x0, y0] = polar(C, CY, 296, i * 3.75);
+              const [x1, y1] = polar(C, CY, i % 8 === 0 ? 280 : 288, i * 3.75);
+              return (
+                <line
+                  key={i}
+                  x1={x0}
+                  y1={y0}
+                  x2={x1}
+                  y2={y1}
+                  stroke="currentColor"
+                  strokeWidth={i % 8 === 0 ? 1.5 : 0.7}
+                  className="text-foreground"
                 />
-                {/* invisible wide hit area */}
-                <path d={arcPath(C, CY, R, s.a0, s.a1)} fill="none" stroke="transparent" strokeWidth={86} />
-                <motion.svg
-                  x={gx - 15}
-                  y={gy - 15}
-                  width={30}
-                  height={30}
-                  viewBox="0 0 60 60"
-                  fill="none"
-                  stroke="oklch(0.16 0.04 268)"
-                  strokeWidth="3.4"
-                  strokeLinecap="square"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.85 }}
-                  transition={{ duration: 0.6, delay: 0.5 + i * 0.12 }}
-                >
-                  {PILLAR_MARKS[s.id]}
-                </motion.svg>
-                <motion.text
-                  x={lx}
-                  y={ly}
-                  textAnchor={anchor}
-                  dominantBaseline="middle"
-                  fill={on ? tone : "oklch(0.972 0.008 90)"}
-                  className="figure"
-                  fontSize="17"
-                  fontWeight="600"
-                  letterSpacing="1.6"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.55 + i * 0.12 }}
-                >
-                  {DIAL_LABEL[s.id].toUpperCase()}
-                </motion.text>
-              </g>
-            );
-          })}
+              );
+            })}
+          </g>
 
-          {/* centre mark */}
-          <circle cx={C} cy={CY} r={104} fill="none" stroke="oklch(0.98 0 0 / 0.18)" />
-          <motion.g
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 1.05, ease }}
-            style={{ transformOrigin: `${C}px ${CY}px` }}
-          >
-            <text x={C} y={CY - 26} textAnchor="middle" fill="oklch(0.972 0.008 90)" className="font-display" fontSize="54" fontWeight="600">
-              54
-            </text>
-            <text x={C} y={CY + 2} textAnchor="middle" fill="oklch(0.84 0.02 250)" className="figure" fontSize="13" letterSpacing="3">
-              METRICS
-            </text>
-            <line x1={C - 46} y1={CY + 22} x2={C + 46} y2={CY + 22} stroke="oklch(0.98 0 0 / 0.2)" />
-            <text x={C} y={CY + 52} textAnchor="middle" fill="oklch(0.972 0.008 90)" className="font-display" fontSize="30" fontWeight="600">
-              7
-            </text>
-            <text x={C} y={CY + 74} textAnchor="middle" fill="oklch(0.84 0.02 250)" className="figure" fontSize="11" letterSpacing="3">
-              PILLARS
-            </text>
-          </motion.g>
+          {/* concentric rings, each turning at its own rate */}
+          {rings.map((r, i) => (
+            <motion.circle
+              key={r.r}
+              cx={C}
+              cy={CY}
+              r={r.r}
+              fill="none"
+              stroke={tones[i % tones.length]}
+              strokeWidth={r.w}
+              strokeDasharray={r.dash}
+              opacity={r.o + 0.24}
+              style={{ transformOrigin: `${C}px ${CY}px` }}
+              animate={reduce ? undefined : { rotate: 360 * r.dir }}
+              transition={{ duration: r.dur, repeat: Infinity, ease: "linear" }}
+            />
+          ))}
+
+          {/* orbiting metric nodes */}
+          {[0, 1, 2, 3, 4, 5, 6].map((i) => (
+            <motion.g
+              key={i}
+              style={{ transformOrigin: `${C}px ${CY}px` }}
+              animate={reduce ? undefined : { rotate: i % 2 === 0 ? 360 : -360 }}
+              transition={{ duration: 46 + i * 9, repeat: Infinity, ease: "linear" }}
+            >
+              <circle
+                cx={C + (i % 2 === 0 ? 224 : 176)}
+                cy={CY}
+                r={i % 3 === 0 ? 5 : 3}
+                fill={tones[i % tones.length]}
+                opacity="0.9"
+              />
+            </motion.g>
+          ))}
+
+          {/* scanning sweep */}
+          {!reduce && (
+            <motion.g
+              style={{ transformOrigin: `${C}px ${CY}px` }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 11, repeat: Infinity, ease: "linear" }}
+            >
+              <rect x={C - 1.5} y={CY - 268} width="3" height="268" fill="url(#of-sweep)" />
+            </motion.g>
+          )}
+
+          {/* live diagnostic curve — redraws continuously */}
+          <motion.path
+            fill="none"
+            stroke="url(#of-curve)"
+            strokeWidth="3"
+            strokeLinecap="round"
+            animate={
+              reduce
+                ? { d: curve(0, 20) }
+                : { d: [curve(0, 22), curve(2.1, 32), curve(4.2, 18), curve(6.28, 22)] }
+            }
+            transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.path
+            fill="none"
+            stroke="var(--oxblood-glow)"
+            strokeWidth="1.4"
+            opacity="0.5"
+            strokeDasharray="5 9"
+            animate={
+              reduce
+                ? { d: curve(1.2, 12) }
+                : { d: [curve(1.2, 12), curve(3.4, 22), curve(5.5, 10), curve(7.48, 12)] }
+            }
+            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+          />
+
+          {/* drifting readouts */}
+          {readouts.map((rd, i) => (
+            <motion.g
+              key={rd.k}
+              animate={reduce ? undefined : { y: [0, i % 2 === 0 ? -10 : 10, 0], opacity: [0.7, 1, 0.7] }}
+              transition={{ duration: 9 + i * 2, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <text
+                x={rd.x}
+                y={rd.y}
+                textAnchor={rd.x > C ? "end" : "start"}
+                className="figure fill-foreground"
+                fontSize="11"
+                letterSpacing="2.6"
+                opacity="0.72"
+              >
+                {rd.k}
+              </text>
+              <text
+                x={rd.x}
+                y={rd.y + 26}
+                textAnchor={rd.x > C ? "end" : "start"}
+                className="font-display"
+                fill={tones[i % tones.length]}
+                fontSize="26"
+                fontWeight="600"
+              >
+                {rd.v}
+              </text>
+            </motion.g>
+          ))}
+
+          {/* centre aperture */}
+          <motion.circle
+            cx={C}
+            cy={CY}
+            r={74}
+            fill="none"
+            stroke="var(--gold-glow)"
+            strokeWidth="1.2"
+            opacity="0.55"
+            animate={reduce ? undefined : { r: [70, 80, 70], opacity: [0.4, 0.7, 0.4] }}
+            transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.circle
+            cx={C}
+            cy={CY}
+            r={44}
+            fill="none"
+            stroke="currentColor"
+            className="text-foreground"
+            strokeWidth="0.8"
+            opacity="0.3"
+            animate={reduce ? undefined : { r: [48, 40, 48] }}
+            transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
+          />
         </svg>
       </motion.div>
     </div>
   );
 }
 
+/**
+ * InstrumentStack — four planes in perspective describing the travel of a
+ * figure: sector calibration, metric intake, scoring, report.
+ */
+const STACK_PLANES = [
+  { label: "Sector calibration", tone: "var(--steel)" },
+  { label: "Metric intake", tone: "var(--forest)" },
+  { label: "Scoring engines", tone: "var(--burnt)" },
+  { label: "Boardroom report", tone: "var(--gold)" },
+];
 
+export function InstrumentStack({ className }: { className?: string }) {
+  const reduce = useReducedMotion();
+  return (
+    <div className={cn("relative w-full", className)} style={{ perspective: "1200px" }}>
+      <div
+        className="relative mx-auto flex w-full flex-col items-center gap-3"
+        style={{ transformStyle: "preserve-3d" }}
+      >
+        {STACK_PLANES.map((p, i) => (
+          <motion.div
+            key={p.label}
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7, delay: i * 0.12, ease }}
+            className="w-full"
+          >
+            <motion.div
+              animate={reduce ? undefined : { y: [0, i % 2 === 0 ? -5 : 5, 0] }}
+              transition={{ duration: 7 + i, repeat: Infinity, ease: "easeInOut" }}
+              className="relative border border-border bg-card px-5 py-4 shadow-[var(--shadow-plate)]"
+              style={{ transform: `rotateX(16deg) translateZ(${(4 - i) * 16}px)` }}
+            >
+              <span
+                className="absolute inset-y-0 left-0 w-1"
+                style={{ backgroundColor: p.tone }}
+                aria-hidden
+              />
+              <p className="figure pl-3 text-[0.68rem] uppercase tracking-[0.26em] text-foreground">
+                {p.label}
+              </p>
+              <div className="mt-3 flex gap-1 pl-3" aria-hidden>
+                {Array.from({ length: 18 }).map((_, k) => (
+                  <motion.span
+                    key={k}
+                    className="h-6 flex-1"
+                    style={{ backgroundColor: p.tone, opacity: 0.16 + ((k * 7 + i * 5) % 9) * 0.07 }}
+                    animate={reduce ? undefined : { opacity: [0.18, 0.8, 0.18] }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      delay: (k * 0.13 + i * 0.4) % 4,
+                      ease: "easeInOut",
+                    }}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * BenchmarkBand — a single reading resolved against its sector-calibrated
+ * healthy range.
+ */
+export function BenchmarkBand({ className }: { className?: string }) {
+  const reduce = useReducedMotion();
+  return (
+    <div className={cn("w-full border border-border bg-card p-6 shadow-[var(--shadow-plate)]", className)}>
+      <p className="figure text-[0.62rem] uppercase tracking-[0.28em] text-foreground">
+        A reading against its sector band
+      </p>
+      <svg viewBox="0 0 420 150" className="mt-5 block h-auto w-full" role="img" aria-label="A reading resolved against a sector-calibrated healthy band">
+        <rect x="20" y="58" width="380" height="26" fill="var(--critical)" opacity="0.28" />
+        <rect x="120" y="58" width="200" height="26" fill="var(--acceptable)" opacity="0.34" />
+        <rect x="180" y="58" width="110" height="26" fill="var(--healthy)" opacity="0.5" />
+        {Array.from({ length: 21 }).map((_, i) => (
+          <line
+            key={i}
+            x1={20 + i * 19}
+            y1="92"
+            x2={20 + i * 19}
+            y2={i % 5 === 0 ? 104 : 98}
+            stroke="currentColor"
+            className="text-foreground"
+            strokeWidth={i % 5 === 0 ? 1.4 : 0.7}
+            opacity="0.5"
+          />
+        ))}
+        <motion.g
+          animate={reduce ? undefined : { x: [0, 96, 64, 0] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <line x1="150" y1="40" x2="150" y2="94" stroke="var(--burnt)" strokeWidth="2.5" />
+          <circle cx="150" cy="40" r="6" fill="var(--burnt)" />
+          <text x="150" y="26" textAnchor="middle" className="figure fill-foreground" fontSize="12" letterSpacing="1.6">
+            READING
+          </text>
+        </motion.g>
+        <text x="20" y="126" className="figure fill-foreground" fontSize="10" letterSpacing="2" opacity="0.75">
+          STRAINED
+        </text>
+        <text x="235" y="126" className="figure fill-foreground" fontSize="10" letterSpacing="2" opacity="0.75">
+          HEALTHY BAND
+        </text>
+      </svg>
+    </div>
+  );
+}

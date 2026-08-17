@@ -10,7 +10,7 @@ export function SiteHeader() {
           <span className="shrink-0 font-display text-sm tracking-tight text-foreground sm:text-base">
             LetNumbersTalk
           </span>
-          <span className="hidden text-[0.62rem] uppercase tracking-[0.28em] text-accent sm:inline">
+          <span className="hidden text-[0.82rem] font-semibold tracking-normal text-accent sm:inline">
             By Mr. Sajal Roy
           </span>
         </Link>
@@ -97,10 +97,10 @@ export function Disclosure() {
   return (
     <section
       aria-label={DISCLOSURE.title}
-      className="print-plain print-avoid-break border-l-2 border-accent/70 bg-secondary/50 px-6 py-6"
+      className="print-plain print-avoid-break border border-border border-l-4 border-l-accent bg-card px-7 py-7 shadow-[var(--shadow-plate)]"
     >
-      <h2 className="text-[0.65rem] uppercase tracking-[0.26em] text-accent">{DISCLOSURE.title}</h2>
-      <p className="mt-3 measure text-xs leading-relaxed text-muted-foreground">{DISCLOSURE.body}</p>
+      <h2 className="font-display text-lg text-foreground">{DISCLOSURE.title}</h2>
+      <p className="mt-4 measure text-sm leading-[1.75] text-foreground">{DISCLOSURE.body}</p>
     </section>
   );
 }

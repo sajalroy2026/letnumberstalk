@@ -10,7 +10,7 @@ import {
   DisplayNumeral,
   FlowGraph,
   BenchmarkTerrain,
-  PillarEmblems,
+  OpticField,
   ScoreColumns,
   OrbitField,
   ParallaxLayer,
@@ -84,7 +84,7 @@ function Home() {
             <SignalField />
           </ParallaxLayer>
 
-          <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-12 px-5 pb-20 pt-16 sm:px-8 sm:pt-24 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
+          <div className="relative z-10 mx-auto grid max-w-6xl items-stretch gap-12 px-5 pb-20 pt-16 sm:px-8 sm:pt-24 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
             <div className="max-w-2xl">
 
               <motion.p
@@ -168,9 +168,9 @@ function Home() {
               initial={{ opacity: 0, filter: "blur(10px)" }}
               animate={{ opacity: 1, filter: "blur(0px)" }}
               transition={{ duration: 1.2, ease }}
-              className="relative mx-auto w-full max-w-[36rem] lg:max-w-none"
+              className="relative mx-auto h-[26rem] w-full max-w-[36rem] sm:h-[32rem] lg:h-full lg:min-h-[38rem] lg:max-w-none"
             >
-              <PillarEmblems />
+              <OpticField />
             </motion.div>
 
 
