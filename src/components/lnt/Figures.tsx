@@ -1714,7 +1714,7 @@ export function OpticField({ className }: { className?: string }) {
               strokeDasharray={r.dash}
               opacity={r.o + 0.24}
               style={{ transformOrigin: `${C}px ${CY}px` }}
-              animate={reduce ? undefined : { rotate: 360 * r.dir }}
+              animate={reduce ? {} : { rotate: 360 * r.dir }}
               transition={{ duration: r.dur, repeat: Infinity, ease: "linear" }}
             />
           ))}
@@ -1724,7 +1724,7 @@ export function OpticField({ className }: { className?: string }) {
             <motion.g
               key={i}
               style={{ transformOrigin: `${C}px ${CY}px` }}
-              animate={reduce ? undefined : { rotate: i % 2 === 0 ? 360 : -360 }}
+              animate={reduce ? {} : { rotate: i % 2 === 0 ? 360 : -360 }}
               transition={{ duration: 46 + i * 9, repeat: Infinity, ease: "linear" }}
             >
               <circle
@@ -1779,7 +1779,7 @@ export function OpticField({ className }: { className?: string }) {
           {readouts.map((rd, i) => (
             <motion.g
               key={rd.k}
-              animate={reduce ? undefined : { y: [0, i % 2 === 0 ? -10 : 10, 0], opacity: [0.7, 1, 0.7] }}
+              animate={reduce ? {} : { y: [0, i % 2 === 0 ? -10 : 10, 0], opacity: [0.7, 1, 0.7] }}
               transition={{ duration: 9 + i * 2, repeat: Infinity, ease: "easeInOut" }}
             >
               <text
@@ -1816,7 +1816,7 @@ export function OpticField({ className }: { className?: string }) {
             stroke="var(--gold-glow)"
             strokeWidth="1.2"
             opacity="0.55"
-            animate={reduce ? undefined : { r: [70, 80, 70], opacity: [0.4, 0.7, 0.4] }}
+            animate={reduce ? {} : { r: [70, 80, 70], opacity: [0.4, 0.7, 0.4] }}
             transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
           />
           <motion.circle
@@ -1828,7 +1828,7 @@ export function OpticField({ className }: { className?: string }) {
             className="text-foreground"
             strokeWidth="0.8"
             opacity="0.3"
-            animate={reduce ? undefined : { r: [48, 40, 48] }}
+            animate={reduce ? {} : { r: [48, 40, 48] }}
             transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
           />
         </svg>
@@ -1866,7 +1866,7 @@ export function InstrumentStack({ className }: { className?: string }) {
             className="w-full"
           >
             <motion.div
-              animate={reduce ? undefined : { y: [0, i % 2 === 0 ? -5 : 5, 0] }}
+              animate={reduce ? {} : { y: [0, i % 2 === 0 ? -5 : 5, 0] }}
               transition={{ duration: 7 + i, repeat: Infinity, ease: "easeInOut" }}
               className="relative border border-border bg-card px-5 py-4 shadow-[var(--shadow-plate)]"
               style={{ transform: `rotateX(16deg) translateZ(${(4 - i) * 16}px)` }}
@@ -1885,7 +1885,7 @@ export function InstrumentStack({ className }: { className?: string }) {
                     key={k}
                     className="h-6 flex-1"
                     style={{ backgroundColor: p.tone, opacity: 0.16 + ((k * 7 + i * 5) % 9) * 0.07 }}
-                    animate={reduce ? undefined : { opacity: [0.18, 0.8, 0.18] }}
+                    animate={reduce ? {} : { opacity: [0.18, 0.8, 0.18] }}
                     transition={{
                       duration: 4,
                       repeat: Infinity,
@@ -1932,7 +1932,7 @@ export function BenchmarkBand({ className }: { className?: string }) {
           />
         ))}
         <motion.g
-          animate={reduce ? undefined : { x: [0, 96, 64, 0] }}
+          animate={reduce ? {} : { x: [0, 96, 64, 0] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         >
           <line x1="150" y1="40" x2="150" y2="94" stroke="var(--burnt)" strokeWidth="2.5" />
