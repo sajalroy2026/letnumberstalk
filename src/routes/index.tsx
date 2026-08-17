@@ -10,7 +10,7 @@ import {
   DisplayNumeral,
   FlowGraph,
   BenchmarkTerrain,
-  PillarArmature,
+  PillarEmblems,
   ScoreColumns,
   OrbitField,
   ParallaxLayer,
