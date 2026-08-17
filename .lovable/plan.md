@@ -14,10 +14,10 @@ Replace the single navy/sand identity with a warm, multi-tone palette used as an
 
 ## 2. Illustration and figure layer
 
-Art-directed, geometric mid-century illustration — flat planes, halftone grain, limited palette, long shadows — never generic SaaS spot art.
+Art-directed, geometric mid-century illustration — flat planes, halftone grain, limited palette, long shadows — never generic SaaS spot art, and no depictions of people.
 
 - Hero: a layered spatial composition (boardroom-table abstraction with orbiting pillar planes) built as parallax layers reacting to scroll and pointer.
-- Human presence: 3-4 stylised figure illustrations (operator at a ledger, boardroom pair reviewing a spectrum, an assessor tracing a value chain) used at chapter openings and in the About spread.
+- No human figures anywhere. Storytelling carried by abstract and conceptual compositions instead: ledger planes, orbiting pillar bodies, layered benchmark corridors, geometric value-chain landscapes used at chapter openings and in the About spread.
 - Each of the 5 sector profiles gets a full illustrated tile, not a glyph.
 - Value chain, benchmark scale and tier ladder redrawn as editorial diagrams with type set into the artwork.
 - Illustrations generated as assets and composed with SVG/CSS layers so they stay crisp and animatable.
