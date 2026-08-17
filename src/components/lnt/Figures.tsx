@@ -1735,18 +1735,6 @@ export function PillarEmblems({ className }: { className?: string }) {
         className="relative w-full overflow-visible"
       >
         <svg viewBox="0 0 760 600" className="block h-auto w-full" role="img" aria-label="Seven weighted pillars of the diagnostic">
-          <defs>
-            <pattern id="dial-grid" width="30" height="30" patternUnits="userSpaceOnUse">
-              <path d="M30 0 L0 0 0 30" fill="none" stroke="oklch(0.98 0 0 / 0.06)" strokeWidth="1" />
-            </pattern>
-            <radialGradient id="dial-depth" cx="50%" cy="34%" r="72%">
-              <stop offset="0%" stopColor="oklch(0.33 0.074 262)" />
-              <stop offset="100%" stopColor="oklch(0.176 0.05 268)" />
-            </radialGradient>
-          </defs>
-
-          <rect width="760" height="600" fill="url(#dial-depth)" />
-          <rect width="760" height="600" fill="url(#dial-grid)" />
 
           {/* instrument rings */}
           <circle cx={C} cy={CY} r={232} fill="none" stroke="oklch(0.98 0 0 / 0.1)" strokeWidth="1" />
