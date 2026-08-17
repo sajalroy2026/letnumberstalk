@@ -208,17 +208,14 @@ function Home() {
 
 
         {/* ------------------------------------------------------ The pillars */}
-        <section className="relative overflow-hidden">
+        <section className="prism-wash relative overflow-hidden">
           <ParallaxLayer
-            depth={0.5}
-            className="pointer-events-none absolute inset-0 -z-10"
+            depth={0.45}
+            className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 opacity-45"
           >
-            <div
-              className="mx-auto h-[38rem] w-[38rem] rounded-full opacity-[0.09]"
-              style={{ background: "var(--gradient-warm)" }}
-              aria-hidden
-            />
+            <DataLattice />
           </ParallaxLayer>
+
           <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
             <p className="figure text-[0.65rem] uppercase tracking-[0.28em] text-accent">
               03 — Structure
