@@ -288,10 +288,55 @@ export function PillarStage() {
   );
 }
 
+/**
+ * Pinned identity of the pillar under examination — stays at the top of the
+ * viewport for the whole of the metric run so orientation is never lost.
+ */
+function PillarIdentityRail({
+  name,
+  weight,
+  accent,
+  entered,
+  total,
+  score,
+}: {
+  name: string;
+  weight: number;
+  accent: string;
+  entered: number;
+  total: number;
+  score: number | null;
+}) {
+  return (
+    <div className="no-print sticky-under-rail border-b border-border/70 bg-background/92 backdrop-blur-md">
+      <div className="mx-auto flex max-w-5xl items-center gap-4 px-5 py-2.5 sm:px-8">
+        <span className="h-8 w-1.5 shrink-0" style={{ background: accent }} aria-hidden />
+        <div className="min-w-0 flex-1">
+          <p className="truncate font-display text-sm text-foreground sm:text-base">{name}</p>
+          <p className="figure text-[0.62rem] uppercase tracking-[0.18em] text-muted-foreground">
+            {Math.round(weight * 100)}% of composite · {entered}/{total} entered
+          </p>
+        </div>
+        <span className="figure text-2xl" style={{ color: score === null ? "var(--muted-foreground)" : accent }}>
+          {score === null ? "—" : score}
+        </span>
+      </div>
+      <div className="h-[3px] w-full bg-secondary" aria-hidden>
+        <motion.div
+          className="h-full"
+          style={{ background: accent }}
+          animate={{ width: `${total ? Math.round((entered / total) * 100) : 0}%` }}
+          transition={{ duration: 0.5, ease }}
+        />
+      </div>
+    </div>
+  );
+}
+
 function ProgressSpine() {
   const { selectedPillars, activeIndex, goToPillar, assessments } = useSession();
   return (
-    <div className="no-print sticky top-[57px] z-30 border-b border-border/60 bg-background/85 backdrop-blur-md">
+    <div className="no-print sticky-under-header border-b border-border/60 bg-background/90 backdrop-blur-md">
       <div className="mx-auto flex max-w-5xl gap-1 overflow-x-auto px-5 py-3 sm:px-8">
         {selectedPillars.map((p, i) => {
           const meta = PILLAR_META.find((m) => m.id === p)!;
@@ -301,6 +346,7 @@ function ProgressSpine() {
               key={p}
               type="button"
               onClick={() => goToPillar(i)}
+              style={i === activeIndex ? { borderColor: pillarColor(p) } : undefined}
               className={cn(
                 "shrink-0 border-b-2 px-3 py-1.5 text-[0.7rem] uppercase tracking-[0.14em] transition-colors",
                 i === activeIndex
@@ -310,6 +356,7 @@ function ProgressSpine() {
                     : "border-transparent text-muted-foreground/70 hover:text-foreground",
               )}
             >
+
               {meta.name}
             </button>
           );
