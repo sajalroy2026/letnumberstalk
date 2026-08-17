@@ -75,18 +75,14 @@ All Areas to Look Into text is authored verbatim from the spec into a content mo
 
 ## Where the risk actually is
 
-- **Content fidelity, not code.** 54 entries × six text fields is the bulk of the work and the easiest place to drift. Mitigated by extracting from the document programmatically rather than retyping.
-- **The 28 metrics without scoring bands** — the single biggest blocker. Without point allocations their pillar engines cannot sum to 100.
-- **Sub-component allocations that have no metric.** Pillar 4 allocates points to "Decision speed", "Skills-gap", "Leadership depth"; Pillar 5 to "Model leverage", "Network advantage", "Digital and AI maturity"; Pillar 7 to "Integration and Data Flow", "Adoption"; Pillar 3 to "Contribution per customer" and "Share trajectory"; Pillar 1 to "Pricing power", "Cost-structure flexibility", "Cost-trend management". These likely account for the 57-vs-54 gap.
+- **Content fidelity, not code.** 54 entries × six text fields is the bulk of the work and the easiest place to drift. Mitigated by extracting from the document programmatically rather than retyping, then diffing the built content bundle against the source text.
+- **Band-boundary correctness.** With all 54 bands now specified, the residual risk is off-by-one at tier edges (is exactly 40% "moderate" or "high"?). Every band gets boundary tests at each threshold value.
 - **Client-side PDF at this content volume** — a full seven-pillar report with all Areas content is long; layout fidelity and mobile generation need early validation.
 - **Cinematic motion vs. the 3-second paint budget and WCAG AA** — motion must be prefers-reduced-motion aware and must not gate content.
 
-## Items I need clarified before building
+## Remaining open item
 
-1. **57 vs 54.** Are three metrics missing from V3.0, or is 57 a count of scored sub-components rather than metric entries?
-2. **Missing scoring bands (28 metrics).** Do you supply the point allocations, or should I derive them from each metric's four-tier benchmark table using a consistent mapping (healthy = full points, acceptable ≈ 70%, concern ≈ 35%, critical = 0) scaled to the sub-component allocation? I will not invent thresholds — but the mapping rule needs your sign-off either way.
-3. **Unmapped sub-components.** For Pillar 4 "Decision speed", Pillar 5 "Model leverage" / "Network advantage" / "Digital and AI maturity", Pillar 7 "Integration and Data Flow" — add them as self-assessment metrics with your wording, or redistribute their points across the existing metrics in that pillar?
-4. **Caution thresholds.** I read them as cash runway < 3 months and top-three customer concentration > 60% (the "Critical" tier in each metric's table). Confirm.
-5. **Confidence classification.** The spec names the flag but not the levels. Proposal: `Stated` (point value), `Estimated` (range midpoint), and a pillar-level `High / Moderate / Indicative` derived from coverage. Confirm the vocabulary.
-6. **Report format.** PRD says PDF; is a print-optimised, browser-native PDF acceptable, or do you want a generated document file?
-7. **Qualitative capture (FR-08) vs. no-dropdowns (FR-06).** Self-assessment metrics are 1–4 guided bands. I plan to render these as labelled band cards (not a dropdown, not a bare number field). Confirm that satisfies the intent.
+1. **Report format.** The PRD specifies a downloadable PDF. I plan a print-optimised, browser-native PDF (client-side, zero server, exact on-screen parity). Confirm that satisfies FR-23/FR-24, or say if you want a generated document file instead. This does not block phases 1–5.
+
+Everything else previously flagged is resolved by the regenerated specification, and I'll build strictly to it.
+
