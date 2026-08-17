@@ -1659,85 +1659,210 @@ const PANEL: Record<PillarId, { bg: string; edge: string; mark: string; z: numbe
 
 const PANEL_LABEL = "oklch(0.972 0.008 90)";
 
+/* Short instrument labels — the ring stays legible at every width. */
+const DIAL_LABEL: Record<PillarId, string> = {
+  financial: "Financial",
+  risk: "Risk",
+  market: "Market",
+  operational: "Operations",
+  strategic: "Strategy",
+  organizational: "Organisation",
+  technology: "Technology",
+};
+
+const TAU = Math.PI * 2;
+const polar = (cx: number, cy: number, r: number, deg: number) => {
+  const a = ((deg - 90) * TAU) / 360;
+  return [cx + r * Math.cos(a), cy + r * Math.sin(a)] as const;
+};
+const arcPath = (cx: number, cy: number, r: number, a0: number, a1: number) => {
+  const [x0, y0] = polar(cx, cy, r, a0);
+  const [x1, y1] = polar(cx, cy, r, a1);
+  return `M ${x0.toFixed(2)} ${y0.toFixed(2)} A ${r} ${r} 0 ${a1 - a0 > 180 ? 1 : 0} 1 ${x1.toFixed(2)} ${y1.toFixed(2)}`;
+};
+
+/**
+ * The hero instrument: one navy plate carrying a single seven-segment dial.
+ * Segment arc length follows the pillar weighting; every segment is drawn in
+ * its lifted pillar colour so it separates cleanly from the deep ground.
+ */
 export function PillarEmblems({ className }: { className?: string }) {
   const rotX = useMotionValue(0);
   const rotY = useMotionValue(0);
   const sx = useSpring(rotX, { stiffness: 70, damping: 18 });
   const sy = useSpring(rotY, { stiffness: 70, damping: 18 });
+  const [hover, setHover] = useState<PillarId | null>(null);
+
+  const C = 300;
+  const R = 196;
+  const GAP = 3;
+
+  let cursor = -90;
+  const segments = PILLAR_META.map((p) => {
+    const span = p.weight * 360;
+    const a0 = cursor + GAP / 2;
+    const a1 = cursor + span - GAP / 2;
+    cursor += span;
+    return { ...p, a0, a1, mid: (a0 + a1) / 2 };
+  });
 
   return (
     <div
       className={cn("pointer-events-auto relative w-full", className)}
-      style={{ perspective: "1500px" }}
+      style={{ perspective: "1600px" }}
       onPointerMove={(e) => {
         const b = e.currentTarget.getBoundingClientRect();
-        rotY.set(((e.clientX - b.left) / b.width - 0.5) * 10);
-        rotX.set(-((e.clientY - b.top) / b.height - 0.5) * 8);
+        rotY.set(((e.clientX - b.left) / b.width - 0.5) * 12);
+        rotX.set(-((e.clientY - b.top) / b.height - 0.5) * 9);
       }}
       onPointerLeave={() => {
         rotX.set(0);
         rotY.set(0);
+        setHover(null);
       }}
     >
       <motion.div
-        style={{ rotateX: sx, rotateY: sy, transformStyle: "preserve-3d" }}
-        className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3"
+        initial={{ opacity: 0, scale: 0.94 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1, ease }}
+        style={{
+          rotateX: sx,
+          rotateY: sy,
+          transformStyle: "preserve-3d",
+          backgroundColor: "oklch(0.196 0.056 268)",
+          boxShadow:
+            "0 40px 90px -46px oklch(0.1 0.03 268 / 0.95), inset 0 1px 0 0 oklch(0.98 0 0 / 0.14)",
+          border: "1px solid oklch(0.98 0 0 / 0.16)",
+        }}
+        className="relative w-full overflow-hidden"
       >
-        {PILLAR_META.map((p, i) => {
-          const panel = PANEL[p.id];
-          return (
-            <motion.figure
-              key={p.id}
-              initial={{ opacity: 0, z: -240, y: 34, rotateX: 14 }}
-              animate={{ opacity: 1, z: panel.z, y: 0, rotateX: 0 }}
-              transition={{ duration: 0.95, delay: 0.1 * i, ease }}
-              whileHover={{ z: panel.z + 64 }}
-              style={{
-                transformStyle: "preserve-3d",
-                backgroundColor: panel.bg,
-                backgroundImage: `linear-gradient(158deg, color-mix(in oklab, ${panel.edge} 46%, ${panel.bg}) 0%, ${panel.bg} 62%)`,
-                borderColor: panel.edge,
-                boxShadow: `0 22px 46px -28px oklch(0.12 0.03 268 / 0.85), inset 0 1px 0 0 color-mix(in oklab, ${panel.mark} 34%, transparent)`,
-              }}
-              className={cn(
-                "relative overflow-hidden border p-3 sm:p-4",
-                i === 6 && "col-span-2 sm:col-span-1",
-              )}
-            >
-              <span
-                className="absolute inset-x-0 top-0 h-[3px]"
-                style={{ backgroundImage: `linear-gradient(90deg, ${panel.mark}, transparent 88%)` }}
-                aria-hidden
+        <svg viewBox="0 0 600 600" className="block h-auto w-full" role="img" aria-label="Seven weighted pillars of the diagnostic">
+          <defs>
+            <pattern id="dial-grid" width="30" height="30" patternUnits="userSpaceOnUse">
+              <path d="M30 0 L0 0 0 30" fill="none" stroke="oklch(0.98 0 0 / 0.06)" strokeWidth="1" />
+            </pattern>
+            <radialGradient id="dial-depth" cx="50%" cy="34%" r="72%">
+              <stop offset="0%" stopColor="oklch(0.33 0.074 262)" />
+              <stop offset="100%" stopColor="oklch(0.176 0.05 268)" />
+            </radialGradient>
+          </defs>
+
+          <rect width="600" height="600" fill="url(#dial-depth)" />
+          <rect width="600" height="600" fill="url(#dial-grid)" />
+
+          {/* instrument rings */}
+          <circle cx={C} cy={C} r={244} fill="none" stroke="oklch(0.98 0 0 / 0.1)" strokeWidth="1" />
+          <circle cx={C} cy={C} r={R + 40} fill="none" stroke="oklch(0.98 0 0 / 0.14)" strokeWidth="1" />
+          <circle cx={C} cy={C} r={R - 40} fill="none" stroke="oklch(0.98 0 0 / 0.14)" strokeWidth="1" />
+
+          {/* tick ring */}
+          {Array.from({ length: 72 }).map((_, i) => {
+            const [x0, y0] = polar(C, C, R - 48, i * 5);
+            const [x1, y1] = polar(C, C, R - 54, i * 5);
+            return (
+              <line
+                key={i}
+                x1={x0}
+                y1={y0}
+                x2={x1}
+                y2={y1}
+                stroke="oklch(0.98 0 0 / 0.16)"
+                strokeWidth={i % 6 === 0 ? 1.6 : 0.8}
               />
-              <figcaption
-                className="figure text-[0.58rem] font-semibold uppercase leading-tight tracking-[0.14em]"
-                style={{ color: PANEL_LABEL }}
+            );
+          })}
+
+          {segments.map((s, i) => {
+            const tone = PANEL[s.id].mark;
+            const on = hover === s.id;
+            const [lx, ly] = polar(C, C, R + 62, s.mid);
+            const [gx, gy] = polar(C, C, R, s.mid);
+            const anchor = Math.abs(s.mid % 360) < 8 || Math.abs((s.mid % 360) - 180) < 8
+              ? "middle"
+              : (s.mid % 360 + 360) % 360 < 180
+                ? "start"
+                : "end";
+            return (
+              <g
+                key={s.id}
+                onPointerEnter={() => setHover(s.id)}
+                style={{ cursor: "default" }}
               >
-                {p.name}
-              </figcaption>
-              <svg
-                viewBox="0 0 60 60"
-                className="mt-3 h-14 w-full sm:h-16"
-                fill="none"
-                stroke={panel.mark}
-                strokeWidth="2.2"
-                strokeLinecap="square"
-                strokeLinejoin="miter"
-                aria-hidden
-              >
-                <motion.g
+                <title>{s.name}</title>
+                <motion.path
+                  d={arcPath(C, C, R, s.a0, s.a1)}
+                  fill="none"
+                  stroke={tone}
+                  strokeLinecap="butt"
                   initial={{ pathLength: 0, opacity: 0 }}
-                  animate={{ pathLength: 1, opacity: 1 }}
-                  transition={{ duration: 1.2, delay: 0.2 + 0.1 * i, ease }}
+                  animate={{ pathLength: 1, opacity: on ? 1 : 0.86 }}
+                  transition={{ duration: 0.9, delay: 0.15 + i * 0.12, ease }}
+                  style={{ strokeWidth: on ? 72 : 60 }}
+                />
+                {/* invisible wide hit area */}
+                <path d={arcPath(C, C, R, s.a0, s.a1)} fill="none" stroke="transparent" strokeWidth={86} />
+                <motion.svg
+                  x={gx - 15}
+                  y={gy - 15}
+                  width={30}
+                  height={30}
+                  viewBox="0 0 60 60"
+                  fill="none"
+                  stroke="oklch(0.16 0.04 268)"
+                  strokeWidth="3.4"
+                  strokeLinecap="square"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.85 }}
+                  transition={{ duration: 0.6, delay: 0.5 + i * 0.12 }}
                 >
-                  {PILLAR_MARKS[p.id]}
-                </motion.g>
-              </svg>
-            </motion.figure>
-          );
-        })}
+                  {PILLAR_MARKS[s.id]}
+                </motion.svg>
+                <motion.text
+                  x={lx}
+                  y={ly}
+                  textAnchor={anchor}
+                  dominantBaseline="middle"
+                  fill={on ? tone : "oklch(0.972 0.008 90)"}
+                  className="figure"
+                  fontSize="17"
+                  fontWeight="600"
+                  letterSpacing="1.6"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.55 + i * 0.12 }}
+                >
+                  {DIAL_LABEL[s.id].toUpperCase()}
+                </motion.text>
+              </g>
+            );
+          })}
+
+          {/* centre mark */}
+          <circle cx={C} cy={C} r={112} fill="oklch(0.166 0.048 268)" stroke="oklch(0.98 0 0 / 0.16)" />
+          <motion.g
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 1.05, ease }}
+            style={{ transformOrigin: `${C}px ${C}px` }}
+          >
+            <text x={C} y={C - 26} textAnchor="middle" fill="oklch(0.972 0.008 90)" className="font-display" fontSize="54" fontWeight="600">
+              54
+            </text>
+            <text x={C} y={C + 2} textAnchor="middle" fill="oklch(0.84 0.02 250)" className="figure" fontSize="13" letterSpacing="3">
+              METRICS
+            </text>
+            <line x1={C - 46} y1={C + 22} x2={C + 46} y2={C + 22} stroke="oklch(0.98 0 0 / 0.2)" />
+            <text x={C} y={C + 52} textAnchor="middle" fill="oklch(0.972 0.008 90)" className="font-display" fontSize="30" fontWeight="600">
+              7
+            </text>
+            <text x={C} y={C + 74} textAnchor="middle" fill="oklch(0.84 0.02 250)" className="figure" fontSize="11" letterSpacing="3">
+              PILLARS
+            </text>
+          </motion.g>
+        </svg>
       </motion.div>
     </div>
   );
 }
+
 
