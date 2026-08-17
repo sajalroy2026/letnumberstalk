@@ -337,43 +337,63 @@
 .tone-navy,
 .tone-teal,
 .tone-amber,
+.tone-gold,
 .tone-plum,
 .tone-cyan,
 .tone-lime,
+.tone-forest,
 .tone-coral,
+.tone-burnt,
+.tone-mocha,
 .tone-rust {
   --ring: var(--accent);
-  --gradient-rust: linear-gradient(135deg, var(--accent), color-mix(in oklab, var(--accent) 68%, var(--foreground)));
-  --gradient-warm: linear-gradient(120deg, var(--accent-glow), var(--accent) 62%, color-mix(in oklab, var(--accent) 55%, var(--foreground)));
+  --gradient-rust: linear-gradient(135deg, var(--accent), var(--accent-pair, color-mix(in oklab, var(--accent) 68%, var(--foreground))));
+  --gradient-warm: linear-gradient(120deg, var(--accent-glow), var(--accent) 58%, var(--accent-pair, color-mix(in oklab, var(--accent) 55%, var(--foreground))));
+  --gradient-duo: linear-gradient(115deg, var(--accent) 0%, var(--accent-pair, var(--accent)) 100%);
 }
 
 .tone-navy,
 .tone-cyan {
   --accent: var(--navy-mid);
   --accent-glow: var(--navy-glow);
+  --accent-pair: var(--forest);
 }
 .tone-teal {
   --accent: var(--steel);
   --accent-glow: var(--steel-glow);
+  --accent-pair: var(--navy);
 }
-.tone-amber {
+.tone-amber,
+.tone-gold {
   --accent: var(--gold);
   --accent-glow: var(--gold-glow);
   --accent-foreground: oklch(0.192 0.056 268);
+  --accent-pair: var(--burnt);
 }
 .tone-plum {
   --accent: var(--oxblood-core);
   --accent-glow: var(--oxblood-glow);
+  --accent-pair: var(--mocha);
 }
-.tone-lime {
+.tone-lime,
+.tone-forest {
   --accent: var(--forest);
   --accent-glow: var(--forest-glow);
+  --accent-pair: var(--steel);
 }
 .tone-coral,
+.tone-burnt,
 .tone-rust {
   --accent: var(--burnt);
   --accent-glow: var(--burnt-glow);
+  --accent-pair: var(--oxblood-core);
 }
+.tone-mocha {
+  --accent: var(--mocha);
+  --accent-glow: var(--mocha-glow);
+  --accent-pair: var(--gold);
+}
+
 
 
 .dark {
