@@ -6,11 +6,11 @@ import { Disclosure, SiteFooter, SiteHeader } from "@/components/lnt/SiteChrome"
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About LetNumbersTalk and the Enterprise Systems Architect" },
+      { title: "About LetNumbersTalk — Conceptualized by Mr Sajal Roy" },
       {
         name: "description",
         content:
-          "What the LetNumbersTalk diagnostic delivers, the 7-pillar architecture behind it, and the consulting practice of Mr Sajal Roy, Architect of Enterprise Systems.",
+          "What the LetNumbersTalk diagnostic delivers, the 7-pillar architecture behind it, and the consulting practice of Mr Sajal Roy, Enterprise Systems Architect.",
       },
       { property: "og:title", content: "About LetNumbersTalk" },
       {
