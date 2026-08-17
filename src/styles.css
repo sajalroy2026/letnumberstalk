@@ -78,6 +78,8 @@
   --color-cyan: var(--cyan);
   --color-lime: var(--lime);
   --color-accent-glow: var(--accent-glow);
+  --color-mocha: var(--mocha);
+
   --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
