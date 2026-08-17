@@ -866,3 +866,172 @@ export function DisplayNumeral({
     </div>
   );
 }
+
+/* ---------------------------------------------------- Cinematic depth wrap */
+
+/**
+ * Z-plane travel: content approaches the viewer as it enters, with the
+ * far plane held back in depth. Collapses to a fade under reduced motion.
+ */
+export function DepthReveal({
+  className,
+  children,
+  intensity = 1,
+}: {
+  className?: string;
+  children: React.ReactNode;
+  intensity?: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "center center"] });
+  const rotateX = useTransform(scrollYProgress, [0, 1], [14 * intensity, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.9, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.55], [0.25, 1]);
+
+  return (
+    <div ref={ref} className={cn("depth-stage", className)}>
+      <motion.div style={{ rotateX, scale, opacity, transformOrigin: "50% 100%" }}>
+        {children}
+      </motion.div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------ Data lattice */
+
+/** Wireframe terrain of measurement — a field of readings held in depth. */
+export function DataLattice({ className }: { className?: string }) {
+  const rows = 9;
+  const cols = 14;
+  return (
+    <svg viewBox="0 0 400 220" className={cn("w-full", className)} aria-hidden>
+      <defs>
+        <linearGradient id="lat-g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="var(--cyan)" />
+          <stop offset="55%" stopColor="var(--plum)" />
+          <stop offset="100%" stopColor="var(--amber)" />
+        </linearGradient>
+      </defs>
+      {Array.from({ length: rows }).map((_, r) => {
+        const t = r / (rows - 1);
+        const y = 60 + t * t * 150;
+        const inset = (1 - t) * 120;
+        return (
+          <path
+            key={`r${r}`}
+            d={`M${inset} ${y} H${400 - inset}`}
+            stroke="url(#lat-g)"
+            strokeWidth="0.8"
+            opacity={0.18 + t * 0.5}
+            fill="none"
+          />
+        );
+      })}
+      {Array.from({ length: cols + 1 }).map((_, c) => {
+        const t = c / cols;
+        return (
+          <path
+            key={`c${c}`}
+            d={`M${120 + t * 160} 60 L${t * 400} 210`}
+            stroke="url(#lat-g)"
+            strokeWidth="0.7"
+            opacity="0.32"
+            fill="none"
+          />
+        );
+      })}
+      {[
+        [150, 96, 3],
+        [232, 118, 4.5],
+        [96, 158, 5],
+        [304, 150, 3.5],
+        [200, 190, 6],
+      ].map(([x, y, r], i) => (
+        <circle key={i} cx={x} cy={y} r={r} fill="url(#lat-g)" opacity="0.9" />
+      ))}
+    </svg>
+  );
+}
+
+/* -------------------------------------------------------------- Prism stack */
+
+/** Translucent stacked planes — the layered composite, seen edge-on. */
+export function PrismStack({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 320 240" className={cn("w-full", className)} aria-hidden>
+      <defs>
+        <linearGradient id="ps-a" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="var(--cyan)" stopOpacity="0.85" />
+          <stop offset="100%" stopColor="var(--teal)" stopOpacity="0.35" />
+        </linearGradient>
+        <linearGradient id="ps-b" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="var(--plum)" stopOpacity="0.75" />
+          <stop offset="100%" stopColor="var(--rust)" stopOpacity="0.3" />
+        </linearGradient>
+        <linearGradient id="ps-c" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="var(--amber)" stopOpacity="0.8" />
+          <stop offset="100%" stopColor="var(--ochre)" stopOpacity="0.28" />
+        </linearGradient>
+      </defs>
+      {[
+        { y: 172, fill: "url(#ps-c)" },
+        { y: 128, fill: "url(#ps-b)" },
+        { y: 84, fill: "url(#ps-a)" },
+      ].map((p, i) => (
+        <g key={i}>
+          <path
+            d={`M160 ${p.y - 44} l108 44 l-108 44 l-108 -44 Z`}
+            fill={p.fill}
+            stroke="var(--foreground)"
+            strokeOpacity="0.14"
+            strokeWidth="0.8"
+          />
+        </g>
+      ))}
+      <path d="M160 40 V196" stroke="var(--foreground)" strokeOpacity="0.22" strokeDasharray="3 6" />
+      <circle cx="160" cy="40" r="5" fill="var(--accent)" />
+    </svg>
+  );
+}
+
+/* -------------------------------------------------------------- Orbit field */
+
+/** Concentric measurement orbits with travelling markers. */
+export function OrbitField({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 300 300" className={cn("w-full", className)} aria-hidden>
+      <defs>
+        <radialGradient id="of-core">
+          <stop offset="0%" stopColor="var(--amber)" stopOpacity="0.9" />
+          <stop offset="100%" stopColor="var(--rust)" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      <circle cx="150" cy="150" r="70" fill="url(#of-core)" />
+      {[54, 84, 112, 138].map((r, i) => (
+        <g key={r}>
+          <ellipse
+            cx="150"
+            cy="150"
+            rx={r}
+            ry={r * (0.34 + i * 0.12)}
+            fill="none"
+            stroke={i % 2 ? "var(--cyan)" : "var(--ochre)"}
+            strokeOpacity="0.45"
+            strokeWidth="0.9"
+            transform={`rotate(${-18 - i * 12} 150 150)`}
+          />
+          <motion.circle
+            r="3.4"
+            fill={i % 2 ? "var(--cyan)" : "var(--ochre)"}
+            initial={{ opacity: 0.4 }}
+            animate={{ opacity: [0.35, 1, 0.35] }}
+            transition={{ duration: 3 + i, repeat: Infinity, ease: "easeInOut" }}
+            cx={150 + r}
+            cy={150}
+            transform={`rotate(${-18 - i * 12} 150 150)`}
+          />
+        </g>
+      ))}
+    </svg>
+  );
+}
