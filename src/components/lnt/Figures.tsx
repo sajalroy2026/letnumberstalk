@@ -170,11 +170,17 @@ export function PillarWeightRing({ active }: { active?: PillarId[] }) {
         </svg>
         <ul className="min-w-0 space-y-1.5">
           {PILLAR_META.map((p) => (
-            <li key={p.id} className="flex items-baseline justify-between gap-3 text-xs">
-              <span className="truncate text-muted-foreground">{p.name}</span>
+            <li key={p.id} className="flex items-baseline gap-2.5 text-xs">
+              <span
+                className="mt-1 size-2 shrink-0"
+                style={{ background: pillarColor(p.id) }}
+                aria-hidden
+              />
+              <span className="min-w-0 flex-1 truncate text-muted-foreground">{p.name}</span>
               <span className="figure shrink-0 text-foreground">{Math.round(p.weight * 100)}%</span>
             </li>
           ))}
+
         </ul>
       </div>
       <figcaption className="mt-4 border-t border-border pt-3 text-[0.65rem] uppercase tracking-[0.2em] text-muted-foreground">
