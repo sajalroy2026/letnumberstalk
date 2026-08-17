@@ -616,15 +616,16 @@ export function HeroComposition({ className }: { className?: string }) {
         style={{ rotateX: rotX, rotateY: rotY, transformStyle: "preserve-3d" }}
         className="relative"
       >
-        {/* far plane — benchmark corridor */}
+        {/* far plane — benchmark corridor, a soft warm haze behind the orbit */}
         <motion.div
-          initial={{ opacity: 0, y: 34 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease }}
-          className="absolute inset-x-4 top-6 h-40 border border-border/70"
-          style={{ transform: "translateZ(-90px)", background: "var(--gradient-warm)", opacity: 0.16 }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 0.2, scale: 1 }}
+          transition={{ duration: 1.4, ease }}
+          className="pointer-events-none absolute inset-0 rounded-full blur-2xl"
+          style={{ transform: "translateZ(-120px)", background: "var(--gradient-warm)" }}
           aria-hidden
         />
+
         {/* mid plane — ledger bars */}
         <motion.svg
           viewBox="0 0 320 120"
