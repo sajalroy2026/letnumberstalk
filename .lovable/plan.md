@@ -2,15 +2,15 @@
 
 A single coherent colour system, a proper hero figure, more 3D work throughout, and analytics reduced to a plain counter.
 
-## 1. Colour system — Navy Trust + Gold
+## 1. Colour system — Navy, Gold, Burnt Orange, Forest, Oxblood
 
-One premium base, applied everywhere so contrast is consistent instead of accidental.
+One premium five-colour system, applied everywhere so contrast is consistent instead of accidental.
 
 - Grounds: crisp cool white and pale steel (#e8edf3 family) as the default reading surface; deep navy (#0f1b3d) reserved for the hero band, report cover and footer.
 - Structure: mid navy (#1e3a5f) for rules, plates, chart axes and headings on light ground.
-- Accents alternate two ways, section by section: **gold** (#c9a84c) and **steel blue** (#3b6fa0). No third decorative accent competing.
-- Pillar identity colours stay distinct (colour as information) but are re-derived as tints and shades within the navy–gold–steel family so they never clash with the page accent.
-- Diagnostic tiers re-tuned inside the same family: healthy steel blue, acceptable gold, concern amber-bronze, critical deep oxblood — each checked to AA on both white and navy grounds.
+- Accent family, rotating section by section in a fixed cadence so no two neighbouring chapters match: **navy → gold (#c9a84c) → burnt orange (#b4531f) → forest green (#1f5c3d) → oxblood (#6e1f24)**. Each has a light-ground value and a lifted value for use on navy, so type sitting on any accent stays legible.
+- Pillar identity colours stay distinct (colour as information), drawn from the same five-colour family plus controlled tints, so they read as one system rather than a rainbow.
+- Diagnostic tiers map onto the family: healthy forest green, acceptable gold, concern burnt orange, critical oxblood — each checked to AA on both white and navy grounds.
 - Numerals, chart strokes, benchmark corridors and score dials all read from the active section accent, so figures and text never drift apart in colour.
 - Every foreground/background pairing audited: body copy AAA on light grounds, AA minimum everywhere, including text over figures (figures get a solid scrim or move out of the text column).
 
@@ -35,8 +35,8 @@ Motion register: long weighted easing, depth travel and focus-pull rather than s
 
 ## 4. Attribution fix
 
-- Header keeps only: **LetNumbersTalk — by Mr Sajal Roy**. The "The Business Health Instrument" tagline is removed from the header.
-- Hero eyebrow drops the "· by Mr Sajal Roy" suffix and reads as a plain instrument line.
+- Header keeps **LetNumbersTalk — by Mr Sajal Roy** alongside the "The Business Health Instrument" line.
+- Hero eyebrow drops the "· by Mr Sajal Roy" suffix and reads as "The Business Health Instrument" only, since the name already appears once at the top.
 - Footer attribution stays as "Conceptualized by Mr Sajal Roy, Enterprise Systems Architect".
 
 ## 5. Analytics reduced to a counter
