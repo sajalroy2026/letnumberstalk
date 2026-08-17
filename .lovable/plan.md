@@ -35,8 +35,8 @@ Motion register: long weighted easing, depth travel and focus-pull rather than s
 
 ## 4. Attribution fix
 
-- Header keeps only: **LetNumbersTalk — by Mr Sajal Roy**. The "The Business Health Instrument" tagline is removed from the header.
-- Hero eyebrow drops the "· by Mr Sajal Roy" suffix and reads as a plain instrument line.
+- Header keeps **LetNumbersTalk — by Mr Sajal Roy** alongside the "The Business Health Instrument" line.
+- Hero eyebrow drops the "· by Mr Sajal Roy" suffix and reads as "The Business Health Instrument" only, since the name already appears once at the top.
 - Footer attribution stays as "Conceptualized by Mr Sajal Roy, Enterprise Systems Architect".
 
 ## 5. Analytics reduced to a counter
