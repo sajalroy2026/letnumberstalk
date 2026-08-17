@@ -36,7 +36,7 @@ export function SiteHeader() {
 
 export function SiteFooter() {
   return (
-    <footer className="mt-28 border-t border-border bg-secondary/40">
+    <footer className="border-t border-border bg-background">
       <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8">
         <div className="grid gap-10 md:grid-cols-3">
           <div>
