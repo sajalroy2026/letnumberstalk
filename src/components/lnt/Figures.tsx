@@ -1694,8 +1694,9 @@ export function PillarEmblems({ className }: { className?: string }) {
   const sy = useSpring(rotY, { stiffness: 70, damping: 18 });
   const [hover, setHover] = useState<PillarId | null>(null);
 
-  const C = 300;
-  const R = 196;
+  const C = 380;
+  const CY = 300;
+  const R = 182;
   const GAP = 3;
 
   let cursor = -90;
@@ -1737,7 +1738,7 @@ export function PillarEmblems({ className }: { className?: string }) {
         }}
         className="relative w-full overflow-hidden"
       >
-        <svg viewBox="0 0 600 600" className="block h-auto w-full" role="img" aria-label="Seven weighted pillars of the diagnostic">
+        <svg viewBox="0 0 760 600" className="block h-auto w-full" role="img" aria-label="Seven weighted pillars of the diagnostic">
           <defs>
             <pattern id="dial-grid" width="30" height="30" patternUnits="userSpaceOnUse">
               <path d="M30 0 L0 0 0 30" fill="none" stroke="oklch(0.98 0 0 / 0.06)" strokeWidth="1" />
@@ -1748,18 +1749,18 @@ export function PillarEmblems({ className }: { className?: string }) {
             </radialGradient>
           </defs>
 
-          <rect width="600" height="600" fill="url(#dial-depth)" />
-          <rect width="600" height="600" fill="url(#dial-grid)" />
+          <rect width="760" height="600" fill="url(#dial-depth)" />
+          <rect width="760" height="600" fill="url(#dial-grid)" />
 
           {/* instrument rings */}
-          <circle cx={C} cy={C} r={244} fill="none" stroke="oklch(0.98 0 0 / 0.1)" strokeWidth="1" />
-          <circle cx={C} cy={C} r={R + 40} fill="none" stroke="oklch(0.98 0 0 / 0.14)" strokeWidth="1" />
-          <circle cx={C} cy={C} r={R - 40} fill="none" stroke="oklch(0.98 0 0 / 0.14)" strokeWidth="1" />
+          <circle cx={C} cy={CY} r={232} fill="none" stroke="oklch(0.98 0 0 / 0.1)" strokeWidth="1" />
+          <circle cx={C} cy={CY} r={R + 40} fill="none" stroke="oklch(0.98 0 0 / 0.14)" strokeWidth="1" />
+          <circle cx={C} cy={CY} r={R - 40} fill="none" stroke="oklch(0.98 0 0 / 0.14)" strokeWidth="1" />
 
           {/* tick ring */}
           {Array.from({ length: 72 }).map((_, i) => {
-            const [x0, y0] = polar(C, C, R - 48, i * 5);
-            const [x1, y1] = polar(C, C, R - 54, i * 5);
+            const [x0, y0] = polar(C, CY, R - 48, i * 5);
+            const [x1, y1] = polar(C, CY, R - 54, i * 5);
             return (
               <line
                 key={i}
@@ -1776,8 +1777,8 @@ export function PillarEmblems({ className }: { className?: string }) {
           {segments.map((s, i) => {
             const tone = PANEL[s.id].mark;
             const on = hover === s.id;
-            const [lx, ly] = polar(C, C, R + 62, s.mid);
-            const [gx, gy] = polar(C, C, R, s.mid);
+            const [lx, ly] = polar(C, CY, R + 52, s.mid);
+            const [gx, gy] = polar(C, CY, R, s.mid);
             const anchor = Math.abs(s.mid % 360) < 8 || Math.abs((s.mid % 360) - 180) < 8
               ? "middle"
               : (s.mid % 360 + 360) % 360 < 180
@@ -1791,7 +1792,7 @@ export function PillarEmblems({ className }: { className?: string }) {
               >
                 <title>{s.name}</title>
                 <motion.path
-                  d={arcPath(C, C, R, s.a0, s.a1)}
+                  d={arcPath(C, CY, R, s.a0, s.a1)}
                   fill="none"
                   stroke={tone}
                   strokeLinecap="butt"
@@ -1801,7 +1802,7 @@ export function PillarEmblems({ className }: { className?: string }) {
                   style={{ strokeWidth: on ? 72 : 60 }}
                 />
                 {/* invisible wide hit area */}
-                <path d={arcPath(C, C, R, s.a0, s.a1)} fill="none" stroke="transparent" strokeWidth={86} />
+                <path d={arcPath(C, CY, R, s.a0, s.a1)} fill="none" stroke="transparent" strokeWidth={86} />
                 <motion.svg
                   x={gx - 15}
                   y={gy - 15}
@@ -1839,24 +1840,24 @@ export function PillarEmblems({ className }: { className?: string }) {
           })}
 
           {/* centre mark */}
-          <circle cx={C} cy={C} r={112} fill="oklch(0.166 0.048 268)" stroke="oklch(0.98 0 0 / 0.16)" />
+          <circle cx={C} cy={CY} r={104} fill="oklch(0.166 0.048 268)" stroke="oklch(0.98 0 0 / 0.16)" />
           <motion.g
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 1.05, ease }}
-            style={{ transformOrigin: `${C}px ${C}px` }}
+            style={{ transformOrigin: `${C}px ${CY}px` }}
           >
-            <text x={C} y={C - 26} textAnchor="middle" fill="oklch(0.972 0.008 90)" className="font-display" fontSize="54" fontWeight="600">
+            <text x={C} y={CY - 26} textAnchor="middle" fill="oklch(0.972 0.008 90)" className="font-display" fontSize="54" fontWeight="600">
               54
             </text>
-            <text x={C} y={C + 2} textAnchor="middle" fill="oklch(0.84 0.02 250)" className="figure" fontSize="13" letterSpacing="3">
+            <text x={C} y={CY + 2} textAnchor="middle" fill="oklch(0.84 0.02 250)" className="figure" fontSize="13" letterSpacing="3">
               METRICS
             </text>
-            <line x1={C - 46} y1={C + 22} x2={C + 46} y2={C + 22} stroke="oklch(0.98 0 0 / 0.2)" />
-            <text x={C} y={C + 52} textAnchor="middle" fill="oklch(0.972 0.008 90)" className="font-display" fontSize="30" fontWeight="600">
+            <line x1={C - 46} y1={CY + 22} x2={C + 46} y2={CY + 22} stroke="oklch(0.98 0 0 / 0.2)" />
+            <text x={C} y={CY + 52} textAnchor="middle" fill="oklch(0.972 0.008 90)" className="font-display" fontSize="30" fontWeight="600">
               7
             </text>
-            <text x={C} y={C + 74} textAnchor="middle" fill="oklch(0.84 0.02 250)" className="figure" fontSize="11" letterSpacing="3">
+            <text x={C} y={CY + 74} textAnchor="middle" fill="oklch(0.84 0.02 250)" className="figure" fontSize="11" letterSpacing="3">
               PILLARS
             </text>
           </motion.g>
