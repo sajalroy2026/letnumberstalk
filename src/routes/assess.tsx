@@ -30,7 +30,7 @@ function AssessPage() {
   return (
     <SessionProvider>
       <div className="min-h-screen bg-background">
-        <div className="ink">
+        <div className="ink no-print sticky top-0 z-40">
           <SiteHeader />
         </div>
         <main className="surface-depth">

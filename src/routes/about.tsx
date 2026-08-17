@@ -28,7 +28,7 @@ export const Route = createFileRoute("/about")({
 function AboutPage() {
   return (
     <div className="min-h-screen bg-background">
-      <div className="ink">
+      <div className="ink no-print sticky top-0 z-40">
         <SiteHeader />
       </div>
       <section className="ink warm-wash halftone relative overflow-hidden">
