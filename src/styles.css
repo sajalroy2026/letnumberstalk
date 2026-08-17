@@ -128,6 +128,8 @@
   --burnt: oklch(0.548 0.138 46);
   --forest: oklch(0.452 0.098 158);
   --oxblood-core: oklch(0.412 0.128 22);
+  --mocha: oklch(0.448 0.056 52);
+
 
   /* Legacy accent aliases — remapped into the family so every component follows it */
   --rust: var(--burnt);
