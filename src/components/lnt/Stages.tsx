@@ -245,7 +245,7 @@ export function PillarStage() {
           {!assessment.meetsCriticalMinimum ? (
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               A meaningful reading for this pillar needs at least {tier.floor} metrics — {tier.floorText}.
-              Anything entered below that is held, not scored.
+              Figures entered so far are held for the session and score once that floor is reached.
             </p>
           ) : null}
         </div>
