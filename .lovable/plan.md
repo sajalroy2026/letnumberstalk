@@ -80,9 +80,22 @@ All Areas to Look Into text is authored verbatim from the spec into a content mo
 - **Client-side PDF at this content volume** — a full seven-pillar report with all Areas content is long; layout fidelity and mobile generation need early validation.
 - **Cinematic motion vs. the 3-second paint budget and WCAG AA** — motion must be prefers-reduced-motion aware and must not gate content.
 
+## Craft latitude I'll exercise
+
+The spec is binding on every number, formula, threshold, and word of diagnostic content. Everywhere else I'll take the experience beyond a literal reading:
+
+- **Cinematic progression** — a full-bleed entry, industry selection as a considered choice rather than a form, pillar-by-pillar chaptering with a persistent progress spine, and score reveals that count up and settle rather than appear.
+- **Editorial typography** — Libre Baskerville set large and confident for scores and pillar titles, DM Sans at a generous measure for guidance; the mid-century palette carried through paper-warm surfaces, thin navy rules, and copper used sparingly as emphasis.
+- **The guidance layer as the product's signature** — definition, sourcing, formula, and reading presented as an unfolding panel beside each field, not a tooltip; the formula set in real mathematical notation.
+- **Areas to Look Into as a designed artefact** — a distinct, warmer surface fused beneath the finding, visually reading as commentary rather than an error state.
+- **The integrated report as a document** — a printed-report feel: score plate, seven-pillar breakdown, caution block where triggered, About sections, disclosure. The downloadable PDF is the same artefact, not a lesser copy.
+
+Nothing here alters a computed value or a line of specified content.
+
 ## Remaining open item
 
-1. **Report format.** The PRD specifies a downloadable PDF. I plan a print-optimised, browser-native PDF (client-side, zero server, exact on-screen parity). Confirm that satisfies FR-23/FR-24, or say if you want a generated document file instead. This does not block phases 1–5.
+1. **Report format.** The PRD specifies a downloadable PDF. I'll build a print-optimised, browser-native PDF (client-side, zero server, exact on-screen parity) unless you'd rather have a generated document file. This does not block phases 1–5.
 
 Everything else previously flagged is resolved by the regenerated specification, and I'll build strictly to it.
+
 
