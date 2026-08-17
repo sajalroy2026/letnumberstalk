@@ -82,20 +82,23 @@ All Areas to Look Into text is authored verbatim from the spec into a content mo
 
 ## Craft latitude I'll exercise
 
-The spec is binding on every number, formula, threshold, and word of diagnostic content. Everywhere else I'll take the experience beyond a literal reading:
+The spec is binding on every number, formula, threshold, and word of diagnostic content. Everywhere else I'll take the experience beyond a literal reading. The audience is founders and boardroom leaders arriving for a serious diagnostic — the surface has to earn that in the first three seconds.
 
-- **Cinematic progression** — a full-bleed entry, industry selection as a considered choice rather than a form, pillar-by-pillar chaptering with a persistent progress spine, and score reveals that count up and settle rather than appear.
-- **Editorial typography** — Libre Baskerville set large and confident for scores and pillar titles, DM Sans at a generous measure for guidance; the mid-century palette carried through paper-warm surfaces, thin navy rules, and copper used sparingly as emphasis.
-- **The guidance layer as the product's signature** — definition, sourcing, formula, and reading presented as an unfolding panel beside each field, not a tooltip; the formula set in real mathematical notation.
-- **Areas to Look Into as a designed artefact** — a distinct, warmer surface fused beneath the finding, visually reading as commentary rather than an error state.
-- **The integrated report as a document** — a printed-report feel: score plate, seven-pillar breakdown, caution block where triggered, About sections, disclosure. The downloadable PDF is the same artefact, not a lesser copy.
+- **Palette** — McKinsey restraint, BCG analytical warmth, Bain decisiveness, resolved through mid-century modern: deep navy authority, warm cream paper, warm teal for healthy readings, copper as the single decisive accent. Defined once as semantic tokens in `src/styles.css`, never hardcoded.
+- **Cinematic, dimensional motion** — a full-bleed entry with subtle depth and parallax; industry selection as tilting, layered cards rather than a form; pillar-to-pillar chaptering with a persistent progress spine; score reveals that count up and settle. Depth is achieved with CSS 3D transforms, layered shadows, and spring motion — no heavy WebGL library, which keeps the 3-second paint budget and mobile parity intact.
+- **Editorial typography** — Libre Baskerville set large and confident for scores and pillar titles; DM Sans at a generous measure for guidance.
+- **The guidance layer as the product's signature** — definition, sourcing, formula, and reading as an unfolding panel beside each field, not a tooltip; formulas in real mathematical notation.
+- **Areas to Look Into as a designed artefact** — a distinct, warmer surface fused beneath the finding, reading as commentary rather than an error state.
+- **The integrated report as a document** — score plate, seven-pillar breakdown, caution block where triggered, About sections, disclosure. The downloadable PDF is the same artefact, not a lesser copy.
+- **Zero backend** — no accounts, no database, no network calls with user figures. Everything computes in memory and is discarded on exit, exactly as NFR-01 and NFR-07 require.
 
-Nothing here alters a computed value or a line of specified content.
+Nothing here alters a computed value or a line of specified content. Motion respects `prefers-reduced-motion` and never gates content.
 
 ## Remaining open item
 
 1. **Report format.** The PRD specifies a downloadable PDF. I'll build a print-optimised, browser-native PDF (client-side, zero server, exact on-screen parity) unless you'd rather have a generated document file. This does not block phases 1–5.
 
 Everything else previously flagged is resolved by the regenerated specification, and I'll build strictly to it.
+
 
 
