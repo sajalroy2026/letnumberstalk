@@ -1643,16 +1643,21 @@ const PILLAR_MARKS: Record<PillarId, React.ReactNode> = {
   ),
 };
 
-/** Depth offsets so the set reads as one object rather than a flat grid. */
-const CARD_LAYOUT: Record<PillarId, { z: number; rot: number; y: number }> = {
-  financial: { z: 46, rot: -5, y: -14 },
-  risk: { z: 14, rot: 3, y: 8 },
-  market: { z: 38, rot: -2, y: -6 },
-  operational: { z: 6, rot: 5, y: 14 },
-  strategic: { z: 30, rot: -4, y: 0 },
-  organizational: { z: 18, rot: 2, y: 10 },
-  technology: { z: 42, rot: -3, y: -8 },
+/**
+ * Panel grounds: each pillar owns a deep, saturated field with a lifted mark
+ * colour, so the label sits in ivory at full legibility.
+ */
+const PANEL: Record<PillarId, { bg: string; edge: string; mark: string; z: number }> = {
+  financial: { bg: "oklch(0.278 0.076 262)", edge: "oklch(0.42 0.09 258)", mark: "oklch(0.82 0.088 250)", z: 48 },
+  risk: { bg: "oklch(0.322 0.152 21)", edge: "oklch(0.47 0.17 22)", mark: "oklch(0.82 0.118 26)", z: 16 },
+  market: { bg: "oklch(0.352 0.062 236)", edge: "oklch(0.5 0.07 234)", mark: "oklch(0.85 0.078 224)", z: 40 },
+  operational: { bg: "oklch(0.356 0.116 48)", edge: "oklch(0.5 0.13 50)", mark: "oklch(0.86 0.104 62)", z: 8 },
+  strategic: { bg: "oklch(0.352 0.088 82)", edge: "oklch(0.5 0.1 84)", mark: "oklch(0.88 0.114 90)", z: 30 },
+  organizational: { bg: "oklch(0.322 0.078 160)", edge: "oklch(0.46 0.09 158)", mark: "oklch(0.84 0.104 156)", z: 20 },
+  technology: { bg: "oklch(0.236 0.05 268)", edge: "oklch(0.38 0.06 262)", mark: "oklch(0.82 0.07 258)", z: 44 },
 };
+
+const PANEL_LABEL = "oklch(0.972 0.008 90)";
 
 export function PillarEmblems({ className }: { className?: string }) {
   const rotX = useMotionValue(0);
@@ -1663,11 +1668,11 @@ export function PillarEmblems({ className }: { className?: string }) {
   return (
     <div
       className={cn("pointer-events-auto relative w-full", className)}
-      style={{ perspective: "1400px" }}
+      style={{ perspective: "1500px" }}
       onPointerMove={(e) => {
         const b = e.currentTarget.getBoundingClientRect();
-        rotY.set(((e.clientX - b.left) / b.width - 0.5) * 12);
-        rotX.set(-((e.clientY - b.top) / b.height - 0.5) * 10);
+        rotY.set(((e.clientX - b.left) / b.width - 0.5) * 10);
+        rotX.set(-((e.clientY - b.top) / b.height - 0.5) * 8);
       }}
       onPointerLeave={() => {
         rotX.set(0);
@@ -1676,24 +1681,23 @@ export function PillarEmblems({ className }: { className?: string }) {
     >
       <motion.div
         style={{ rotateX: sx, rotateY: sy, transformStyle: "preserve-3d" }}
-        className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4"
+        className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3"
       >
         {PILLAR_META.map((p, i) => {
-          const l = CARD_LAYOUT[p.id];
-          const tone = pillarColor(p.id);
+          const panel = PANEL[p.id];
           return (
             <motion.figure
               key={p.id}
-              initial={{ opacity: 0, z: -220, y: 40, rotateX: 16 }}
-              animate={{ opacity: 1, z: l.z, y: l.y, rotateX: 0 }}
-              transition={{ duration: 1, delay: 0.12 * i, ease }}
-              whileHover={{ z: l.z + 60 }}
+              initial={{ opacity: 0, z: -240, y: 34, rotateX: 14 }}
+              animate={{ opacity: 1, z: panel.z, y: 0, rotateX: 0 }}
+              transition={{ duration: 0.95, delay: 0.1 * i, ease }}
+              whileHover={{ z: panel.z + 64 }}
               style={{
                 transformStyle: "preserve-3d",
-                rotate: `${l.rot}deg`,
-                borderColor: `color-mix(in oklab, ${tone} 45%, transparent)`,
-                background: `linear-gradient(155deg, color-mix(in oklab, ${tone} 14%, var(--card)), var(--card))`,
-                boxShadow: `0 18px 40px -26px color-mix(in oklab, ${tone} 80%, transparent), inset 0 1px 0 0 color-mix(in oklab, ${tone} 24%, transparent)`,
+                backgroundColor: panel.bg,
+                backgroundImage: `linear-gradient(158deg, color-mix(in oklab, ${panel.edge} 46%, ${panel.bg}) 0%, ${panel.bg} 62%)`,
+                borderColor: panel.edge,
+                boxShadow: `0 22px 46px -28px oklch(0.12 0.03 268 / 0.85), inset 0 1px 0 0 color-mix(in oklab, ${panel.mark} 34%, transparent)`,
               }}
               className={cn(
                 "relative overflow-hidden border p-3 sm:p-4",
@@ -1702,12 +1706,12 @@ export function PillarEmblems({ className }: { className?: string }) {
             >
               <span
                 className="absolute inset-x-0 top-0 h-[3px]"
-                style={{ backgroundImage: `linear-gradient(90deg, ${tone}, transparent)` }}
+                style={{ backgroundImage: `linear-gradient(90deg, ${panel.mark}, transparent 88%)` }}
                 aria-hidden
               />
               <figcaption
-                className="figure text-[0.55rem] uppercase leading-tight tracking-[0.2em]"
-                style={{ color: tone }}
+                className="figure text-[0.58rem] font-semibold uppercase leading-tight tracking-[0.14em]"
+                style={{ color: PANEL_LABEL }}
               >
                 {p.name}
               </figcaption>
@@ -1715,8 +1719,8 @@ export function PillarEmblems({ className }: { className?: string }) {
                 viewBox="0 0 60 60"
                 className="mt-3 h-14 w-full sm:h-16"
                 fill="none"
-                stroke={tone}
-                strokeWidth="2"
+                stroke={panel.mark}
+                strokeWidth="2.2"
                 strokeLinecap="square"
                 strokeLinejoin="miter"
                 aria-hidden
@@ -1724,7 +1728,7 @@ export function PillarEmblems({ className }: { className?: string }) {
                 <motion.g
                   initial={{ pathLength: 0, opacity: 0 }}
                   animate={{ pathLength: 1, opacity: 1 }}
-                  transition={{ duration: 1.2, delay: 0.2 + 0.12 * i, ease }}
+                  transition={{ duration: 1.2, delay: 0.2 + 0.1 * i, ease }}
                 >
                   {PILLAR_MARKS[p.id]}
                 </motion.g>
@@ -1736,3 +1740,4 @@ export function PillarEmblems({ className }: { className?: string }) {
     </div>
   );
 }
+
