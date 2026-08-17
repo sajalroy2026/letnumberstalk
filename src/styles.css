@@ -120,7 +120,7 @@
   --healthy: oklch(0.452 0.098 158);
   --acceptable: oklch(0.578 0.108 82);
   --concern: oklch(0.548 0.138 46);
-  --critical: oklch(0.412 0.128 22);
+  --critical: oklch(0.428 0.186 21);
 
   /* The five-colour family — text-safe values for light grounds */
   --navy: oklch(0.262 0.068 266);
@@ -129,7 +129,7 @@
   --gold: oklch(0.578 0.108 82);
   --burnt: oklch(0.548 0.138 46);
   --forest: oklch(0.452 0.098 158);
-  --oxblood-core: oklch(0.412 0.128 22);
+  --oxblood-core: oklch(0.428 0.186 21);
   --mocha: oklch(0.448 0.056 52);
 
 
@@ -151,7 +151,7 @@
   --gold-glow: oklch(0.792 0.116 88);
   --burnt-glow: oklch(0.732 0.142 54);
   --forest-glow: oklch(0.722 0.116 156);
-  --oxblood-glow: oklch(0.672 0.148 24);
+  --oxblood-glow: oklch(0.668 0.198 22);
   --mocha-glow: oklch(0.762 0.058 58);
 
 
@@ -165,7 +165,7 @@
 
   /* Pillar identity colours — distinct, all drawn from the same family */
   --pillar-financial: oklch(0.352 0.074 254);
-  --pillar-risk: oklch(0.412 0.128 22);
+  --pillar-risk: oklch(0.428 0.186 21);
   --pillar-market: oklch(0.512 0.086 250);
   --pillar-operational: oklch(0.548 0.138 46);
   --pillar-strategic: oklch(0.578 0.108 82);
@@ -237,7 +237,7 @@
   --concern: oklch(0.732 0.142 54);
   --critical: oklch(0.672 0.148 24);
   --pillar-financial: oklch(0.782 0.078 244);
-  --pillar-risk: oklch(0.672 0.148 24);
+  --pillar-risk: oklch(0.668 0.198 22);
   --pillar-market: oklch(0.742 0.062 250);
   --pillar-operational: oklch(0.732 0.142 54);
   --pillar-strategic: oklch(0.792 0.116 88);
@@ -259,7 +259,7 @@
   --gold: oklch(0.792 0.116 88);
   --burnt: oklch(0.732 0.142 54);
   --forest: oklch(0.722 0.116 156);
-  --oxblood-core: oklch(0.672 0.148 24);
+  --oxblood-core: oklch(0.668 0.198 22);
   --mocha: oklch(0.782 0.052 58);
   --mocha-glow: oklch(0.868 0.042 62);
 
@@ -291,12 +291,13 @@
 
 /* Pale oxblood band — the deepest warm counterpoint, at ground weight. */
 .plum-band {
-  --background: oklch(0.948 0.02 24);
-  --card: oklch(0.986 0.008 24);
-  --secondary: oklch(0.912 0.028 24);
-  --muted: oklch(0.912 0.028 24);
-  --elevated: oklch(0.986 0.008 24);
-  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.972 0.012 26) 0%, oklch(0.922 0.028 20) 72%);
+  --background: oklch(0.926 0.048 22);
+  --card: oklch(0.982 0.014 22);
+  --secondary: oklch(0.878 0.066 21);
+  --muted: oklch(0.884 0.062 21);
+  --elevated: oklch(0.982 0.014 22);
+  --border: oklch(0.828 0.072 21);
+  --gradient-depth: radial-gradient(125% 95% at 50% -12%, oklch(0.958 0.03 30) 0%, oklch(0.878 0.078 19) 78%);
   background-color: var(--background);
   color: var(--foreground);
 }
@@ -484,8 +485,10 @@
 
 /* Solid, always-legible accent control. */
 @utility btn-accent {
-  background-image: var(--gradient-duo, var(--gradient-rust));
-  color: var(--accent-foreground);
+  background-image: linear-gradient(118deg, var(--gold-glow) 0%, var(--gold) 46%, var(--accent) 100%);
+  color: oklch(0.168 0.048 268);
+  font-weight: 600;
+  box-shadow: 0 10px 24px -16px color-mix(in oklab, var(--gold) 80%, transparent);
   transition:
     filter 320ms ease,
     transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -498,14 +501,17 @@
 
 /* Outlined accent control for secondary navigation. */
 @utility btn-ghost-accent {
-  border: 1px solid color-mix(in oklab, var(--accent) 62%, transparent);
+  border: 2px solid var(--gold);
   color: var(--foreground);
+  font-weight: 600;
   transition:
     background-color 300ms ease,
+    color 300ms ease,
     border-color 300ms ease;
   &:hover {
-    background-color: color-mix(in oklab, var(--accent) 16%, transparent);
-    border-color: var(--accent);
+    background-color: var(--gold);
+    border-color: var(--gold);
+    color: oklch(0.168 0.048 268);
   }
 }
 
