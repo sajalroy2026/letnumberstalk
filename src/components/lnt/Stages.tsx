@@ -506,26 +506,30 @@ export function ReportStage() {
   );
 }
 
-function MetricResultRow({
-  name,
-  tier,
-  points,
-  max,
-  band,
-}: {
-  name: string;
-  tier: Tier;
-  points: number;
-  max: number;
-  band: string;
-}) {
+function MetricResultRow({ result }: { result: MetricResult }) {
+  const metric = METRICS_BY_ID[result.metricId];
   return (
-    <div className="print-plain flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 rounded-md border border-border/70 bg-card/40 px-5 py-3">
-      <span className="text-sm text-foreground">{name}</span>
-      <span className={cn("text-xs uppercase tracking-[0.14em]", tierColor[tier])}>{band}</span>
-      <span className="text-xs text-muted-foreground">
-        {points} / {max} pts
-      </span>
+    <div className="print-avoid-break print-plain border border-border/70 bg-card/40">
+      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-6 gap-y-1 px-5 py-3">
+        <span className="min-w-0 text-sm text-foreground">{result.name}</span>
+        <span className="figure shrink-0 text-xs text-muted-foreground">
+          {result.points} / {result.maxPoints} pts
+        </span>
+        <span className={cn("text-xs uppercase tracking-[0.14em]", tierColor[result.tier])}>
+          {result.bandLabel}
+        </span>
+      </div>
+      {result.showAreas && metric ? (
+        <div className="border-t border-border/70 bg-secondary/40 px-5 py-5">
+          <p className="text-[0.62rem] uppercase tracking-[0.26em] text-accent">
+            Areas to look into
+          </p>
+          <div className="mt-3">
+            <ValueChain highlight={stageForPillar(metric.pillar)} />
+          </div>
+          <p className="mt-4 measure text-sm leading-relaxed text-foreground/85">{metric.areas}</p>
+        </div>
+      ) : null}
     </div>
   );
 }
