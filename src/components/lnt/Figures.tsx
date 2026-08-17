@@ -148,7 +148,7 @@ export function PillarWeightRing({ active }: { active?: PillarId[] }) {
     <figure className="print-avoid-break border border-border bg-card p-6 shadow-[var(--shadow-plate)]">
       <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-6">
         <svg viewBox="0 0 140 140" className="h-32 w-32 -rotate-90" role="img" aria-label="Pillar weighting">
-          {PILLAR_META.map((p, i) => {
+          {PILLAR_META.map((p) => {
             const len = p.weight * c;
             const el = (
               <circle
