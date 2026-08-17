@@ -298,7 +298,7 @@ function Home() {
         </section>
 
         {/* ------------------------------------------------ Sector calibration */}
-        <section className="plum-band relative overflow-hidden">
+        <section className="blush-band tone-amber relative overflow-hidden">
           <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
             <p className="figure text-[0.65rem] uppercase tracking-[0.28em] text-accent">
               04 — Calibration
@@ -321,18 +321,29 @@ function Home() {
 
                   <div className="border-t border-border p-5">
                     <h3 className="font-display text-lg text-foreground">{s.name}</h3>
-                    <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                      {s.description}
-                    </p>
+                    <p className="mt-2 text-xs leading-[1.7] text-foreground/75">{s.description}</p>
                   </div>
                 </motion.div>
               ))}
+              <motion.div
+                initial={{ opacity: 0, y: 26 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-70px" }}
+                transition={{ duration: 0.7, delay: 0.35, ease }}
+                className="glass flex flex-col justify-between p-6 text-amber"
+              >
+                <BarSwarm />
+                <p className="mt-4 text-xs leading-[1.7] text-foreground/75">
+                  Each profile carries its own thresholds, so a reading is measured against the
+                  economics of the business you actually operate.
+                </p>
+              </motion.div>
             </div>
           </div>
         </section>
 
         {/* -------------------------------------------------- Espresso: method */}
-        <section className="ink aurora-wash scanlines relative overflow-hidden">
+        <section className="ink tone-lime aurora-wash scanlines relative overflow-hidden">
           <ParallaxLayer depth={0.4} className="pointer-events-none absolute -left-32 top-0 -z-10 w-[36rem] opacity-50">
             <OrbitField />
           </ParallaxLayer>
@@ -342,30 +353,33 @@ function Home() {
               05 — Method
             </p>
             <h2 className="mt-3 font-display text-3xl text-foreground sm:text-4xl">
-              Read like a discovery call, not a questionnaire.
+              Reads with the cadence of a discovery call.
             </h2>
             <span className="band-rule mt-5 block" aria-hidden />
             <div className="mt-14 grid gap-10 sm:grid-cols-3">
-              <DisplayNumeral value="54" caption="Metrics resolved per full assessment" tone="var(--ochre)" />
-              <DisplayNumeral value="7" caption="Independent scoring engines" tone="var(--rust)" />
-              <DisplayNumeral value="0" caption="Figures transmitted or retained" tone="var(--teal)" />
+              <DisplayNumeral value="54" caption="Metrics resolved per full assessment" tone="var(--ochre-glow)" />
+              <DisplayNumeral value="7" caption="Independent scoring engines" tone="var(--cyan-glow)" />
+              <DisplayNumeral value="0" caption="Figures transmitted or retained" tone="var(--lime-glow)" />
             </div>
             <div className="mt-14 grid gap-px bg-border md:grid-cols-3">
               {[
                 {
                   n: "01",
                   t: "Evidence before opinion",
-                  d: "Every input is sourced from a named artefact — Profit and Loss statement, Stripe or QuickBooks ledger, CRM pipeline, operations log — so the diagnosis rests on instrumented figures, not recollection.",
+                  d: "Every input is sourced from a named artefact — Profit and Loss statement, Stripe or QuickBooks ledger, CRM pipeline, operations log — so the diagnosis rests on instrumented figures.",
+                  tone: "var(--cyan)",
                 },
                 {
                   n: "02",
-                  t: "Diagnostic, not prescriptive",
-                  d: "Where a reading falls outside its healthy range, you get where in the value chain it originates, what commonly contributes, and how it presents in practice. No directives, no advice.",
+                  t: "Diagnostic language throughout",
+                  d: "Where a reading falls outside its healthy range, you get where in the value chain it originates, what commonly contributes, and how it presents in practice — observation stated plainly.",
+                  tone: "var(--amber)",
                 },
                 {
                   n: "03",
-                  t: "Nothing leaves the browser",
-                  d: "No account, no sign-up, no transmission. Every figure is held in session memory and discarded the moment the tab closes.",
+                  t: "Everything stays in the browser",
+                  d: "Open the instrument and begin. Every figure is held in session memory and discarded the moment the tab closes.",
+                  tone: "var(--lime)",
                 },
               ].map((c, i) => (
                 <motion.div
@@ -376,9 +390,11 @@ function Home() {
                   transition={{ duration: 0.6, delay: i * 0.08, ease }}
                   className="bg-background p-7"
                 >
-                  <span className="figure text-[0.7rem] tracking-[0.2em] text-accent">{c.n}</span>
+                  <span className="figure text-[0.7rem] tracking-[0.2em]" style={{ color: c.tone }}>
+                    {c.n}
+                  </span>
                   <h3 className="mt-3 font-display text-lg text-foreground">{c.t}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{c.d}</p>
+                  <p className="mt-3 text-sm leading-[1.75] text-foreground/85">{c.d}</p>
                 </motion.div>
               ))}
             </div>
@@ -394,14 +410,24 @@ function Home() {
 }
 
 function Stat({ value, label, tone }: { value: string; label: string; tone: string }) {
+  const numeric = Number(value);
+  const [entered, setEntered] = useState(false);
+  const shown = useCountUp(entered ? numeric : 0, 1400);
   return (
-    <div>
+    <motion.div
+      onViewportEnter={() => setEntered(true)}
+      viewport={{ once: true }}
+      initial={{ opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease }}
+    >
       <dt className="figure text-4xl" style={{ color: tone }}>
-        {value}
+        {Number.isFinite(numeric) ? shown : value}
       </dt>
       <dd className="mt-1 text-[0.65rem] uppercase tracking-[0.18em] text-muted-foreground">
         {label}
       </dd>
-    </div>
+    </motion.div>
   );
 }
+
