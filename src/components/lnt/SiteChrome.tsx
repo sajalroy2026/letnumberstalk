@@ -10,6 +10,9 @@ export function SiteHeader() {
           <span className="truncate font-display text-base tracking-tight text-foreground">
             LetNumbersTalk
           </span>
+          <span className="hidden text-[0.62rem] uppercase tracking-[0.28em] text-muted-foreground sm:inline">
+            by Mr Sajal Roy
+          </span>
           <span className="hidden text-[0.62rem] uppercase tracking-[0.3em] text-muted-foreground lg:inline">
             The Business Health Instrument
           </span>
