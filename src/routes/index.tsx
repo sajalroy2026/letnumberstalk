@@ -80,10 +80,16 @@ function Home() {
 
       <main>
         {/* ---------------------------------------------------- Espresso hero */}
-        <section className="ink aurora-wash scanlines relative overflow-hidden">
+        <section className="ink tone-cyan aurora-wash scanlines relative overflow-hidden">
+          <ParallaxLayer
+            depth={0.25}
+            className="pointer-events-none absolute inset-x-0 top-0 -z-10 opacity-40"
+          >
+            <SignalField />
+          </ParallaxLayer>
 
           <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-5 pb-24 pt-20 sm:px-8 sm:pt-28 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-            <div>
+            <div className="scrim">
               <motion.p
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -93,19 +99,19 @@ function Home() {
                 01 — The Business Health Instrument
               </motion.p>
               <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.95, delay: 0.1, ease }}
+                initial={{ opacity: 0, y: 30, filter: "blur(12px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ duration: 1.1, delay: 0.1, ease }}
                 className="mt-6 font-display text-4xl leading-[1.08] text-foreground sm:text-6xl"
               >
-                Let the numbers say what the narrative won't.
+                Let the numbers state the condition of the business.
               </motion.h1>
               <span className="band-rule mt-8 block" aria-hidden />
               <motion.p
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.24, ease }}
-                className="mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground"
+                className="mt-7 max-w-xl text-lg leading-[1.7] text-foreground/90"
               >
                 LetNumbersTalk converts the operating figures you already hold into an
                 institutional read of enterprise health: 54 sector-benchmarked metrics resolved
@@ -117,12 +123,12 @@ function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.32, ease }}
-                className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground"
+                className="mt-4 max-w-xl text-sm leading-[1.75] text-muted-foreground"
               >
                 Decision intelligence at the standard a board expects — produced in a single
-                sitting, with no account, no advisory engagement, and no figure leaving your
-                browser.
+                sitting, open to anyone, and computed entirely inside your own browser.
               </motion.p>
+
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
