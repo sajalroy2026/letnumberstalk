@@ -33,7 +33,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "7 weighted pillars, 54 metrics, 5 industry profiles. Decision intelligence for founders and boardroom leaders, with no account and no data leaving the browser.",
+          "7 weighted pillars, 54 metrics, 5 industry profiles. Decision intelligence for founders and boardroom leaders, computed entirely in your browser.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -47,27 +47,27 @@ const ease = [0.16, 1, 0.3, 1] as const;
 const DELIVERS = [
   {
     n: "01",
-    t: "A weighted diagnosis, not a survey result",
+    t: "A weighted diagnosis built from your operating figures",
     d: "7 independent scoring engines convert your operating figures into pillar scores, then into a single Integrated Business Health Score under a fixed weighting — Financial Health 22%, Risk 20%, Market 18%, Operations 15%, Strategy 13%, Organisation 7%, Technology 5%.",
     tone: "var(--teal)",
   },
   {
     n: "02",
     t: "Sector-calibrated benchmarking",
-    d: "Every threshold is re-based against 1 of 5 industry profiles. A services practice is never judged against SaaS retention economics, and a manufacturer is never judged against D2C contribution margin.",
-    tone: "var(--rust)",
+    d: "Every threshold is re-based against 1 of 5 industry profiles. A services practice is read against services economics, and a manufacturer against manufacturing economics, so each comparison holds.",
+    tone: "var(--plum)",
   },
   {
     n: "03",
     t: "Value-chain attribution",
-    d: "Where a reading breaches its healthy band, the instrument names the location in the value chain, the factors that commonly contribute, and how the pattern presents in practice — diagnostic language only.",
+    d: "Where a reading breaches its healthy band, the instrument names the location in the value chain, the factors that commonly contribute, and how the pattern presents in practice — diagnostic language throughout.",
     tone: "var(--ochre)",
   },
   {
     n: "04",
     t: "Terminal-risk surveillance",
-    d: "Cash runway and customer concentration are monitored as terminal indicators. A breach raises a distinct Caution disclosure in the integrated report. It never gates or delays score generation.",
-    tone: "var(--oxblood)",
+    d: "Cash runway and customer concentration are monitored as terminal indicators. A breach raises a distinct Caution disclosure in the integrated report, while scores generate in full alongside it.",
+    tone: "var(--cyan)",
   },
 ];
 
