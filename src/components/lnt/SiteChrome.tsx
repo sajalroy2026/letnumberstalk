@@ -4,7 +4,7 @@ import { ABOUT_ARCHITECT, DISCLOSURE, METHODOLOGY_NOTE } from "@/lib/assessment/
 
 export function SiteHeader() {
   return (
-    <header className="ink tone-amber no-print sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur-md">
+    <header className="ink tone-amber no-print relative z-40 border-b border-border">
       <div className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-3 sm:gap-4 sm:px-8 sm:py-4">
         <Link to="/" className="group flex min-w-0 items-baseline gap-3">
           <span className="shrink-0 font-display text-sm tracking-tight text-foreground sm:text-base">
@@ -13,10 +13,8 @@ export function SiteHeader() {
           <span className="hidden text-[0.62rem] uppercase tracking-[0.28em] text-accent sm:inline">
             by Mr Sajal Roy
           </span>
-          <span className="hidden text-[0.62rem] uppercase tracking-[0.3em] text-muted-foreground lg:inline">
-            The Business Health Instrument
-          </span>
         </Link>
+
         <nav className="flex shrink-0 items-center gap-2 text-[0.62rem] uppercase tracking-[0.16em] sm:gap-4 sm:text-[0.7rem] sm:tracking-[0.2em]">
           <Link
             to="/about"
