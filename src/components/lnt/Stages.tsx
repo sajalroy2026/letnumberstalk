@@ -1,6 +1,8 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import { track } from "@/lib/analytics/track";
+
 import { MetricCard } from "./MetricCard";
 import { Disclosure } from "./SiteChrome";
 import { AboutSections } from "./AboutSections";
