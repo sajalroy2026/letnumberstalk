@@ -108,7 +108,7 @@ export function assessPillar(
   // Re-weighting: missing metrics leave both numerator and denominator — never scored as zero.
   const score = availablePoints > 0 ? Math.round((earnedPoints / availablePoints) * 100) : 0;
 
-  const tier = COVERAGE_TIERS[pillar];
+  const tier = COVERAGE_TIERS[pillar]!;
   const entered = results.length;
   const meetsCriticalMinimum = entered >= tier.floor;
   const confidence =
@@ -138,7 +138,7 @@ export function evaluateCaution(inputs: BaseInputSet): CautionItem[] {
   const out: CautionItem[] = [];
   const runway = inputs["cash-runway-risk"] ?? inputs["cash-runway"];
   if (runway && runway.value < 3) {
-    const src = METRICS_BY_ID["cash-runway-risk"];
+    const src = METRICS_BY_ID["cash-runway-risk"]!;
     out.push({
       metricId: src.id,
       name: "Cash Runway",
@@ -148,7 +148,7 @@ export function evaluateCaution(inputs: BaseInputSet): CautionItem[] {
   }
   const conc = inputs["customer-concentration-risk"] ?? inputs["revenue-concentration"];
   if (conc && conc.value > 60) {
-    const src = METRICS_BY_ID["customer-concentration-risk"];
+    const src = METRICS_BY_ID["customer-concentration-risk"]!;
     out.push({
       metricId: src.id,
       name: "Customer Concentration",
