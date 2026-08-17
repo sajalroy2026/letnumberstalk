@@ -27,25 +27,36 @@ export const Route = createFileRoute("/about")({
 
 function AboutPage() {
   return (
-    <div className="surface-depth min-h-screen">
-      <SiteHeader />
+    <div className="min-h-screen bg-background">
+      <div className="ink">
+        <SiteHeader />
+      </div>
+      <section className="ink grid-field relative overflow-hidden">
+        <div className="relative mx-auto max-w-5xl px-5 py-16 sm:px-8">
+          <p className="figure text-[0.66rem] uppercase tracking-[0.28em] text-accent">
+            The instrument
+          </p>
+          <h1 className="mt-4 max-w-3xl font-display text-4xl leading-tight text-foreground sm:text-5xl">
+            A boardroom diagnostic, run from the figures already in the business.
+          </h1>
+          <span className="band-rule mt-6 block" aria-hidden />
+        </div>
+      </section>
       <main className="mx-auto max-w-5xl px-5 pb-20 pt-16 sm:px-8">
-        <p className="text-xs uppercase tracking-[0.28em] text-primary">The instrument</p>
-        <h1 className="mt-4 max-w-3xl font-display text-4xl leading-tight text-foreground sm:text-5xl">
-          A boardroom diagnostic, run from the figures already in the business.
-        </h1>
         <div className="mt-12 space-y-10">
           <AboutSections />
           <Disclosure />
         </div>
         <Link
           to="/assess"
-          className="rule-copper mt-12 inline-block rounded-full px-8 py-3 text-xs uppercase tracking-[0.2em] text-primary-foreground"
+          className="rule-copper mt-12 inline-block px-8 py-3 text-xs uppercase tracking-[0.2em] text-primary-foreground"
         >
           Begin the assessment
         </Link>
       </main>
-      <SiteFooter />
+      <div className="ink">
+        <SiteFooter />
+      </div>
     </div>
   );
 }
