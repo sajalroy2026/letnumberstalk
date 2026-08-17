@@ -32,6 +32,13 @@ export interface Band {
   label: string;
 }
 
+export interface TierBand {
+  min?: number;
+  max?: number;
+  tier: Tier;
+  label: string;
+}
+
 export interface BandCard {
   value: number;
   label: string;
@@ -44,8 +51,10 @@ export interface MetricScoring {
   placeholder: string;
   /** Sector-neutral point bands, taken verbatim from the metric's Scoring Band line. */
   pointBands: Band[];
-  /** Where the Scoring Band line is expressed in sector-relative terms. */
+  /** Where the Scoring Band line is itself expressed in sector-relative terms. */
   sectorBands?: Record<SectorId, Band[]>;
+  /** Sector benchmark classification, used for the healthy/outside-healthy reading. */
+  tierBands?: Record<SectorId, TierBand[]>;
   /** Note shown where the sector table does not carry a row for the selected profile. */
   sectorNote?: Partial<Record<SectorId, string>>;
   /** Guided descriptive band cards for self-assessment metrics. */
