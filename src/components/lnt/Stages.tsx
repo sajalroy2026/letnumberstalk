@@ -8,7 +8,15 @@ import { COVERAGE_TIERS, SECTORS } from "@/lib/assessment/scoring";
 import { metricsForPillar, METRICS_BY_ID, PILLAR_ORDER } from "@/lib/assessment/engine";
 import { PILLAR_META } from "@/lib/assessment/spec.generated";
 import { useSession } from "@/lib/assessment/session";
-import { PillarWeightRing, ScoreDial, ValueChain, stageForPillar } from "./Figures";
+import {
+  ChapterPlate,
+  PillarSpectrum,
+  PillarWeightRing,
+  ScoreDial,
+  SectorGlyph,
+  ValueChain,
+  stageForPillar,
+} from "./Figures";
 import type { MetricResult, PillarAssessment, PillarId, Tier } from "@/lib/assessment/types";
 import { cn } from "@/lib/utils";
 
@@ -45,10 +53,21 @@ export function SectorStage() {
             transition={{ duration: 0.55, delay: i * 0.06, ease }}
             aria-pressed={sector === s.id}
             className={cn(
-              "tilt-card group rounded-md border bg-card/70 p-6 text-left",
-              sector === s.id ? "border-primary" : "border-border hover:border-primary/50",
+              "tilt-card group relative overflow-hidden border bg-card p-6 text-left shadow-[var(--shadow-plate)]",
+              sector === s.id ? "border-accent" : "border-border hover:border-accent/60",
             )}
           >
+            <span
+              className="absolute inset-x-0 top-0 h-[3px]"
+              style={{
+                background:
+                  sector === s.id ? "var(--gradient-rust)" : "var(--gradient-ink)",
+              }}
+              aria-hidden
+            />
+            <span className="mb-4 block text-accent">
+              <SectorGlyph id={s.id} />
+            </span>
             <span className="block font-display text-lg text-foreground">{s.name}</span>
             <span className="mt-2 block text-sm leading-relaxed text-muted-foreground">
               {s.description}
@@ -90,14 +109,14 @@ export function PillarSelectStage() {
               transition={{ duration: 0.5, delay: i * 0.05, ease }}
               aria-pressed={active}
               className={cn(
-                "flex items-start gap-4 rounded-md border bg-card/70 p-5 text-left transition-colors",
-                active ? "border-primary bg-primary/8" : "border-border hover:border-primary/50",
+                "flex items-start gap-4 border bg-card p-5 text-left shadow-[var(--shadow-plate)] transition-colors",
+                active ? "border-accent bg-accent/8" : "border-border hover:border-accent/60",
               )}
             >
               <span
                 className={cn(
                   "mt-1 grid size-5 shrink-0 place-items-center rounded-full border text-[0.6rem]",
-                  active ? "border-primary bg-primary text-primary-foreground" : "border-border",
+                  active ? "border-accent bg-accent text-accent-foreground" : "border-border",
                 )}
                 aria-hidden
               >
@@ -123,7 +142,7 @@ export function PillarSelectStage() {
         <button
           type="button"
           onClick={selectAllPillars}
-          className="rounded-full border border-border px-5 py-2 text-xs uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:border-primary/60 hover:text-foreground"
+          className="border border-border px-5 py-2 text-xs uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:border-accent/70 hover:text-foreground"
         >
           Select all 7
         </button>
@@ -131,7 +150,7 @@ export function PillarSelectStage() {
           type="button"
           disabled={selectedPillars.length === 0}
           onClick={startAssessment}
-          className="rule-copper rounded-full px-7 py-2.5 text-xs uppercase tracking-[0.2em] text-primary-foreground transition-opacity disabled:cursor-not-allowed disabled:opacity-40"
+          className="rule-copper px-7 py-2.5 text-xs uppercase tracking-[0.2em] text-primary-foreground transition-opacity disabled:cursor-not-allowed disabled:opacity-40"
         >
           Begin assessment
         </button>
@@ -177,6 +196,13 @@ export function PillarStage() {
   return (
     <div ref={topRef}>
       <ProgressSpine />
+      <ChapterPlate
+        index={activeIndex + 1}
+        total={selectedPillars.length}
+        name={meta.name}
+        weight={meta.weight}
+        note={`${PILLAR_NOTE[pillarId]} Enter what is known — every blank metric is left out of the calculation entirely rather than counted as zero.`}
+      />
       <motion.div
         key={pillarId}
         initial={{ opacity: 0, y: 36 }}
@@ -184,18 +210,8 @@ export function PillarStage() {
         transition={{ duration: 0.6, ease }}
         className="mx-auto max-w-5xl px-5 pb-24 pt-10 sm:px-8"
       >
-        <p className="text-xs uppercase tracking-[0.28em] text-primary">
-          Pillar {activeIndex + 1} of {selectedPillars.length} · {Math.round(meta.weight * 100)}% weight
-        </p>
-        <h1 className="mt-4 font-display text-3xl leading-tight text-foreground sm:text-5xl">
-          {meta.name}
-        </h1>
-        <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
-          {PILLAR_NOTE[pillarId]} Enter what is known — every blank metric is left out of the
-          calculation entirely rather than counted as zero.
-        </p>
 
-        <div className="mt-6 rounded-md border border-border bg-card/60 p-5">
+        <div className="border border-border bg-card p-5 shadow-[var(--shadow-plate)]">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <span className="text-sm text-muted-foreground">
               {assessment.entered} of {metrics.length} metrics entered · minimum for a meaningful
@@ -248,14 +264,14 @@ export function PillarStage() {
           <button
             type="button"
             onClick={back}
-            className="rounded-full border border-border px-6 py-2.5 text-xs uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:border-primary/60 hover:text-foreground"
+            className="border border-border px-6 py-2.5 text-xs uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:border-accent/70 hover:text-foreground"
           >
             Back
           </button>
           <button
             type="button"
             onClick={next}
-            className="rule-copper rounded-full px-8 py-2.5 text-xs uppercase tracking-[0.2em] text-primary-foreground"
+            className="rule-copper px-8 py-2.5 text-xs uppercase tracking-[0.2em] text-primary-foreground"
           >
             {isLast ? (isFullAssessment ? "Compute integrated score" : "View results") : "Next pillar"}
           </button>
@@ -281,7 +297,7 @@ function ProgressSpine() {
               className={cn(
                 "shrink-0 border-b-2 px-3 py-1.5 text-[0.7rem] uppercase tracking-[0.14em] transition-colors",
                 i === activeIndex
-                  ? "border-primary text-foreground"
+                  ? "border-accent text-foreground"
                   : done
                     ? "border-healthy/60 text-muted-foreground hover:text-foreground"
                     : "border-transparent text-muted-foreground/70 hover:text-foreground",
@@ -338,7 +354,7 @@ export function PillarScorePlate({
       initial={{ opacity: 0, rotateX: 8, y: 24 }}
       animate={{ opacity: 1, rotateX: 0, y: 0 }}
       transition={{ duration: 0.7, ease }}
-      className={cn("plate print-plain rounded-md p-8", className)}
+      className={cn("plate print-plain p-8", className)}
     >
       <div className="flex flex-wrap items-end justify-between gap-6">
         <div>
@@ -402,7 +418,7 @@ export function ReportStage() {
           initial={{ opacity: 0, scale: 0.97, rotateX: 10 }}
           animate={{ opacity: 1, scale: 1, rotateX: 0 }}
           transition={{ duration: 0.9, delay: 0.15, ease }}
-          className="plate print-plain mt-10 grid items-center gap-10 rounded-md p-10 md:grid-cols-[auto_minmax(0,1fr)]"
+          className="plate print-plain mt-10 grid items-center gap-10 p-10 md:grid-cols-[auto_minmax(0,1fr)]"
         >
           <div className="justify-self-center">
             <ScoreDial
@@ -437,7 +453,7 @@ export function ReportStage() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3, ease }}
-          className="print-plain mt-10 rounded-md border border-critical/50 bg-critical/8 p-8"
+          className="print-plain mt-10 border-l-4 border-critical bg-critical/10 p-8"
           aria-label="Caution"
         >
           <h2 className="text-xs uppercase tracking-[0.28em] text-critical">Caution</h2>
@@ -450,7 +466,7 @@ export function ReportStage() {
               <div key={c.metricId}>
                 <h3 className="font-display text-lg text-foreground">{c.name}</h3>
                 <p className="mt-1.5 text-sm text-foreground/90">{c.headline}</p>
-                <div className="mt-3 rounded-md border border-border bg-background/40 p-5">
+                <div className="mt-3 border border-border bg-background/40 p-5">
                   <span className="text-xs uppercase tracking-[0.2em] text-primary">
                     Areas to look into
                   </span>
@@ -469,7 +485,7 @@ export function ReportStage() {
             {a.meetsCriticalMinimum ? (
               <PillarScorePlate assessment={a} />
             ) : (
-              <div className="print-plain rounded-md border border-border bg-card/60 p-8">
+              <div className="print-plain border border-border bg-card p-8">
                 <p className="font-display text-xl text-foreground">{a.name}</p>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   {a.entered} metrics were entered, below the {COVERAGE_TIERS[a.pillarId]!.floor}{" "}
@@ -498,14 +514,14 @@ export function ReportStage() {
         <button
           type="button"
           onClick={() => window.print()}
-          className="rule-copper rounded-full px-8 py-2.5 text-xs uppercase tracking-[0.2em] text-primary-foreground"
+          className="rule-copper px-8 py-2.5 text-xs uppercase tracking-[0.2em] text-primary-foreground"
         >
           Download report
         </button>
         <button
           type="button"
           onClick={reset}
-          className="rounded-full border border-border px-6 py-2.5 text-xs uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:border-primary/60 hover:text-foreground"
+          className="border border-border px-6 py-2.5 text-xs uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:border-accent/70 hover:text-foreground"
         >
           Start a new session
         </button>
