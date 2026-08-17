@@ -156,39 +156,76 @@
 
 
 /*
- * Ink band — the navy half of the duotone. Any subtree marked .ink re-binds the
- * semantic tokens, so every child component flips surface without hardcoded colour.
+ * Espresso band — the dark chapter of the system. Any subtree marked .ink
+ * re-binds the semantic tokens, so children flip surface with no hardcoded colour.
  */
 .ink {
-  --background: oklch(0.245 0.045 262);
-  --foreground: oklch(0.945 0.016 85);
-  --card: oklch(0.295 0.048 262);
-  --card-foreground: oklch(0.945 0.016 85);
-  --popover: oklch(0.295 0.048 262);
-  --popover-foreground: oklch(0.945 0.016 85);
-  --primary: oklch(0.912 0.026 85);
-  --primary-foreground: oklch(0.235 0.045 262);
-  --secondary: oklch(0.315 0.045 262);
-  --secondary-foreground: oklch(0.945 0.016 85);
-  --muted: oklch(0.315 0.045 262);
-  --muted-foreground: oklch(0.775 0.024 85);
-  --accent: oklch(0.638 0.145 48);
-  --accent-foreground: oklch(0.205 0.042 262);
-  --border: oklch(0.912 0.026 85 / 18%);
-  --input: oklch(0.912 0.026 85 / 30%);
-  --ring: oklch(0.638 0.145 48);
-  --healthy: oklch(0.648 0.098 178);
-  --acceptable: oklch(0.775 0.125 84);
-  --concern: oklch(0.665 0.145 48);
-  --critical: oklch(0.615 0.165 26);
-  --elevated: oklch(0.295 0.048 262);
-  --paper: oklch(0.295 0.048 262);
-  --gradient-depth: radial-gradient(120% 95% at 50% -10%, oklch(0.315 0.052 262) 0%, oklch(0.225 0.042 262) 72%);
-  --shadow-plate: 0 1px 0 0 oklch(0.945 0.016 85 / 0.06), 0 26px 60px -40px oklch(0 0 0 / 0.85);
+  --background: oklch(0.222 0.014 55);
+  --foreground: oklch(0.951 0.017 82);
+  --card: oklch(0.278 0.018 55);
+  --card-foreground: oklch(0.951 0.017 82);
+  --popover: oklch(0.278 0.018 55);
+  --popover-foreground: oklch(0.951 0.017 82);
+  --primary: oklch(0.755 0.135 80);
+  --primary-foreground: oklch(0.222 0.014 55);
+  --secondary: oklch(0.302 0.02 55);
+  --secondary-foreground: oklch(0.951 0.017 82);
+  --muted: oklch(0.302 0.02 55);
+  --muted-foreground: oklch(0.795 0.024 82);
+  --accent: oklch(0.678 0.152 48);
+  --accent-foreground: oklch(0.205 0.014 55);
+  --border: oklch(0.925 0.024 82 / 18%);
+  --input: oklch(0.925 0.024 82 / 30%);
+  --ring: oklch(0.678 0.152 48);
+  --healthy: oklch(0.678 0.088 178);
+  --acceptable: oklch(0.808 0.128 82);
+  --concern: oklch(0.678 0.152 48);
+  --critical: oklch(0.618 0.148 26);
+  --rust: oklch(0.678 0.152 48);
+  --teal: oklch(0.678 0.088 178);
+  --ochre: oklch(0.808 0.128 82);
+  --oxblood: oklch(0.578 0.132 26);
+  --slate-blue: oklch(0.735 0.052 232);
+  --pillar-financial: oklch(0.678 0.088 178);
+  --pillar-risk: oklch(0.678 0.152 48);
+  --pillar-market: oklch(0.735 0.052 232);
+  --pillar-operational: oklch(0.808 0.128 82);
+  --pillar-strategic: oklch(0.598 0.132 26);
+  --pillar-organizational: oklch(0.688 0.092 152);
+  --pillar-technology: oklch(0.665 0.088 292);
+  --elevated: oklch(0.278 0.018 55);
+  --paper: oklch(0.278 0.018 55);
+  --gradient-depth: radial-gradient(125% 95% at 50% -10%, oklch(0.302 0.024 55) 0%, oklch(0.198 0.012 55) 74%);
+  --shadow-plate: 0 1px 0 0 oklch(0.951 0.017 82 / 0.06), 0 26px 60px -40px oklch(0 0 0 / 0.85);
   --shadow-lift: 0 32px 70px -32px oklch(0 0 0 / 0.8);
   background-color: var(--background);
   color: var(--foreground);
 }
+
+/* Warm putty band — the middle temperature between bone and espresso. */
+.putty-band {
+  --background: oklch(0.902 0.03 82);
+  --card: oklch(0.945 0.02 82);
+  --secondary: oklch(0.862 0.034 80);
+  --muted: oklch(0.862 0.034 80);
+  --elevated: oklch(0.945 0.02 82);
+  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.928 0.026 84) 0%, oklch(0.882 0.032 80) 72%);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Cool counter-band, used sparingly for analytical chapters. */
+.teal-band {
+  --background: oklch(0.926 0.028 190);
+  --card: oklch(0.962 0.016 190);
+  --secondary: oklch(0.888 0.034 190);
+  --muted: oklch(0.888 0.034 190);
+  --elevated: oklch(0.962 0.016 190);
+  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.952 0.02 190) 0%, oklch(0.902 0.032 190) 72%);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
 
 
 
