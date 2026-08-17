@@ -1341,3 +1341,226 @@ export function HorizonField({ className }: { className?: string }) {
     </svg>
   );
 }
+
+/* ------------------------------------------- Seven-pillar armature (hero) */
+
+const ARMATURE_TONES = [
+  "var(--navy-glow)",
+  "var(--gold)",
+  "var(--rust)",
+  "var(--forest)",
+  "var(--oxblood)",
+  "var(--cyan)",
+  "var(--plum)",
+];
+
+/**
+ * Full-bleed hero composition: a slowly rotating armature of seven weighted
+ * arcs — one per pillar — carrying metric nodes, set against a depth-blurred
+ * benchmark corridor field.
+ */
+export function PillarArmature({ className }: { className?: string }) {
+  return (
+    <svg
+      className={cn("h-full w-full", className)}
+      viewBox="0 0 1600 900"
+      preserveAspectRatio="xMidYMid slice"
+      aria-hidden
+    >
+      <defs>
+        <radialGradient id="pa-core" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="var(--accent-glow)" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="var(--accent-glow)" stopOpacity="0" />
+        </radialGradient>
+        <filter id="pa-soft" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="9" />
+        </filter>
+        <linearGradient id="pa-floor" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="var(--navy)" stopOpacity="0" />
+          <stop offset="50%" stopColor="var(--navy)" stopOpacity="0.28" />
+          <stop offset="100%" stopColor="var(--navy)" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+
+      {/* Depth-blurred corridor floor */}
+      <g filter="url(#pa-soft)" opacity="0.5">
+        {Array.from({ length: 9 }).map((_, i) => (
+          <motion.path
+            key={`floor-${i}`}
+            d={`M -160 ${640 + i * 34} C 380 ${600 + i * 30}, 1120 ${700 + i * 26}, 1780 ${632 + i * 34}`}
+            fill="none"
+            stroke="url(#pa-floor)"
+            strokeWidth={1.4}
+            animate={{ x: [0, -70, 0] }}
+            transition={{ duration: 26 + i * 3, repeat: Infinity, ease: "easeInOut" }}
+          />
+        ))}
+      </g>
+
+      <g transform="translate(800 430)">
+        <motion.circle
+          r="330"
+          fill="url(#pa-core)"
+          animate={{ opacity: [0.5, 1, 0.5], scale: [1, 1.06, 1] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {/* One arc per pillar, radius and weight carried from the model */}
+        {PILLAR_META.map((p, i) => {
+          const r = 118 + i * 44;
+          const tone = ARMATURE_TONES[i % ARMATURE_TONES.length];
+          const circ = 2 * Math.PI * r;
+          const arc = circ * (0.22 + p.weight * 1.6);
+          return (
+            <g key={p.id} transform={`rotate(${i * 14 - 20})`}>
+              <circle r={r} fill="none" stroke={tone} strokeOpacity={0.14} strokeWidth={1} />
+              <motion.circle
+                r={r}
+                fill="none"
+                stroke={tone}
+                strokeOpacity={0.7}
+                strokeWidth={2 + p.weight * 10}
+                strokeLinecap="round"
+                strokeDasharray={`${arc} ${circ}`}
+                initial={{ rotate: -140, opacity: 0, pathLength: 0 }}
+                animate={{ rotate: 220, opacity: 1, pathLength: 1 }}
+                transition={{
+                  rotate: { duration: 52 + i * 11, repeat: Infinity, ease: "linear" },
+                  opacity: { duration: 1.1, delay: 0.2 + i * 0.09 },
+                  pathLength: { duration: 1.8, delay: 0.2 + i * 0.09, ease },
+                }}
+              />
+              <motion.circle
+                cx={r}
+                cy={0}
+                r={4.5}
+                fill={tone}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: [0.35, 1, 0.35] }}
+                transition={{ duration: 5 + i, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </g>
+          );
+        })}
+
+        {/* Metric nodes distributed around the armature */}
+        {Array.from({ length: 54 }).map((_, i) => {
+          const ring = i % 7;
+          const r = 118 + ring * 44;
+          const a = (i * 137.508 * Math.PI) / 180;
+          return (
+            <motion.circle
+              key={`m-${i}`}
+              cx={Math.cos(a) * r}
+              cy={Math.sin(a) * r * 0.58}
+              r={1.9}
+              fill={ARMATURE_TONES[ring]}
+              initial={{ opacity: 0, scale: 0.3 }}
+              animate={{ opacity: [0.2, 0.85, 0.2], scale: 1 }}
+              transition={{ duration: 6 + (i % 6), repeat: Infinity, delay: i * 0.05, ease: "easeInOut" }}
+            />
+          );
+        })}
+
+        <motion.circle
+          r="52"
+          fill="var(--accent)"
+          fillOpacity={0.14}
+          stroke="var(--accent)"
+          strokeOpacity={0.55}
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </g>
+    </svg>
+  );
+}
+
+/* --------------------------------------------------- Benchmark terrain */
+
+/** Layered sector corridors — depth-stacked ridges reading as a benchmark field. */
+export function BenchmarkTerrain({ className }: { className?: string }) {
+  const tones = ["var(--navy-glow)", "var(--forest)", "var(--gold)", "var(--rust)", "var(--oxblood)"];
+  return (
+    <svg
+      className={cn("h-full w-full", className)}
+      viewBox="0 0 900 500"
+      preserveAspectRatio="xMidYMid meet"
+      aria-hidden
+    >
+      {tones.map((tone, i) => {
+        const base = 430 - i * 62;
+        const d = `M 0 ${base} C 150 ${base - 60 - i * 12}, 300 ${base + 30}, 460 ${base - 44}
+                   S 760 ${base + 22}, 900 ${base - 30} L 900 500 L 0 500 Z`;
+        return (
+          <motion.path
+            key={tone + i}
+            d={d}
+            fill={tone}
+            fillOpacity={0.1 + i * 0.03}
+            stroke={tone}
+            strokeOpacity={0.5}
+            strokeWidth={1.4}
+            initial={{ opacity: 0, y: 26 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 1, delay: i * 0.12, ease }}
+          />
+        );
+      })}
+    </svg>
+  );
+}
+
+/* ------------------------------------------------------ Extruded columns */
+
+/** Extruded score columns — weighted pillar mass rendered in false perspective. */
+export function ScoreColumns({ className }: { className?: string }) {
+  return (
+    <svg
+      className={cn("h-full w-full", className)}
+      viewBox="0 0 900 420"
+      preserveAspectRatio="xMidYMid meet"
+      aria-hidden
+    >
+      {PILLAR_META.map((p, i) => {
+        const w = 74;
+        const x = 48 + i * 116;
+        const h = 90 + p.weight * 900;
+        const tone = ARMATURE_TONES[i % ARMATURE_TONES.length];
+        return (
+          <motion.g
+            key={p.id}
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.8, delay: i * 0.08, ease }}
+          >
+            <polygon
+              points={`${x + w},${340 - h} ${x + w + 22},${328 - h} ${x + w + 22},${328} ${x + w},${340}`}
+              fill={tone}
+              fillOpacity={0.32}
+            />
+            <polygon
+              points={`${x},${340 - h} ${x + 22},${328 - h} ${x + w + 22},${328 - h} ${x + w},${340 - h}`}
+              fill={tone}
+              fillOpacity={0.62}
+            />
+            <rect x={x} y={340 - h} width={w} height={h} fill={tone} fillOpacity={0.2} stroke={tone} strokeOpacity={0.6} />
+            <text
+              x={x + w / 2}
+              y={368}
+              textAnchor="middle"
+              fill="currentColor"
+              fontSize="13"
+              className="figure"
+              opacity={0.7}
+            >
+              {Math.round(p.weight * 100)}%
+            </text>
+          </motion.g>
+        );
+      })}
+    </svg>
+  );
+}
