@@ -1214,3 +1214,130 @@ export function SignalField({ className }: { className?: string }) {
     </svg>
   );
 }
+
+/* ------------------------------------------------ Full-bleed horizon field */
+
+/**
+ * Screen-scale hero composition: drifting benchmark corridors, pillar arcs and
+ * a resolving lattice. Designed to sit behind and around the hero copy rather
+ * than inside a tile, so the opening occupies the whole viewport.
+ */
+export function HorizonField({ className }: { className?: string }) {
+  const tones = [
+    "var(--teal)",
+    "var(--rust)",
+    "var(--lime)",
+    "var(--plum)",
+    "var(--cyan)",
+    "var(--ochre)",
+  ];
+
+  return (
+    <svg
+      className={cn("h-full w-full", className)}
+      viewBox="0 0 1600 900"
+      preserveAspectRatio="xMidYMid slice"
+      aria-hidden
+    >
+      <defs>
+        <linearGradient id="hf-corridor" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="var(--accent-glow)" stopOpacity="0" />
+          <stop offset="45%" stopColor="var(--accent-glow)" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="var(--accent)" stopOpacity="0.15" />
+        </linearGradient>
+        <radialGradient id="hf-bloom" cx="50%" cy="35%" r="65%">
+          <stop offset="0%" stopColor="var(--accent-glow)" stopOpacity="0.30" />
+          <stop offset="100%" stopColor="var(--accent-glow)" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+
+      <motion.rect
+        x="0"
+        y="0"
+        width="1600"
+        height="900"
+        fill="url(#hf-bloom)"
+        animate={{ opacity: [0.55, 0.95, 0.55] }}
+        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Benchmark corridors drifting across the field */}
+      {Array.from({ length: 7 }).map((_, i) => {
+        const y = 150 + i * 96;
+        return (
+          <motion.path
+            key={`corridor-${i}`}
+            d={`M -200 ${y} C 260 ${y - 70 - i * 6}, 700 ${y + 80}, 1100 ${y - 30} S 1700 ${y + 46}, 1900 ${y}`}
+            fill="none"
+            stroke="url(#hf-corridor)"
+            strokeWidth={i % 3 === 0 ? 2.4 : 1.1}
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1, x: [0, -60, 0] }}
+            transition={{
+              pathLength: { duration: 2.4, delay: i * 0.12, ease },
+              opacity: { duration: 1.2, delay: i * 0.12 },
+              x: { duration: 22 + i * 2, repeat: Infinity, ease: "easeInOut" },
+            }}
+          />
+        );
+      })}
+
+      {/* Pillar arcs — one sweep per pillar, colour as information */}
+      <g transform="translate(1180 450)">
+        {tones.map((tone, i) => {
+          const r = 120 + i * 42;
+          return (
+            <motion.circle
+              key={tone + i}
+              r={r}
+              fill="none"
+              stroke={tone}
+              strokeOpacity={0.42}
+              strokeWidth={1.6}
+              strokeLinecap="round"
+              strokeDasharray={`${r * 1.2} ${r * 5}`}
+              initial={{ rotate: -120, opacity: 0 }}
+              animate={{ rotate: 240, opacity: 1 }}
+              transition={{
+                rotate: { duration: 40 + i * 9, repeat: Infinity, ease: "linear" },
+                opacity: { duration: 1.4, delay: 0.3 + i * 0.1 },
+              }}
+            />
+          );
+        })}
+        <motion.circle
+          r="46"
+          fill="var(--accent)"
+          fillOpacity={0.12}
+          stroke="var(--accent)"
+          strokeOpacity={0.5}
+          animate={{ scale: [1, 1.12, 1] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </g>
+
+      {/* Resolving lattice nodes */}
+      {Array.from({ length: 26 }).map((_, i) => {
+        const x = 60 + ((i * 137) % 1480);
+        const y = 90 + ((i * 271) % 760);
+        return (
+          <motion.circle
+            key={`node-${i}`}
+            cx={x}
+            cy={y}
+            r={i % 5 === 0 ? 4 : 2}
+            fill={tones[i % tones.length]}
+            initial={{ opacity: 0, scale: 0.4 }}
+            animate={{ opacity: [0.15, 0.7, 0.15], scale: 1 }}
+            transition={{
+              duration: 6 + (i % 5),
+              repeat: Infinity,
+              delay: i * 0.16,
+              ease: "easeInOut",
+            }}
+          />
+        );
+      })}
+    </svg>
+  );
+}

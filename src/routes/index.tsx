@@ -11,7 +11,7 @@ import {
   DepthReveal,
   DisplayNumeral,
   FlowGraph,
-  HeroComposition,
+  HorizonField,
   OrbitField,
   ParallaxLayer,
   PrismStack,
@@ -48,25 +48,21 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 const DELIVERS = [
   {
-    n: "01",
     t: "A weighted diagnosis built from your operating figures",
     d: "7 independent scoring engines convert your operating figures into pillar scores, then into a single Integrated Business Health Score under a fixed weighting — Financial Health 22%, Risk 20%, Market 18%, Operations 15%, Strategy 13%, Organisation 7%, Technology 5%.",
     tone: "var(--teal)",
   },
   {
-    n: "02",
     t: "Sector-calibrated benchmarking",
     d: "Every threshold is re-based against 1 of 5 industry profiles. A services practice is read against services economics, and a manufacturer against manufacturing economics, so each comparison holds.",
     tone: "var(--plum)",
   },
   {
-    n: "03",
     t: "Value-chain attribution",
     d: "Where a reading breaches its healthy band, the instrument names the location in the value chain, the factors that commonly contribute, and how the pattern presents in practice — diagnostic language throughout.",
     tone: "var(--ochre)",
   },
   {
-    n: "04",
     t: "Terminal-risk surveillance",
     d: "Cash runway and customer concentration are monitored as terminal indicators. A breach raises a distinct Caution disclosure in the integrated report, while scores generate in full alongside it.",
     tone: "var(--cyan)",
@@ -81,24 +77,32 @@ function Home() {
       </div>
 
       <main>
-        {/* ---------------------------------------------------- Espresso hero */}
-        <section className="ink tone-cyan aurora-wash scanlines relative overflow-hidden">
+        {/* ------------------------------------------------- Full-bleed hero */}
+        <section className="ink tone-cyan aurora-wash relative min-h-[92vh] overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.8, ease }}
+            className="pointer-events-none absolute inset-0 -z-10"
+          >
+            <HorizonField />
+          </motion.div>
           <ParallaxLayer
             depth={0.25}
-            className="pointer-events-none absolute inset-x-0 top-0 -z-10 opacity-40"
+            className="pointer-events-none absolute inset-x-0 top-0 -z-10 opacity-25"
           >
             <SignalField />
           </ParallaxLayer>
 
-          <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-5 pb-24 pt-20 sm:px-8 sm:pt-28 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-            <div className="scrim">
+          <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-5 pb-24 pt-20 sm:px-8 sm:pt-28">
+            <div className="scrim max-w-3xl">
               <motion.p
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease }}
                 className="figure text-[0.68rem] uppercase tracking-[0.32em] text-accent"
               >
-                01 — The Business Health Instrument
+                The Business Health Instrument · by Mr Sajal Roy
               </motion.p>
               <motion.h1
                 initial={{ opacity: 0, y: 30, filter: "blur(12px)" }}
@@ -165,14 +169,6 @@ function Home() {
               </motion.dl>
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, delay: 0.25, ease }}
-              className="mx-auto w-full max-w-[26rem]"
-            >
-              <HeroComposition />
-            </motion.div>
           </div>
         </section>
 
@@ -183,7 +179,7 @@ function Home() {
           </ParallaxLayer>
           <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
             <p className="figure text-[0.65rem] uppercase tracking-[0.28em] text-accent">
-              02 — Mandate
+              Mandate
             </p>
             <h2 className="mt-3 font-display text-3xl text-foreground sm:text-4xl">
               What the instrument delivers
@@ -220,10 +216,12 @@ function Home() {
                         style={{ background: c.tone }}
                         aria-hidden
                       />
-                      <span className="figure text-[0.7rem] tracking-[0.22em]" style={{ color: c.tone }}>
-                        {c.n}
-                      </span>
-                      <h3 className="mt-3 font-display text-lg leading-snug text-foreground">{c.t}</h3>
+                      <span
+                        className="block h-[3px] w-10"
+                        style={{ background: c.tone }}
+                        aria-hidden
+                      />
+                      <h3 className="mt-4 font-display text-lg leading-snug text-foreground">{c.t}</h3>
                       <p className="mt-3 text-sm leading-[1.7] text-foreground/80">{c.d}</p>
                     </motion.article>
                   ))}
@@ -246,7 +244,7 @@ function Home() {
 
           <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
             <p className="figure text-[0.65rem] uppercase tracking-[0.28em] text-accent">
-              03 — Structure
+              Structure
             </p>
             <h2 className="mt-3 font-display text-3xl text-foreground sm:text-4xl">The 7 pillars</h2>
             <span className="band-rule mt-5 block" aria-hidden />
@@ -303,7 +301,7 @@ function Home() {
         <section className="blush-band tone-amber relative overflow-hidden">
           <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
             <p className="figure text-[0.65rem] uppercase tracking-[0.28em] text-accent">
-              04 — Calibration
+              Calibration
             </p>
             <h2 className="mt-3 font-display text-3xl text-foreground sm:text-4xl">
               5 industry profiles, 1 benchmark set each
@@ -352,10 +350,10 @@ function Home() {
           <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
 
             <p className="figure text-[0.65rem] uppercase tracking-[0.28em] text-accent">
-              05 — Method
+              Method
             </p>
             <h2 className="mt-3 font-display text-3xl text-foreground sm:text-4xl">
-              Reads with the cadence of a discovery call.
+              Evidence in, weighted judgement out.
             </h2>
             <span className="band-rule mt-5 block" aria-hidden />
             <div className="mt-14 grid gap-10 sm:grid-cols-3">
@@ -366,19 +364,16 @@ function Home() {
             <div className="mt-14 grid gap-px bg-border md:grid-cols-3">
               {[
                 {
-                  n: "01",
                   t: "Evidence before opinion",
                   d: "Every input is sourced from a named artefact — Profit and Loss statement, Stripe or QuickBooks ledger, CRM pipeline, operations log — so the diagnosis rests on instrumented figures.",
                   tone: "var(--cyan)",
                 },
                 {
-                  n: "02",
                   t: "Diagnostic language throughout",
                   d: "Where a reading falls outside its healthy range, you get where in the value chain it originates, what commonly contributes, and how it presents in practice — observation stated plainly.",
                   tone: "var(--amber)",
                 },
                 {
-                  n: "03",
                   t: "Everything stays in the browser",
                   d: "Open the instrument and begin. Every figure is held in session memory and discarded the moment the tab closes.",
                   tone: "var(--lime)",
@@ -392,10 +387,8 @@ function Home() {
                   transition={{ duration: 0.6, delay: i * 0.08, ease }}
                   className="bg-background p-7"
                 >
-                  <span className="figure text-[0.7rem] tracking-[0.2em]" style={{ color: c.tone }}>
-                    {c.n}
-                  </span>
-                  <h3 className="mt-3 font-display text-lg text-foreground">{c.t}</h3>
+                  <span className="block h-[3px] w-10" style={{ background: c.tone }} aria-hidden />
+                  <h3 className="mt-4 font-display text-lg text-foreground">{c.t}</h3>
                   <p className="mt-3 text-sm leading-[1.75] text-foreground/85">{c.d}</p>
                 </motion.div>
               ))}

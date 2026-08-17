@@ -11,7 +11,7 @@ export const ABOUT_PLATFORM = {
 };
 
 export const ABOUT_ARCHITECT = {
-  title: "About the Enterprise Systems Architect",
+  title: "Conceptualized by Mr Sajal Roy",
   paragraphs: [
     "LetNumbersTalk was conceptualized by Mr Sajal Roy, an Enterprise Systems Architect who builds and runs systems that help founders and boardroom leaders with decision intelligence. His practice spans management and strategy consulting, AI-augmented business solutions, large-scale program governance, operations management, business transformation and executive mentoring, drawing on a decade of continued experience across complex enterprise ecosystems and multi-stakeholder delivery at scale.",
     "The instrument reflects that practice directly. The 7 pillars mirror the dimensions along which enterprise performance is reviewed at board level. The 54 metrics are the figures a consulting engagement would request in its first week. The scoring logic encodes what an experienced assessor concludes when a gross margin, a runway figure and a concentration ratio are read together rather than separately, and the guidance layer carries the diagnostic reasoning that would otherwise arrive verbally in a review room.",

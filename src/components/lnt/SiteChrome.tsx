@@ -10,6 +10,9 @@ export function SiteHeader() {
           <span className="truncate font-display text-base tracking-tight text-foreground">
             LetNumbersTalk
           </span>
+          <span className="hidden text-[0.62rem] uppercase tracking-[0.28em] text-muted-foreground sm:inline">
+            by Mr Sajal Roy
+          </span>
           <span className="hidden text-[0.62rem] uppercase tracking-[0.3em] text-muted-foreground lg:inline">
             The Business Health Instrument
           </span>
@@ -55,7 +58,7 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <p className="text-[0.65rem] uppercase tracking-[0.26em] text-accent">Architect</p>
+            <p className="text-[0.65rem] uppercase tracking-[0.26em] text-accent">Conceptualized by</p>
             <p className="mt-3 font-display text-base text-foreground">{ABOUT_ARCHITECT.name}</p>
             <p className="text-sm text-muted-foreground">{ABOUT_ARCHITECT.role}</p>
             <p className="mt-3 text-sm text-muted-foreground">
