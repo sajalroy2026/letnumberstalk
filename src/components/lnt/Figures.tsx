@@ -1451,8 +1451,8 @@ export function PillarArmature({ className }: { className?: string }) {
           return (
             <motion.circle
               key={`m-${i}`}
-              cx={Math.cos(a) * r}
-              cy={Math.sin(a) * r * 0.58}
+              cx={Math.round(Math.cos(a) * r * 100) / 100}
+              cy={Math.round(Math.sin(a) * r * 58) / 100}
               r={1.9}
               fill={ARMATURE_TONES[ring]}
               initial={{ opacity: 0, scale: 0.3 }}
