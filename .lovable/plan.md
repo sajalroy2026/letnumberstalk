@@ -12,8 +12,11 @@ Rework them into deep instrument panels:
 - Labels sit in ivory/near-white on that deep ground — the pillar name becomes clearly legible at small size, with a weight increase and tighter tracking.
 - The pillar mark is drawn in the panel's lifted counterpart colour (the glow value) so it separates from the deep ground.
 - Drop the per-card tilt rotation. Panels align to a strict grid on a single perspective plane; depth and stagger come from z-offset and entry timing, keeping the formation deliberate rather than scattered.
-- Each panel carries its weight figure (22%, 20%, 18%, 15%, 13%, 7%, 5%) as a small numeral in the corner, so the figure reads as an instrument rather than decoration.
+- Each panel carries only the pillar name and its bespoke figure — no weighting percentages anywhere in the hero.
 - Hover keeps the forward z-push and adds a brightening edge; the pointer tilt on the whole group stays.
+- The header and footer strips stay exactly as they are — navy, unchanged.
+
+
 
 ## 2. Oxblood becomes true crimson
 
