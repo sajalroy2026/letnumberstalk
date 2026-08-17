@@ -3,18 +3,18 @@
 export const ABOUT_PLATFORM = {
   title: "About LetNumbersTalk",
   paragraphs: [
-    "LetNumbersTalk tells a founder or operating leader where their business is actually strong, where it is quietly fragile, and which of those findings deserves attention first. It reads fifty-four figures already sitting in the accounting system, the CRM, the payroll register and the operations log, and returns a diagnosis: a score for each dimension of the business, a plain-language reading of every figure entered, and — wherever a reading falls outside its healthy range — the place in the value chain where that finding usually originates, the factors that commonly contribute to it, and concrete illustrations of how it presents in practice.",
-    "The benchmark sets behind those readings are built on AI-augmented research synthesis: sector-specific ranges assembled and cross-checked across five business profiles, so a services firm is never measured against SaaS expectations and a pre-profitability startup is never held to manufacturing norms. That calibration is what makes the diagnosis usable rather than merely numerical.",
+    "LetNumbersTalk tells a founder or operating leader where their business is actually strong, where it is quietly fragile, and which of those findings deserves attention first. It reads 54 figures already sitting in the accounting system, the CRM, the payroll register and the operations log, and returns a diagnosis: a score for each dimension of the business, a plain-language reading of every figure entered, and — wherever a reading falls outside its healthy range — the place in the value chain where that finding usually originates, the factors that commonly contribute to it, and concrete illustrations of how it presents in practice.",
+    "The benchmark sets behind those readings are built on AI-augmented research synthesis: sector-specific ranges assembled and cross-checked across 5 business profiles, so a services firm is never measured against SaaS expectations and a pre-profitability startup is never held to manufacturing norms. That calibration is what makes the diagnosis usable rather than merely numerical.",
     "The user walks away able to see the business as an assessor would see it — with the weak seams named, the strong ones confirmed, and the sequence of attention made obvious.",
-    "The architecture underneath: seven independently weighted pillars — Financial Health at twenty-two percent, Risk Management at twenty, Market Position at eighteen, Operational Efficiency at fifteen, Strategic Positioning at thirteen, Organizational Capability at seven, and Technology and Systems at five. Each pillar carries its own scoring engine, converting its constituent metrics into a zero-to-one-hundred score against sector-calibrated bands. Where metrics are left blank, the engine re-weights across only what was entered; nothing is scored as zero for being unknown. Assessing all seven pillars produces an Integrated Business Health Score as a weighted composite. Every figure entered stays in the browser: no account, no transmission, no storage.",
+    "The architecture underneath: 7 independently weighted pillars — Financial Health at 22%, Risk Management at 20, Market Position at 18, Operational Efficiency at 15, Strategic Positioning at 13, Organizational Capability at 7, and Technology and Systems at 5. Each pillar carries its own scoring engine, converting its constituent metrics into a 0-to-100 score against sector-calibrated bands. Where metrics are left blank, the engine re-weights across only what was entered; nothing is scored as zero for being unknown. Assessing all 7 pillars produces an Integrated Business Health Score as a weighted composite. Every figure entered stays in the browser: no account, no transmission, no storage.",
   ],
 };
 
 export const ABOUT_ARCHITECT = {
   title: "About the Enterprise Systems Architect",
   paragraphs: [
-    "LetNumbersTalk was designed by Mr Sajal Roy, an Architect of Enterprise Systems working with founders, boardroom leaders and senior professionals globally. His practice spans management and strategy consulting, AI-augmented business solutions, large-scale program governance, operations management, business transformation and executive mentoring, drawing on a decade of continued experience across complex enterprise ecosystems and multi-stakeholder delivery at scale.",
-    "The instrument reflects that practice directly. The seven pillars mirror the dimensions along which enterprise performance is reviewed at board level. The fifty-four metrics are the figures a consulting engagement would request in its first week. The scoring logic encodes what an experienced assessor concludes when a gross margin, a runway figure and a concentration ratio are read together rather than separately, and the guidance layer carries the diagnostic reasoning that would otherwise arrive verbally in a review room.",
+    "LetNumbersTalk was designed by Mr Sajal Roy, an Enterprise Systems Architect working with founders, boardroom leaders and senior professionals globally. His practice spans management and strategy consulting, AI-augmented business solutions, large-scale program governance, operations management, business transformation and executive mentoring, drawing on a decade of continued experience across complex enterprise ecosystems and multi-stakeholder delivery at scale.",
+    "The instrument reflects that practice directly. The 7 pillars mirror the dimensions along which enterprise performance is reviewed at board level. The 54 metrics are the figures a consulting engagement would request in its first week. The scoring logic encodes what an experienced assessor concludes when a gross margin, a runway figure and a concentration ratio are read together rather than separately, and the guidance layer carries the diagnostic reasoning that would otherwise arrive verbally in a review room.",
     "He contributes to the founder ecosystem through the LinkedIn newsletter Strategy Consulting Weekly and the podcast The Clarity Dispatch on Spotify, and works pro bono with founders applying the frameworks of management and strategy consulting to early and scaling businesses.",
     "LetNumbersTalk is the convergence point of that work: management and strategy consulting discipline fused with product management thinking to produce a scalable decision-intelligence instrument.",
   ],
@@ -27,7 +27,14 @@ export const ABOUT_ARCHITECT = {
     "Kanban KMP1",
   ],
   contact: "roysajal5@gmail.com",
+  contactLabel: "Mail",
+  name: "Mr Sajal Roy",
+  role: "Enterprise Systems Architect",
+  linkedin: "",
 };
+
+export const METHODOLOGY_NOTE =
+  "This diagnostic capability is built out of AI-augmented research synthesis and a fusion of Product Management and Management Consulting frameworks.";
 
 export const DISCLOSURE = {
   title: "Application Disclaimer",

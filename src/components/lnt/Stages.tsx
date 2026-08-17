@@ -5,10 +5,11 @@ import { MetricCard } from "./MetricCard";
 import { Disclosure } from "./SiteChrome";
 import { AboutSections } from "./AboutSections";
 import { COVERAGE_TIERS, SECTORS } from "@/lib/assessment/scoring";
-import { metricsForPillar, PILLAR_ORDER } from "@/lib/assessment/engine";
+import { metricsForPillar, METRICS_BY_ID, PILLAR_ORDER } from "@/lib/assessment/engine";
 import { PILLAR_META } from "@/lib/assessment/spec.generated";
 import { useSession } from "@/lib/assessment/session";
-import type { PillarAssessment, PillarId, Tier } from "@/lib/assessment/types";
+import { PillarWeightRing, ScoreDial, ValueChain, stageForPillar } from "./Figures";
+import type { MetricResult, PillarAssessment, PillarId, Tier } from "@/lib/assessment/types";
 import { cn } from "@/lib/utils";
 
 const PILLAR_NOTE: Record<PillarId, string> = {
@@ -29,9 +30,9 @@ export function SectorStage() {
   const { sector, setSector } = useSession();
   return (
     <StageShell
-      eyebrow="Step one"
+      eyebrow="Step 1"
       title="Which profile does the business run on?"
-      lede="Every benchmark in this assessment is sector-specific. The profile selected here recalibrates all fifty-four comparisons for the session — there is no general fallback."
+      lede="Every benchmark in this assessment is sector-specific. The profile selected here recalibrates all 54 comparisons for the session — there is no general fallback."
     >
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {SECTORS.map((s, i) => (
@@ -71,9 +72,9 @@ export function PillarSelectStage() {
 
   return (
     <StageShell
-      eyebrow={`Step two · calibrated to ${sectorName}`}
+      eyebrow={`Step 2 · calibrated to ${sectorName}`}
       title="Which pillars are under examination?"
-      lede="One pillar returns one score. All seven return the Integrated Business Health Score — a weighted composite across the full instrument."
+      lede="One pillar returns one score. All 7 return the Integrated Business Health Score — a weighted composite across the full instrument."
     >
       <div className="grid gap-3 md:grid-cols-2">
         {PILLAR_META.map((p, i) => {
@@ -124,7 +125,7 @@ export function PillarSelectStage() {
           onClick={selectAllPillars}
           className="rounded-full border border-border px-5 py-2 text-xs uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:border-primary/60 hover:text-foreground"
         >
-          Select all seven
+          Select all 7
         </button>
         <button
           type="button"
@@ -138,7 +139,7 @@ export function PillarSelectStage() {
           {selectedPillars.length === 0
             ? "Select at least one pillar."
             : all
-              ? "All seven selected — the Integrated Business Health Score will be computed."
+              ? "All 7 selected — the Integrated Business Health Score will be computed."
               : `${selectedPillars.length} selected — independent pillar scores only, no blended figure.`}
         </span>
       </div>
@@ -358,7 +359,7 @@ export function PillarScorePlate({
       <p className="mt-6 max-w-3xl text-sm leading-relaxed text-muted-foreground">
         Scored across the {assessment.entered} metrics entered, re-weighted so unentered metrics
         neither add nor subtract. Weight of this pillar in the integrated composite:{" "}
-        {Math.round(assessment.weight * 100)} percent.
+        {Math.round(assessment.weight * 100)}%.
       </p>
     </motion.div>
   );
@@ -401,20 +402,32 @@ export function ReportStage() {
           initial={{ opacity: 0, scale: 0.97, rotateX: 10 }}
           animate={{ opacity: 1, scale: 1, rotateX: 0 }}
           transition={{ duration: 0.9, delay: 0.15, ease }}
-          className="plate print-plain mt-10 rounded-md p-10 text-center"
+          className="plate print-plain mt-10 grid items-center gap-10 rounded-md p-10 md:grid-cols-[auto_minmax(0,1fr)]"
         >
-          <p className="text-xs uppercase tracking-[0.28em] text-muted-foreground">
-            Integrated Business Health Score
-          </p>
-          <p className="mt-4 font-display text-8xl leading-none text-foreground">{shown}</p>
-          <p className="mt-4 text-sm text-muted-foreground">
-            Weighted composite across all seven pillars.
-          </p>
+          <div className="justify-self-center">
+            <ScoreDial
+              score={report.integratedScore}
+              tier={tierOf(report.integratedScore)}
+              label="Integrated"
+            />
+          </div>
+          <div className="min-w-0">
+            <p className="text-xs uppercase tracking-[0.28em] text-muted-foreground">
+              Integrated Business Health Score
+            </p>
+            <p className="mt-3 measure text-sm leading-relaxed text-muted-foreground">
+              Weighted composite across 7 pillars, each pillar contributing at its defined weight.
+              Sector profile: {sectorName}.
+            </p>
+            <div className="mt-6">
+              <PillarWeightRing />
+            </div>
+          </div>
         </motion.section>
       ) : (
-        <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground">
-          {assessments.length} of seven pillars were assessed, so independent pillar scores are
-          presented without a blended figure. Assessing all seven produces the Integrated Business
+        <p className="mt-8 measure text-base leading-relaxed text-muted-foreground">
+          {assessments.length} of 7 pillars were assessed, so independent pillar scores are
+          presented without a blended figure. Assessing all 7 produces the Integrated Business
           Health Score.
         </p>
       )}
@@ -429,7 +442,7 @@ export function ReportStage() {
         >
           <h2 className="text-xs uppercase tracking-[0.28em] text-critical">Caution</h2>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            Two indicators carry terminal risk for a business. The readings below crossed their
+            2 indicators carry terminal risk for a business. The readings below crossed their
             critical thresholds. This is supplementary context to the pillar breakdown above.
           </p>
           <div className="mt-6 space-y-6">
@@ -467,7 +480,7 @@ export function ReportStage() {
             )}
             <div className="mt-4 space-y-4">
               {a.metricResults.map((r) => (
-                <MetricResultRow key={r.metricId} name={r.name} tier={r.tier} points={r.points} max={r.maxPoints} band={r.bandLabel} />
+                <MetricResultRow key={r.metricId} result={r} />
               ))}
             </div>
             <button
@@ -506,26 +519,30 @@ export function ReportStage() {
   );
 }
 
-function MetricResultRow({
-  name,
-  tier,
-  points,
-  max,
-  band,
-}: {
-  name: string;
-  tier: Tier;
-  points: number;
-  max: number;
-  band: string;
-}) {
+function MetricResultRow({ result }: { result: MetricResult }) {
+  const metric = METRICS_BY_ID[result.metricId];
   return (
-    <div className="print-plain flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 rounded-md border border-border/70 bg-card/40 px-5 py-3">
-      <span className="text-sm text-foreground">{name}</span>
-      <span className={cn("text-xs uppercase tracking-[0.14em]", tierColor[tier])}>{band}</span>
-      <span className="text-xs text-muted-foreground">
-        {points} / {max} pts
-      </span>
+    <div className="print-avoid-break print-plain border border-border/70 bg-card/40">
+      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-6 gap-y-1 px-5 py-3">
+        <span className="min-w-0 text-sm text-foreground">{result.name}</span>
+        <span className="figure shrink-0 text-xs text-muted-foreground">
+          {result.points} / {result.maxPoints} pts
+        </span>
+        <span className={cn("text-xs uppercase tracking-[0.14em]", tierColor[result.tier])}>
+          {result.bandLabel}
+        </span>
+      </div>
+      {result.showAreas && metric ? (
+        <div className="border-t border-border/70 bg-secondary/40 px-5 py-5">
+          <p className="text-[0.62rem] uppercase tracking-[0.26em] text-accent">
+            Areas to look into
+          </p>
+          <div className="mt-3">
+            <ValueChain highlight={stageForPillar(metric.pillar)} />
+          </div>
+          <p className="mt-4 measure text-sm leading-relaxed text-foreground/85">{metric.areas}</p>
+        </div>
+      ) : null}
     </div>
   );
 }

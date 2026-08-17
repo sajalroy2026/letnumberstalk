@@ -8,17 +8,17 @@ import { SECTORS } from "@/lib/assessment/scoring";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "LetNumbersTalk — Seven-Pillar Business Health Diagnostic" },
+      { title: "LetNumbersTalk — 7-Pillar Business Health Diagnostic" },
       {
         name: "description",
         content:
-          "A boardroom-grade diagnostic across 54 sector-benchmarked metrics and seven weighted pillars. Scores, readings and Areas to Look Into — computed entirely in your browser.",
+          "A boardroom-grade diagnostic across 54 sector-benchmarked metrics and 7 weighted pillars. Scores, readings and Areas to Look Into — computed entirely in your browser.",
       },
       { property: "og:title", content: "LetNumbersTalk — Business Health Diagnostic" },
       {
         property: "og:description",
         content:
-          "Seven weighted pillars, 54 metrics, five industry profiles. Founder-grade diagnosis with no account and no data leaving your browser.",
+          "7 weighted pillars, 54 metrics, 5 industry profiles. Founder-grade diagnosis with no account and no data leaving your browser.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -69,8 +69,8 @@ function Home() {
               transition={{ duration: 0.9, delay: 0.22, ease }}
               className="mt-7 max-w-2xl text-lg leading-relaxed text-muted-foreground"
             >
-              Fifty-four figures already sitting in your accounting system, CRM and operations log,
-              read against sector benchmarks across seven weighted pillars — and returned as a
+              54 figures already sitting in your accounting system, CRM and operations log,
+              read against sector benchmarks across 7 weighted pillars — and returned as a
               diagnosis a board would recognise.
             </motion.p>
 
@@ -109,10 +109,10 @@ function Home() {
         </section>
 
         <section className="mx-auto max-w-6xl px-5 pb-8 sm:px-8">
-          <h2 className="font-display text-2xl text-foreground">The seven pillars</h2>
+          <h2 className="font-display text-2xl text-foreground">The 7 pillars</h2>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
             Each pillar carries its own scoring engine and its own weight in the integrated
-            composite. Assess one, several, or all seven.
+            composite. Assess one, several, or all 7.
           </p>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {PILLAR_META.map((p, i) => {
@@ -146,7 +146,7 @@ function Home() {
             {[
               {
                 t: "Sector-calibrated",
-                d: "Five industry profiles recalibrate every benchmark. A services firm is never measured against SaaS expectations.",
+                d: "5 industry profiles recalibrate every benchmark. A services firm is never measured against SaaS expectations.",
               },
               {
                 t: "Diagnostic, not prescriptive",
