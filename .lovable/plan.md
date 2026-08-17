@@ -1,17 +1,24 @@
 # LetNumbersTalk — Build Plan
 
-I read both documents end to end. Below is my judgment on architecture, sequencing, risk, and the specific gaps I found between the two documents that need your decision before code starts.
+I re-read the regenerated Logic Specification V3.0 against my earlier findings. Every blocking gap is closed. This plan is now buildable as written.
 
-## What I verified in the documents
+## Verification of the regenerated spec
 
-- Logic Spec Sections 2–8 contain **54 metric entries**, not 57: Financial Health 17, Operational Efficiency 9, Market Position 10, Organizational Capability 5, Strategic Positioning 5, Risk Management 5, Technology & Systems 3. Section 11.1 also says "All 17" for Financial Health, confirming 17 there.
-- **26 of the 54 metrics carry an explicit `Scoring Band:` line. 28 do not** — they have sector benchmark tables and threshold readings but no point allocation.
-- Each pillar's scoring engine header allocates 100 points across sub-components, and several sub-components have **no matching metric entry** in the spec (details below).
-- Section 11.1 defines critical-minimum sets for all seven pillars. Section 11.3 defines permitted and prohibited language patterns. Section 9 defines pillar weights and the two-indicator Caution mechanism.
+- **Scope restated as 54 metrics** (was "57"). Distribution confirmed: Financial Health 17, Operational Efficiency 9, Market Position 10, Organizational Capability 5, Strategic Positioning 5, Risk Management 5, Technology & Systems 3.
+- **All 54 metrics now carry an explicit `Scoring Band` line** (was 26 of 54).
+- **All seven pillar point allocations sum to exactly 100** — I summed the per-metric maximum points in each pillar and each totals 100.
+- **Every scoring-engine sub-component now names real metrics.** The previously unmapped components (Decision speed, Model leverage, Network advantage, Digital and AI maturity, Integration and Data Flow, Contribution per customer, Share trajectory, Pricing power, Cost-structure flexibility) are gone; sub-components are now groupings of the actual 54 metrics.
+- **Caution thresholds are now explicit** in Section 9: cash runway below 3 months, top-three customer concentration above 60%, with the non-blocking rule restated.
+- **New Section 11.2a** fixes the confidence vocabulary: per-input `Stated` / `Estimated`; per-pillar `High` / `Moderate` / `Indicative` derived from coverage against the Section 11.1 tiers.
+- **New Section 11.2b** confirms qualitative metrics render as labelled selectable band cards — not dropdowns, not bare numeric fields — resolving the FR-06 / FR-08 tension.
+- **Content completeness:** all 54 metrics have Definition, Formula, sourcing guidance, What This Reading Shows, and Areas to Look Into. 49 of 54 carry sector benchmark tables; the 5 without (Process Cycle Time, Differentiation Strength, Switching Cost Assessment, Key-Person Dependency, Automation Level) are sector-neutral by nature — four are 1–4 self-assessments and cycle time is business-specific. No action needed.
+
+Only one open item remains, and it does not block the start of the build (item 1 at the end).
 
 ## Architecture — one engine, not seven implementations
 
-The 57 (54) metrics do not need 57 scoring functions. Everything in the spec reduces to four declarative scorer shapes, plus a generic evaluator.
+The 54 metrics do not need 54 scoring functions. Everything in the spec reduces to four declarative scorer shapes, plus a generic evaluator.
+
 
 ```text
 metric definition (data)          engine (code, written once)
@@ -68,18 +75,14 @@ All Areas to Look Into text is authored verbatim from the spec into a content mo
 
 ## Where the risk actually is
 
-- **Content fidelity, not code.** 54 entries × six text fields is the bulk of the work and the easiest place to drift. Mitigated by extracting from the document programmatically rather than retyping.
-- **The 28 metrics without scoring bands** — the single biggest blocker. Without point allocations their pillar engines cannot sum to 100.
-- **Sub-component allocations that have no metric.** Pillar 4 allocates points to "Decision speed", "Skills-gap", "Leadership depth"; Pillar 5 to "Model leverage", "Network advantage", "Digital and AI maturity"; Pillar 7 to "Integration and Data Flow", "Adoption"; Pillar 3 to "Contribution per customer" and "Share trajectory"; Pillar 1 to "Pricing power", "Cost-structure flexibility", "Cost-trend management". These likely account for the 57-vs-54 gap.
+- **Content fidelity, not code.** 54 entries × six text fields is the bulk of the work and the easiest place to drift. Mitigated by extracting from the document programmatically rather than retyping, then diffing the built content bundle against the source text.
+- **Band-boundary correctness.** With all 54 bands now specified, the residual risk is off-by-one at tier edges (is exactly 40% "moderate" or "high"?). Every band gets boundary tests at each threshold value.
 - **Client-side PDF at this content volume** — a full seven-pillar report with all Areas content is long; layout fidelity and mobile generation need early validation.
 - **Cinematic motion vs. the 3-second paint budget and WCAG AA** — motion must be prefers-reduced-motion aware and must not gate content.
 
-## Items I need clarified before building
+## Remaining open item
 
-1. **57 vs 54.** Are three metrics missing from V3.0, or is 57 a count of scored sub-components rather than metric entries?
-2. **Missing scoring bands (28 metrics).** Do you supply the point allocations, or should I derive them from each metric's four-tier benchmark table using a consistent mapping (healthy = full points, acceptable ≈ 70%, concern ≈ 35%, critical = 0) scaled to the sub-component allocation? I will not invent thresholds — but the mapping rule needs your sign-off either way.
-3. **Unmapped sub-components.** For Pillar 4 "Decision speed", Pillar 5 "Model leverage" / "Network advantage" / "Digital and AI maturity", Pillar 7 "Integration and Data Flow" — add them as self-assessment metrics with your wording, or redistribute their points across the existing metrics in that pillar?
-4. **Caution thresholds.** I read them as cash runway < 3 months and top-three customer concentration > 60% (the "Critical" tier in each metric's table). Confirm.
-5. **Confidence classification.** The spec names the flag but not the levels. Proposal: `Stated` (point value), `Estimated` (range midpoint), and a pillar-level `High / Moderate / Indicative` derived from coverage. Confirm the vocabulary.
-6. **Report format.** PRD says PDF; is a print-optimised, browser-native PDF acceptable, or do you want a generated document file?
-7. **Qualitative capture (FR-08) vs. no-dropdowns (FR-06).** Self-assessment metrics are 1–4 guided bands. I plan to render these as labelled band cards (not a dropdown, not a bare number field). Confirm that satisfies the intent.
+1. **Report format.** The PRD specifies a downloadable PDF. I plan a print-optimised, browser-native PDF (client-side, zero server, exact on-screen parity). Confirm that satisfies FR-23/FR-24, or say if you want a generated document file instead. This does not block phases 1–5.
+
+Everything else previously flagged is resolved by the regenerated specification, and I'll build strictly to it.
+
