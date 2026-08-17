@@ -186,8 +186,10 @@ export function PillarStage() {
   const assessment = assessments[activeIndex]!;
   const tier = COVERAGE_TIERS[pillarId]!;
   const topRef = useRef<HTMLDivElement>(null);
+  const accent = pillarColor(pillarId);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
     topRef.current?.scrollIntoView({ block: "start" });
   }, [activeIndex]);
 
@@ -203,6 +205,14 @@ export function PillarStage() {
         weight={meta.weight}
         note={`${PILLAR_NOTE[pillarId]} Enter what is known — every blank metric is left out of the calculation entirely rather than counted as zero.`}
       />
+      <PillarIdentityRail
+        name={meta.name}
+        weight={meta.weight}
+        accent={accent}
+        entered={assessment.entered}
+        total={metrics.length}
+        score={assessment.meetsCriticalMinimum ? assessment.score : null}
+      />
       <motion.div
         key={pillarId}
         initial={{ opacity: 0, y: 36 }}
@@ -210,6 +220,8 @@ export function PillarStage() {
         transition={{ duration: 0.6, ease }}
         className="mx-auto max-w-5xl px-5 pb-24 pt-10 sm:px-8"
       >
+
+
 
         <div className="border border-border bg-card p-5 shadow-[var(--shadow-plate)]">
           <div className="flex flex-wrap items-center justify-between gap-3">
