@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 
 import { ABOUT_ARCHITECT, ABOUT_PLATFORM, METHODOLOGY_NOTE } from "@/lib/assessment/content";
-import { PillarWeightRing } from "@/components/lnt/Figures";
+import { BenchmarkBand, InstrumentStack } from "@/components/lnt/Figures";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -24,13 +24,14 @@ export function AboutSections() {
         <div className="mt-8 grid gap-12 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)]">
           <div className="space-y-5">
             {ABOUT_PLATFORM.paragraphs.map((p, i) => (
-              <p key={i} className="measure text-[0.95rem] leading-[1.75] text-foreground/85">
+              <p key={i} className="measure text-[0.95rem] leading-[1.75] text-foreground">
                 {p}
               </p>
             ))}
           </div>
-          <div className="no-print">
-            <PillarWeightRing />
+          <div className="no-print space-y-6">
+            <InstrumentStack />
+            <BenchmarkBand />
             <p className="mt-5 border-l-2 border-accent/70 pl-5 font-display text-lg leading-relaxed text-foreground">
               “A diagnosis is what the figures already say, read against the right comparison
               set.”
@@ -95,11 +96,11 @@ export function AboutSections() {
 
           <div className="space-y-5">
             {ABOUT_ARCHITECT.paragraphs.map((p, i) => (
-              <p key={i} className="measure text-[0.95rem] leading-[1.75] text-foreground/85">
+              <p key={i} className="measure text-[0.95rem] leading-[1.75] text-foreground">
                 {p}
               </p>
             ))}
-            <p className="measure border-t border-border pt-5 text-xs leading-relaxed text-muted-foreground">
+            <p className="measure border-t border-border pt-5 text-sm leading-[1.7] text-foreground">
               {METHODOLOGY_NOTE}
             </p>
           </div>
