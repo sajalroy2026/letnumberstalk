@@ -539,52 +539,65 @@
 
 @media print {
   @page {
-    margin: 15mm;
+    margin: 14mm;
   }
+
+  /* The report prints in brand colour, not flattened greyscale. */
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
   body {
-    background: #fff !important;
-    color: #241c16 !important;
+    background: var(--background) !important;
+    color: var(--foreground) !important;
   }
+
   .no-print {
     display: none !important;
   }
-  .halftone::after,
-  .warm-wash {
-    display: none !important;
-    background-image: none !important;
-  }
-  .ink,
-  .putty-band,
-  .teal-band {
-    --background: #ffffff;
-    --foreground: #241c16;
-    --card: #ffffff;
-    --card-foreground: #241c16;
-    --secondary: #f2ece1;
-    --muted: #f2ece1;
-    --muted-foreground: #55493f;
-    --primary: #1e6f66;
-    --primary-foreground: #ffffff;
-    --accent: #c2572b;
-    --border: rgba(36, 28, 22, 0.25);
-    --healthy: #1e6f66;
-    --acceptable: #a97e18;
-    --concern: #c2572b;
-    --critical: #7a2e2a;
-    background: #ffffff !important;
-    color: #241c16 !important;
-  }
 
+  /* Heavy atmospherics are suppressed so pages stay crisp; colour stays. */
+  .halftone::after,
+  .scanlines::after,
+  .prism-wash::before,
   .grid-field::before {
     display: none !important;
   }
 
-  .print-plain {
-    background: #fff !important;
-    color: #14181f !important;
-    box-shadow: none !important;
-    border-color: #ccc6b8 !important;
+  .aurora-wash,
+  .warm-wash {
+    background-image: var(--gradient-depth) !important;
   }
+
+  .glass {
+    backdrop-filter: none !important;
+    background-image: none !important;
+    background-color: var(--card) !important;
+  }
+
+  /* Body chapters print on a light ground for legibility, accents intact. */
+  .putty-band,
+  .teal-band,
+  .plum-band,
+  .sun-band {
+    background-image: none !important;
+  }
+
+  /* The cover keeps its full ink plate. */
+  .print-cover {
+    background-image: none !important;
+    background-color: var(--background) !important;
+    color: var(--foreground) !important;
+  }
+
+  .print-plain {
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
   .print-break {
     break-before: page;
   }
@@ -598,4 +611,5 @@
     overflow: visible !important;
   }
 }
+
 
