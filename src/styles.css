@@ -353,6 +353,59 @@
   box-shadow: inset 0 -2px 0 0 var(--accent);
 }
 
+/* Mid-century print grain — subtle halftone over any surface */
+@utility halftone {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(
+      color-mix(in oklab, var(--foreground) 26%, transparent) 0.7px,
+      transparent 0.8px
+    );
+    background-size: 5px 5px;
+    opacity: 0.28;
+    mix-blend-mode: multiply;
+  }
+}
+
+.ink .halftone::after {
+  mix-blend-mode: screen;
+  opacity: 0.16;
+}
+
+/* Warm atmospheric wash used behind hero and chapter compositions */
+@utility warm-wash {
+  background-image:
+    radial-gradient(60% 55% at 12% 18%, color-mix(in oklab, var(--ochre) 22%, transparent), transparent 70%),
+    radial-gradient(55% 50% at 88% 6%, color-mix(in oklab, var(--rust) 20%, transparent), transparent 72%),
+    radial-gradient(70% 60% at 62% 100%, color-mix(in oklab, var(--teal) 18%, transparent), transparent 70%),
+    var(--gradient-depth);
+}
+
+/* Editorial stacked sticky offsets */
+@utility sticky-under-header {
+  position: sticky;
+  top: 57px;
+  z-index: 30;
+}
+
+@utility sticky-under-rail {
+  position: sticky;
+  top: 101px;
+  z-index: 20;
+}
+
+@utility warm-rule {
+  height: 3px;
+  width: 4.5rem;
+  background-image: var(--gradient-warm);
+}
+
+
+
 
 @layer base {
   html {
