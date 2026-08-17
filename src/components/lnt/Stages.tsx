@@ -5,10 +5,11 @@ import { MetricCard } from "./MetricCard";
 import { Disclosure } from "./SiteChrome";
 import { AboutSections } from "./AboutSections";
 import { COVERAGE_TIERS, SECTORS } from "@/lib/assessment/scoring";
-import { metricsForPillar, PILLAR_ORDER } from "@/lib/assessment/engine";
+import { metricsForPillar, METRICS_BY_ID, PILLAR_ORDER } from "@/lib/assessment/engine";
 import { PILLAR_META } from "@/lib/assessment/spec.generated";
 import { useSession } from "@/lib/assessment/session";
-import type { PillarAssessment, PillarId, Tier } from "@/lib/assessment/types";
+import { PillarWeightRing, ScoreDial, ValueChain, stageForPillar } from "./Figures";
+import type { MetricResult, PillarAssessment, PillarId, Tier } from "@/lib/assessment/types";
 import { cn } from "@/lib/utils";
 
 const PILLAR_NOTE: Record<PillarId, string> = {
