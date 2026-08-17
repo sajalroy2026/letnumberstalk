@@ -886,7 +886,7 @@ export function DepthReveal({
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "center center"] });
   const rotateX = useTransform(scrollYProgress, [0, 1], [14 * intensity, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], [0.9, 1]);
-  const opacity = useTransform(scrollYProgress, [0, 0.55], [0.25, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.35], [0.7, 1]);
 
   return (
     <div ref={ref} className={cn("depth-stage", className)}>
