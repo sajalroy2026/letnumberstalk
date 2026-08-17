@@ -108,13 +108,14 @@ function Home() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.24, ease }}
-                className="mt-7 max-w-xl text-lg leading-[1.7] text-foreground/90"
+                className="mt-7 max-w-xl text-lg leading-[1.7] text-foreground/95"
               >
-                LetNumbersTalk converts the operating figures you already hold into an
-                institutional read of enterprise health: 54 sector-benchmarked metrics resolved
-                through 7 weighted scoring engines into pillar scores, an Integrated Business
-                Health Score, value-chain attribution for every underperforming reading, and
-                terminal-risk disclosure on runway and revenue concentration.
+                LetNumbersTalk elevates the operating figures already sitting in your ledgers
+                into an institutional reading of enterprise condition: 54 sector-calibrated
+                metrics, resolved through 7 independently weighted scoring engines, into pillar
+                scores, an Integrated Business Health Score, value-chain attribution for every
+                strained reading, and explicit terminal-risk disclosure on cash runway and
+                revenue concentration.
               </motion.p>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -122,8 +123,9 @@ function Home() {
                 transition={{ duration: 0.9, delay: 0.32, ease }}
                 className="mt-4 max-w-xl text-sm leading-[1.75] text-muted-foreground"
               >
-                Decision intelligence at the standard a board expects — produced in a single
-                sitting, open to anyone, and computed entirely inside your own browser.
+                Decision intelligence held to the standard a board expects — assembled in a
+                single sitting, open to every operator, and computed end to end inside your own
+                browser.
               </motion.p>
 
 
@@ -135,13 +137,13 @@ function Home() {
               >
                 <Link
                   to="/assess"
-                  className="sheen rule-copper px-9 py-3.5 text-xs uppercase tracking-[0.22em] text-primary-foreground shadow-[var(--shadow-lift)] transition-transform hover:-translate-y-0.5"
+                  className="sheen btn-accent px-9 py-3.5 text-xs font-medium uppercase tracking-[0.22em] shadow-[var(--shadow-lift)] hover:-translate-y-0.5"
                 >
                   Begin the assessment
                 </Link>
                 <Link
                   to="/about"
-                  className="text-xs uppercase tracking-[0.2em] text-muted-foreground underline decoration-accent/50 underline-offset-8 transition-colors hover:text-foreground"
+                  className="btn-ghost-accent px-6 py-3.5 text-xs uppercase tracking-[0.2em]"
                 >
                   How it works
                 </Link>
@@ -153,15 +155,26 @@ function Home() {
                 transition={{ duration: 1, delay: 0.55 }}
                 className="mt-14 grid max-w-2xl grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-4"
               >
-                <Stat value={String(METRIC_CONTENT.length)} label="Metrics" tone="var(--teal)" />
-                <Stat value="7" label="Weighted pillars" tone="var(--amber)" />
-                <Stat value={String(SECTORS.length)} label="Industry profiles" tone="var(--plum)" />
-                <Stat value="0" label="Figures stored" tone="var(--lime)" />
+                <Stat value={String(METRIC_CONTENT.length)} label="Metrics" tone="var(--gold-glow)" />
+                <Stat value="7" label="Weighted pillars" tone="var(--forest-glow)" />
+                <Stat value={String(SECTORS.length)} label="Industry profiles" tone="var(--burnt-glow)" />
+                <Stat value="0" label="Figures stored" tone="var(--steel-glow)" />
               </motion.dl>
             </div>
 
+            {/* Figure column — its own space, never behind the copy. */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94, filter: "blur(10px)" }}
+              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+              transition={{ duration: 1.6, ease }}
+              className="pointer-events-none relative mx-auto aspect-square w-full max-w-[34rem] lg:aspect-[4/5]"
+            >
+              <PillarArmature fit="meet" />
+            </motion.div>
+
           </div>
         </section>
+
 
         {/* ------------------------------------------------ What it delivers */}
         <section className="sun-band tone-teal relative overflow-hidden">
