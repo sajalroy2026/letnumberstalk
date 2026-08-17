@@ -173,68 +173,98 @@
  * re-binds the semantic tokens, so children flip surface with no hardcoded colour.
  */
 .ink {
-  --background: oklch(0.222 0.014 55);
-  --foreground: oklch(0.951 0.017 82);
-  --card: oklch(0.278 0.018 55);
-  --card-foreground: oklch(0.951 0.017 82);
-  --popover: oklch(0.278 0.018 55);
-  --popover-foreground: oklch(0.951 0.017 82);
-  --primary: oklch(0.755 0.135 80);
-  --primary-foreground: oklch(0.222 0.014 55);
-  --secondary: oklch(0.302 0.02 55);
-  --secondary-foreground: oklch(0.951 0.017 82);
-  --muted: oklch(0.302 0.02 55);
-  --muted-foreground: oklch(0.795 0.024 82);
-  --accent: oklch(0.678 0.152 48);
-  --accent-foreground: oklch(0.205 0.014 55);
-  --border: oklch(0.925 0.024 82 / 18%);
-  --input: oklch(0.925 0.024 82 / 30%);
-  --ring: oklch(0.678 0.152 48);
-  --healthy: oklch(0.678 0.088 178);
-  --acceptable: oklch(0.808 0.128 82);
-  --concern: oklch(0.678 0.152 48);
-  --critical: oklch(0.618 0.148 26);
-  --rust: oklch(0.678 0.152 48);
-  --teal: oklch(0.678 0.088 178);
-  --ochre: oklch(0.808 0.128 82);
-  --oxblood: oklch(0.578 0.132 26);
-  --slate-blue: oklch(0.735 0.052 232);
-  --pillar-financial: oklch(0.678 0.088 178);
-  --pillar-risk: oklch(0.678 0.152 48);
-  --pillar-market: oklch(0.735 0.052 232);
-  --pillar-operational: oklch(0.808 0.128 82);
-  --pillar-strategic: oklch(0.598 0.132 26);
-  --pillar-organizational: oklch(0.688 0.092 152);
-  --pillar-technology: oklch(0.665 0.088 292);
-  --elevated: oklch(0.278 0.018 55);
-  --paper: oklch(0.278 0.018 55);
-  --gradient-depth: radial-gradient(125% 95% at 50% -10%, oklch(0.302 0.024 55) 0%, oklch(0.198 0.012 55) 74%);
-  --shadow-plate: 0 1px 0 0 oklch(0.951 0.017 82 / 0.06), 0 26px 60px -40px oklch(0 0 0 / 0.85);
+  --background: oklch(0.198 0.034 285);
+  --foreground: oklch(0.968 0.014 88);
+  --card: oklch(0.258 0.038 286);
+  --card-foreground: oklch(0.968 0.014 88);
+  --popover: oklch(0.258 0.038 286);
+  --popover-foreground: oklch(0.968 0.014 88);
+  --primary: oklch(0.822 0.152 88);
+  --primary-foreground: oklch(0.198 0.034 285);
+  --secondary: oklch(0.292 0.042 286);
+  --secondary-foreground: oklch(0.968 0.014 88);
+  --muted: oklch(0.292 0.042 286);
+  --muted-foreground: oklch(0.822 0.022 86);
+  --accent: oklch(0.742 0.168 48);
+  --accent-foreground: oklch(0.198 0.034 285);
+  --border: oklch(0.938 0.02 88 / 20%);
+  --input: oklch(0.938 0.02 88 / 32%);
+  --ring: oklch(0.742 0.168 48);
+  --healthy: oklch(0.788 0.128 192);
+  --acceptable: oklch(0.858 0.152 86);
+  --concern: oklch(0.742 0.168 48);
+  --critical: oklch(0.688 0.172 22);
+  --rust: oklch(0.742 0.168 48);
+  --teal: oklch(0.788 0.128 192);
+  --ochre: oklch(0.858 0.152 86);
+  --amber: oklch(0.852 0.158 74);
+  --oxblood: oklch(0.658 0.162 22);
+  --plum: oklch(0.702 0.172 330);
+  --cyan: oklch(0.812 0.118 222);
+  --lime: oklch(0.878 0.158 122);
+  --slate-blue: oklch(0.782 0.062 234);
+  --pillar-financial: oklch(0.788 0.128 192);
+  --pillar-risk: oklch(0.742 0.168 48);
+  --pillar-market: oklch(0.812 0.118 222);
+  --pillar-operational: oklch(0.858 0.152 86);
+  --pillar-strategic: oklch(0.702 0.172 330);
+  --pillar-organizational: oklch(0.772 0.148 148);
+  --pillar-technology: oklch(0.712 0.152 288);
+  --elevated: oklch(0.258 0.038 286);
+  --paper: oklch(0.258 0.038 286);
+  --gradient-depth: radial-gradient(125% 95% at 50% -10%, oklch(0.288 0.052 288) 0%, oklch(0.172 0.03 285) 74%);
+  --gradient-glass: linear-gradient(150deg, oklch(0.968 0.014 88 / 0.12), oklch(0.968 0.014 88 / 0.03));
+  --shadow-plate: 0 1px 0 0 oklch(0.968 0.014 88 / 0.07), 0 26px 60px -40px oklch(0 0 0 / 0.85);
   --shadow-lift: 0 32px 70px -32px oklch(0 0 0 / 0.8);
   background-color: var(--background);
   color: var(--foreground);
 }
 
-/* Warm putty band — the middle temperature between bone and espresso. */
+/* Warm putty band — the middle temperature between ivory and ink. */
 .putty-band {
-  --background: oklch(0.902 0.03 82);
-  --card: oklch(0.945 0.02 82);
-  --secondary: oklch(0.862 0.034 80);
-  --muted: oklch(0.862 0.034 80);
-  --elevated: oklch(0.945 0.02 82);
-  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.928 0.026 84) 0%, oklch(0.882 0.032 80) 72%);
+  --background: oklch(0.928 0.038 84);
+  --card: oklch(0.968 0.022 86);
+  --secondary: oklch(0.888 0.044 80);
+  --muted: oklch(0.888 0.044 80);
+  --elevated: oklch(0.968 0.022 86);
+  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.952 0.032 88) 0%, oklch(0.904 0.042 78) 72%);
   background-color: var(--background);
   color: var(--foreground);
 }
 
-/* Cool counter-band, used sparingly for analytical chapters. */
+/* Cool counter-band, used for analytical chapters. */
 .teal-band {
-  --background: oklch(0.926 0.028 190);
-  --card: oklch(0.962 0.016 190);
-  --secondary: oklch(0.888 0.034 190);
-  --muted: oklch(0.888 0.034 190);
-  --elevated: oklch(0.962 0.016 190);
-  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.952 0.02 190) 0%, oklch(0.902 0.032 190) 72%);
+  --background: oklch(0.938 0.038 196);
+  --card: oklch(0.972 0.02 196);
+  --secondary: oklch(0.902 0.048 196);
+  --muted: oklch(0.902 0.048 196);
+  --elevated: oklch(0.972 0.02 196);
+  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.962 0.026 200) 0%, oklch(0.912 0.044 192) 72%);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Plum-violet band — luxurious counterpoint for strategic chapters. */
+.plum-band {
+  --background: oklch(0.936 0.038 328);
+  --card: oklch(0.972 0.02 328);
+  --secondary: oklch(0.898 0.05 328);
+  --muted: oklch(0.898 0.05 328);
+  --elevated: oklch(0.972 0.02 328);
+  --accent: oklch(0.545 0.168 330);
+  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.962 0.026 330) 0%, oklch(0.908 0.046 326) 72%);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Sun band — bright amber ground for high-energy moments. */
+.sun-band {
+  --background: oklch(0.944 0.052 84);
+  --card: oklch(0.976 0.028 86);
+  --secondary: oklch(0.906 0.064 80);
+  --muted: oklch(0.906 0.064 80);
+  --elevated: oklch(0.976 0.028 86);
+  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.972 0.038 90) 0%, oklch(0.912 0.062 74) 72%);
   background-color: var(--background);
   color: var(--foreground);
 }
