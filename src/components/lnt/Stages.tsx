@@ -65,10 +65,11 @@ export function SectorStage() {
               <span className="mt-2 block text-sm leading-relaxed text-muted-foreground">
                 {s.description}
               </span>
-
-            <span className="mt-5 block text-xs uppercase tracking-[0.2em] text-primary opacity-0 transition-opacity group-hover:opacity-100">
-              Calibrate to this profile →
+              <span className="mt-5 block text-xs uppercase tracking-[0.2em] text-accent opacity-0 transition-opacity group-hover:opacity-100">
+                Calibrate to this profile →
+              </span>
             </span>
+
           </motion.button>
         ))}
       </div>
