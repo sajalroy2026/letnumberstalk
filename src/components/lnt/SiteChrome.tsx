@@ -11,7 +11,7 @@ export function SiteHeader() {
             LetNumbersTalk
           </span>
           <span className="hidden text-[0.62rem] uppercase tracking-[0.28em] text-accent sm:inline">
-            by Mr Sajal Roy
+            By Mr. Sajal Roy
           </span>
         </Link>
 
