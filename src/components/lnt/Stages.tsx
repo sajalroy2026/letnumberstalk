@@ -359,7 +359,7 @@ export function PillarScorePlate({
       <p className="mt-6 max-w-3xl text-sm leading-relaxed text-muted-foreground">
         Scored across the {assessment.entered} metrics entered, re-weighted so unentered metrics
         neither add nor subtract. Weight of this pillar in the integrated composite:{" "}
-        {Math.round(assessment.weight * 100)} percent.
+        {Math.round(assessment.weight * 100)}%.
       </p>
     </motion.div>
   );
