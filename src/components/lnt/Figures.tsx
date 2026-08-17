@@ -660,70 +660,181 @@ export function HeroComposition({ className }: { className?: string }) {
 
 /* ------------------------------------------------------- Sector plate */
 
-/** Full illustrated tile per industry profile — abstract geometry, own accent. */
+/**
+ * Full high-tech composition per industry profile. Each sector gets its own
+ * geometry, technique and colourway — network mesh, isometric line-flow,
+ * translucent shelving, recurring-wave lattice, ascending trajectory.
+ */
 export function SectorPlate({ id, active }: { id: string; active?: boolean }) {
-  const tone: Record<string, string> = {
-    services: "var(--teal)",
-    manufacturing: "var(--rust)",
-    retail: "var(--ochre)",
-    saas: "var(--slate-blue)",
-    startup: "var(--oxblood)",
+  const tone: Record<string, [string, string]> = {
+    services: ["var(--cyan)", "var(--teal)"],
+    manufacturing: ["var(--amber)", "var(--rust)"],
+    retail: ["var(--plum)", "var(--rust)"],
+    saas: ["var(--teal)", "var(--pillar-technology)"],
+    startup: ["var(--lime)", "var(--pillar-organizational)"],
   };
-  const c = tone[id] ?? "var(--accent)";
+  const [a, b] = tone[id] ?? ["var(--accent)", "var(--primary)"];
+  const gid = `sg-${id}`;
+  const fid = `sf-${id}`;
+
   return (
     <svg
       viewBox="0 0 200 110"
       preserveAspectRatio="xMidYMid slice"
       className="h-28 w-full"
       aria-hidden
-      style={{ opacity: active ? 1 : 0.92 }}
+      style={{ opacity: active ? 1 : 0.9 }}
     >
+      <defs>
+        <linearGradient id={gid} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor={a} />
+          <stop offset="100%" stopColor={b} />
+        </linearGradient>
+        <filter id={fid} x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="5" result="g" />
+          <feMerge>
+            <feMergeNode in="g" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
       <rect x="0" y="0" width="200" height="110" fill="var(--secondary)" />
+      <rect x="0" y="0" width="200" height="110" fill={`url(#${gid})`} opacity="0.14" />
+
       {id === "services" && (
-        <>
-          <circle cx="52" cy="55" r="30" fill={c} opacity="0.9" />
-          <path d="M52 25 A30 30 0 0 1 82 55 L52 55 Z" fill="var(--background)" opacity="0.85" />
-          <rect x="100" y="30" width="70" height="8" fill={c} opacity="0.55" />
-          <rect x="100" y="50" width="48" height="8" fill={c} opacity="0.8" />
-          <rect x="100" y="70" width="60" height="8" fill="var(--foreground)" opacity="0.25" />
-        </>
+        /* Network mesh — a routed capability graph */
+        <g>
+          {[
+            [26, 78],
+            [58, 40],
+            [92, 72],
+            [128, 34],
+            [162, 62],
+            [116, 96],
+          ].map(([x, y], i, arr) => (
+            <g key={i}>
+              {arr.slice(i + 1).map(([x2, y2], j) => (
+                <line
+                  key={j}
+                  x1={x}
+                  y1={y}
+                  x2={x2}
+                  y2={y2}
+                  stroke={`url(#${gid})`}
+                  strokeWidth="0.7"
+                  opacity="0.4"
+                />
+              ))}
+            </g>
+          ))}
+          {[
+            [26, 78, 4],
+            [58, 40, 7],
+            [92, 72, 5],
+            [128, 34, 9],
+            [162, 62, 5],
+            [116, 96, 3.5],
+          ].map(([x, y, r], i) => (
+            <circle key={i} cx={x} cy={y} r={r} fill={`url(#${gid})`} filter={`url(#${fid})`} opacity="0.9" />
+          ))}
+        </g>
       )}
+
       {id === "manufacturing" && (
-        <>
-          <rect x="22" y="58" width="26" height="34" fill={c} />
-          <rect x="54" y="42" width="26" height="50" fill={c} opacity="0.75" />
-          <rect x="86" y="26" width="26" height="66" fill={c} opacity="0.55" />
-          <circle cx="152" cy="42" r="22" fill="none" stroke={c} strokeWidth="6" />
-          <circle cx="152" cy="42" r="6" fill={c} />
-          <path d="M14 92 H186" stroke="var(--foreground)" strokeOpacity="0.3" strokeWidth="2" />
-        </>
+        /* Isometric extruded line-flow */
+        <g>
+          {[0, 1, 2, 3].map((i) => {
+            const x = 24 + i * 40;
+            const h = 26 + i * 12;
+            return (
+              <g key={i} opacity={0.92 - i * 0.1}>
+                <path d={`M${x} ${92 - h} l16 -9 l16 9 l-16 9 Z`} fill={a} opacity="0.85" />
+                <path d={`M${x} ${92 - h} v${h} l16 9 v-${h} Z`} fill={b} opacity="0.65" />
+                <path d={`M${x + 16} ${92 - h + 9} v${h} l16 -9 v-${h} Z`} fill={b} opacity="0.4" />
+              </g>
+            );
+          })}
+          <path d="M6 100 H194" stroke={`url(#${gid})`} strokeWidth="1.4" opacity="0.7" />
+        </g>
       )}
+
       {id === "retail" && (
-        <>
-          <path d="M28 40 H172 L160 92 H40 Z" fill={c} opacity="0.85" />
-          <path d="M78 40 V28 a22 22 0 0 1 44 0 v12" fill="none" stroke="var(--foreground)" strokeOpacity="0.4" strokeWidth="4" />
-          <rect x="60" y="58" width="80" height="4" fill="var(--background)" opacity="0.8" />
-          <rect x="72" y="70" width="56" height="4" fill="var(--background)" opacity="0.6" />
-        </>
+        /* Translucent stacked shelves with demand arcs */
+        <g>
+          {[0, 1, 2].map((i) => (
+            <rect
+              key={i}
+              x={22 + i * 8}
+              y={26 + i * 24}
+              width={156 - i * 16}
+              height="16"
+              rx="1"
+              fill={`url(#${gid})`}
+              opacity={0.28 + i * 0.22}
+            />
+          ))}
+          <path
+            d="M18 84 C60 26 140 26 182 84"
+            fill="none"
+            stroke={a}
+            strokeWidth="1.6"
+            strokeDasharray="4 4"
+            opacity="0.9"
+          />
+          <circle cx="100" cy="44" r="5" fill={a} filter={`url(#${fid})`} />
+        </g>
       )}
+
       {id === "saas" && (
-        <>
-          <rect x="24" y="24" width="152" height="62" fill="none" stroke={c} strokeWidth="4" />
-          <path d="M32 78 L70 52 L98 66 L136 32 L168 46" fill="none" stroke={c} strokeWidth="5" />
-          <circle cx="136" cy="32" r="7" fill={c} />
-          <rect x="24" y="24" width="152" height="10" fill={c} opacity="0.35" />
-        </>
+        /* Recurring-wave lattice — retention cohorts */
+        <g>
+          {[0, 1, 2, 3, 4].map((i) => (
+            <path
+              key={i}
+              d={`M0 ${34 + i * 14} C40 ${14 + i * 14} 70 ${58 + i * 12} 110 ${34 + i * 13} S180 ${16 + i * 14} 200 ${36 + i * 13}`}
+              fill="none"
+              stroke={`url(#${gid})`}
+              strokeWidth="1.2"
+              opacity={0.85 - i * 0.13}
+            />
+          ))}
+          {[36, 78, 120, 162].map((x, i) => (
+            <rect key={i} x={x} y="18" width="1" height="78" fill={b} opacity="0.28" />
+          ))}
+          <circle cx="120" cy="40" r="6" fill={a} filter={`url(#${fid})`} />
+        </g>
       )}
+
       {id === "startup" && (
-        <>
-          <path d="M100 14 C124 42 132 62 128 88 L100 74 L72 88 C68 62 76 42 100 14 Z" fill={c} />
-          <circle cx="100" cy="50" r="11" fill="var(--background)" />
-          <path d="M64 96 L48 108 M136 96 L152 108" stroke={c} strokeWidth="5" />
-        </>
+        /* Ascending trajectory over provisional scaffolding */
+        <g>
+          {[0, 1, 2, 3, 4, 5].map((i) => (
+            <rect
+              key={i}
+              x={18 + i * 30}
+              y={92 - i * 4}
+              width="18"
+              height={6 + i * 4}
+              fill={b}
+              opacity="0.28"
+            />
+          ))}
+          <path
+            d="M14 96 C64 92 96 58 118 40 S168 16 190 12"
+            fill="none"
+            stroke={`url(#${gid})`}
+            strokeWidth="3"
+            filter={`url(#${fid})`}
+          />
+          <circle cx="190" cy="12" r="5" fill={a} filter={`url(#${fid})`} />
+          <path d="M14 96 h176" stroke={b} strokeWidth="0.8" opacity="0.5" strokeDasharray="3 5" />
+        </g>
       )}
     </svg>
   );
 }
+
 
 /* -------------------------------------------------------- Display numeral */
 
