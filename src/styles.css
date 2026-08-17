@@ -447,6 +447,66 @@
   background-image: var(--gradient-warm);
 }
 
+/* Frosted translucent panel — the core futurist surface */
+@utility glass {
+  background-image: var(--gradient-glass);
+  backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid color-mix(in oklab, var(--foreground) 12%, transparent);
+  box-shadow: var(--shadow-plate);
+}
+
+/* Aurora atmosphere — cool-to-warm blend, distinct from warm-wash */
+@utility aurora-wash {
+  background-image:
+    radial-gradient(58% 52% at 82% 12%, color-mix(in oklab, var(--cyan) 30%, transparent), transparent 72%),
+    radial-gradient(52% 48% at 8% 28%, color-mix(in oklab, var(--plum) 24%, transparent), transparent 70%),
+    radial-gradient(66% 58% at 48% 104%, color-mix(in oklab, var(--lime) 20%, transparent), transparent 72%),
+    var(--gradient-depth);
+}
+
+/* Prism atmosphere — spectral sweep for reveal moments */
+@utility prism-wash {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -20%;
+    pointer-events: none;
+    background-image: var(--gradient-prism);
+    filter: blur(70px);
+    opacity: 0.24;
+  }
+}
+
+/* Perspective stage for z-plane travel */
+@utility depth-stage {
+  perspective: 1400px;
+  transform-style: preserve-3d;
+}
+
+/* Fine technical scanlines over dark chapters */
+@utility scanlines {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--foreground) 8%, transparent) 0 1px,
+      transparent 1px 4px
+    );
+    opacity: 0.35;
+  }
+}
+
+@utility glow-edge {
+  box-shadow: var(--shadow-glow);
+}
+
+
+
 
 
 
