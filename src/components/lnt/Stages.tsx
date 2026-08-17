@@ -567,7 +567,7 @@ export function ReportStage() {
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   {a.entered} metrics were entered, below the {COVERAGE_TIERS[a.pillarId]!.floor}{" "}
                   needed for a meaningful reading — {COVERAGE_TIERS[a.pillarId]!.floorText}. The
-                  figures entered are held, not scored.
+                  figures entered are held for the session and score once that floor is reached.
                 </p>
               </div>
             )}
