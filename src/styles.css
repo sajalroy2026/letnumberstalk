@@ -73,6 +73,10 @@
   --color-oxblood: var(--oxblood);
   --color-slate-blue: var(--slate-blue);
   --color-putty: var(--putty);
+  --color-amber: var(--amber);
+  --color-plum: var(--plum);
+  --color-cyan: var(--cyan);
+  --color-lime: var(--lime);
   --font-display: "Libre Baskerville", Georgia, serif;
   --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
@@ -82,77 +86,86 @@
 :root {
   --radius: 0.125rem;
 
-  /* Mid-century warm system: bone base, espresso ink, expressive accent family */
-  --background: oklch(0.951 0.017 82);
-  --foreground: oklch(0.235 0.017 55);
-  --card: oklch(0.975 0.011 84);
-  --card-foreground: oklch(0.235 0.017 55);
-  --popover: oklch(0.975 0.011 84);
-  --popover-foreground: oklch(0.235 0.017 55);
-  --primary: oklch(0.462 0.078 180);
-  --primary-foreground: oklch(0.965 0.014 84);
-  --secondary: oklch(0.884 0.028 82);
-  --secondary-foreground: oklch(0.235 0.017 55);
-  --muted: oklch(0.884 0.028 82);
-  --muted-foreground: oklch(0.452 0.024 58);
-  --accent: oklch(0.565 0.145 42);
-  --accent-foreground: oklch(0.972 0.013 84);
-  --destructive: oklch(0.435 0.122 26);
-  --destructive-foreground: oklch(0.972 0.013 84);
-  --border: oklch(0.235 0.017 55 / 18%);
-  --input: oklch(0.235 0.017 55 / 26%);
-  --ring: oklch(0.565 0.145 42);
+  /* Warm luminous system: ivory ground, indigo-espresso ink, bright accent family */
+  --background: oklch(0.972 0.017 88);
+  --foreground: oklch(0.245 0.026 285);
+  --card: oklch(0.988 0.009 90);
+  --card-foreground: oklch(0.245 0.026 285);
+  --popover: oklch(0.988 0.009 90);
+  --popover-foreground: oklch(0.245 0.026 285);
+  --primary: oklch(0.585 0.115 196);
+  --primary-foreground: oklch(0.985 0.01 90);
+  --secondary: oklch(0.918 0.031 84);
+  --secondary-foreground: oklch(0.245 0.026 285);
+  --muted: oklch(0.918 0.031 84);
+  --muted-foreground: oklch(0.475 0.032 285);
+  --accent: oklch(0.638 0.178 40);
+  --accent-foreground: oklch(0.985 0.01 90);
+  --destructive: oklch(0.535 0.185 22);
+  --destructive-foreground: oklch(0.985 0.01 90);
+  --border: oklch(0.245 0.026 285 / 16%);
+  --input: oklch(0.245 0.026 285 / 24%);
+  --ring: oklch(0.638 0.178 40);
 
-  /* Diagnostic tiers — teal / ochre / burnt orange / oxblood */
-  --healthy: oklch(0.462 0.078 180);
-  --acceptable: oklch(0.655 0.118 80);
-  --concern: oklch(0.565 0.145 42);
-  --critical: oklch(0.435 0.122 26);
+  /* Diagnostic tiers — brighter, still legible on ivory */
+  --healthy: oklch(0.585 0.115 196);
+  --acceptable: oklch(0.702 0.152 78);
+  --concern: oklch(0.638 0.178 40);
+  --critical: oklch(0.512 0.182 20);
 
   /* Expressive accent family */
-  --rust: oklch(0.565 0.145 42);
-  --teal: oklch(0.462 0.078 180);
-  --ochre: oklch(0.755 0.135 80);
-  --oxblood: oklch(0.395 0.105 26);
-  --slate-blue: oklch(0.685 0.048 232);
-  --putty: oklch(0.884 0.028 82);
+  --rust: oklch(0.638 0.178 40);
+  --teal: oklch(0.585 0.115 196);
+  --ochre: oklch(0.788 0.162 82);
+  --amber: oklch(0.792 0.158 68);
+  --oxblood: oklch(0.478 0.162 20);
+  --plum: oklch(0.545 0.168 330);
+  --cyan: oklch(0.712 0.118 226);
+  --lime: oklch(0.808 0.152 122);
+  --slate-blue: oklch(0.712 0.078 236);
+  --putty: oklch(0.918 0.031 84);
 
   /* Pillar identity colours — colour as information */
-  --pillar-financial: oklch(0.462 0.078 180);
-  --pillar-risk: oklch(0.565 0.145 42);
-  --pillar-market: oklch(0.685 0.048 232);
-  --pillar-operational: oklch(0.685 0.115 80);
-  --pillar-strategic: oklch(0.395 0.105 26);
-  --pillar-organizational: oklch(0.552 0.082 152);
-  --pillar-technology: oklch(0.505 0.078 292);
+  --pillar-financial: oklch(0.585 0.115 196);
+  --pillar-risk: oklch(0.638 0.178 40);
+  --pillar-market: oklch(0.712 0.118 226);
+  --pillar-operational: oklch(0.752 0.158 78);
+  --pillar-strategic: oklch(0.545 0.168 330);
+  --pillar-organizational: oklch(0.632 0.145 148);
+  --pillar-technology: oklch(0.565 0.152 288);
 
   /* Surfaces and depth */
-  --paper: oklch(0.975 0.011 84);
-  --paper-foreground: oklch(0.235 0.017 55);
-  --ink: oklch(0.222 0.014 55);
-  --sand: oklch(0.884 0.028 82);
-  --elevated: oklch(0.975 0.011 84);
-  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.972 0.014 84) 0%, oklch(0.925 0.024 82) 72%);
-  --gradient-ink: linear-gradient(135deg, oklch(0.298 0.02 55), oklch(0.205 0.014 55));
-  --gradient-rust: linear-gradient(135deg, oklch(0.628 0.152 52), oklch(0.492 0.132 32));
-  --gradient-warm: linear-gradient(120deg, oklch(0.755 0.135 80), oklch(0.565 0.145 42) 55%, oklch(0.395 0.105 26));
-  --shadow-plate: 0 1px 0 0 oklch(0.235 0.017 55 / 0.07), 0 18px 40px -34px oklch(0.235 0.017 55 / 0.6);
-  --shadow-lift: 0 26px 58px -30px oklch(0.235 0.017 55 / 0.5);
+  --paper: oklch(0.988 0.009 90);
+  --paper-foreground: oklch(0.245 0.026 285);
+  --ink: oklch(0.212 0.032 285);
+  --sand: oklch(0.918 0.031 84);
+  --elevated: oklch(0.988 0.009 90);
+  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.99 0.012 90) 0%, oklch(0.938 0.03 84) 72%);
+  --gradient-ink: linear-gradient(135deg, oklch(0.318 0.052 288), oklch(0.208 0.032 285));
+  --gradient-rust: linear-gradient(135deg, oklch(0.712 0.172 58), oklch(0.552 0.172 28));
+  --gradient-warm: linear-gradient(120deg, oklch(0.812 0.158 92), oklch(0.658 0.178 42) 52%, oklch(0.528 0.168 340));
+  --gradient-aurora: linear-gradient(135deg, oklch(0.742 0.142 200) 0%, oklch(0.652 0.152 288) 42%, oklch(0.742 0.168 42) 100%);
+  --gradient-prism: conic-gradient(from 220deg at 50% 50%, oklch(0.752 0.148 200), oklch(0.812 0.158 92), oklch(0.688 0.172 40), oklch(0.598 0.168 330), oklch(0.752 0.148 200));
+  --gradient-glass: linear-gradient(150deg, color-mix(in oklab, var(--card) 96%, transparent), color-mix(in oklab, var(--card) 74%, transparent));
+  --shadow-plate: 0 1px 0 0 oklch(0.245 0.026 285 / 0.06), 0 18px 40px -34px oklch(0.245 0.026 285 / 0.55);
+  --shadow-lift: 0 26px 58px -30px oklch(0.245 0.026 285 / 0.45);
+  --shadow-glow: 0 0 0 1px color-mix(in oklab, var(--accent) 24%, transparent), 0 24px 60px -30px color-mix(in oklab, var(--accent) 55%, transparent);
 
-  --chart-1: oklch(0.462 0.078 180);
-  --chart-2: oklch(0.565 0.145 42);
-  --chart-3: oklch(0.755 0.135 80);
-  --chart-4: oklch(0.685 0.048 232);
-  --chart-5: oklch(0.395 0.105 26);
-  --sidebar: oklch(0.951 0.017 82);
-  --sidebar-foreground: oklch(0.235 0.017 55);
-  --sidebar-primary: oklch(0.462 0.078 180);
-  --sidebar-primary-foreground: oklch(0.965 0.014 84);
-  --sidebar-accent: oklch(0.884 0.028 82);
-  --sidebar-accent-foreground: oklch(0.235 0.017 55);
-  --sidebar-border: oklch(0.235 0.017 55 / 16%);
-  --sidebar-ring: oklch(0.565 0.145 42);
+  --chart-1: oklch(0.585 0.115 196);
+  --chart-2: oklch(0.638 0.178 40);
+  --chart-3: oklch(0.788 0.162 82);
+  --chart-4: oklch(0.712 0.118 226);
+  --chart-5: oklch(0.545 0.168 330);
+  --sidebar: oklch(0.972 0.017 88);
+  --sidebar-foreground: oklch(0.245 0.026 285);
+  --sidebar-primary: oklch(0.585 0.115 196);
+  --sidebar-primary-foreground: oklch(0.985 0.01 90);
+  --sidebar-accent: oklch(0.918 0.031 84);
+  --sidebar-accent-foreground: oklch(0.245 0.026 285);
+  --sidebar-border: oklch(0.245 0.026 285 / 15%);
+  --sidebar-ring: oklch(0.638 0.178 40);
 }
+
 
 
 /*
@@ -160,68 +173,98 @@
  * re-binds the semantic tokens, so children flip surface with no hardcoded colour.
  */
 .ink {
-  --background: oklch(0.222 0.014 55);
-  --foreground: oklch(0.951 0.017 82);
-  --card: oklch(0.278 0.018 55);
-  --card-foreground: oklch(0.951 0.017 82);
-  --popover: oklch(0.278 0.018 55);
-  --popover-foreground: oklch(0.951 0.017 82);
-  --primary: oklch(0.755 0.135 80);
-  --primary-foreground: oklch(0.222 0.014 55);
-  --secondary: oklch(0.302 0.02 55);
-  --secondary-foreground: oklch(0.951 0.017 82);
-  --muted: oklch(0.302 0.02 55);
-  --muted-foreground: oklch(0.795 0.024 82);
-  --accent: oklch(0.678 0.152 48);
-  --accent-foreground: oklch(0.205 0.014 55);
-  --border: oklch(0.925 0.024 82 / 18%);
-  --input: oklch(0.925 0.024 82 / 30%);
-  --ring: oklch(0.678 0.152 48);
-  --healthy: oklch(0.678 0.088 178);
-  --acceptable: oklch(0.808 0.128 82);
-  --concern: oklch(0.678 0.152 48);
-  --critical: oklch(0.618 0.148 26);
-  --rust: oklch(0.678 0.152 48);
-  --teal: oklch(0.678 0.088 178);
-  --ochre: oklch(0.808 0.128 82);
-  --oxblood: oklch(0.578 0.132 26);
-  --slate-blue: oklch(0.735 0.052 232);
-  --pillar-financial: oklch(0.678 0.088 178);
-  --pillar-risk: oklch(0.678 0.152 48);
-  --pillar-market: oklch(0.735 0.052 232);
-  --pillar-operational: oklch(0.808 0.128 82);
-  --pillar-strategic: oklch(0.598 0.132 26);
-  --pillar-organizational: oklch(0.688 0.092 152);
-  --pillar-technology: oklch(0.665 0.088 292);
-  --elevated: oklch(0.278 0.018 55);
-  --paper: oklch(0.278 0.018 55);
-  --gradient-depth: radial-gradient(125% 95% at 50% -10%, oklch(0.302 0.024 55) 0%, oklch(0.198 0.012 55) 74%);
-  --shadow-plate: 0 1px 0 0 oklch(0.951 0.017 82 / 0.06), 0 26px 60px -40px oklch(0 0 0 / 0.85);
+  --background: oklch(0.198 0.034 285);
+  --foreground: oklch(0.968 0.014 88);
+  --card: oklch(0.258 0.038 286);
+  --card-foreground: oklch(0.968 0.014 88);
+  --popover: oklch(0.258 0.038 286);
+  --popover-foreground: oklch(0.968 0.014 88);
+  --primary: oklch(0.822 0.152 88);
+  --primary-foreground: oklch(0.198 0.034 285);
+  --secondary: oklch(0.292 0.042 286);
+  --secondary-foreground: oklch(0.968 0.014 88);
+  --muted: oklch(0.292 0.042 286);
+  --muted-foreground: oklch(0.822 0.022 86);
+  --accent: oklch(0.742 0.168 48);
+  --accent-foreground: oklch(0.198 0.034 285);
+  --border: oklch(0.938 0.02 88 / 20%);
+  --input: oklch(0.938 0.02 88 / 32%);
+  --ring: oklch(0.742 0.168 48);
+  --healthy: oklch(0.788 0.128 192);
+  --acceptable: oklch(0.858 0.152 86);
+  --concern: oklch(0.742 0.168 48);
+  --critical: oklch(0.688 0.172 22);
+  --rust: oklch(0.742 0.168 48);
+  --teal: oklch(0.788 0.128 192);
+  --ochre: oklch(0.858 0.152 86);
+  --amber: oklch(0.852 0.158 74);
+  --oxblood: oklch(0.658 0.162 22);
+  --plum: oklch(0.702 0.172 330);
+  --cyan: oklch(0.812 0.118 222);
+  --lime: oklch(0.878 0.158 122);
+  --slate-blue: oklch(0.782 0.062 234);
+  --pillar-financial: oklch(0.788 0.128 192);
+  --pillar-risk: oklch(0.742 0.168 48);
+  --pillar-market: oklch(0.812 0.118 222);
+  --pillar-operational: oklch(0.858 0.152 86);
+  --pillar-strategic: oklch(0.702 0.172 330);
+  --pillar-organizational: oklch(0.772 0.148 148);
+  --pillar-technology: oklch(0.712 0.152 288);
+  --elevated: oklch(0.258 0.038 286);
+  --paper: oklch(0.258 0.038 286);
+  --gradient-depth: radial-gradient(125% 95% at 50% -10%, oklch(0.288 0.052 288) 0%, oklch(0.172 0.03 285) 74%);
+  --gradient-glass: linear-gradient(150deg, oklch(0.968 0.014 88 / 0.12), oklch(0.968 0.014 88 / 0.03));
+  --shadow-plate: 0 1px 0 0 oklch(0.968 0.014 88 / 0.07), 0 26px 60px -40px oklch(0 0 0 / 0.85);
   --shadow-lift: 0 32px 70px -32px oklch(0 0 0 / 0.8);
   background-color: var(--background);
   color: var(--foreground);
 }
 
-/* Warm putty band — the middle temperature between bone and espresso. */
+/* Warm putty band — the middle temperature between ivory and ink. */
 .putty-band {
-  --background: oklch(0.902 0.03 82);
-  --card: oklch(0.945 0.02 82);
-  --secondary: oklch(0.862 0.034 80);
-  --muted: oklch(0.862 0.034 80);
-  --elevated: oklch(0.945 0.02 82);
-  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.928 0.026 84) 0%, oklch(0.882 0.032 80) 72%);
+  --background: oklch(0.928 0.038 84);
+  --card: oklch(0.968 0.022 86);
+  --secondary: oklch(0.888 0.044 80);
+  --muted: oklch(0.888 0.044 80);
+  --elevated: oklch(0.968 0.022 86);
+  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.952 0.032 88) 0%, oklch(0.904 0.042 78) 72%);
   background-color: var(--background);
   color: var(--foreground);
 }
 
-/* Cool counter-band, used sparingly for analytical chapters. */
+/* Cool counter-band, used for analytical chapters. */
 .teal-band {
-  --background: oklch(0.926 0.028 190);
-  --card: oklch(0.962 0.016 190);
-  --secondary: oklch(0.888 0.034 190);
-  --muted: oklch(0.888 0.034 190);
-  --elevated: oklch(0.962 0.016 190);
-  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.952 0.02 190) 0%, oklch(0.902 0.032 190) 72%);
+  --background: oklch(0.938 0.038 196);
+  --card: oklch(0.972 0.02 196);
+  --secondary: oklch(0.902 0.048 196);
+  --muted: oklch(0.902 0.048 196);
+  --elevated: oklch(0.972 0.02 196);
+  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.962 0.026 200) 0%, oklch(0.912 0.044 192) 72%);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Plum-violet band — luxurious counterpoint for strategic chapters. */
+.plum-band {
+  --background: oklch(0.936 0.038 328);
+  --card: oklch(0.972 0.02 328);
+  --secondary: oklch(0.898 0.05 328);
+  --muted: oklch(0.898 0.05 328);
+  --elevated: oklch(0.972 0.02 328);
+  --accent: oklch(0.545 0.168 330);
+  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.962 0.026 330) 0%, oklch(0.908 0.046 326) 72%);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Sun band — bright amber ground for high-energy moments. */
+.sun-band {
+  --background: oklch(0.944 0.052 84);
+  --card: oklch(0.976 0.028 86);
+  --secondary: oklch(0.906 0.064 80);
+  --muted: oklch(0.906 0.064 80);
+  --elevated: oklch(0.976 0.028 86);
+  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.972 0.038 90) 0%, oklch(0.912 0.062 74) 72%);
   background-color: var(--background);
   color: var(--foreground);
 }
@@ -404,6 +447,66 @@
   background-image: var(--gradient-warm);
 }
 
+/* Frosted translucent panel — the core futurist surface */
+@utility glass {
+  background-image: var(--gradient-glass);
+  backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid color-mix(in oklab, var(--foreground) 12%, transparent);
+  box-shadow: var(--shadow-plate);
+}
+
+/* Aurora atmosphere — cool-to-warm blend, distinct from warm-wash */
+@utility aurora-wash {
+  background-image:
+    radial-gradient(58% 52% at 82% 12%, color-mix(in oklab, var(--cyan) 30%, transparent), transparent 72%),
+    radial-gradient(52% 48% at 8% 28%, color-mix(in oklab, var(--plum) 24%, transparent), transparent 70%),
+    radial-gradient(66% 58% at 48% 104%, color-mix(in oklab, var(--lime) 20%, transparent), transparent 72%),
+    var(--gradient-depth);
+}
+
+/* Prism atmosphere — spectral sweep for reveal moments */
+@utility prism-wash {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -20%;
+    pointer-events: none;
+    background-image: var(--gradient-prism);
+    filter: blur(70px);
+    opacity: 0.24;
+  }
+}
+
+/* Perspective stage for z-plane travel */
+@utility depth-stage {
+  perspective: 1400px;
+  transform-style: preserve-3d;
+}
+
+/* Fine technical scanlines over dark chapters */
+@utility scanlines {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--foreground) 8%, transparent) 0 1px,
+      transparent 1px 4px
+    );
+    opacity: 0.12;
+  }
+}
+
+@utility glow-edge {
+  box-shadow: var(--shadow-glow);
+}
+
+
+
 
 
 
@@ -436,52 +539,65 @@
 
 @media print {
   @page {
-    margin: 15mm;
+    margin: 14mm;
   }
+
+  /* The report prints in brand colour, not flattened greyscale. */
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
   body {
-    background: #fff !important;
-    color: #241c16 !important;
+    background: var(--background) !important;
+    color: var(--foreground) !important;
   }
+
   .no-print {
     display: none !important;
   }
-  .halftone::after,
-  .warm-wash {
-    display: none !important;
-    background-image: none !important;
-  }
-  .ink,
-  .putty-band,
-  .teal-band {
-    --background: #ffffff;
-    --foreground: #241c16;
-    --card: #ffffff;
-    --card-foreground: #241c16;
-    --secondary: #f2ece1;
-    --muted: #f2ece1;
-    --muted-foreground: #55493f;
-    --primary: #1e6f66;
-    --primary-foreground: #ffffff;
-    --accent: #c2572b;
-    --border: rgba(36, 28, 22, 0.25);
-    --healthy: #1e6f66;
-    --acceptable: #a97e18;
-    --concern: #c2572b;
-    --critical: #7a2e2a;
-    background: #ffffff !important;
-    color: #241c16 !important;
-  }
 
+  /* Heavy atmospherics are suppressed so pages stay crisp; colour stays. */
+  .halftone::after,
+  .scanlines::after,
+  .prism-wash::before,
   .grid-field::before {
     display: none !important;
   }
 
-  .print-plain {
-    background: #fff !important;
-    color: #14181f !important;
-    box-shadow: none !important;
-    border-color: #ccc6b8 !important;
+  .aurora-wash,
+  .warm-wash {
+    background-image: var(--gradient-depth) !important;
   }
+
+  .glass {
+    backdrop-filter: none !important;
+    background-image: none !important;
+    background-color: var(--card) !important;
+  }
+
+  /* Body chapters print on a light ground for legibility, accents intact. */
+  .putty-band,
+  .teal-band,
+  .plum-band,
+  .sun-band {
+    background-image: none !important;
+  }
+
+  /* The cover keeps its full ink plate. */
+  .print-cover {
+    background-image: none !important;
+    background-color: var(--background) !important;
+    color: var(--foreground) !important;
+  }
+
+  .print-plain {
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
   .print-break {
     break-before: page;
   }
@@ -495,4 +611,5 @@
     overflow: visible !important;
   }
 }
+
 

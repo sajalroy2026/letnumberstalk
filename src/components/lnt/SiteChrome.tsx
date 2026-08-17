@@ -20,13 +20,13 @@ export function SiteHeader() {
             className="text-muted-foreground transition-colors hover:text-foreground"
             activeProps={{ className: "text-foreground" }}
           >
-            Practice
+            About
           </Link>
           <Link
             to="/assess"
             className="rule-copper px-5 py-2 text-primary-foreground transition-opacity hover:opacity-90"
           >
-            Commence
+            Start Assessment
           </Link>
         </nav>
       </div>

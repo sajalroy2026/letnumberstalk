@@ -455,7 +455,7 @@ export function ReportStage() {
   return (
     <div>
       {/* ------------------------------------------------- Ink cover plate */}
-      <section className="ink warm-wash halftone print-plain relative overflow-hidden">
+      <section className="ink aurora-wash scanlines print-cover relative overflow-hidden">
         <div className="relative mx-auto max-w-5xl px-5 py-16 sm:px-8">
           <motion.header
             initial={{ opacity: 0, y: 28 }}
@@ -476,7 +476,7 @@ export function ReportStage() {
               initial={{ opacity: 0, scale: 0.97, rotateX: 10 }}
               animate={{ opacity: 1, scale: 1, rotateX: 0 }}
               transition={{ duration: 0.95, delay: 0.15, ease }}
-              className="plate print-plain mt-10 grid items-center gap-10 p-8 sm:p-10 md:grid-cols-[auto_minmax(0,1fr)]"
+              className="glass print-avoid-break mt-10 grid items-center gap-10 p-8 sm:p-10 md:grid-cols-[auto_minmax(0,1fr)]"
             >
               <div className="justify-self-center">
                 <ScoreDial
