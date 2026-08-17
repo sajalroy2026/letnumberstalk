@@ -183,7 +183,7 @@ function Home() {
           </ParallaxLayer>
           <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
             <p className="figure text-[0.65rem] uppercase tracking-[0.28em] text-accent">
-              02 — Mandate
+              Mandate
             </p>
             <h2 className="mt-3 font-display text-3xl text-foreground sm:text-4xl">
               What the instrument delivers
@@ -246,7 +246,7 @@ function Home() {
 
           <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
             <p className="figure text-[0.65rem] uppercase tracking-[0.28em] text-accent">
-              03 — Structure
+              Structure
             </p>
             <h2 className="mt-3 font-display text-3xl text-foreground sm:text-4xl">The 7 pillars</h2>
             <span className="band-rule mt-5 block" aria-hidden />
@@ -303,7 +303,7 @@ function Home() {
         <section className="blush-band tone-amber relative overflow-hidden">
           <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
             <p className="figure text-[0.65rem] uppercase tracking-[0.28em] text-accent">
-              04 — Calibration
+              Calibration
             </p>
             <h2 className="mt-3 font-display text-3xl text-foreground sm:text-4xl">
               5 industry profiles, 1 benchmark set each
@@ -352,10 +352,10 @@ function Home() {
           <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
 
             <p className="figure text-[0.65rem] uppercase tracking-[0.28em] text-accent">
-              05 — Method
+              Method
             </p>
             <h2 className="mt-3 font-display text-3xl text-foreground sm:text-4xl">
-              Reads with the cadence of a discovery call.
+              Evidence in, weighted judgement out.
             </h2>
             <span className="band-rule mt-5 block" aria-hidden />
             <div className="mt-14 grid gap-10 sm:grid-cols-3">
