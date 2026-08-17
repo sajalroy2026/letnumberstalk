@@ -13,10 +13,12 @@ import {
   PillarSpectrum,
   PillarWeightRing,
   ScoreDial,
-  SectorGlyph,
+  SectorPlate,
   ValueChain,
+  pillarColor,
   stageForPillar,
 } from "./Figures";
+
 import type { MetricResult, PillarAssessment, PillarId, Tier } from "@/lib/assessment/types";
 import { cn } from "@/lib/utils";
 
