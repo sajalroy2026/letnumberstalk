@@ -72,7 +72,8 @@ function Home() {
 
       <main>
         {/* ---------------------------------------------------- Espresso hero */}
-        <section className="ink warm-wash halftone relative overflow-hidden">
+        <section className="ink aurora-wash scanlines relative overflow-hidden">
+
           <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-5 pb-24 pt-20 sm:px-8 sm:pt-28 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
             <div>
               <motion.p
