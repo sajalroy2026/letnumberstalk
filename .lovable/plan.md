@@ -5,21 +5,26 @@ Remove "The Business Health Instrument" from the header entirely. The top-left r
 `LetNumbersTalk — by Mr Sajal Roy`.
 
 ## 2. Replace the hero figure
-Retire the circular pillar armature (and any donut/orbit/ring figure). In its place, a prominent seven-panel emblem set — each pillar represented by its own custom symbol, no charts, no percentages:
+Retire the circular pillar armature (and any donut/orbit/ring figure). The hero becomes a single composed piece built from the 7 pillars: each pillar is a card carrying its name and its own illustrative figure, and the seven together form the hero composition in 3D motion.
 
 ```text
-  ┌────────┬────────┬────────┬────────┬────────┬────────┬────────┐
-  │  ▙▟    │   ⛨    │   ⬗⬖   │   ⚙    │   ➤    │  ⬢⬢    │   ⬒    │
-  │ VAULT  │ SHIELD │ COMPASS│  GEAR  │ ARROW  │  CELLS │  GRID  │
-  │ Finan. │  Risk  │ Market │  Ops   │ Strat. │  Org.  │  Tech  │
-  └────────┴────────┴────────┴────────┴────────┴────────┴────────┘
+      ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐
+      │ FINANCIAL│ │   RISK   │ │  MARKET  │ │OPERATIONS│
+      │  ▙▟ ▂▂   │ │   ⛨      │ │  ⬗⬖      │ │   ⚙⚙     │
+      └──────────┘ └──────────┘ └──────────┘ └──────────┘
+         ┌──────────┐ ┌──────────┐ ┌──────────┐
+         │ STRATEGY │ │ORGANISAT.│ │TECHNOLOGY│
+         │   ➤      │ │  ⬢⬢      │ │   ⬒      │
+         └──────────┘ └──────────┘ └──────────┘
 ```
 
-- Seven upright panels side by side, each in its own pillar colour with 3D extrusion and depth shadow.
-- Each panel carries a bespoke geometric symbol for its pillar — vault/ledger block (Financial), shield (Risk), compass facet (Market), interlocking gear form (Operations), directional chevron (Strategy), linked cells (Organisation), circuit grid (Technology) — drawn as angular mid-century marks, not icon-font clipart.
-- The set is scaled as the hero's dominant element: full column height, large symbols that read at a glance, pillar names as small caps beneath.
-- Symbols draw in with a stroke reveal, panels rise staggered, a slow light sweep crosses the set, and the group drifts gently on scroll.
+- Seven cards, one per pillar: pillar name in small caps at the top, a bespoke illustrative figure beneath it, each card in its own pillar colour with extruded edge and depth shadow.
+- Illustrations, drawn as angular mid-century marks (not icon-font clipart): ledger/vault block (Financial), shield (Risk), compass facet (Market), interlocking gear form (Operations), directional chevron (Strategy), linked cells (Organisation), circuit grid (Technology).
+- The seven cards are arranged as one staggered 3D formation on a shared perspective plane — cards sit at slightly different depths and tilts so the set reads as a single hero object rather than a flat row.
+- Motion: cards enter staggered with a depth push, each figure draws in with a stroke reveal, the formation tilts subtly toward the pointer, a slow light sweep crosses it, and the whole group drifts on scroll.
+- Sized as the hero's dominant element, filling its column at full height; stacks into a compact grid on mobile with the same motion, reduced amplitude.
 - No circles, arcs, orbits, rotation, bars, or percentage labels.
+
 
 
 
@@ -41,6 +46,6 @@ Remove the sticky positioning from the site header so it scrolls away naturally 
 
 ## Technical notes
 - `src/components/lnt/SiteChrome.tsx`: drop the instrument tagline span; remove `sticky top-0` from `<header>`.
-- `src/components/lnt/Figures.tsx`: add a `PillarEmblems` figure (seven extruded panels, each with a bespoke SVG pillar symbol and stroke-reveal animation); remove `PillarArmature` usage from the home page.
+- `src/components/lnt/Figures.tsx`: add a `PillarEmblems` hero figure (seven named pillar cards with bespoke SVG illustrations on a shared 3D perspective plane, staggered depth entry, stroke reveal, pointer tilt); remove `PillarArmature` usage from the home page.
 - `src/routes/index.tsx`: swap the hero figure, reassign section tone classes to the oxblood-led rotation, change the DELIVERS tile animation to a pop and reduce grid gap.
 - `src/styles.css`: make oxblood the default body accent, keep navy scoped to header/footer, verify each `.tone-*` pair retains AA contrast.
