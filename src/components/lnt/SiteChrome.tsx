@@ -85,7 +85,7 @@ export function SiteFooter() {
 
         <p className="mt-6 measure text-xs leading-relaxed text-muted-foreground">
           Every figure entered is held in browser memory for the duration of the session and is
-          never transmitted or stored. No account, no sign-up, no retention.
+          discarded when the tab closes. Open the instrument and begin.
         </p>
       </div>
     </footer>
