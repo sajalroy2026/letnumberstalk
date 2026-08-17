@@ -82,59 +82,78 @@
 :root {
   --radius: 0.125rem;
 
-  /* Consulting duotone: warm sand working surface, deep ink navy authority, copper decision accent */
-  --background: oklch(0.943 0.015 85);
-  --foreground: oklch(0.245 0.045 262);
-  --card: oklch(0.978 0.008 85);
-  --card-foreground: oklch(0.245 0.045 262);
-  --popover: oklch(0.978 0.008 85);
-  --popover-foreground: oklch(0.245 0.045 262);
-  --primary: oklch(0.265 0.052 262);
-  --primary-foreground: oklch(0.955 0.016 85);
-  --secondary: oklch(0.902 0.022 85);
-  --secondary-foreground: oklch(0.265 0.052 262);
-  --muted: oklch(0.902 0.022 85);
-  --muted-foreground: oklch(0.475 0.03 262);
-  --accent: oklch(0.525 0.135 44);
-  --accent-foreground: oklch(0.972 0.012 85);
-  --destructive: oklch(0.462 0.152 26);
-  --destructive-foreground: oklch(0.972 0.012 85);
-  --border: oklch(0.245 0.045 262 / 18%);
-  --input: oklch(0.245 0.045 262 / 26%);
-  --ring: oklch(0.525 0.135 44);
+  /* Mid-century warm system: bone base, espresso ink, expressive accent family */
+  --background: oklch(0.951 0.017 82);
+  --foreground: oklch(0.235 0.017 55);
+  --card: oklch(0.975 0.011 84);
+  --card-foreground: oklch(0.235 0.017 55);
+  --popover: oklch(0.975 0.011 84);
+  --popover-foreground: oklch(0.235 0.017 55);
+  --primary: oklch(0.462 0.078 180);
+  --primary-foreground: oklch(0.965 0.014 84);
+  --secondary: oklch(0.884 0.028 82);
+  --secondary-foreground: oklch(0.235 0.017 55);
+  --muted: oklch(0.884 0.028 82);
+  --muted-foreground: oklch(0.452 0.024 58);
+  --accent: oklch(0.565 0.145 42);
+  --accent-foreground: oklch(0.972 0.013 84);
+  --destructive: oklch(0.435 0.122 26);
+  --destructive-foreground: oklch(0.972 0.013 84);
+  --border: oklch(0.235 0.017 55 / 18%);
+  --input: oklch(0.235 0.017 55 / 26%);
+  --ring: oklch(0.565 0.145 42);
 
-  /* Diagnostic tiers — teal / ochre / copper / oxblood signal set */
-  --healthy: oklch(0.475 0.078 178);
-  --acceptable: oklch(0.655 0.115 82);
-  --concern: oklch(0.545 0.135 46);
-  --critical: oklch(0.462 0.152 26);
+  /* Diagnostic tiers — teal / ochre / burnt orange / oxblood */
+  --healthy: oklch(0.462 0.078 180);
+  --acceptable: oklch(0.655 0.118 80);
+  --concern: oklch(0.565 0.145 42);
+  --critical: oklch(0.435 0.122 26);
+
+  /* Expressive accent family */
+  --rust: oklch(0.565 0.145 42);
+  --teal: oklch(0.462 0.078 180);
+  --ochre: oklch(0.755 0.135 80);
+  --oxblood: oklch(0.395 0.105 26);
+  --slate-blue: oklch(0.685 0.048 232);
+  --putty: oklch(0.884 0.028 82);
+
+  /* Pillar identity colours — colour as information */
+  --pillar-financial: oklch(0.462 0.078 180);
+  --pillar-risk: oklch(0.565 0.145 42);
+  --pillar-market: oklch(0.685 0.048 232);
+  --pillar-operational: oklch(0.685 0.115 80);
+  --pillar-strategic: oklch(0.395 0.105 26);
+  --pillar-organizational: oklch(0.552 0.082 152);
+  --pillar-technology: oklch(0.505 0.078 292);
 
   /* Surfaces and depth */
-  --paper: oklch(0.978 0.008 85);
-  --paper-foreground: oklch(0.245 0.045 262);
-  --ink: oklch(0.245 0.045 262);
-  --sand: oklch(0.902 0.022 85);
-  --elevated: oklch(0.978 0.008 85);
-  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.968 0.012 85) 0%, oklch(0.926 0.02 85) 70%);
-  --gradient-ink: linear-gradient(135deg, oklch(0.305 0.055 262), oklch(0.205 0.042 262));
-  --gradient-rust: linear-gradient(135deg, oklch(0.575 0.145 48), oklch(0.465 0.13 34));
-  --shadow-plate: 0 1px 0 0 oklch(0.245 0.045 262 / 0.07), 0 18px 40px -34px oklch(0.245 0.045 262 / 0.6);
-  --shadow-lift: 0 26px 58px -30px oklch(0.245 0.045 262 / 0.5);
+  --paper: oklch(0.975 0.011 84);
+  --paper-foreground: oklch(0.235 0.017 55);
+  --ink: oklch(0.222 0.014 55);
+  --sand: oklch(0.884 0.028 82);
+  --elevated: oklch(0.975 0.011 84);
+  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.972 0.014 84) 0%, oklch(0.925 0.024 82) 72%);
+  --gradient-ink: linear-gradient(135deg, oklch(0.298 0.02 55), oklch(0.205 0.014 55));
+  --gradient-rust: linear-gradient(135deg, oklch(0.628 0.152 52), oklch(0.492 0.132 32));
+  --gradient-warm: linear-gradient(120deg, oklch(0.755 0.135 80), oklch(0.565 0.145 42) 55%, oklch(0.395 0.105 26));
+  --shadow-plate: 0 1px 0 0 oklch(0.235 0.017 55 / 0.07), 0 18px 40px -34px oklch(0.235 0.017 55 / 0.6);
+  --shadow-lift: 0 26px 58px -30px oklch(0.235 0.017 55 / 0.5);
 
-  --chart-1: oklch(0.265 0.052 262);
-  --chart-2: oklch(0.525 0.135 44);
-  --chart-3: oklch(0.475 0.078 178);
-  --chart-4: oklch(0.655 0.115 82);
-  --chart-5: oklch(0.462 0.152 26);
-  --sidebar: oklch(0.955 0.016 85);
-  --sidebar-foreground: oklch(0.245 0.045 262);
-  --sidebar-primary: oklch(0.265 0.052 262);
-  --sidebar-primary-foreground: oklch(0.955 0.016 85);
-  --sidebar-accent: oklch(0.902 0.022 85);
-  --sidebar-accent-foreground: oklch(0.265 0.052 262);
-  --sidebar-border: oklch(0.245 0.045 262 / 16%);
-  --sidebar-ring: oklch(0.525 0.135 44);
+  --chart-1: oklch(0.462 0.078 180);
+  --chart-2: oklch(0.565 0.145 42);
+  --chart-3: oklch(0.755 0.135 80);
+  --chart-4: oklch(0.685 0.048 232);
+  --chart-5: oklch(0.395 0.105 26);
+  --sidebar: oklch(0.951 0.017 82);
+  --sidebar-foreground: oklch(0.235 0.017 55);
+  --sidebar-primary: oklch(0.462 0.078 180);
+  --sidebar-primary-foreground: oklch(0.965 0.014 84);
+  --sidebar-accent: oklch(0.884 0.028 82);
+  --sidebar-accent-foreground: oklch(0.235 0.017 55);
+  --sidebar-border: oklch(0.235 0.017 55 / 16%);
+  --sidebar-ring: oklch(0.565 0.145 42);
 }
+
 
 /*
  * Ink band — the navy half of the duotone. Any subtree marked .ink re-binds the
