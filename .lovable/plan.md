@@ -46,6 +46,6 @@ Remove the sticky positioning from the site header so it scrolls away naturally 
 
 ## Technical notes
 - `src/components/lnt/SiteChrome.tsx`: drop the instrument tagline span; remove `sticky top-0` from `<header>`.
-- `src/components/lnt/Figures.tsx`: add a `PillarEmblems` figure (seven extruded panels, each with a bespoke SVG pillar symbol and stroke-reveal animation); remove `PillarArmature` usage from the home page.
+- `src/components/lnt/Figures.tsx`: add a `PillarEmblems` hero figure (seven named pillar cards with bespoke SVG illustrations on a shared 3D perspective plane, staggered depth entry, stroke reveal, pointer tilt); remove `PillarArmature` usage from the home page.
 - `src/routes/index.tsx`: swap the hero figure, reassign section tone classes to the oxblood-led rotation, change the DELIVERS tile animation to a pop and reduce grid gap.
 - `src/styles.css`: make oxblood the default body accent, keep navy scoped to header/footer, verify each `.tone-*` pair retains AA contrast.
