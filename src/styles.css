@@ -67,10 +67,17 @@
   --color-paper-foreground: var(--paper-foreground);
   --color-ink: var(--ink);
   --color-elevated: var(--elevated);
+  --color-rust: var(--rust);
+  --color-teal: var(--teal);
+  --color-ochre: var(--ochre);
+  --color-oxblood: var(--oxblood);
+  --color-slate-blue: var(--slate-blue);
+  --color-putty: var(--putty);
   --font-display: "Libre Baskerville", Georgia, serif;
   --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
 }
+
 
 :root {
   --radius: 0.125rem;
