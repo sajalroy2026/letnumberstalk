@@ -455,7 +455,7 @@ export function ReportStage() {
   return (
     <div>
       {/* ------------------------------------------------- Ink cover plate */}
-      <section className="ink grid-field print-plain relative overflow-hidden">
+      <section className="ink warm-wash halftone print-plain relative overflow-hidden">
         <div className="relative mx-auto max-w-5xl px-5 py-16 sm:px-8">
           <motion.header
             initial={{ opacity: 0, y: 28 }}

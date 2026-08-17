@@ -31,7 +31,7 @@ function AboutPage() {
       <div className="ink">
         <SiteHeader />
       </div>
-      <section className="ink grid-field relative overflow-hidden">
+      <section className="ink warm-wash halftone relative overflow-hidden">
         <div className="relative mx-auto max-w-5xl px-5 py-16 sm:px-8">
           <p className="figure text-[0.66rem] uppercase tracking-[0.28em] text-accent">
             The instrument

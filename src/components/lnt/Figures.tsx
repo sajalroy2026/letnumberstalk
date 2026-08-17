@@ -459,7 +459,7 @@ export function ChapterPlate({
       initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
       animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       transition={{ duration: 0.85, ease }}
-      className="ink grid-field print-plain relative overflow-hidden"
+      className="ink warm-wash halftone print-plain relative overflow-hidden"
     >
       <div className="relative mx-auto grid w-full max-w-5xl grid-cols-[auto_minmax(0,1fr)] items-center gap-6 px-5 py-12 sm:gap-10 sm:px-8 sm:py-16">
         <motion.span
