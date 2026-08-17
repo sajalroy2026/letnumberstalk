@@ -1572,114 +1572,11 @@ export function ScoreColumns({ className }: { className?: string }) {
   );
 }
 
-/* ------------------------------------------------- Hero: seven pillar cards */
-
-/**
- * Hero composition. Seven cards — one per pillar — each carrying the pillar
- * name and its own bespoke mark, arranged as a single staggered formation on a
- * shared perspective plane. Cards enter with a depth push, marks draw in, and
- * the whole group tilts gently toward the pointer.
- */
-const PILLAR_MARKS: Record<PillarId, React.ReactNode> = {
-  financial: (
-    <>
-      <path d="M8 40 L20 40 L20 20 L8 20 Z" />
-      <path d="M24 40 L36 40 L36 12 L24 12 Z" />
-      <path d="M40 40 L52 40 L52 26 L40 26 Z" />
-      <path d="M4 46 L56 46" />
-      <path d="M8 14 L20 6 L32 12" />
-    </>
-  ),
-  risk: (
-    <>
-      <path d="M30 4 L52 13 L52 28 C52 40 42 47 30 52 C18 47 8 40 8 28 L8 13 Z" />
-      <path d="M30 16 L30 34" />
-      <path d="M20 25 L40 25" />
-    </>
-  ),
-  market: (
-    <>
-      <path d="M30 4 L54 30 L30 56 L6 30 Z" />
-      <path d="M30 4 L30 56" />
-      <path d="M18 17 L42 43" />
-      <path d="M6 30 L54 30" />
-    </>
-  ),
-  operational: (
-    <>
-      <path d="M30 8 L44 16 L44 32 L30 40 L16 32 L16 16 Z" />
-      <path d="M30 20 L38 25 L38 34" />
-      <path d="M8 48 L52 48" />
-      <path d="M18 44 L18 52" />
-      <path d="M42 44 L42 52" />
-    </>
-  ),
-  strategic: (
-    <>
-      <path d="M8 46 L30 8 L52 46" />
-      <path d="M18 46 L30 26 L42 46" />
-      <path d="M30 8 L30 2" />
-      <path d="M4 52 L56 52" />
-    </>
-  ),
-  organizational: (
-    <>
-      <path d="M30 6 L40 12 L40 24 L30 30 L20 24 L20 12 Z" />
-      <path d="M12 30 L22 36 L22 48 L12 54 L2 48 L2 36 Z" />
-      <path d="M48 30 L58 36 L58 48 L48 54 L38 48 L38 36 Z" />
-      <path d="M25 28 L17 33" />
-      <path d="M35 28 L43 33" />
-    </>
-  ),
-  technology: (
-    <>
-      <path d="M14 14 L46 14 L46 46 L14 46 Z" />
-      <path d="M24 24 L36 24 L36 36 L24 36 Z" />
-      <path d="M30 14 L30 4" />
-      <path d="M30 46 L30 56" />
-      <path d="M14 30 L4 30" />
-      <path d="M46 30 L56 30" />
-    </>
-  ),
-};
-
-/**
- * Panel grounds: each pillar owns a deep, saturated field with a lifted mark
- * colour, so the label sits in ivory at full legibility.
- */
-const PANEL: Record<PillarId, { bg: string; edge: string; mark: string; z: number }> = {
-  financial: { bg: "oklch(0.278 0.076 262)", edge: "oklch(0.42 0.09 258)", mark: "oklch(0.82 0.088 250)", z: 48 },
-  risk: { bg: "oklch(0.322 0.152 21)", edge: "oklch(0.47 0.17 22)", mark: "oklch(0.82 0.118 26)", z: 16 },
-  market: { bg: "oklch(0.352 0.062 236)", edge: "oklch(0.5 0.07 234)", mark: "oklch(0.85 0.078 224)", z: 40 },
-  operational: { bg: "oklch(0.356 0.116 48)", edge: "oklch(0.5 0.13 50)", mark: "oklch(0.86 0.104 62)", z: 8 },
-  strategic: { bg: "oklch(0.352 0.088 82)", edge: "oklch(0.5 0.1 84)", mark: "oklch(0.88 0.114 90)", z: 30 },
-  organizational: { bg: "oklch(0.322 0.078 160)", edge: "oklch(0.46 0.09 158)", mark: "oklch(0.84 0.104 156)", z: 20 },
-  technology: { bg: "oklch(0.236 0.05 268)", edge: "oklch(0.38 0.06 262)", mark: "oklch(0.82 0.07 258)", z: 44 },
-};
-
-const PANEL_LABEL = "oklch(0.972 0.008 90)";
-
-/* Short instrument labels — the ring stays legible at every width. */
-const DIAL_LABEL: Record<PillarId, string> = {
-  financial: "Financial",
-  risk: "Risk",
-  market: "Market",
-  operational: "Operations",
-  strategic: "Strategy",
-  organizational: "Organisation",
-  technology: "Technology",
-};
-
 const TAU = Math.PI * 2;
 const r2 = (n: number) => Math.round(n * 100) / 100;
 const polar = (cx: number, cy: number, r: number, deg: number) => {
   const a = ((deg - 90) * TAU) / 360;
   return [r2(cx + r * Math.cos(a)), r2(cy + r * Math.sin(a))] as const;
-};
-const arcPath = (cx: number, cy: number, r: number, a0: number, a1: number) => {
-  const [x0, y0] = polar(cx, cy, r, a0);
-  const [x1, y1] = polar(cx, cy, r, a1);
-  return `M ${x0.toFixed(2)} ${y0.toFixed(2)} A ${r} ${r} 0 ${a1 - a0 > 180 ? 1 : 0} 1 ${x1.toFixed(2)} ${y1.toFixed(2)}`;
 };
 
 /**
