@@ -306,8 +306,12 @@ function Home() {
         </section>
 
         {/* -------------------------------------------------- Espresso: method */}
-        <section className="ink warm-wash halftone relative overflow-hidden">
+        <section className="ink aurora-wash scanlines relative overflow-hidden">
+          <ParallaxLayer depth={0.4} className="pointer-events-none absolute -left-32 top-0 -z-10 w-[36rem] opacity-50">
+            <OrbitField />
+          </ParallaxLayer>
           <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
+
             <p className="figure text-[0.65rem] uppercase tracking-[0.28em] text-accent">
               05 — Method
             </p>
