@@ -272,7 +272,7 @@ function Home() {
         </section>
 
         {/* ------------------------------------------------ Sector calibration */}
-        <section className="teal-band halftone relative overflow-hidden">
+        <section className="plum-band relative overflow-hidden">
           <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
             <p className="figure text-[0.65rem] uppercase tracking-[0.28em] text-accent">
               04 — Calibration
@@ -285,13 +285,14 @@ function Home() {
               {SECTORS.map((s, i) => (
                 <motion.div
                   key={s.id}
-                  initial={{ opacity: 0, y: 26 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 26, rotateX: 10 }}
+                  whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
                   viewport={{ once: true, margin: "-70px" }}
-                  transition={{ duration: 0.6, delay: i * 0.06, ease }}
-                  className="border border-border bg-card shadow-[var(--shadow-plate)]"
+                  transition={{ duration: 0.7, delay: i * 0.07, ease }}
+                  className="glass overflow-hidden"
                 >
                   <SectorPlate id={s.id} />
+
                   <div className="border-t border-border p-5">
                     <h3 className="font-display text-lg text-foreground">{s.name}</h3>
                     <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
