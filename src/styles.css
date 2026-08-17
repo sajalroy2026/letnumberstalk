@@ -87,204 +87,243 @@
 :root {
   --radius: 0.125rem;
 
-  /* Warm luminous system: ivory ground, indigo-espresso ink, bright accent family */
-  --background: oklch(0.978 0.015 88);
-  --foreground: oklch(0.192 0.028 285);
-  --card: oklch(0.992 0.008 90);
-  --card-foreground: oklch(0.192 0.028 285);
-  --popover: oklch(0.992 0.008 90);
-  --popover-foreground: oklch(0.192 0.028 285);
-  --primary: oklch(0.508 0.108 208);
-  --primary-foreground: oklch(0.988 0.008 90);
-  --secondary: oklch(0.922 0.029 84);
-  --secondary-foreground: oklch(0.192 0.028 285);
-  --muted: oklch(0.922 0.029 84);
-  --muted-foreground: oklch(0.398 0.028 285);
-  --accent: oklch(0.562 0.152 45);
-  --accent-foreground: oklch(0.988 0.008 90);
-  --accent-glow: oklch(0.782 0.132 58);
-  --destructive: oklch(0.502 0.162 26);
-  --destructive-foreground: oklch(0.988 0.008 90);
-  --border: oklch(0.192 0.028 285 / 18%);
-  --input: oklch(0.192 0.028 285 / 28%);
-  --ring: oklch(0.562 0.152 45);
+  /*
+   * Navy institutional system.
+   * Five-colour family: navy, gold, burnt orange, forest green, oxblood.
+   * Each colour carries a text-safe value (AA on light grounds) and a lifted
+   * "glow" value (AA on navy grounds) so type never loses contrast.
+   */
+  --background: oklch(0.982 0.004 250);
+  --foreground: oklch(0.208 0.058 266);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.208 0.058 266);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.208 0.058 266);
+  --primary: oklch(0.352 0.074 254);
+  --primary-foreground: oklch(0.985 0.004 250);
+  --secondary: oklch(0.928 0.014 248);
+  --secondary-foreground: oklch(0.208 0.058 266);
+  --muted: oklch(0.928 0.014 248);
+  --muted-foreground: oklch(0.412 0.032 258);
+  --accent: oklch(0.578 0.108 82);
+  --accent-foreground: oklch(0.985 0.004 250);
+  --accent-glow: oklch(0.792 0.116 88);
+  --destructive: oklch(0.412 0.128 22);
+  --destructive-foreground: oklch(0.985 0.004 250);
+  --border: oklch(0.208 0.058 266 / 16%);
+  --input: oklch(0.208 0.058 266 / 26%);
+  --ring: oklch(0.578 0.108 82);
 
-  /* Diagnostic tiers — AA on light grounds */
-  --healthy: oklch(0.512 0.108 152);
-  --acceptable: oklch(0.578 0.108 72);
-  --concern: oklch(0.562 0.152 45);
-  --critical: oklch(0.482 0.148 26);
+  /* Diagnostic tiers — mapped onto the five-colour family, AA on white and navy */
+  --healthy: oklch(0.452 0.098 158);
+  --acceptable: oklch(0.578 0.108 82);
+  --concern: oklch(0.548 0.138 46);
+  --critical: oklch(0.412 0.128 22);
 
-  /* Expressive accent family — light-spectrum, text-safe values */
-  --rust: oklch(0.562 0.152 45);        /* burnt orange */
-  --teal: oklch(0.518 0.098 232);       /* light blue */
-  --ochre: oklch(0.578 0.108 72);       /* clay */
-  --amber: oklch(0.598 0.122 62);       /* warm clay */
-  --oxblood: oklch(0.482 0.132 26);     /* soft terracotta */
-  --plum: oklch(0.512 0.132 328);       /* muted plum */
-  --cyan: oklch(0.528 0.086 202);       /* dusty teal */
-  --lime: oklch(0.512 0.108 152);       /* forest green */
-  --slate-blue: oklch(0.522 0.058 238);
-  --putty: oklch(0.922 0.029 84);
+  /* The five-colour family — text-safe values for light grounds */
+  --navy: oklch(0.262 0.068 266);
+  --navy-mid: oklch(0.352 0.074 254);
+  --steel: oklch(0.512 0.086 250);
+  --gold: oklch(0.578 0.108 82);
+  --burnt: oklch(0.548 0.138 46);
+  --forest: oklch(0.452 0.098 158);
+  --oxblood-core: oklch(0.412 0.128 22);
 
-  /* Luminous counterparts — figures, glows, gradient stops only */
-  --rust-glow: oklch(0.782 0.132 58);
-  --teal-glow: oklch(0.812 0.082 232);
-  --ochre-glow: oklch(0.842 0.118 82);
-  --amber-glow: oklch(0.848 0.122 72);
-  --plum-glow: oklch(0.752 0.118 330);
-  --cyan-glow: oklch(0.828 0.078 204);
-  --lime-glow: oklch(0.812 0.108 150);
+  /* Legacy accent aliases — remapped into the family so every component follows it */
+  --rust: var(--burnt);
+  --teal: var(--steel);
+  --ochre: var(--gold);
+  --amber: var(--gold);
+  --oxblood: var(--oxblood-core);
+  --plum: var(--oxblood-core);
+  --cyan: var(--navy-mid);
+  --lime: var(--forest);
+  --slate-blue: var(--steel);
+  --putty: oklch(0.928 0.014 248);
 
-  /* Pillar identity colours — colour as information, AA on light grounds */
-  --pillar-financial: oklch(0.518 0.098 232);
-  --pillar-risk: oklch(0.562 0.152 45);
-  --pillar-market: oklch(0.528 0.086 202);
-  --pillar-operational: oklch(0.578 0.108 72);
-  --pillar-strategic: oklch(0.512 0.132 328);
-  --pillar-organizational: oklch(0.512 0.108 152);
-  --pillar-technology: oklch(0.512 0.118 288);
+  /* Lifted counterparts — legible on navy, and used for figures, glows, gradients */
+  --navy-glow: oklch(0.742 0.062 250);
+  --steel-glow: oklch(0.782 0.078 244);
+  --gold-glow: oklch(0.792 0.116 88);
+  --burnt-glow: oklch(0.732 0.142 54);
+  --forest-glow: oklch(0.722 0.116 156);
+  --oxblood-glow: oklch(0.672 0.148 24);
+
+  --rust-glow: var(--burnt-glow);
+  --teal-glow: var(--steel-glow);
+  --ochre-glow: var(--gold-glow);
+  --amber-glow: var(--gold-glow);
+  --plum-glow: var(--oxblood-glow);
+  --cyan-glow: var(--navy-glow);
+  --lime-glow: var(--forest-glow);
+
+  /* Pillar identity colours — distinct, all drawn from the same family */
+  --pillar-financial: oklch(0.352 0.074 254);
+  --pillar-risk: oklch(0.412 0.128 22);
+  --pillar-market: oklch(0.512 0.086 250);
+  --pillar-operational: oklch(0.548 0.138 46);
+  --pillar-strategic: oklch(0.578 0.108 82);
+  --pillar-organizational: oklch(0.452 0.098 158);
+  --pillar-technology: oklch(0.262 0.068 266);
 
   /* Surfaces and depth */
-  --paper: oklch(0.988 0.009 90);
-  --paper-foreground: oklch(0.245 0.026 285);
-  --ink: oklch(0.212 0.032 285);
-  --sand: oklch(0.918 0.031 84);
-  --elevated: oklch(0.988 0.009 90);
-  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.99 0.012 90) 0%, oklch(0.938 0.03 84) 72%);
-  --gradient-ink: linear-gradient(135deg, oklch(0.318 0.052 288), oklch(0.208 0.032 285));
-  --gradient-rust: linear-gradient(135deg, oklch(0.712 0.172 58), oklch(0.552 0.172 28));
-  --gradient-warm: linear-gradient(120deg, oklch(0.812 0.158 92), oklch(0.658 0.178 42) 52%, oklch(0.528 0.168 340));
-  --gradient-aurora: linear-gradient(135deg, oklch(0.742 0.142 200) 0%, oklch(0.652 0.152 288) 42%, oklch(0.742 0.168 42) 100%);
-  --gradient-prism: conic-gradient(from 220deg at 50% 50%, oklch(0.752 0.148 200), oklch(0.812 0.158 92), oklch(0.688 0.172 40), oklch(0.598 0.168 330), oklch(0.752 0.148 200));
-  --gradient-glass: linear-gradient(150deg, color-mix(in oklab, var(--card) 96%, transparent), color-mix(in oklab, var(--card) 74%, transparent));
-  --shadow-plate: 0 1px 0 0 oklch(0.245 0.026 285 / 0.06), 0 18px 40px -34px oklch(0.245 0.026 285 / 0.55);
-  --shadow-lift: 0 26px 58px -30px oklch(0.245 0.026 285 / 0.45);
-  --shadow-glow: 0 0 0 1px color-mix(in oklab, var(--accent) 24%, transparent), 0 24px 60px -30px color-mix(in oklab, var(--accent) 55%, transparent);
+  --paper: oklch(1 0 0);
+  --paper-foreground: oklch(0.208 0.058 266);
+  --ink: oklch(0.222 0.062 266);
+  --sand: oklch(0.928 0.014 248);
+  --elevated: oklch(1 0 0);
+  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.996 0.002 250) 0%, oklch(0.932 0.016 248) 74%);
+  --gradient-ink: linear-gradient(135deg, oklch(0.302 0.072 262), oklch(0.192 0.056 268));
+  --gradient-rust: linear-gradient(135deg, var(--accent-glow), var(--accent));
+  --gradient-warm: linear-gradient(120deg, oklch(0.792 0.116 88), oklch(0.548 0.138 46) 58%, oklch(0.412 0.128 22));
+  --gradient-aurora: linear-gradient(135deg, oklch(0.302 0.072 262) 0%, oklch(0.452 0.086 248) 46%, oklch(0.578 0.108 82) 100%);
+  --gradient-prism: conic-gradient(from 220deg at 50% 50%, oklch(0.352 0.074 254), oklch(0.578 0.108 82), oklch(0.548 0.138 46), oklch(0.452 0.098 158), oklch(0.412 0.128 22), oklch(0.352 0.074 254));
+  --gradient-glass: linear-gradient(150deg, color-mix(in oklab, var(--card) 96%, transparent), color-mix(in oklab, var(--card) 76%, transparent));
+  --shadow-plate: 0 1px 0 0 oklch(0.208 0.058 266 / 0.06), 0 18px 40px -34px oklch(0.208 0.058 266 / 0.55);
+  --shadow-lift: 0 26px 58px -30px oklch(0.208 0.058 266 / 0.45);
+  --shadow-glow: 0 0 0 1px color-mix(in oklab, var(--accent) 26%, transparent), 0 24px 60px -30px color-mix(in oklab, var(--accent) 55%, transparent);
 
-  --chart-1: oklch(0.585 0.115 196);
-  --chart-2: oklch(0.638 0.178 40);
-  --chart-3: oklch(0.788 0.162 82);
-  --chart-4: oklch(0.712 0.118 226);
-  --chart-5: oklch(0.545 0.168 330);
-  --sidebar: oklch(0.972 0.017 88);
-  --sidebar-foreground: oklch(0.245 0.026 285);
-  --sidebar-primary: oklch(0.585 0.115 196);
-  --sidebar-primary-foreground: oklch(0.985 0.01 90);
-  --sidebar-accent: oklch(0.918 0.031 84);
-  --sidebar-accent-foreground: oklch(0.245 0.026 285);
-  --sidebar-border: oklch(0.245 0.026 285 / 15%);
-  --sidebar-ring: oklch(0.638 0.178 40);
+  --chart-1: oklch(0.352 0.074 254);
+  --chart-2: oklch(0.578 0.108 82);
+  --chart-3: oklch(0.548 0.138 46);
+  --chart-4: oklch(0.452 0.098 158);
+  --chart-5: oklch(0.412 0.128 22);
+  --sidebar: oklch(0.972 0.008 250);
+  --sidebar-foreground: oklch(0.208 0.058 266);
+  --sidebar-primary: oklch(0.352 0.074 254);
+  --sidebar-primary-foreground: oklch(0.985 0.004 250);
+  --sidebar-accent: oklch(0.928 0.014 248);
+  --sidebar-accent-foreground: oklch(0.208 0.058 266);
+  --sidebar-border: oklch(0.208 0.058 266 / 15%);
+  --sidebar-ring: oklch(0.578 0.108 82);
 }
 
 
 
 /*
- * Espresso band — the dark chapter of the system. Any subtree marked .ink
- * re-binds the semantic tokens, so children flip surface with no hardcoded colour.
- */
-/*
- * Sky band — formerly the dark chapter, now a luminous pale-blue ground.
- * Dark ink type on a light field, everywhere.
+ * Navy chapter — the deep ground of the system, used for the hero band, the
+ * header, the footer and the report cover. Any subtree marked .ink re-binds
+ * the semantic tokens, so children flip surface with no hardcoded colour.
  */
 .ink {
-  --background: oklch(0.958 0.028 232);
-  --foreground: oklch(0.182 0.03 262);
-  --card: oklch(0.986 0.012 232);
-  --card-foreground: oklch(0.182 0.03 262);
-  --popover: oklch(0.986 0.012 232);
-  --popover-foreground: oklch(0.182 0.03 262);
-  --primary: oklch(0.492 0.108 236);
-  --primary-foreground: oklch(0.99 0.008 232);
-  --secondary: oklch(0.918 0.038 232);
-  --secondary-foreground: oklch(0.182 0.03 262);
-  --muted: oklch(0.918 0.038 232);
-  --muted-foreground: oklch(0.402 0.032 262);
-  --accent: oklch(0.552 0.152 44);
-  --accent-foreground: oklch(0.99 0.008 232);
-  --border: oklch(0.182 0.03 262 / 16%);
-  --input: oklch(0.182 0.03 262 / 26%);
-  --ring: oklch(0.552 0.152 44);
-  --accent-glow: oklch(0.762 0.142 58);
-  --elevated: oklch(0.986 0.012 232);
-  --paper: oklch(0.986 0.012 232);
-  --gradient-depth: radial-gradient(125% 95% at 50% -10%, oklch(0.988 0.016 216) 0%, oklch(0.932 0.04 236) 74%);
-  --gradient-glass: linear-gradient(150deg, oklch(1 0 0 / 0.88), oklch(1 0 0 / 0.6));
-  --shadow-plate: 0 1px 0 0 oklch(0.182 0.03 262 / 0.05), 0 20px 44px -34px oklch(0.182 0.03 262 / 0.5);
-  --shadow-lift: 0 28px 62px -30px oklch(0.182 0.03 262 / 0.42);
+  --background: oklch(0.212 0.062 266);
+  --foreground: oklch(0.972 0.006 250);
+  --card: oklch(0.272 0.062 264);
+  --card-foreground: oklch(0.972 0.006 250);
+  --popover: oklch(0.272 0.062 264);
+  --popover-foreground: oklch(0.972 0.006 250);
+  --primary: oklch(0.792 0.116 88);
+  --primary-foreground: oklch(0.192 0.056 268);
+  --secondary: oklch(0.312 0.062 262);
+  --secondary-foreground: oklch(0.972 0.006 250);
+  --muted: oklch(0.312 0.062 262);
+  --muted-foreground: oklch(0.818 0.024 250);
+  --accent: oklch(0.792 0.116 88);
+  --accent-foreground: oklch(0.192 0.056 268);
+  --accent-glow: oklch(0.878 0.098 92);
+  --border: oklch(0.972 0.006 250 / 20%);
+  --input: oklch(0.972 0.006 250 / 32%);
+  --ring: oklch(0.792 0.116 88);
+  --elevated: oklch(0.272 0.062 264);
+  --paper: oklch(0.272 0.062 264);
+  --healthy: oklch(0.722 0.116 156);
+  --acceptable: oklch(0.792 0.116 88);
+  --concern: oklch(0.732 0.142 54);
+  --critical: oklch(0.672 0.148 24);
+  --pillar-financial: oklch(0.782 0.078 244);
+  --pillar-risk: oklch(0.672 0.148 24);
+  --pillar-market: oklch(0.742 0.062 250);
+  --pillar-operational: oklch(0.732 0.142 54);
+  --pillar-strategic: oklch(0.792 0.116 88);
+  --pillar-organizational: oklch(0.722 0.116 156);
+  --pillar-technology: oklch(0.828 0.052 258);
+  --gradient-depth: radial-gradient(125% 95% at 50% -10%, oklch(0.302 0.072 262) 0%, oklch(0.192 0.056 268) 76%);
+  --gradient-glass: linear-gradient(150deg, oklch(0.972 0.006 250 / 0.12), oklch(0.972 0.006 250 / 0.04));
+  --shadow-plate: 0 1px 0 0 oklch(0.98 0 0 / 0.06), 0 20px 44px -34px oklch(0.06 0 0 / 0.7);
+  --shadow-lift: 0 28px 62px -30px oklch(0.06 0 0 / 0.7);
   background-color: var(--background);
   color: var(--foreground);
 }
 
-/* Warm putty band — the middle temperature between ivory and ink. */
+/* Within a navy chapter the whole accent family lifts so figures stay legible. */
+.ink {
+  --navy: oklch(0.828 0.052 258);
+  --navy-mid: oklch(0.782 0.078 244);
+  --steel: oklch(0.782 0.078 244);
+  --gold: oklch(0.792 0.116 88);
+  --burnt: oklch(0.732 0.142 54);
+  --forest: oklch(0.722 0.116 156);
+  --oxblood-core: oklch(0.672 0.148 24);
+}
+
+/* Pale steel band — the default analytical ground. */
 .putty-band {
-  --background: oklch(0.928 0.038 84);
-  --card: oklch(0.968 0.022 86);
-  --secondary: oklch(0.888 0.044 80);
-  --muted: oklch(0.888 0.044 80);
-  --elevated: oklch(0.968 0.022 86);
-  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.952 0.032 88) 0%, oklch(0.904 0.042 78) 72%);
+  --background: oklch(0.938 0.012 248);
+  --card: oklch(0.986 0.004 250);
+  --secondary: oklch(0.902 0.018 248);
+  --muted: oklch(0.902 0.018 248);
+  --elevated: oklch(0.986 0.004 250);
+  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.968 0.008 250) 0%, oklch(0.916 0.018 246) 72%);
   background-color: var(--background);
   color: var(--foreground);
 }
 
-/* Cool counter-band, used for analytical chapters. */
+/* Pale navy-blue band. */
 .teal-band {
-  --background: oklch(0.938 0.038 196);
-  --card: oklch(0.972 0.02 196);
-  --secondary: oklch(0.902 0.048 196);
-  --muted: oklch(0.902 0.048 196);
-  --elevated: oklch(0.972 0.02 196);
-  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.962 0.026 200) 0%, oklch(0.912 0.044 192) 72%);
+  --background: oklch(0.942 0.022 246);
+  --card: oklch(0.986 0.008 248);
+  --secondary: oklch(0.906 0.03 246);
+  --muted: oklch(0.906 0.03 246);
+  --elevated: oklch(0.986 0.008 248);
+  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.968 0.014 250) 0%, oklch(0.918 0.03 244) 72%);
   background-color: var(--background);
   color: var(--foreground);
 }
 
-/* Plum-violet band — luxurious counterpoint for strategic chapters. */
+/* Pale oxblood band — the deepest warm counterpoint, at ground weight. */
 .plum-band {
-  --background: oklch(0.936 0.038 328);
-  --card: oklch(0.972 0.02 328);
-  --secondary: oklch(0.898 0.05 328);
-  --muted: oklch(0.898 0.05 328);
-  --elevated: oklch(0.972 0.02 328);
-  --accent: oklch(0.545 0.168 330);
-  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.962 0.026 330) 0%, oklch(0.908 0.046 326) 72%);
+  --background: oklch(0.948 0.02 24);
+  --card: oklch(0.986 0.008 24);
+  --secondary: oklch(0.912 0.028 24);
+  --muted: oklch(0.912 0.028 24);
+  --elevated: oklch(0.986 0.008 24);
+  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.972 0.012 26) 0%, oklch(0.922 0.028 20) 72%);
   background-color: var(--background);
   color: var(--foreground);
 }
 
-/* Sun band — bright amber ground for high-energy moments. */
+/* Gold band — warm, bright ground for high-energy chapters. */
 .sun-band {
-  --background: oklch(0.944 0.052 84);
-  --card: oklch(0.976 0.028 86);
-  --secondary: oklch(0.906 0.064 80);
-  --muted: oklch(0.906 0.064 80);
-  --elevated: oklch(0.976 0.028 86);
-  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.972 0.038 90) 0%, oklch(0.912 0.062 74) 72%);
+  --background: oklch(0.956 0.032 88);
+  --card: oklch(0.988 0.014 88);
+  --secondary: oklch(0.918 0.042 86);
+  --muted: oklch(0.918 0.042 86);
+  --elevated: oklch(0.988 0.014 88);
+  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.978 0.02 90) 0%, oklch(0.926 0.042 82) 72%);
   background-color: var(--background);
   color: var(--foreground);
 }
 
-/* Mint band — cool bright ground, analytical chapters. */
+/* Forest band — cool green ground, structural chapters. */
 .mint-band {
-  --background: oklch(0.952 0.042 162);
-  --card: oklch(0.982 0.018 162);
-  --secondary: oklch(0.916 0.05 162);
-  --muted: oklch(0.916 0.05 162);
-  --elevated: oklch(0.982 0.018 162);
-  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.976 0.026 168) 0%, oklch(0.924 0.05 156) 72%);
+  --background: oklch(0.952 0.026 158);
+  --card: oklch(0.986 0.012 158);
+  --secondary: oklch(0.914 0.034 158);
+  --muted: oklch(0.914 0.034 158);
+  --elevated: oklch(0.986 0.012 158);
+  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.976 0.016 162) 0%, oklch(0.922 0.034 154) 72%);
   background-color: var(--background);
   color: var(--foreground);
 }
 
-/* Blush band — warm bright ground, human chapters. */
+/* Burnt orange band — warm ground for human chapters. */
 .blush-band {
-  --background: oklch(0.954 0.036 22);
-  --card: oklch(0.984 0.016 22);
-  --secondary: oklch(0.918 0.046 22);
-  --muted: oklch(0.918 0.046 22);
-  --elevated: oklch(0.984 0.016 22);
-  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.978 0.022 30) 0%, oklch(0.926 0.046 18) 72%);
+  --background: oklch(0.952 0.03 52);
+  --card: oklch(0.988 0.012 52);
+  --secondary: oklch(0.914 0.04 50);
+  --muted: oklch(0.914 0.04 50);
+  --elevated: oklch(0.988 0.012 52);
+  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.976 0.018 56) 0%, oklch(0.922 0.04 46) 72%);
   background-color: var(--background);
   color: var(--foreground);
 }
@@ -292,8 +331,10 @@
 /*
  * Rotating accent system. Any subtree marked with a .tone-* class re-binds the
  * local accent pair, so rules, numerals, badges, focus rings, chart strokes and
- * figure highlights all shift together chapter by chapter.
+ * figure highlights all shift together chapter by chapter. Cadence:
+ * navy -> gold -> burnt orange -> forest -> oxblood.
  */
+.tone-navy,
 .tone-teal,
 .tone-amber,
 .tone-plum,
@@ -306,30 +347,31 @@
   --gradient-warm: linear-gradient(120deg, var(--accent-glow), var(--accent) 62%, color-mix(in oklab, var(--accent) 55%, var(--foreground)));
 }
 
+.tone-navy,
+.tone-cyan {
+  --accent: var(--navy-mid);
+  --accent-glow: var(--navy-glow);
+}
 .tone-teal {
-  --accent: var(--teal);
-  --accent-glow: var(--teal-glow);
+  --accent: var(--steel);
+  --accent-glow: var(--steel-glow);
 }
 .tone-amber {
-  --accent: var(--amber);
-  --accent-glow: var(--amber-glow);
+  --accent: var(--gold);
+  --accent-glow: var(--gold-glow);
 }
 .tone-plum {
-  --accent: var(--plum);
-  --accent-glow: var(--plum-glow);
-}
-.tone-cyan {
-  --accent: var(--cyan);
-  --accent-glow: var(--cyan-glow);
+  --accent: var(--oxblood-core);
+  --accent-glow: var(--oxblood-glow);
 }
 .tone-lime {
-  --accent: var(--lime);
-  --accent-glow: var(--lime-glow);
+  --accent: var(--forest);
+  --accent-glow: var(--forest-glow);
 }
 .tone-coral,
 .tone-rust {
-  --accent: var(--rust);
-  --accent-glow: var(--rust-glow);
+  --accent: var(--burnt);
+  --accent-glow: var(--burnt-glow);
 }
 
 
