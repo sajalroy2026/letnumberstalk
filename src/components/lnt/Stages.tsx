@@ -55,25 +55,17 @@ export function SectorStage() {
             transition={{ duration: 0.55, delay: i * 0.06, ease }}
             aria-pressed={sector === s.id}
             className={cn(
-              "tilt-card group relative overflow-hidden border bg-card p-6 text-left shadow-[var(--shadow-plate)]",
+              "tilt-card group relative overflow-hidden border bg-card text-left shadow-[var(--shadow-plate)]",
               sector === s.id ? "border-accent" : "border-border hover:border-accent/60",
             )}
           >
-            <span
-              className="absolute inset-x-0 top-0 h-[3px]"
-              style={{
-                background:
-                  sector === s.id ? "var(--gradient-rust)" : "var(--gradient-ink)",
-              }}
-              aria-hidden
-            />
-            <span className="mb-4 block text-accent">
-              <SectorGlyph id={s.id} />
-            </span>
-            <span className="block font-display text-lg text-foreground">{s.name}</span>
-            <span className="mt-2 block text-sm leading-relaxed text-muted-foreground">
-              {s.description}
-            </span>
+            <SectorPlate id={s.id} active={sector === s.id} />
+            <span className="block border-t border-border p-6">
+              <span className="block font-display text-lg text-foreground">{s.name}</span>
+              <span className="mt-2 block text-sm leading-relaxed text-muted-foreground">
+                {s.description}
+              </span>
+
             <span className="mt-5 block text-xs uppercase tracking-[0.2em] text-primary opacity-0 transition-opacity group-hover:opacity-100">
               Calibrate to this profile →
             </span>
