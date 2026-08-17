@@ -161,7 +161,10 @@ function Home() {
         </section>
 
         {/* ------------------------------------------------ What it delivers */}
-        <section className="putty-band halftone relative overflow-hidden">
+        <section className="sun-band relative overflow-hidden">
+          <ParallaxLayer depth={0.35} className="pointer-events-none absolute -right-24 top-10 -z-10 w-[34rem] opacity-40">
+            <PrismStack />
+          </ParallaxLayer>
           <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
             <p className="figure text-[0.65rem] uppercase tracking-[0.28em] text-accent">
               02 — Mandate
@@ -170,31 +173,34 @@ function Home() {
               What the instrument delivers
             </h2>
             <span className="band-rule mt-5 block" aria-hidden />
-            <div className="mt-12 grid gap-px bg-border sm:grid-cols-2">
-              {DELIVERS.map((c, i) => (
-                <motion.article
-                  key={c.t}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-70px" }}
-                  transition={{ duration: 0.65, delay: i * 0.06, ease }}
-                  className="relative bg-card p-8"
-                >
-                  <span
-                    className="absolute inset-y-0 left-0 w-[3px]"
-                    style={{ background: c.tone }}
-                    aria-hidden
-                  />
-                  <span className="figure text-[0.7rem] tracking-[0.22em]" style={{ color: c.tone }}>
-                    {c.n}
-                  </span>
-                  <h3 className="mt-3 font-display text-xl leading-snug text-foreground">{c.t}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{c.d}</p>
-                </motion.article>
-              ))}
-            </div>
+            <DepthReveal className="mt-12">
+              <div className="grid gap-px bg-border sm:grid-cols-2">
+                {DELIVERS.map((c, i) => (
+                  <motion.article
+                    key={c.t}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-70px" }}
+                    transition={{ duration: 0.65, delay: i * 0.06, ease }}
+                    className="glass relative p-8"
+                  >
+                    <span
+                      className="absolute inset-y-0 left-0 w-[3px]"
+                      style={{ background: c.tone }}
+                      aria-hidden
+                    />
+                    <span className="figure text-[0.7rem] tracking-[0.22em]" style={{ color: c.tone }}>
+                      {c.n}
+                    </span>
+                    <h3 className="mt-3 font-display text-xl leading-snug text-foreground">{c.t}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{c.d}</p>
+                  </motion.article>
+                ))}
+              </div>
+            </DepthReveal>
           </div>
         </section>
+
 
         {/* ------------------------------------------------------ The pillars */}
         <section className="relative overflow-hidden">
