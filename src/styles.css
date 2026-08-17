@@ -135,14 +135,14 @@
   --cyan-glow: oklch(0.792 0.118 226);
   --lime-glow: oklch(0.858 0.152 132);
 
-  /* Pillar identity colours — colour as information */
-  --pillar-financial: oklch(0.585 0.115 196);
-  --pillar-risk: oklch(0.638 0.178 40);
-  --pillar-market: oklch(0.712 0.118 226);
-  --pillar-operational: oklch(0.752 0.158 78);
-  --pillar-strategic: oklch(0.545 0.168 330);
-  --pillar-organizational: oklch(0.632 0.145 148);
-  --pillar-technology: oklch(0.565 0.152 288);
+  /* Pillar identity colours — colour as information, AA on light grounds */
+  --pillar-financial: oklch(0.508 0.108 208);
+  --pillar-risk: oklch(0.552 0.185 38);
+  --pillar-market: oklch(0.532 0.112 234);
+  --pillar-operational: oklch(0.578 0.132 76);
+  --pillar-strategic: oklch(0.492 0.185 330);
+  --pillar-organizational: oklch(0.538 0.132 150);
+  --pillar-technology: oklch(0.512 0.158 290);
 
   /* Surfaces and depth */
   --paper: oklch(0.988 0.009 90);
