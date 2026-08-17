@@ -26,7 +26,7 @@ const tierLabel: Record<Tier, string> = {
 
 const TIER_LADDER: Tier[] = ["critical", "concern", "acceptable", "healthy"];
 
-type PanelKey = "definition" | "formula" | "sourcing" | "benchmarks";
+type PanelKey = "formula" | "sourcing" | "benchmarks";
 
 export function MetricCard({
   metric,
@@ -330,10 +330,10 @@ function Chip({
       onClick={onClick}
       aria-expanded={active}
       className={cn(
-        "border px-3.5 py-1.5 text-[0.62rem] uppercase tracking-[0.18em] transition-colors",
+        "border px-3.5 py-1.5 text-[0.62rem] uppercase tracking-[0.18em] transition-all",
         active
-          ? "border-primary bg-primary text-primary-foreground"
-          : "border-border text-muted-foreground hover:border-primary/60 hover:text-foreground",
+          ? "border-accent bg-accent text-accent-foreground copper-underline"
+          : "border-border text-muted-foreground hover:border-accent/70 hover:text-foreground",
       )}
     >
       {children}
