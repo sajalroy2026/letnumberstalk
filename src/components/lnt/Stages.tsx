@@ -13,10 +13,12 @@ import {
   PillarSpectrum,
   PillarWeightRing,
   ScoreDial,
-  SectorGlyph,
+  SectorPlate,
   ValueChain,
+  pillarColor,
   stageForPillar,
 } from "./Figures";
+
 import type { MetricResult, PillarAssessment, PillarId, Tier } from "@/lib/assessment/types";
 import { cn } from "@/lib/utils";
 
@@ -53,28 +55,21 @@ export function SectorStage() {
             transition={{ duration: 0.55, delay: i * 0.06, ease }}
             aria-pressed={sector === s.id}
             className={cn(
-              "tilt-card group relative overflow-hidden border bg-card p-6 text-left shadow-[var(--shadow-plate)]",
+              "tilt-card group relative overflow-hidden border bg-card text-left shadow-[var(--shadow-plate)]",
               sector === s.id ? "border-accent" : "border-border hover:border-accent/60",
             )}
           >
-            <span
-              className="absolute inset-x-0 top-0 h-[3px]"
-              style={{
-                background:
-                  sector === s.id ? "var(--gradient-rust)" : "var(--gradient-ink)",
-              }}
-              aria-hidden
-            />
-            <span className="mb-4 block text-accent">
-              <SectorGlyph id={s.id} />
+            <SectorPlate id={s.id} active={sector === s.id} />
+            <span className="block border-t border-border p-6">
+              <span className="block font-display text-lg text-foreground">{s.name}</span>
+              <span className="mt-2 block text-sm leading-relaxed text-muted-foreground">
+                {s.description}
+              </span>
+              <span className="mt-5 block text-xs uppercase tracking-[0.2em] text-accent opacity-0 transition-opacity group-hover:opacity-100">
+                Calibrate to this profile →
+              </span>
             </span>
-            <span className="block font-display text-lg text-foreground">{s.name}</span>
-            <span className="mt-2 block text-sm leading-relaxed text-muted-foreground">
-              {s.description}
-            </span>
-            <span className="mt-5 block text-xs uppercase tracking-[0.2em] text-primary opacity-0 transition-opacity group-hover:opacity-100">
-              Calibrate to this profile →
-            </span>
+
           </motion.button>
         ))}
       </div>
@@ -186,8 +181,10 @@ export function PillarStage() {
   const assessment = assessments[activeIndex]!;
   const tier = COVERAGE_TIERS[pillarId]!;
   const topRef = useRef<HTMLDivElement>(null);
+  const accent = pillarColor(pillarId);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
     topRef.current?.scrollIntoView({ block: "start" });
   }, [activeIndex]);
 
@@ -203,6 +200,14 @@ export function PillarStage() {
         weight={meta.weight}
         note={`${PILLAR_NOTE[pillarId]} Enter what is known — every blank metric is left out of the calculation entirely rather than counted as zero.`}
       />
+      <PillarIdentityRail
+        name={meta.name}
+        weight={meta.weight}
+        accent={accent}
+        entered={assessment.entered}
+        total={metrics.length}
+        score={assessment.meetsCriticalMinimum ? assessment.score : null}
+      />
       <motion.div
         key={pillarId}
         initial={{ opacity: 0, y: 36 }}
@@ -210,6 +215,8 @@ export function PillarStage() {
         transition={{ duration: 0.6, ease }}
         className="mx-auto max-w-5xl px-5 pb-24 pt-10 sm:px-8"
       >
+
+
 
         <div className="border border-border bg-card p-5 shadow-[var(--shadow-plate)]">
           <div className="flex flex-wrap items-center justify-between gap-3">
@@ -281,10 +288,55 @@ export function PillarStage() {
   );
 }
 
+/**
+ * Pinned identity of the pillar under examination — stays at the top of the
+ * viewport for the whole of the metric run so orientation is never lost.
+ */
+function PillarIdentityRail({
+  name,
+  weight,
+  accent,
+  entered,
+  total,
+  score,
+}: {
+  name: string;
+  weight: number;
+  accent: string;
+  entered: number;
+  total: number;
+  score: number | null;
+}) {
+  return (
+    <div className="no-print sticky-under-rail border-b border-border/70 bg-background/92 backdrop-blur-md">
+      <div className="mx-auto flex max-w-5xl items-center gap-4 px-5 py-2.5 sm:px-8">
+        <span className="h-8 w-1.5 shrink-0" style={{ background: accent }} aria-hidden />
+        <div className="min-w-0 flex-1">
+          <p className="truncate font-display text-sm text-foreground sm:text-base">{name}</p>
+          <p className="figure text-[0.62rem] uppercase tracking-[0.18em] text-muted-foreground">
+            {Math.round(weight * 100)}% of composite · {entered}/{total} entered
+          </p>
+        </div>
+        <span className="figure text-2xl" style={{ color: score === null ? "var(--muted-foreground)" : accent }}>
+          {score === null ? "—" : score}
+        </span>
+      </div>
+      <div className="h-[3px] w-full bg-secondary" aria-hidden>
+        <motion.div
+          className="h-full"
+          style={{ background: accent }}
+          animate={{ width: `${total ? Math.round((entered / total) * 100) : 0}%` }}
+          transition={{ duration: 0.5, ease }}
+        />
+      </div>
+    </div>
+  );
+}
+
 function ProgressSpine() {
   const { selectedPillars, activeIndex, goToPillar, assessments } = useSession();
   return (
-    <div className="no-print sticky top-[57px] z-30 border-b border-border/60 bg-background/85 backdrop-blur-md">
+    <div className="no-print sticky-under-header border-b border-border/60 bg-background/90 backdrop-blur-md">
       <div className="mx-auto flex max-w-5xl gap-1 overflow-x-auto px-5 py-3 sm:px-8">
         {selectedPillars.map((p, i) => {
           const meta = PILLAR_META.find((m) => m.id === p)!;
@@ -294,6 +346,7 @@ function ProgressSpine() {
               key={p}
               type="button"
               onClick={() => goToPillar(i)}
+              style={i === activeIndex ? { borderColor: pillarColor(p) } : undefined}
               className={cn(
                 "shrink-0 border-b-2 px-3 py-1.5 text-[0.7rem] uppercase tracking-[0.14em] transition-colors",
                 i === activeIndex
@@ -303,6 +356,7 @@ function ProgressSpine() {
                     : "border-transparent text-muted-foreground/70 hover:text-foreground",
               )}
             >
+
               {meta.name}
             </button>
           );
@@ -401,7 +455,7 @@ export function ReportStage() {
   return (
     <div>
       {/* ------------------------------------------------- Ink cover plate */}
-      <section className="ink grid-field print-plain relative overflow-hidden">
+      <section className="ink warm-wash halftone print-plain relative overflow-hidden">
         <div className="relative mx-auto max-w-5xl px-5 py-16 sm:px-8">
           <motion.header
             initial={{ opacity: 0, y: 28 }}
@@ -622,7 +676,14 @@ function StageShell({
 
 export function AssessmentFlow() {
   const { stage } = useSession();
+
+  // Every stage transition returns the reader to the top of the new chapter.
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [stage]);
+
   return (
+
     <AnimatePresence mode="wait">
       {stage === "sector" ? <SectorStage key="sector" /> : null}
       {stage === "pillars" ? <PillarSelectStage key="pillars" /> : null}

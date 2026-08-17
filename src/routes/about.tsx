@@ -16,7 +16,7 @@ export const Route = createFileRoute("/about")({
       {
         property: "og:description",
         content:
-          "A 7-pillar, 54-metric business diagnostic built on AI-augmented research synthesis, designed by Mr Sajal Roy.",
+          "A 7-pillar, 54-metric business diagnostic built on AI-augmented research synthesis, conceptualized by Mr Sajal Roy.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -28,10 +28,10 @@ export const Route = createFileRoute("/about")({
 function AboutPage() {
   return (
     <div className="min-h-screen bg-background">
-      <div className="ink">
+      <div className="ink no-print sticky top-0 z-40">
         <SiteHeader />
       </div>
-      <section className="ink grid-field relative overflow-hidden">
+      <section className="ink warm-wash halftone relative overflow-hidden">
         <div className="relative mx-auto max-w-5xl px-5 py-16 sm:px-8">
           <p className="figure text-[0.66rem] uppercase tracking-[0.28em] text-accent">
             The instrument
