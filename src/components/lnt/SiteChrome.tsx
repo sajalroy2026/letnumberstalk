@@ -24,7 +24,7 @@ export function SiteHeader() {
           </Link>
           <Link
             to="/assess"
-            className="rule-ink rounded-full px-5 py-2 text-primary-foreground transition-opacity hover:opacity-90"
+            className="rule-copper px-5 py-2 text-primary-foreground transition-opacity hover:opacity-90"
           >
             Commence
           </Link>
