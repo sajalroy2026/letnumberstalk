@@ -30,9 +30,9 @@ export function SectorStage() {
   const { sector, setSector } = useSession();
   return (
     <StageShell
-      eyebrow="Step one"
+      eyebrow="Step 1"
       title="Which profile does the business run on?"
-      lede="Every benchmark in this assessment is sector-specific. The profile selected here recalibrates all fifty-four comparisons for the session — there is no general fallback."
+      lede="Every benchmark in this assessment is sector-specific. The profile selected here recalibrates all 54 comparisons for the session — there is no general fallback."
     >
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {SECTORS.map((s, i) => (
@@ -72,9 +72,9 @@ export function PillarSelectStage() {
 
   return (
     <StageShell
-      eyebrow={`Step two · calibrated to ${sectorName}`}
+      eyebrow={`Step 2 · calibrated to ${sectorName}`}
       title="Which pillars are under examination?"
-      lede="One pillar returns one score. All seven return the Integrated Business Health Score — a weighted composite across the full instrument."
+      lede="One pillar returns one score. All 7 return the Integrated Business Health Score — a weighted composite across the full instrument."
     >
       <div className="grid gap-3 md:grid-cols-2">
         {PILLAR_META.map((p, i) => {
@@ -125,7 +125,7 @@ export function PillarSelectStage() {
           onClick={selectAllPillars}
           className="rounded-full border border-border px-5 py-2 text-xs uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:border-primary/60 hover:text-foreground"
         >
-          Select all seven
+          Select all 7
         </button>
         <button
           type="button"
@@ -139,7 +139,7 @@ export function PillarSelectStage() {
           {selectedPillars.length === 0
             ? "Select at least one pillar."
             : all
-              ? "All seven selected — the Integrated Business Health Score will be computed."
+              ? "All 7 selected — the Integrated Business Health Score will be computed."
               : `${selectedPillars.length} selected — independent pillar scores only, no blended figure.`}
         </span>
       </div>
@@ -442,7 +442,7 @@ export function ReportStage() {
         >
           <h2 className="text-xs uppercase tracking-[0.28em] text-critical">Caution</h2>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            Two indicators carry terminal risk for a business. The readings below crossed their
+            2 indicators carry terminal risk for a business. The readings below crossed their
             critical thresholds. This is supplementary context to the pillar breakdown above.
           </p>
           <div className="mt-6 space-y-6">

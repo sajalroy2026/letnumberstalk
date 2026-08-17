@@ -81,7 +81,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "A seven-pillar, 54-metric business health diagnostic for founders and boardroom leaders.",
+          "A 7-pillar, 54-metric business health diagnostic for founders and boardroom leaders.",
       },
       { name: "author", content: "Sajal Roy" },
       { property: "og:type", content: "website" },

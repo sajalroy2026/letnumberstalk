@@ -11,13 +11,13 @@ export const Route = createFileRoute("/assess")({
       {
         name: "description",
         content:
-          "Assess seven pillars across 54 sector-benchmarked metrics. Scores, readings and Areas to Look Into, computed entirely in your browser.",
+          "Assess 7 pillars across 54 sector-benchmarked metrics. Scores, readings and Areas to Look Into, computed entirely in your browser.",
       },
       { property: "og:title", content: "Run the LetNumbersTalk Business Diagnostic" },
       {
         property: "og:description",
         content:
-          "Seven weighted pillars, 54 metrics, five industry profiles. No account, no data leaves your browser.",
+          "7 weighted pillars, 54 metrics, 5 industry profiles. No account, no data leaves your browser.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

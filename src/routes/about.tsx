@@ -10,13 +10,13 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "What the LetNumbersTalk diagnostic delivers, the seven-pillar architecture behind it, and the consulting practice of Mr Sajal Roy, Architect of Enterprise Systems.",
+          "What the LetNumbersTalk diagnostic delivers, the 7-pillar architecture behind it, and the consulting practice of Mr Sajal Roy, Architect of Enterprise Systems.",
       },
       { property: "og:title", content: "About LetNumbersTalk" },
       {
         property: "og:description",
         content:
-          "A seven-pillar, 54-metric business diagnostic built on AI-augmented research synthesis, designed by Mr Sajal Roy.",
+          "A 7-pillar, 54-metric business diagnostic built on AI-augmented research synthesis, designed by Mr Sajal Roy.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
