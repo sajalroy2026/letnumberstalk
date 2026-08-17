@@ -480,7 +480,7 @@ export function ReportStage() {
             )}
             <div className="mt-4 space-y-4">
               {a.metricResults.map((r) => (
-                <MetricResultRow key={r.metricId} name={r.name} tier={r.tier} points={r.points} max={r.maxPoints} band={r.bandLabel} />
+                <MetricResultRow key={r.metricId} result={r} />
               ))}
             </div>
             <button
