@@ -105,14 +105,14 @@
   --secondary-foreground: oklch(0.208 0.058 266);
   --muted: oklch(0.928 0.014 248);
   --muted-foreground: oklch(0.412 0.032 258);
-  --accent: oklch(0.578 0.108 82);
+  --accent: oklch(0.352 0.074 254);
   --accent-foreground: oklch(0.985 0.004 250);
-  --accent-glow: oklch(0.792 0.116 88);
+  --accent-glow: oklch(0.742 0.062 250);
   --destructive: oklch(0.412 0.128 22);
   --destructive-foreground: oklch(0.985 0.004 250);
   --border: oklch(0.208 0.058 266 / 16%);
   --input: oklch(0.208 0.058 266 / 26%);
-  --ring: oklch(0.578 0.108 82);
+  --ring: oklch(0.352 0.074 254);
 
   /* Diagnostic tiers — mapped onto the five-colour family, AA on white and navy */
   --healthy: oklch(0.452 0.098 158);
@@ -174,7 +174,7 @@
   --elevated: oklch(1 0 0);
   --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.996 0.002 250) 0%, oklch(0.932 0.016 248) 74%);
   --gradient-ink: linear-gradient(135deg, oklch(0.302 0.072 262), oklch(0.192 0.056 268));
-  --gradient-rust: linear-gradient(135deg, var(--accent-glow), var(--accent));
+  --gradient-rust: linear-gradient(135deg, var(--accent), color-mix(in oklab, var(--accent) 68%, var(--foreground)));
   --gradient-warm: linear-gradient(120deg, oklch(0.792 0.116 88), oklch(0.548 0.138 46) 58%, oklch(0.412 0.128 22));
   --gradient-aurora: linear-gradient(135deg, oklch(0.302 0.072 262) 0%, oklch(0.452 0.086 248) 46%, oklch(0.578 0.108 82) 100%);
   --gradient-prism: conic-gradient(from 220deg at 50% 50%, oklch(0.352 0.074 254), oklch(0.578 0.108 82), oklch(0.548 0.138 46), oklch(0.452 0.098 158), oklch(0.412 0.128 22), oklch(0.352 0.074 254));
@@ -343,7 +343,7 @@
 .tone-coral,
 .tone-rust {
   --ring: var(--accent);
-  --gradient-rust: linear-gradient(135deg, var(--accent-glow), var(--accent));
+  --gradient-rust: linear-gradient(135deg, var(--accent), color-mix(in oklab, var(--accent) 68%, var(--foreground)));
   --gradient-warm: linear-gradient(120deg, var(--accent-glow), var(--accent) 62%, color-mix(in oklab, var(--accent) 55%, var(--foreground)));
 }
 
@@ -359,6 +359,7 @@
 .tone-amber {
   --accent: var(--gold);
   --accent-glow: var(--gold-glow);
+  --accent-foreground: oklch(0.192 0.056 268);
 }
 .tone-plum {
   --accent: var(--oxblood-core);
