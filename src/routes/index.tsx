@@ -6,8 +6,6 @@ import { SiteFooter, SiteHeader } from "@/components/lnt/SiteChrome";
 import { METRIC_CONTENT, PILLAR_META } from "@/lib/assessment/spec.generated";
 import { SECTORS } from "@/lib/assessment/scoring";
 import {
-  BarSwarm,
-  DataLattice,
   DepthReveal,
   DisplayNumeral,
   FlowGraph,
