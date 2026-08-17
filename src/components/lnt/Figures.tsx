@@ -1359,14 +1359,21 @@ const ARMATURE_TONES = [
  * arcs — one per pillar — carrying metric nodes, set against a depth-blurred
  * benchmark corridor field.
  */
-export function PillarArmature({ className }: { className?: string }) {
+export function PillarArmature({
+  className,
+  fit = "slice",
+}: {
+  className?: string;
+  fit?: "slice" | "meet";
+}) {
   return (
     <svg
       className={cn("h-full w-full", className)}
       viewBox="0 0 1600 900"
-      preserveAspectRatio="xMidYMid slice"
+      preserveAspectRatio={`xMidYMid ${fit}`}
       aria-hidden
     >
+
       <defs>
         <radialGradient id="pa-core" cx="50%" cy="50%" r="50%">
           <stop offset="0%" stopColor="var(--accent-glow)" stopOpacity="0.55" />
