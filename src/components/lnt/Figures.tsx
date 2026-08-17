@@ -1369,10 +1369,11 @@ export function PillarArmature({
   return (
     <svg
       className={cn("h-full w-full", className)}
-      viewBox="0 0 1600 900"
+      viewBox={fit === "meet" ? "360 10 880 840" : "0 0 1600 900"}
       preserveAspectRatio={`xMidYMid ${fit}`}
       aria-hidden
     >
+
 
       <defs>
         <radialGradient id="pa-core" cx="50%" cy="50%" r="50%">
