@@ -173,14 +173,6 @@ function Home() {
               </motion.dl>
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, delay: 0.25, ease }}
-              className="mx-auto w-full max-w-[26rem]"
-            >
-              <HeroComposition />
-            </motion.div>
           </div>
         </section>
 
