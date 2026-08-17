@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
+import { useState } from "react";
 
 import { SiteFooter, SiteHeader } from "@/components/lnt/SiteChrome";
 import { METRIC_CONTENT, PILLAR_META } from "@/lib/assessment/spec.generated";
@@ -17,6 +18,7 @@ import {
   SectorPlate,
   SignalField,
   pillarColor,
+  useCountUp,
 } from "@/components/lnt/Figures";
 
 
