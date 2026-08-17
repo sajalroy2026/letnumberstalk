@@ -162,8 +162,6 @@ export function MetricCard({
         </div>
 
         <AnimatePresence initial={false} mode="wait">
-
-
           {openPanel === "formula" ? (
             <Panel key="formula" label="Formula">
               <p className="figure text-[0.95rem] leading-relaxed text-foreground">
@@ -174,8 +172,15 @@ export function MetricCard({
                   Reading = {formatValue(result.value, scoring.unit)}
                 </p>
               ) : null}
+              <p className="mt-5 text-[0.62rem] uppercase tracking-[0.22em] text-muted-foreground">
+                Scoring band
+              </p>
+              <p className="mt-1.5 measure text-sm leading-relaxed text-muted-foreground">
+                {metric.bandText}
+              </p>
             </Panel>
           ) : null}
+
 
           {openPanel === "sourcing" ? (
             <Panel key="sourcing" label="Where to source">
