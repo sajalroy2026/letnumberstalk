@@ -786,10 +786,10 @@ const SCORING_LIST: MetricScoring[] = [
     unit: "ordinal",
     placeholder: "",
     cards: [
-      card(4, "4 — Highly Automated", "Under 20 percent of core data flows require manual entry or re-keying."),
-      card(3, "3 — Partially Automated", "20 to 40 percent of core data flows are manual."),
-      card(2, "2 — Mostly Manual", "40 to 60 percent of core data flows are manual."),
-      card(1, "1 — Fully Manual", "Over 60 percent of core data flows are manual."),
+      card(4, "4 — Highly Automated", "Under 20% of core data flows require manual entry or re-keying."),
+      card(3, "3 — Partially Automated", "20 to 40% of core data flows are manual."),
+      card(2, "2 — Mostly Manual", "40 to 60% of core data flows are manual."),
+      card(1, "1 — Fully Manual", "Over 60% of core data flows are manual."),
     ],
     pointBands: [
       B(4, null, 30, "healthy", "Highly automated"),
