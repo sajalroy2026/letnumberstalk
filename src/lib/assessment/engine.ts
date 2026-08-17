@@ -152,7 +152,7 @@ export function evaluateCaution(inputs: BaseInputSet): CautionItem[] {
     out.push({
       metricId: src.id,
       name: "Customer Concentration",
-      headline: `Top-three customer concentration is recorded at ${formatNumber(conc.value)} percent, above the 60% critical threshold.`,
+      headline: `Top-three customer concentration is recorded at ${formatNumber(conc.value)}%, above the 60% critical threshold.`,
       areas: src.areas,
     });
   }
