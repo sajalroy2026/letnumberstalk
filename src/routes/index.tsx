@@ -81,17 +81,25 @@ function Home() {
       </div>
 
       <main>
-        {/* ---------------------------------------------------- Espresso hero */}
-        <section className="ink tone-cyan aurora-wash scanlines relative overflow-hidden">
+        {/* ------------------------------------------------- Full-bleed hero */}
+        <section className="ink tone-cyan aurora-wash relative min-h-[92vh] overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.8, ease }}
+            className="pointer-events-none absolute inset-0 -z-10"
+          >
+            <HorizonField />
+          </motion.div>
           <ParallaxLayer
             depth={0.25}
-            className="pointer-events-none absolute inset-x-0 top-0 -z-10 opacity-40"
+            className="pointer-events-none absolute inset-x-0 top-0 -z-10 opacity-25"
           >
             <SignalField />
           </ParallaxLayer>
 
-          <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-5 pb-24 pt-20 sm:px-8 sm:pt-28 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-            <div className="scrim">
+          <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-5 pb-24 pt-20 sm:px-8 sm:pt-28">
+            <div className="scrim max-w-3xl">
               <motion.p
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
