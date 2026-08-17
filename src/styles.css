@@ -477,6 +477,39 @@
   background-image: var(--gradient-rust);
 }
 
+/* Two-accent gradient bar / fill — the blended system in one stroke. */
+@utility rule-duo {
+  background-image: var(--gradient-duo, var(--gradient-rust));
+}
+
+/* Solid, always-legible accent control. */
+@utility btn-accent {
+  background-image: var(--gradient-duo, var(--gradient-rust));
+  color: var(--accent-foreground);
+  transition:
+    filter 320ms ease,
+    transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 320ms ease;
+  &:hover {
+    filter: brightness(1.08);
+    box-shadow: var(--shadow-lift);
+  }
+}
+
+/* Outlined accent control for secondary navigation. */
+@utility btn-ghost-accent {
+  border: 1px solid color-mix(in oklab, var(--accent) 62%, transparent);
+  color: var(--foreground);
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease;
+  &:hover {
+    background-color: color-mix(in oklab, var(--accent) 16%, transparent);
+    border-color: var(--accent);
+  }
+}
+
+
 @utility rule-ink {
   background-image: var(--gradient-ink);
 }
