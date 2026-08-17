@@ -1571,3 +1571,168 @@ export function ScoreColumns({ className }: { className?: string }) {
     </svg>
   );
 }
+
+/* ------------------------------------------------- Hero: seven pillar cards */
+
+/**
+ * Hero composition. Seven cards — one per pillar — each carrying the pillar
+ * name and its own bespoke mark, arranged as a single staggered formation on a
+ * shared perspective plane. Cards enter with a depth push, marks draw in, and
+ * the whole group tilts gently toward the pointer.
+ */
+const PILLAR_MARKS: Record<PillarId, React.ReactNode> = {
+  financial: (
+    <>
+      <path d="M8 40 L20 40 L20 20 L8 20 Z" />
+      <path d="M24 40 L36 40 L36 12 L24 12 Z" />
+      <path d="M40 40 L52 40 L52 26 L40 26 Z" />
+      <path d="M4 46 L56 46" />
+      <path d="M8 14 L20 6 L32 12" />
+    </>
+  ),
+  risk: (
+    <>
+      <path d="M30 4 L52 13 L52 28 C52 40 42 47 30 52 C18 47 8 40 8 28 L8 13 Z" />
+      <path d="M30 16 L30 34" />
+      <path d="M20 25 L40 25" />
+    </>
+  ),
+  market: (
+    <>
+      <path d="M30 4 L54 30 L30 56 L6 30 Z" />
+      <path d="M30 4 L30 56" />
+      <path d="M18 17 L42 43" />
+      <path d="M6 30 L54 30" />
+    </>
+  ),
+  operational: (
+    <>
+      <path d="M30 8 L44 16 L44 32 L30 40 L16 32 L16 16 Z" />
+      <path d="M30 20 L38 25 L38 34" />
+      <path d="M8 48 L52 48" />
+      <path d="M18 44 L18 52" />
+      <path d="M42 44 L42 52" />
+    </>
+  ),
+  strategic: (
+    <>
+      <path d="M8 46 L30 8 L52 46" />
+      <path d="M18 46 L30 26 L42 46" />
+      <path d="M30 8 L30 2" />
+      <path d="M4 52 L56 52" />
+    </>
+  ),
+  organizational: (
+    <>
+      <path d="M30 6 L40 12 L40 24 L30 30 L20 24 L20 12 Z" />
+      <path d="M12 30 L22 36 L22 48 L12 54 L2 48 L2 36 Z" />
+      <path d="M48 30 L58 36 L58 48 L48 54 L38 48 L38 36 Z" />
+      <path d="M25 28 L17 33" />
+      <path d="M35 28 L43 33" />
+    </>
+  ),
+  technology: (
+    <>
+      <path d="M14 14 L46 14 L46 46 L14 46 Z" />
+      <path d="M24 24 L36 24 L36 36 L24 36 Z" />
+      <path d="M30 14 L30 4" />
+      <path d="M30 46 L30 56" />
+      <path d="M14 30 L4 30" />
+      <path d="M46 30 L56 30" />
+    </>
+  ),
+};
+
+/** Depth offsets so the set reads as one object rather than a flat grid. */
+const CARD_LAYOUT: Record<PillarId, { z: number; rot: number; y: number }> = {
+  financial: { z: 46, rot: -5, y: -14 },
+  risk: { z: 14, rot: 3, y: 8 },
+  market: { z: 38, rot: -2, y: -6 },
+  operational: { z: 6, rot: 5, y: 14 },
+  strategic: { z: 30, rot: -4, y: 0 },
+  organizational: { z: 18, rot: 2, y: 10 },
+  technology: { z: 42, rot: -3, y: -8 },
+};
+
+export function PillarEmblems({ className }: { className?: string }) {
+  const rotX = useMotionValue(0);
+  const rotY = useMotionValue(0);
+  const sx = useSpring(rotX, { stiffness: 70, damping: 18 });
+  const sy = useSpring(rotY, { stiffness: 70, damping: 18 });
+
+  return (
+    <div
+      className={cn("pointer-events-auto relative w-full", className)}
+      style={{ perspective: "1400px" }}
+      onPointerMove={(e) => {
+        const b = e.currentTarget.getBoundingClientRect();
+        rotY.set(((e.clientX - b.left) / b.width - 0.5) * 12);
+        rotX.set(-((e.clientY - b.top) / b.height - 0.5) * 10);
+      }}
+      onPointerLeave={() => {
+        rotX.set(0);
+        rotY.set(0);
+      }}
+    >
+      <motion.div
+        style={{ rotateX: sx, rotateY: sy, transformStyle: "preserve-3d" }}
+        className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4"
+      >
+        {PILLAR_META.map((p, i) => {
+          const l = CARD_LAYOUT[p.id];
+          const tone = pillarColor(p.id);
+          return (
+            <motion.figure
+              key={p.id}
+              initial={{ opacity: 0, z: -220, y: 40, rotateX: 16 }}
+              animate={{ opacity: 1, z: l.z, y: l.y, rotateX: 0 }}
+              transition={{ duration: 1, delay: 0.12 * i, ease }}
+              whileHover={{ z: l.z + 60 }}
+              style={{
+                transformStyle: "preserve-3d",
+                rotate: `${l.rot}deg`,
+                borderColor: `color-mix(in oklab, ${tone} 45%, transparent)`,
+                background: `linear-gradient(155deg, color-mix(in oklab, ${tone} 14%, var(--card)), var(--card))`,
+                boxShadow: `0 18px 40px -26px color-mix(in oklab, ${tone} 80%, transparent), inset 0 1px 0 0 color-mix(in oklab, ${tone} 24%, transparent)`,
+              }}
+              className={cn(
+                "relative overflow-hidden border p-3 sm:p-4",
+                i === 6 && "col-span-2 sm:col-span-1",
+              )}
+            >
+              <span
+                className="absolute inset-x-0 top-0 h-[3px]"
+                style={{ backgroundImage: `linear-gradient(90deg, ${tone}, transparent)` }}
+                aria-hidden
+              />
+              <figcaption
+                className="figure text-[0.55rem] uppercase leading-tight tracking-[0.2em]"
+                style={{ color: tone }}
+              >
+                {p.name}
+              </figcaption>
+              <svg
+                viewBox="0 0 60 60"
+                className="mt-3 h-14 w-full sm:h-16"
+                fill="none"
+                stroke={tone}
+                strokeWidth="2"
+                strokeLinecap="square"
+                strokeLinejoin="miter"
+                aria-hidden
+              >
+                <motion.g
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={{ pathLength: 1, opacity: 1 }}
+                  transition={{ duration: 1.2, delay: 0.2 + 0.12 * i, ease }}
+                >
+                  {PILLAR_MARKS[p.id]}
+                </motion.g>
+              </svg>
+            </motion.figure>
+          );
+        })}
+      </motion.div>
+    </div>
+  );
+}
