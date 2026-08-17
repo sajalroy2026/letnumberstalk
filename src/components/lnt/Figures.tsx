@@ -1731,26 +1731,10 @@ export function PillarEmblems({ className }: { className?: string }) {
           rotateX: sx,
           rotateY: sy,
           transformStyle: "preserve-3d",
-          backgroundColor: "oklch(0.196 0.056 268)",
-          boxShadow:
-            "0 40px 90px -46px oklch(0.1 0.03 268 / 0.95), inset 0 1px 0 0 oklch(0.98 0 0 / 0.14)",
-          border: "1px solid oklch(0.98 0 0 / 0.16)",
         }}
-        className="relative w-full overflow-hidden"
+        className="relative w-full overflow-visible"
       >
         <svg viewBox="0 0 760 600" className="block h-auto w-full" role="img" aria-label="Seven weighted pillars of the diagnostic">
-          <defs>
-            <pattern id="dial-grid" width="30" height="30" patternUnits="userSpaceOnUse">
-              <path d="M30 0 L0 0 0 30" fill="none" stroke="oklch(0.98 0 0 / 0.06)" strokeWidth="1" />
-            </pattern>
-            <radialGradient id="dial-depth" cx="50%" cy="34%" r="72%">
-              <stop offset="0%" stopColor="oklch(0.33 0.074 262)" />
-              <stop offset="100%" stopColor="oklch(0.176 0.05 268)" />
-            </radialGradient>
-          </defs>
-
-          <rect width="760" height="600" fill="url(#dial-depth)" />
-          <rect width="760" height="600" fill="url(#dial-grid)" />
 
           {/* instrument rings */}
           <circle cx={C} cy={CY} r={232} fill="none" stroke="oklch(0.98 0 0 / 0.1)" strokeWidth="1" />
@@ -1840,7 +1824,7 @@ export function PillarEmblems({ className }: { className?: string }) {
           })}
 
           {/* centre mark */}
-          <circle cx={C} cy={CY} r={104} fill="oklch(0.166 0.048 268)" stroke="oklch(0.98 0 0 / 0.16)" />
+          <circle cx={C} cy={CY} r={104} fill="none" stroke="oklch(0.98 0 0 / 0.18)" />
           <motion.g
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
