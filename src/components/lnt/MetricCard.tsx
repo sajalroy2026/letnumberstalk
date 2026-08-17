@@ -148,9 +148,6 @@ export function MetricCard({
         )}
 
         <div className="mt-6 flex flex-wrap gap-2 no-print">
-          <Chip active={openPanel === "definition"} onClick={() => toggle("definition")}>
-            Definition
-          </Chip>
           <Chip active={openPanel === "formula"} onClick={() => toggle("formula")}>
             Formula
           </Chip>
@@ -165,19 +162,7 @@ export function MetricCard({
         </div>
 
         <AnimatePresence initial={false} mode="wait">
-          {openPanel === "definition" ? (
-            <Panel key="definition" label="Definition">
-              <p className="measure text-sm leading-relaxed text-foreground/85">
-                {metric.definition}
-              </p>
-              <p className="mt-4 text-[0.62rem] uppercase tracking-[0.22em] text-muted-foreground">
-                Scoring band
-              </p>
-              <p className="mt-1.5 measure text-sm leading-relaxed text-muted-foreground">
-                {metric.bandText}
-              </p>
-            </Panel>
-          ) : null}
+
 
           {openPanel === "formula" ? (
             <Panel key="formula" label="Formula">
