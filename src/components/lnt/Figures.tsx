@@ -1824,7 +1824,7 @@ export function PillarEmblems({ className }: { className?: string }) {
           })}
 
           {/* centre mark */}
-          <circle cx={C} cy={CY} r={104} fill="oklch(0.166 0.048 268)" stroke="oklch(0.98 0 0 / 0.16)" />
+          <circle cx={C} cy={CY} r={104} fill="none" stroke="oklch(0.98 0 0 / 0.18)" />
           <motion.g
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}

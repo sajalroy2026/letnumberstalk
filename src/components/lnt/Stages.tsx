@@ -310,7 +310,7 @@ function PillarIdentityRail({
   score: number | null;
 }) {
   return (
-    <div className="no-print sticky-under-rail border-b border-border/70 bg-background/92 backdrop-blur-md">
+    <div className="no-print relative border-b border-border/70 bg-background/92">
       <div className="mx-auto flex max-w-5xl items-center gap-4 px-5 py-2.5 sm:px-8">
         <span className="h-8 w-1.5 shrink-0" style={{ background: accent }} aria-hidden />
         <div className="min-w-0 flex-1">
@@ -338,7 +338,7 @@ function PillarIdentityRail({
 function ProgressSpine() {
   const { selectedPillars, activeIndex, goToPillar, assessments } = useSession();
   return (
-    <div className="no-print sticky-under-header border-b border-border/60 bg-background/90 backdrop-blur-md">
+    <div className="no-print relative border-b border-border/60 bg-background/90">
       <div className="mx-auto flex max-w-5xl gap-1 overflow-x-auto px-5 py-3 sm:px-8">
         {selectedPillars.map((p, i) => {
           const meta = PILLAR_META.find((m) => m.id === p)!;
