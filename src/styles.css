@@ -590,25 +590,100 @@
 }
 
 
+/* Legibility scrim — keeps copy crisp when a figure sits behind it. */
+@utility scrim {
+  position: relative;
+  isolation: isolate;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -1.5rem;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(
+      70% 80% at 30% 50%,
+      color-mix(in oklab, var(--background) 88%, transparent),
+      transparent 78%
+    );
+  }
+}
 
+/* Ambient optical motion — low amplitude, always running behind content. */
+@keyframes lnt-drift {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(1.6%, -2.2%, 0) scale(1.03); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+@keyframes lnt-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes lnt-pulse-soft {
+  0%, 100% { opacity: 0.42; }
+  50% { opacity: 0.86; }
+}
+@keyframes lnt-sweep {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(220%); }
+}
 
+@utility ambient-drift {
+  animation: lnt-drift 22s ease-in-out infinite;
+}
+@utility ambient-drift-slow {
+  animation: lnt-drift 38s ease-in-out infinite;
+}
+@utility ambient-spin {
+  animation: lnt-spin 90s linear infinite;
+  transform-origin: 50% 50%;
+}
+@utility ambient-pulse {
+  animation: lnt-pulse-soft 6s ease-in-out infinite;
+}
 
+/* Optical light sweep across a panel — a single cinematic pass on entry. */
+@utility sheen {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      100deg,
+      transparent 30%,
+      color-mix(in oklab, var(--accent-glow) 30%, transparent) 50%,
+      transparent 70%
+    );
+    animation: lnt-sweep 5.5s cubic-bezier(0.16, 1, 0.3, 1) 0.6s infinite;
+  }
+}
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    font-size: 106.25%;
   }
   body {
     font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    letter-spacing: 0.002em;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
   h1, h2, h3, .font-display {
     font-family: var(--font-display);
+    letter-spacing: -0.015em;
+  }
+  p {
+    text-wrap: pretty;
   }
   ::selection {
     background: color-mix(in oklab, var(--accent) 24%, transparent);
   }
 }
+
 
 @media (prefers-reduced-motion: reduce) {
   *,
