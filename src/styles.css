@@ -87,18 +87,18 @@
   --radius: 0.125rem;
 
   /* Warm luminous system: ivory ground, indigo-espresso ink, bright accent family */
-  --background: oklch(0.972 0.017 88);
-  --foreground: oklch(0.245 0.026 285);
-  --card: oklch(0.988 0.009 90);
-  --card-foreground: oklch(0.245 0.026 285);
-  --popover: oklch(0.988 0.009 90);
-  --popover-foreground: oklch(0.245 0.026 285);
-  --primary: oklch(0.585 0.115 196);
-  --primary-foreground: oklch(0.985 0.01 90);
-  --secondary: oklch(0.918 0.031 84);
-  --secondary-foreground: oklch(0.245 0.026 285);
-  --muted: oklch(0.918 0.031 84);
-  --muted-foreground: oklch(0.475 0.032 285);
+  --background: oklch(0.978 0.015 88);
+  --foreground: oklch(0.192 0.028 285);
+  --card: oklch(0.992 0.008 90);
+  --card-foreground: oklch(0.192 0.028 285);
+  --popover: oklch(0.992 0.008 90);
+  --popover-foreground: oklch(0.192 0.028 285);
+  --primary: oklch(0.508 0.108 208);
+  --primary-foreground: oklch(0.988 0.008 90);
+  --secondary: oklch(0.922 0.029 84);
+  --secondary-foreground: oklch(0.192 0.028 285);
+  --muted: oklch(0.922 0.029 84);
+  --muted-foreground: oklch(0.398 0.028 285);
   --accent: oklch(0.638 0.178 40);
   --accent-foreground: oklch(0.985 0.01 90);
   --destructive: oklch(0.535 0.185 22);
