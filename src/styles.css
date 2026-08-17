@@ -201,6 +201,14 @@
   --border: oklch(0.938 0.02 88 / 20%);
   --input: oklch(0.938 0.02 88 / 32%);
   --ring: oklch(0.742 0.168 48);
+  --accent-glow: oklch(0.872 0.152 78);
+  --rust-glow: oklch(0.822 0.168 54);
+  --teal-glow: oklch(0.858 0.118 198);
+  --ochre-glow: oklch(0.892 0.148 88);
+  --amber-glow: oklch(0.888 0.152 76);
+  --plum-glow: oklch(0.792 0.168 332);
+  --cyan-glow: oklch(0.872 0.108 226);
+  --lime-glow: oklch(0.908 0.148 128);
   --healthy: oklch(0.788 0.128 192);
   --acceptable: oklch(0.858 0.152 86);
   --concern: oklch(0.742 0.168 48);
