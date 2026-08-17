@@ -106,7 +106,7 @@ function Home() {
                 transition={{ duration: 0.7, ease }}
                 className="figure text-[0.68rem] uppercase tracking-[0.32em] text-accent"
               >
-                01 — The Business Health Instrument
+                The Business Health Instrument · by Mr Sajal Roy
               </motion.p>
               <motion.h1
                 initial={{ opacity: 0, y: 30, filter: "blur(12px)" }}
