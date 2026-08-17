@@ -11,7 +11,9 @@ import {
   DepthReveal,
   DisplayNumeral,
   FlowGraph,
-  HorizonField,
+  BenchmarkTerrain,
+  PillarArmature,
+  ScoreColumns,
   OrbitField,
   ParallaxLayer,
   PrismStack,
@@ -85,7 +87,7 @@ function Home() {
             transition={{ duration: 1.8, ease }}
             className="pointer-events-none absolute inset-0 -z-10"
           >
-            <HorizonField />
+            <PillarArmature />
           </motion.div>
           <ParallaxLayer
             depth={0.25}
@@ -102,7 +104,7 @@ function Home() {
                 transition={{ duration: 0.7, ease }}
                 className="figure text-[0.68rem] uppercase tracking-[0.32em] text-accent"
               >
-                The Business Health Instrument · by Mr Sajal Roy
+                The Business Health Instrument
               </motion.p>
               <motion.h1
                 initial={{ opacity: 0, y: 30, filter: "blur(12px)" }}
@@ -239,7 +241,7 @@ function Home() {
             depth={0.45}
             className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 opacity-45"
           >
-            <DataLattice />
+            <BenchmarkTerrain />
           </ParallaxLayer>
 
           <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
@@ -332,7 +334,7 @@ function Home() {
                 transition={{ duration: 0.7, delay: 0.35, ease }}
                 className="glass flex flex-col justify-between p-6 text-amber"
               >
-                <BarSwarm />
+                <ScoreColumns />
                 <p className="mt-4 text-xs leading-[1.7] text-foreground/75">
                   Each profile carries its own thresholds, so a reading is measured against the
                   economics of the business you actually operate.
