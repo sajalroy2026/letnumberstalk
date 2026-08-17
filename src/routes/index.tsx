@@ -10,7 +10,7 @@ import {
   DisplayNumeral,
   FlowGraph,
   BenchmarkTerrain,
-  PillarArmature,
+  PillarEmblems,
   ScoreColumns,
   OrbitField,
   ParallaxLayer,
@@ -76,7 +76,7 @@ function Home() {
 
       <main>
         {/* --------------------------------------------- Hero: copy | figure */}
-        <section className="ink tone-amber aurora-wash relative overflow-hidden">
+        <section className="plum-band tone-plum aurora-wash relative overflow-hidden">
           <ParallaxLayer
             depth={0.25}
             className="pointer-events-none absolute inset-x-0 top-0 z-0 opacity-20"
@@ -93,8 +93,9 @@ function Home() {
                 transition={{ duration: 0.7, ease }}
                 className="figure text-[0.68rem] uppercase tracking-[0.32em] text-accent"
               >
-                The Business Health Instrument
+                Diagnostic intelligence for boardroom leaders
               </motion.p>
+
               <motion.h1
                 initial={{ opacity: 0, y: 30, filter: "blur(12px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -155,29 +156,30 @@ function Home() {
                 transition={{ duration: 1, delay: 0.55 }}
                 className="mt-14 grid max-w-2xl grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-4"
               >
-                <Stat value={String(METRIC_CONTENT.length)} label="Metrics" tone="var(--gold-glow)" />
-                <Stat value="7" label="Weighted pillars" tone="var(--forest-glow)" />
-                <Stat value={String(SECTORS.length)} label="Industry profiles" tone="var(--burnt-glow)" />
-                <Stat value="0" label="Figures stored" tone="var(--steel-glow)" />
+                <Stat value={String(METRIC_CONTENT.length)} label="Metrics" tone="var(--oxblood-core)" />
+                <Stat value="7" label="Weighted pillars" tone="var(--forest)" />
+                <Stat value={String(SECTORS.length)} label="Industry profiles" tone="var(--burnt)" />
+                <Stat value="0" label="Figures stored" tone="var(--mocha)" />
               </motion.dl>
             </div>
 
             {/* Figure column — its own space, never behind the copy. */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.94, filter: "blur(10px)" }}
-              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-              transition={{ duration: 1.6, ease }}
-              className="pointer-events-none relative mx-auto aspect-square w-full max-w-[36rem] lg:aspect-[4/5] lg:max-w-none"
+              initial={{ opacity: 0, filter: "blur(10px)" }}
+              animate={{ opacity: 1, filter: "blur(0px)" }}
+              transition={{ duration: 1.2, ease }}
+              className="relative mx-auto w-full max-w-[36rem] lg:max-w-none"
             >
-              <PillarArmature fit="meet" />
+              <PillarEmblems />
             </motion.div>
+
 
           </div>
         </section>
 
 
         {/* ------------------------------------------------ What it delivers */}
-        <section className="sun-band tone-gold relative overflow-hidden">
+        <section className="blush-band tone-burnt relative overflow-hidden">
           <ParallaxLayer depth={0.35} className="pointer-events-none absolute -right-24 top-10 -z-10 w-[34rem] opacity-40">
             <PrismStack />
           </ParallaxLayer>
@@ -209,11 +211,11 @@ function Home() {
                   {DELIVERS.map((c, i) => (
                     <motion.article
                       key={c.t}
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-70px" }}
-                      transition={{ duration: 0.65, delay: i * 0.06, ease }}
-                      className="glass relative p-7"
+                      initial={{ opacity: 0, scale: 0.94 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true, margin: "-40px" }}
+                      transition={{ duration: 0.5, delay: i * 0.08, ease }}
+                      className="glass relative p-6"
                     >
                       <span
                         className="absolute inset-y-0 left-0 w-[3px]"
@@ -238,7 +240,7 @@ function Home() {
 
 
         {/* ------------------------------------------------------ The pillars */}
-        <section className="mint-band tone-forest prism-wash relative overflow-hidden">
+        <section className="sun-band tone-gold prism-wash relative overflow-hidden">
           <ParallaxLayer
             depth={0.45}
             className="pointer-events-none absolute inset-x-0 bottom-0 z-0 opacity-60"
@@ -302,7 +304,7 @@ function Home() {
         </section>
 
         {/* ------------------------------------------------ Sector calibration */}
-        <section className="blush-band tone-burnt relative overflow-hidden">
+        <section className="mint-band tone-forest relative overflow-hidden">
           <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
             <p className="figure text-[0.65rem] uppercase tracking-[0.28em] text-accent">
               Calibration
@@ -349,7 +351,7 @@ function Home() {
         </section>
 
         {/* -------------------------------------------------- Espresso: method */}
-        <section className="ink tone-mocha aurora-wash scanlines relative overflow-hidden">
+        <section className="plum-band tone-mocha aurora-wash relative overflow-hidden">
           <ParallaxLayer depth={0.4} className="pointer-events-none absolute -left-32 top-0 -z-10 w-[36rem] opacity-50">
             <OrbitField />
           </ParallaxLayer>
@@ -363,9 +365,9 @@ function Home() {
             </h2>
             <span className="band-rule mt-5 block" aria-hidden />
             <div className="mt-14 grid gap-10 sm:grid-cols-3">
-              <DisplayNumeral value="54" caption="Metrics resolved per full assessment" tone="var(--gold-glow)" />
-              <DisplayNumeral value="7" caption="Independent scoring engines" tone="var(--forest-glow)" />
-              <DisplayNumeral value="0" caption="Figures transmitted or retained" tone="var(--burnt-glow)" />
+              <DisplayNumeral value="54" caption="Metrics resolved per full assessment" tone="var(--oxblood-core)" />
+              <DisplayNumeral value="7" caption="Independent scoring engines" tone="var(--forest)" />
+              <DisplayNumeral value="0" caption="Figures transmitted or retained" tone="var(--burnt)" />
             </div>
             <div className="mt-14 grid gap-px bg-border md:grid-cols-3">
               {[
@@ -377,7 +379,7 @@ function Home() {
                 {
                   t: "Diagnostic language throughout",
                   d: "Where a reading falls outside its healthy range, you get where in the value chain it originates, what commonly contributes, and how it presents in practice — observation stated plainly.",
-                  tone: "var(--gold-glow)",
+                  tone: "var(--gold)",
                 },
                 {
                   t: "Everything stays in the browser",
