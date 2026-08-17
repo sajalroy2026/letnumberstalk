@@ -150,6 +150,8 @@
   --burnt-glow: oklch(0.732 0.142 54);
   --forest-glow: oklch(0.722 0.116 156);
   --oxblood-glow: oklch(0.672 0.148 24);
+  --mocha-glow: oklch(0.762 0.058 58);
+
 
   --rust-glow: var(--burnt-glow);
   --teal-glow: var(--steel-glow);
