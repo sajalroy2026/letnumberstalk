@@ -158,7 +158,7 @@ export function PillarWeightRing({ active }: { active?: PillarId[] }) {
                 r={r}
                 fill="none"
                 stroke={pillarColor(p.id)}
-                strokeOpacity={active && !active.includes(p.id) ? 0.18 : 1 - i * 0.09}
+                strokeOpacity={active && !active.includes(p.id) ? 0.18 : 1}
                 strokeWidth="14"
                 strokeDasharray={`${len - 2} ${c - len + 2}`}
                 strokeDashoffset={-offset}
