@@ -258,6 +258,9 @@
   --burnt: oklch(0.732 0.142 54);
   --forest: oklch(0.722 0.116 156);
   --oxblood-core: oklch(0.672 0.148 24);
+  --mocha: oklch(0.782 0.052 58);
+  --mocha-glow: oklch(0.868 0.042 62);
+
 }
 
 /* Pale steel band — the default analytical ground. */
