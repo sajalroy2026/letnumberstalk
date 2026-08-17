@@ -26,7 +26,7 @@ const tierLabel: Record<Tier, string> = {
 
 const TIER_LADDER: Tier[] = ["critical", "concern", "acceptable", "healthy"];
 
-type PanelKey = "definition" | "formula" | "sourcing" | "benchmarks";
+type PanelKey = "formula" | "sourcing" | "benchmarks";
 
 export function MetricCard({
   metric,
@@ -148,9 +148,6 @@ export function MetricCard({
         )}
 
         <div className="mt-6 flex flex-wrap gap-2 no-print">
-          <Chip active={openPanel === "definition"} onClick={() => toggle("definition")}>
-            Definition
-          </Chip>
           <Chip active={openPanel === "formula"} onClick={() => toggle("formula")}>
             Formula
           </Chip>
@@ -165,20 +162,6 @@ export function MetricCard({
         </div>
 
         <AnimatePresence initial={false} mode="wait">
-          {openPanel === "definition" ? (
-            <Panel key="definition" label="Definition">
-              <p className="measure text-sm leading-relaxed text-foreground/85">
-                {metric.definition}
-              </p>
-              <p className="mt-4 text-[0.62rem] uppercase tracking-[0.22em] text-muted-foreground">
-                Scoring band
-              </p>
-              <p className="mt-1.5 measure text-sm leading-relaxed text-muted-foreground">
-                {metric.bandText}
-              </p>
-            </Panel>
-          ) : null}
-
           {openPanel === "formula" ? (
             <Panel key="formula" label="Formula">
               <p className="figure text-[0.95rem] leading-relaxed text-foreground">
@@ -189,8 +172,15 @@ export function MetricCard({
                   Reading = {formatValue(result.value, scoring.unit)}
                 </p>
               ) : null}
+              <p className="mt-5 text-[0.62rem] uppercase tracking-[0.22em] text-muted-foreground">
+                Scoring band
+              </p>
+              <p className="mt-1.5 measure text-sm leading-relaxed text-muted-foreground">
+                {metric.bandText}
+              </p>
             </Panel>
           ) : null}
+
 
           {openPanel === "sourcing" ? (
             <Panel key="sourcing" label="Where to source">
@@ -340,10 +330,10 @@ function Chip({
       onClick={onClick}
       aria-expanded={active}
       className={cn(
-        "border px-3.5 py-1.5 text-[0.62rem] uppercase tracking-[0.18em] transition-colors",
+        "border px-3.5 py-1.5 text-[0.62rem] uppercase tracking-[0.18em] transition-all",
         active
-          ? "border-primary bg-primary text-primary-foreground"
-          : "border-border text-muted-foreground hover:border-primary/60 hover:text-foreground",
+          ? "border-accent bg-accent text-accent-foreground copper-underline"
+          : "border-border text-muted-foreground hover:border-accent/70 hover:text-foreground",
       )}
     >
       {children}

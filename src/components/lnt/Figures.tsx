@@ -276,3 +276,259 @@ export function ValueChain({ highlight }: { highlight: ValueChainStage }) {
     </div>
   );
 }
+
+/* ------------------------------------------------- Pillar constellation */
+
+/**
+ * Hero instrument: 7 pillar nodes on an orbit, each arc sized to its weighting.
+ * Slow, engineered rotation — no bounce, honours reduced motion via CSS.
+ */
+export function PillarConstellation({ className }: { className?: string }) {
+  const R = 118;
+  const cx = 160;
+  const cy = 160;
+  let acc = -Math.PI / 2;
+
+  const segments = PILLAR_META.map((p, i) => {
+    const sweep = p.weight * Math.PI * 2;
+    const start = acc;
+    const end = acc + sweep - 0.05;
+    acc += sweep;
+    const mid = (start + end) / 2;
+    const large = end - start > Math.PI ? 1 : 0;
+    const path = `M ${cx + R * Math.cos(start)} ${cy + R * Math.sin(start)} A ${R} ${R} 0 ${large} 1 ${cx + R * Math.cos(end)} ${cy + R * Math.sin(end)}`;
+    return {
+      id: p.id,
+      name: p.name,
+      weight: p.weight,
+      path,
+      nx: cx + R * Math.cos(mid),
+      ny: cy + R * Math.sin(mid),
+      lx: cx + (R + 26) * Math.cos(mid),
+      ly: cy + (R + 26) * Math.sin(mid),
+      i,
+    };
+  });
+
+  return (
+    <div className={cn("relative", className)}>
+      <motion.svg
+        viewBox="0 0 320 320"
+        className="h-full w-full"
+        role="img"
+        aria-label="7 weighted pillars of the diagnostic"
+        initial={{ opacity: 0, scale: 0.94 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.4, ease }}
+      >
+        <motion.g
+          style={{ originX: "160px", originY: "160px" }}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 220, ease: "linear", repeat: Infinity }}
+        >
+          <circle cx={cx} cy={cy} r={R + 34} fill="none" stroke="var(--border)" strokeWidth="0.75" strokeDasharray="2 7" />
+          <circle cx={cx} cy={cy} r={R - 40} fill="none" stroke="var(--border)" strokeWidth="0.75" />
+          {segments.map((s) => (
+            <g key={`tick-${s.id}`}>
+              <line
+                x1={cx}
+                y1={cy}
+                x2={s.nx}
+                y2={s.ny}
+                stroke="var(--border)"
+                strokeWidth="0.75"
+              />
+              <circle cx={s.nx} cy={s.ny} r={3.2} fill="var(--accent)" />
+            </g>
+          ))}
+        </motion.g>
+
+        {segments.map((s, i) => (
+          <motion.path
+            key={s.id}
+            d={s.path}
+            fill="none"
+            stroke={i % 2 === 0 ? "var(--accent)" : "var(--healthy)"}
+            strokeWidth={6 + s.weight * 26}
+            strokeLinecap="butt"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 0.92 }}
+            transition={{ duration: 1.5, delay: 0.25 + i * 0.12, ease }}
+          />
+        ))}
+
+        <circle cx={cx} cy={cy} r={54} fill="var(--card)" stroke="var(--border)" />
+        <text
+          x={cx}
+          y={cy - 4}
+          textAnchor="middle"
+          className="figure"
+          fontSize="30"
+          fill="var(--foreground)"
+        >
+          54
+        </text>
+        <text
+          x={cx}
+          y={cy + 16}
+          textAnchor="middle"
+          fontSize="8"
+          letterSpacing="2.4"
+          fill="var(--muted-foreground)"
+        >
+          METRICS
+        </text>
+
+        {segments.map((s) => (
+          <text
+            key={`l-${s.id}`}
+            x={s.lx}
+            y={s.ly}
+            textAnchor={s.lx > cx + 6 ? "start" : s.lx < cx - 6 ? "end" : "middle"}
+            className="figure"
+            fontSize="8.5"
+            fill="var(--muted-foreground)"
+          >
+            {Math.round(s.weight * 100)}%
+          </text>
+        ))}
+      </motion.svg>
+    </div>
+  );
+}
+
+/* -------------------------------------------------------- Chapter plate */
+
+export function ChapterPlate({
+  index,
+  total,
+  name,
+  weight,
+  note,
+}: {
+  index: number;
+  total: number;
+  name: string;
+  weight: number;
+  note: string;
+}) {
+  return (
+    <motion.section
+      key={name}
+      initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      transition={{ duration: 0.85, ease }}
+      className="ink grid-field print-plain relative overflow-hidden"
+    >
+      <div className="relative mx-auto grid w-full max-w-5xl grid-cols-[auto_minmax(0,1fr)] items-center gap-6 px-5 py-12 sm:gap-10 sm:px-8 sm:py-16">
+        <motion.span
+          initial={{ opacity: 0, x: -24 }}
+          animate={{ opacity: 0.9, x: 0 }}
+          transition={{ duration: 0.9, delay: 0.1, ease }}
+          className="figure text-5xl leading-none text-accent sm:text-7xl"
+          aria-hidden
+        >
+          0{index}
+        </motion.span>
+        <div className="min-w-0">
+          <p className="figure text-[0.65rem] uppercase tracking-[0.26em] text-muted-foreground">
+            Pillar {index} of {total} · {Math.round(weight * 100)}% weight
+          </p>
+          <h1 className="mt-2 font-display text-2xl leading-tight text-foreground sm:text-4xl">
+            {name}
+          </h1>
+          <span className="band-rule mt-4 block" aria-hidden />
+          <p className="mt-4 measure text-sm leading-relaxed text-muted-foreground sm:text-base">
+            {note}
+          </p>
+        </div>
+      </div>
+    </motion.section>
+  );
+}
+
+/* ---------------------------------------------------------- Sector glyph */
+
+export function SectorGlyph({ id }: { id: string }) {
+  const stroke = "var(--accent)";
+  const soft = "var(--primary)";
+  const common = { fill: "none", stroke, strokeWidth: 1.6 } as const;
+  return (
+    <svg viewBox="0 0 64 48" className="h-12 w-16" aria-hidden>
+      <rect x="0.5" y="0.5" width="63" height="47" fill="none" stroke="var(--border)" />
+      {id === "services" && (
+        <>
+          <circle cx="20" cy="18" r="7" {...common} />
+          <circle cx="40" cy="30" r="10" fill="none" stroke={soft} strokeWidth="1.2" strokeDasharray="3 3" />
+          <path d="M8 40 L26 26 L38 34 L56 14" {...common} />
+        </>
+      )}
+      {id === "manufacturing" && (
+        <>
+          <path d="M8 38 V22 l10 6 V22 l10 6 V18 l12 8 V38 Z" {...common} />
+          <circle cx="48" cy="14" r="6" fill="none" stroke={soft} strokeWidth="1.2" />
+          <path d="M48 8 v-4 M48 20 v4 M42 14 h-4 M54 14 h4" stroke={soft} strokeWidth="1.2" />
+        </>
+      )}
+      {id === "retail" && (
+        <>
+          <path d="M10 18 h44 l-4 22 H14 Z" {...common} />
+          <path d="M24 18 v-4 a8 8 0 0 1 16 0 v4" fill="none" stroke={soft} strokeWidth="1.2" />
+          <path d="M18 30 h28" stroke={stroke} strokeWidth="1.2" strokeDasharray="2 3" />
+        </>
+      )}
+      {id === "saas" && (
+        <>
+          <path d="M14 34 a10 10 0 0 1 2-19 a13 13 0 0 1 24 2 a9 9 0 0 1 10 17 Z" {...common} />
+          <path d="M22 40 h20" stroke={soft} strokeWidth="1.2" />
+          <path d="M32 26 v10 M28 32 l4 4 4-4" stroke={stroke} strokeWidth="1.4" fill="none" />
+        </>
+      )}
+      {id === "startup" && (
+        <>
+          <path d="M32 6 c8 8 12 16 12 24 l-12 8 -12-8 c0-8 4-16 12-24 Z" {...common} />
+          <circle cx="32" cy="22" r="4" fill="none" stroke={soft} strokeWidth="1.2" />
+          <path d="M24 40 l-6 6 M40 40 l6 6" stroke={stroke} strokeWidth="1.4" />
+        </>
+      )}
+    </svg>
+  );
+}
+
+/* ------------------------------------------------------- Pillar spectrum */
+
+export function PillarSpectrum({
+  rows,
+}: {
+  rows: { name: string; score: number; weight: number; tier: Tier }[];
+}) {
+  return (
+    <figure className="print-avoid-break print-plain border border-border bg-card p-6">
+      <figcaption className="figure text-[0.62rem] uppercase tracking-[0.24em] text-muted-foreground">
+        Pillar spectrum · score against weight
+      </figcaption>
+      <div className="mt-5 space-y-3.5">
+        {rows.map((r, i) => (
+          <div key={r.name} className="grid grid-cols-[minmax(0,9rem)_minmax(0,1fr)_auto] items-center gap-3">
+            <span className="truncate text-xs text-muted-foreground">{r.name}</span>
+            <span className="relative block h-3 bg-secondary">
+              <motion.span
+                className="absolute inset-y-0 left-0"
+                style={{ background: tierStroke[r.tier] }}
+                initial={{ width: 0 }}
+                animate={{ width: `${r.score}%` }}
+                transition={{ duration: 1, delay: 0.1 + i * 0.07, ease }}
+              />
+              <span
+                className="absolute inset-y-[-3px] w-px bg-foreground/70"
+                style={{ left: `${Math.round(r.weight * 100 * 3)}%` }}
+                aria-hidden
+              />
+            </span>
+            <span className="figure text-xs text-foreground">{r.score}</span>
+          </div>
+        ))}
+      </div>
+    </figure>
+  );
+}

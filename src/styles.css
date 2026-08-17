@@ -75,58 +75,95 @@
 :root {
   --radius: 0.125rem;
 
-  /* Editorial paper deliverable: warm paper stock, ink navy authority, rust decision accent */
-  --background: oklch(0.972 0.006 85);
-  --foreground: oklch(0.215 0.028 258);
-  --card: oklch(0.995 0.003 85);
-  --card-foreground: oklch(0.215 0.028 258);
-  --popover: oklch(0.995 0.003 85);
-  --popover-foreground: oklch(0.215 0.028 258);
-  --primary: oklch(0.255 0.055 258);
-  --primary-foreground: oklch(0.985 0.005 85);
-  --secondary: oklch(0.944 0.008 85);
-  --secondary-foreground: oklch(0.255 0.055 258);
-  --muted: oklch(0.935 0.008 85);
-  --muted-foreground: oklch(0.475 0.018 258);
-  --accent: oklch(0.505 0.145 42);
-  --accent-foreground: oklch(0.985 0.005 85);
-  --destructive: oklch(0.505 0.165 27);
-  --destructive-foreground: oklch(0.985 0.005 85);
-  --border: oklch(0.215 0.028 258 / 16%);
-  --input: oklch(0.215 0.028 258 / 24%);
-  --ring: oklch(0.505 0.145 42);
+  /* Consulting duotone: warm sand working surface, deep ink navy authority, copper decision accent */
+  --background: oklch(0.943 0.015 85);
+  --foreground: oklch(0.245 0.045 262);
+  --card: oklch(0.978 0.008 85);
+  --card-foreground: oklch(0.245 0.045 262);
+  --popover: oklch(0.978 0.008 85);
+  --popover-foreground: oklch(0.245 0.045 262);
+  --primary: oklch(0.265 0.052 262);
+  --primary-foreground: oklch(0.955 0.016 85);
+  --secondary: oklch(0.902 0.022 85);
+  --secondary-foreground: oklch(0.265 0.052 262);
+  --muted: oklch(0.902 0.022 85);
+  --muted-foreground: oklch(0.475 0.03 262);
+  --accent: oklch(0.525 0.135 44);
+  --accent-foreground: oklch(0.972 0.012 85);
+  --destructive: oklch(0.462 0.152 26);
+  --destructive-foreground: oklch(0.972 0.012 85);
+  --border: oklch(0.245 0.045 262 / 18%);
+  --input: oklch(0.245 0.045 262 / 26%);
+  --ring: oklch(0.525 0.135 44);
 
-  /* Diagnostic tiers — muted signal set, never bright */
-  --healthy: oklch(0.475 0.075 158);
-  --acceptable: oklch(0.585 0.095 82);
-  --concern: oklch(0.545 0.135 52);
-  --critical: oklch(0.475 0.155 27);
+  /* Diagnostic tiers — teal / ochre / copper / oxblood signal set */
+  --healthy: oklch(0.475 0.078 178);
+  --acceptable: oklch(0.655 0.115 82);
+  --concern: oklch(0.545 0.135 46);
+  --critical: oklch(0.462 0.152 26);
 
   /* Surfaces and depth */
-  --paper: oklch(0.995 0.003 85);
-  --paper-foreground: oklch(0.215 0.028 258);
-  --ink: oklch(0.185 0.03 258);
-  --elevated: oklch(0.995 0.003 85);
-  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.995 0.004 85) 0%, oklch(0.955 0.009 85) 68%);
-  --gradient-ink: linear-gradient(135deg, oklch(0.275 0.055 258), oklch(0.185 0.038 258));
-  --gradient-rust: linear-gradient(135deg, oklch(0.555 0.15 46), oklch(0.455 0.13 34));
-  --shadow-plate: 0 1px 0 0 oklch(0.215 0.028 258 / 0.06), 0 18px 40px -34px oklch(0.215 0.028 258 / 0.55);
-  --shadow-lift: 0 24px 54px -32px oklch(0.215 0.028 258 / 0.45);
+  --paper: oklch(0.978 0.008 85);
+  --paper-foreground: oklch(0.245 0.045 262);
+  --ink: oklch(0.245 0.045 262);
+  --sand: oklch(0.902 0.022 85);
+  --elevated: oklch(0.978 0.008 85);
+  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.968 0.012 85) 0%, oklch(0.926 0.02 85) 70%);
+  --gradient-ink: linear-gradient(135deg, oklch(0.305 0.055 262), oklch(0.205 0.042 262));
+  --gradient-rust: linear-gradient(135deg, oklch(0.575 0.145 48), oklch(0.465 0.13 34));
+  --shadow-plate: 0 1px 0 0 oklch(0.245 0.045 262 / 0.07), 0 18px 40px -34px oklch(0.245 0.045 262 / 0.6);
+  --shadow-lift: 0 26px 58px -30px oklch(0.245 0.045 262 / 0.5);
 
-  --chart-1: oklch(0.255 0.055 258);
-  --chart-2: oklch(0.505 0.145 42);
-  --chart-3: oklch(0.475 0.075 158);
-  --chart-4: oklch(0.585 0.095 82);
-  --chart-5: oklch(0.475 0.155 27);
-  --sidebar: oklch(0.985 0.005 85);
-  --sidebar-foreground: oklch(0.215 0.028 258);
-  --sidebar-primary: oklch(0.255 0.055 258);
-  --sidebar-primary-foreground: oklch(0.985 0.005 85);
-  --sidebar-accent: oklch(0.944 0.008 85);
-  --sidebar-accent-foreground: oklch(0.255 0.055 258);
-  --sidebar-border: oklch(0.215 0.028 258 / 14%);
-  --sidebar-ring: oklch(0.505 0.145 42);
+  --chart-1: oklch(0.265 0.052 262);
+  --chart-2: oklch(0.525 0.135 44);
+  --chart-3: oklch(0.475 0.078 178);
+  --chart-4: oklch(0.655 0.115 82);
+  --chart-5: oklch(0.462 0.152 26);
+  --sidebar: oklch(0.955 0.016 85);
+  --sidebar-foreground: oklch(0.245 0.045 262);
+  --sidebar-primary: oklch(0.265 0.052 262);
+  --sidebar-primary-foreground: oklch(0.955 0.016 85);
+  --sidebar-accent: oklch(0.902 0.022 85);
+  --sidebar-accent-foreground: oklch(0.265 0.052 262);
+  --sidebar-border: oklch(0.245 0.045 262 / 16%);
+  --sidebar-ring: oklch(0.525 0.135 44);
 }
+
+/*
+ * Ink band — the navy half of the duotone. Any subtree marked .ink re-binds the
+ * semantic tokens, so every child component flips surface without hardcoded colour.
+ */
+.ink {
+  --background: oklch(0.245 0.045 262);
+  --foreground: oklch(0.945 0.016 85);
+  --card: oklch(0.295 0.048 262);
+  --card-foreground: oklch(0.945 0.016 85);
+  --popover: oklch(0.295 0.048 262);
+  --popover-foreground: oklch(0.945 0.016 85);
+  --primary: oklch(0.912 0.026 85);
+  --primary-foreground: oklch(0.235 0.045 262);
+  --secondary: oklch(0.315 0.045 262);
+  --secondary-foreground: oklch(0.945 0.016 85);
+  --muted: oklch(0.315 0.045 262);
+  --muted-foreground: oklch(0.775 0.024 85);
+  --accent: oklch(0.638 0.145 48);
+  --accent-foreground: oklch(0.205 0.042 262);
+  --border: oklch(0.912 0.026 85 / 18%);
+  --input: oklch(0.912 0.026 85 / 30%);
+  --ring: oklch(0.638 0.145 48);
+  --healthy: oklch(0.648 0.098 178);
+  --acceptable: oklch(0.775 0.125 84);
+  --concern: oklch(0.665 0.145 48);
+  --critical: oklch(0.615 0.165 26);
+  --elevated: oklch(0.295 0.048 262);
+  --paper: oklch(0.295 0.048 262);
+  --gradient-depth: radial-gradient(120% 95% at 50% -10%, oklch(0.315 0.052 262) 0%, oklch(0.225 0.042 262) 72%);
+  --shadow-plate: 0 1px 0 0 oklch(0.945 0.016 85 / 0.06), 0 26px 60px -40px oklch(0 0 0 / 0.85);
+  --shadow-lift: 0 32px 70px -32px oklch(0 0 0 / 0.8);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
 
 
 .dark {
@@ -225,6 +262,35 @@
   max-width: 68ch;
 }
 
+/* Blueprint grid overlay used on ink bands */
+@utility grid-field {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, color-mix(in oklab, var(--foreground) 14%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklab, var(--foreground) 14%, transparent) 1px, transparent 1px);
+    background-size: 84px 84px;
+    mask-image: radial-gradient(85% 70% at 50% 12%, black, transparent);
+    opacity: 0.5;
+  }
+}
+
+/* Bain-style hard section marker */
+@utility band-rule {
+  height: 3px;
+  width: 4.5rem;
+  background-image: var(--gradient-rust);
+}
+
+@utility copper-underline {
+  box-shadow: inset 0 -2px 0 0 var(--accent);
+}
+
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -263,6 +329,28 @@
   .no-print {
     display: none !important;
   }
+  .ink {
+    --background: #ffffff;
+    --foreground: #16233a;
+    --card: #ffffff;
+    --card-foreground: #16233a;
+    --secondary: #f2ece1;
+    --muted-foreground: #4a5568;
+    --primary: #16233a;
+    --primary-foreground: #ffffff;
+    --accent: #b8592c;
+    --border: rgba(22, 35, 58, 0.25);
+    --healthy: #1f6f63;
+    --acceptable: #a97e18;
+    --concern: #b8592c;
+    --critical: #8c2f21;
+    background: #ffffff !important;
+    color: #16233a !important;
+  }
+  .grid-field::before {
+    display: none !important;
+  }
+
   .print-plain {
     background: #fff !important;
     color: #14181f !important;

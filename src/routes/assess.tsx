@@ -29,12 +29,16 @@ export const Route = createFileRoute("/assess")({
 function AssessPage() {
   return (
     <SessionProvider>
-      <div className="surface-depth min-h-screen">
-        <SiteHeader />
-        <main>
+      <div className="min-h-screen bg-background">
+        <div className="ink">
+          <SiteHeader />
+        </div>
+        <main className="surface-depth">
           <AssessmentFlow />
         </main>
-        <SiteFooter />
+        <div className="ink">
+          <SiteFooter />
+        </div>
       </div>
     </SessionProvider>
   );
