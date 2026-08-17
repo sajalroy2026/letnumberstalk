@@ -156,22 +156,23 @@ function Home() {
                 transition={{ duration: 1, delay: 0.55 }}
                 className="mt-14 grid max-w-2xl grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-4"
               >
-                <Stat value={String(METRIC_CONTENT.length)} label="Metrics" tone="var(--gold-glow)" />
-                <Stat value="7" label="Weighted pillars" tone="var(--forest-glow)" />
-                <Stat value={String(SECTORS.length)} label="Industry profiles" tone="var(--burnt-glow)" />
-                <Stat value="0" label="Figures stored" tone="var(--steel-glow)" />
+                <Stat value={String(METRIC_CONTENT.length)} label="Metrics" tone="var(--oxblood-core)" />
+                <Stat value="7" label="Weighted pillars" tone="var(--forest)" />
+                <Stat value={String(SECTORS.length)} label="Industry profiles" tone="var(--burnt)" />
+                <Stat value="0" label="Figures stored" tone="var(--mocha)" />
               </motion.dl>
             </div>
 
             {/* Figure column — its own space, never behind the copy. */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.94, filter: "blur(10px)" }}
-              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-              transition={{ duration: 1.6, ease }}
-              className="pointer-events-none relative mx-auto aspect-square w-full max-w-[36rem] lg:aspect-[4/5] lg:max-w-none"
+              initial={{ opacity: 0, filter: "blur(10px)" }}
+              animate={{ opacity: 1, filter: "blur(0px)" }}
+              transition={{ duration: 1.2, ease }}
+              className="relative mx-auto w-full max-w-[36rem] lg:max-w-none"
             >
-              <PillarArmature fit="meet" />
+              <PillarEmblems />
             </motion.div>
+
 
           </div>
         </section>
