@@ -234,7 +234,7 @@ function Home() {
 
 
         {/* ------------------------------------------------------ The pillars */}
-        <section className="prism-wash relative overflow-hidden">
+        <section className="mint-band tone-plum prism-wash relative overflow-hidden">
           <ParallaxLayer
             depth={0.45}
             className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 opacity-45"
@@ -248,10 +248,10 @@ function Home() {
             </p>
             <h2 className="mt-3 font-display text-3xl text-foreground sm:text-4xl">The 7 pillars</h2>
             <span className="band-rule mt-5 block" aria-hidden />
-            <p className="mt-5 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-5 max-w-2xl text-sm leading-[1.75] text-foreground/80">
               Each pillar carries an independent scoring engine and a fixed share of the composite.
-              Assess 1, several, or all 7 — partial coverage re-weights across the metrics you
-              supply rather than penalising the gaps.
+              Assess 1, several, or all 7 — partial coverage re-weights across exactly the metrics
+              you supply, so every figure you enter carries its full influence.
             </p>
             <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {PILLAR_META.map((p, i) => {
