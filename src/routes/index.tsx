@@ -72,30 +72,21 @@ const DELIVERS = [
 function Home() {
   return (
     <div className="min-h-screen bg-background">
-      <div className="ink no-print sticky top-0 z-40">
-        <SiteHeader />
-      </div>
+      <SiteHeader />
 
       <main>
-        {/* ------------------------------------------------- Full-bleed hero */}
-        <section className="ink tone-cyan aurora-wash relative min-h-[92vh] overflow-hidden">
-          <motion.div
-            initial={{ opacity: 0, scale: 1.04 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.8, ease }}
-            className="pointer-events-none absolute inset-0 z-0"
-          >
-            <PillarArmature />
-          </motion.div>
+        {/* --------------------------------------------- Hero: copy | figure */}
+        <section className="ink tone-amber aurora-wash relative overflow-hidden">
           <ParallaxLayer
             depth={0.25}
-            className="pointer-events-none absolute inset-x-0 top-0 z-0 opacity-25"
+            className="pointer-events-none absolute inset-x-0 top-0 z-0 opacity-20"
           >
             <SignalField />
           </ParallaxLayer>
 
-          <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-12 px-5 pb-24 pt-20 sm:px-8 sm:pt-28">
-            <div className="scrim max-w-3xl">
+          <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-12 px-5 pb-20 pt-16 sm:px-8 sm:pt-24 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
+            <div className="max-w-2xl">
+
               <motion.p
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
