@@ -5,22 +5,20 @@ Remove "The Business Health Instrument" from the header entirely. The top-left r
 `LetNumbersTalk — by Mr Sajal Roy`.
 
 ## 2. Replace the hero figure
-Retire the circular pillar armature (and any donut/orbit/ring figure on the home page). In its place, a new linear composition:
+Retire the circular pillar armature (and any donut/orbit/ring figure on the home page). In its place, a seven-panel pillar composition — no percentages, no weighting bars:
 
 ```text
-  Financial  ████████████████████  22%
-  Risk       ██████████████████    20%
-  Market     ████████████████      18%
-  Operations █████████████         15%
-  Strategy   ███████████           13%
-  Organisat. ██████                 7%
-  Technology ████                   5%
+  ┌────────┬────────┬────────┬────────┬────────┬────────┬────────┐
+  │ FINAN. │  RISK  │ MARKET │  OPS   │ STRAT. │  ORG.  │  TECH  │
+  │  ▁▃▅█  │  █▅▃▁  │  ▃█▅▂  │  ▂▅█▃  │  ▅▃█▂  │  ▃▂▅█  │  █▃▂▅  │
+  └────────┴────────┴────────┴────────┴────────┴────────┴────────┘
 ```
 
-- Seven horizontal weighted bars, one per pillar, each in its own pillar colour, with a subtle 3D extrusion and a scan-line sweep.
-- A benchmark corridor line runs across the bars, drawn on scroll, so it reads as a diagnostic chart rather than decoration.
-- Bars animate in staggered from the left; count-up percentage figures ride the ends.
-- No circles, arcs, orbits, or rotation anywhere in the hero.
+- Seven upright panels standing side by side, one per pillar, each in its own pillar colour with a subtle 3D extrusion and depth shadow.
+- Each panel carries the pillar name and a small abstract signal motif (stepped bars / a short trace line) — indicative texture, no figures or ratios.
+- Panels rise in staggered on load, with a slow scan-line sweep crossing the set and a light drift on scroll.
+- No circles, arcs, orbits, rotation, or percentage labels anywhere in the hero.
+
 
 ## 3. Multi-accent, oxblood-led
 The dominant navy is demoted to structural chrome only.
@@ -40,6 +38,6 @@ Remove the sticky positioning from the site header so it scrolls away naturally 
 
 ## Technical notes
 - `src/components/lnt/SiteChrome.tsx`: drop the instrument tagline span; remove `sticky top-0` from `<header>`.
-- `src/components/lnt/Figures.tsx`: add a `PillarWeightBars` figure (weighted horizontal bars + benchmark line); remove `PillarArmature` usage from the home page.
+- `src/components/lnt/Figures.tsx`: add a `PillarPanels` figure (seven extruded upright panels with pillar names and abstract signal motifs); remove `PillarArmature` usage from the home page.
 - `src/routes/index.tsx`: swap the hero figure, reassign section tone classes to the oxblood-led rotation, change the DELIVERS tile animation to a pop and reduce grid gap.
 - `src/styles.css`: make oxblood the default body accent, keep navy scoped to header/footer, verify each `.tone-*` pair retains AA contrast.
