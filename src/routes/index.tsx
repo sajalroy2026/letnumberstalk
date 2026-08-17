@@ -83,18 +83,18 @@ function Home() {
             initial={{ opacity: 0, scale: 1.04 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.8, ease }}
-            className="pointer-events-none absolute inset-0 -z-10"
+            className="pointer-events-none absolute inset-0 z-0"
           >
             <PillarArmature />
           </motion.div>
           <ParallaxLayer
             depth={0.25}
-            className="pointer-events-none absolute inset-x-0 top-0 -z-10 opacity-25"
+            className="pointer-events-none absolute inset-x-0 top-0 z-0 opacity-25"
           >
             <SignalField />
           </ParallaxLayer>
 
-          <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-5 pb-24 pt-20 sm:px-8 sm:pt-28">
+          <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-12 px-5 pb-24 pt-20 sm:px-8 sm:pt-28">
             <div className="scrim max-w-3xl">
               <motion.p
                 initial={{ opacity: 0, y: 16 }}
