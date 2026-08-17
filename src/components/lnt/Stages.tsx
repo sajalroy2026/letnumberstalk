@@ -198,7 +198,7 @@ export function PillarStage() {
         total={selectedPillars.length}
         name={meta.name}
         weight={meta.weight}
-        note={`${PILLAR_NOTE[pillarId]} Enter what is known — every blank metric is left out of the calculation entirely rather than counted as zero.`}
+        note={`${PILLAR_NOTE[pillarId]} Enter what is known — the calculation re-weights across exactly the metrics you supply.`}
       />
       <PillarIdentityRail
         name={meta.name}
