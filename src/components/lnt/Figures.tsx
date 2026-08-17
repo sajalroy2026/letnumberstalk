@@ -673,7 +673,8 @@ export function SectorPlate({ id, active }: { id: string; active?: boolean }) {
   return (
     <svg
       viewBox="0 0 200 110"
-      className="h-24 w-full"
+      preserveAspectRatio="xMidYMid slice"
+      className="h-28 w-full"
       aria-hidden
       style={{ opacity: active ? 1 : 0.92 }}
     >
