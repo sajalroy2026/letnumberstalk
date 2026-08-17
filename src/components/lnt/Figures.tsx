@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion, useMotionValue, useScroll, useSpring, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
 import { PILLAR_META } from "@/lib/assessment/spec.generated";
@@ -6,6 +6,9 @@ import type { PillarId, Tier } from "@/lib/assessment/types";
 import { cn } from "@/lib/utils";
 
 const ease = [0.16, 1, 0.3, 1] as const;
+
+/** Colour as information: every pillar owns an accent across the whole system. */
+export const pillarColor = (id: PillarId) => `var(--pillar-${id})`;
 
 export const tierStroke: Record<Tier, string> = {
   healthy: "var(--healthy)",
@@ -20,6 +23,37 @@ export const tierTextClass: Record<Tier, string> = {
   concern: "text-concern",
   critical: "text-critical",
 };
+
+/* ------------------------------------------------------------ Parallax bed */
+
+/**
+ * Scroll-driven depth layer. `depth` is a multiplier: 0 sits flat with the page,
+ * 1 drifts a full band. Honours reduced motion by collapsing to a static layer.
+ */
+export function ParallaxLayer({
+  depth = 0.3,
+  className,
+  children,
+}: {
+  depth?: number;
+  className?: string;
+  children: React.ReactNode;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const raw = useTransform(scrollYProgress, [0, 1], [depth * 90, depth * -90]);
+  const y = useSpring(raw, { stiffness: 60, damping: 26, mass: 0.6 });
+
+  return (
+    <div ref={ref} className={className}>
+      <motion.div style={{ y }}>{children}</motion.div>
+    </div>
+  );
+}
+
 
 /* --------------------------------------------------------- Counting figure */
 
