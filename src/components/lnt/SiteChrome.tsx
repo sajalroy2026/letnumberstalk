@@ -4,36 +4,36 @@ import { ABOUT_ARCHITECT, DISCLOSURE, METHODOLOGY_NOTE } from "@/lib/assessment/
 
 export function SiteHeader() {
   return (
-    <header className="no-print sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-md">
-      <div className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 sm:px-8">
+    <header className="ink tone-amber no-print sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur-md">
+      <div className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-3 sm:gap-4 sm:px-8 sm:py-4">
         <Link to="/" className="group flex min-w-0 items-baseline gap-3">
-          <span className="truncate font-display text-base tracking-tight text-foreground">
+          <span className="shrink-0 font-display text-sm tracking-tight text-foreground sm:text-base">
             LetNumbersTalk
           </span>
-          <span className="hidden text-[0.62rem] uppercase tracking-[0.28em] text-muted-foreground sm:inline">
+          <span className="hidden text-[0.62rem] uppercase tracking-[0.28em] text-accent sm:inline">
             by Mr Sajal Roy
           </span>
           <span className="hidden text-[0.62rem] uppercase tracking-[0.3em] text-muted-foreground lg:inline">
             The Business Health Instrument
           </span>
         </Link>
-        <nav className="flex shrink-0 items-center gap-5 text-[0.7rem] uppercase tracking-[0.2em]">
+        <nav className="flex shrink-0 items-center gap-2 text-[0.62rem] uppercase tracking-[0.16em] sm:gap-4 sm:text-[0.7rem] sm:tracking-[0.2em]">
           <Link
             to="/about"
-            className="text-muted-foreground transition-colors hover:text-foreground"
-            activeProps={{ className: "text-foreground" }}
+            className="btn-ghost-accent px-3 py-2 text-foreground sm:px-4"
+            activeProps={{ className: "bg-secondary" }}
           >
             About
           </Link>
-          <Link
-            to="/assess"
-            className="rule-copper px-5 py-2 text-primary-foreground transition-opacity hover:opacity-90"
-          >
-            Start Assessment
+          <Link to="/assess" className="btn-accent px-3 py-2 font-medium sm:px-5">
+            <span className="sm:hidden">Start</span>
+            <span className="hidden sm:inline">Start Assessment</span>
           </Link>
         </nav>
       </div>
+
     </header>
+
   );
 }
 

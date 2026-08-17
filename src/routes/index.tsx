@@ -50,52 +50,43 @@ const DELIVERS = [
   {
     t: "A weighted diagnosis built from your operating figures",
     d: "7 independent scoring engines convert your operating figures into pillar scores, then into a single Integrated Business Health Score under a fixed weighting — Financial Health 22%, Risk 20%, Market 18%, Operations 15%, Strategy 13%, Organisation 7%, Technology 5%.",
-    tone: "var(--teal)",
+    tone: "var(--forest)",
   },
   {
     t: "Sector-calibrated benchmarking",
     d: "Every threshold is re-based against 1 of 5 industry profiles. A services practice is read against services economics, and a manufacturer against manufacturing economics, so each comparison holds.",
-    tone: "var(--plum)",
+    tone: "var(--oxblood-core)",
   },
   {
     t: "Value-chain attribution",
     d: "Where a reading breaches its healthy band, the instrument names the location in the value chain, the factors that commonly contribute, and how the pattern presents in practice — diagnostic language throughout.",
-    tone: "var(--ochre)",
+    tone: "var(--gold)",
   },
   {
     t: "Terminal-risk surveillance",
     d: "Cash runway and customer concentration are monitored as terminal indicators. A breach raises a distinct Caution disclosure in the integrated report, while scores generate in full alongside it.",
-    tone: "var(--cyan)",
+    tone: "var(--burnt)",
   },
 ];
 
 function Home() {
   return (
     <div className="min-h-screen bg-background">
-      <div className="ink no-print sticky top-0 z-40">
-        <SiteHeader />
-      </div>
+      <SiteHeader />
 
       <main>
-        {/* ------------------------------------------------- Full-bleed hero */}
-        <section className="ink tone-cyan aurora-wash relative min-h-[92vh] overflow-hidden">
-          <motion.div
-            initial={{ opacity: 0, scale: 1.04 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.8, ease }}
-            className="pointer-events-none absolute inset-0 z-0"
-          >
-            <PillarArmature />
-          </motion.div>
+        {/* --------------------------------------------- Hero: copy | figure */}
+        <section className="ink tone-amber aurora-wash relative overflow-hidden">
           <ParallaxLayer
             depth={0.25}
-            className="pointer-events-none absolute inset-x-0 top-0 z-0 opacity-25"
+            className="pointer-events-none absolute inset-x-0 top-0 z-0 opacity-20"
           >
             <SignalField />
           </ParallaxLayer>
 
-          <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-12 px-5 pb-24 pt-20 sm:px-8 sm:pt-28">
-            <div className="scrim max-w-3xl">
+          <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-12 px-5 pb-20 pt-16 sm:px-8 sm:pt-24 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
+            <div className="max-w-2xl">
+
               <motion.p
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -117,13 +108,14 @@ function Home() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.24, ease }}
-                className="mt-7 max-w-xl text-lg leading-[1.7] text-foreground/90"
+                className="mt-7 max-w-xl text-lg leading-[1.7] text-foreground/95"
               >
-                LetNumbersTalk converts the operating figures you already hold into an
-                institutional read of enterprise health: 54 sector-benchmarked metrics resolved
-                through 7 weighted scoring engines into pillar scores, an Integrated Business
-                Health Score, value-chain attribution for every underperforming reading, and
-                terminal-risk disclosure on runway and revenue concentration.
+                LetNumbersTalk elevates the operating figures already sitting in your ledgers
+                into an institutional reading of enterprise condition: 54 sector-calibrated
+                metrics, resolved through 7 independently weighted scoring engines, into pillar
+                scores, an Integrated Business Health Score, value-chain attribution for every
+                strained reading, and explicit terminal-risk disclosure on cash runway and
+                revenue concentration.
               </motion.p>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -131,8 +123,9 @@ function Home() {
                 transition={{ duration: 0.9, delay: 0.32, ease }}
                 className="mt-4 max-w-xl text-sm leading-[1.75] text-muted-foreground"
               >
-                Decision intelligence at the standard a board expects — produced in a single
-                sitting, open to anyone, and computed entirely inside your own browser.
+                Decision intelligence held to the standard a board expects — assembled in a
+                single sitting, open to every operator, and computed end to end inside your own
+                browser.
               </motion.p>
 
 
@@ -144,13 +137,13 @@ function Home() {
               >
                 <Link
                   to="/assess"
-                  className="sheen rule-copper px-9 py-3.5 text-xs uppercase tracking-[0.22em] text-primary-foreground shadow-[var(--shadow-lift)] transition-transform hover:-translate-y-0.5"
+                  className="sheen btn-accent px-9 py-3.5 text-xs font-medium uppercase tracking-[0.22em] shadow-[var(--shadow-lift)] hover:-translate-y-0.5"
                 >
                   Begin the assessment
                 </Link>
                 <Link
                   to="/about"
-                  className="text-xs uppercase tracking-[0.2em] text-muted-foreground underline decoration-accent/50 underline-offset-8 transition-colors hover:text-foreground"
+                  className="btn-ghost-accent px-6 py-3.5 text-xs uppercase tracking-[0.2em]"
                 >
                   How it works
                 </Link>
@@ -162,18 +155,29 @@ function Home() {
                 transition={{ duration: 1, delay: 0.55 }}
                 className="mt-14 grid max-w-2xl grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-4"
               >
-                <Stat value={String(METRIC_CONTENT.length)} label="Metrics" tone="var(--teal)" />
-                <Stat value="7" label="Weighted pillars" tone="var(--amber)" />
-                <Stat value={String(SECTORS.length)} label="Industry profiles" tone="var(--plum)" />
-                <Stat value="0" label="Figures stored" tone="var(--lime)" />
+                <Stat value={String(METRIC_CONTENT.length)} label="Metrics" tone="var(--gold-glow)" />
+                <Stat value="7" label="Weighted pillars" tone="var(--forest-glow)" />
+                <Stat value={String(SECTORS.length)} label="Industry profiles" tone="var(--burnt-glow)" />
+                <Stat value="0" label="Figures stored" tone="var(--steel-glow)" />
               </motion.dl>
             </div>
+
+            {/* Figure column — its own space, never behind the copy. */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94, filter: "blur(10px)" }}
+              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+              transition={{ duration: 1.6, ease }}
+              className="pointer-events-none relative mx-auto aspect-square w-full max-w-[36rem] lg:aspect-[4/5] lg:max-w-none"
+            >
+              <PillarArmature fit="meet" />
+            </motion.div>
 
           </div>
         </section>
 
+
         {/* ------------------------------------------------ What it delivers */}
-        <section className="sun-band tone-teal relative overflow-hidden">
+        <section className="sun-band tone-gold relative overflow-hidden">
           <ParallaxLayer depth={0.35} className="pointer-events-none absolute -right-24 top-10 -z-10 w-[34rem] opacity-40">
             <PrismStack />
           </ParallaxLayer>
@@ -192,9 +196,9 @@ function Home() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-70px" }}
                 transition={{ duration: 0.9, ease }}
-                className="text-teal"
+                className="text-accent"
               >
-                <FlowGraph tone="var(--teal)" glow="var(--teal-glow)" seed={0.4} />
+                <FlowGraph tone="var(--gold)" glow="var(--gold-glow)" seed={0.4} />
                 <p className="figure mt-2 text-[0.62rem] uppercase tracking-[0.22em] text-muted-foreground">
                   Reading against a sector-calibrated corridor
                 </p>
@@ -217,8 +221,8 @@ function Home() {
                         aria-hidden
                       />
                       <span
-                        className="block h-[3px] w-10"
-                        style={{ background: c.tone }}
+                        className="block h-[3px] w-14"
+                        style={{ backgroundImage: `linear-gradient(90deg, ${c.tone}, var(--accent))` }}
                         aria-hidden
                       />
                       <h3 className="mt-4 font-display text-lg leading-snug text-foreground">{c.t}</h3>
@@ -234,7 +238,7 @@ function Home() {
 
 
         {/* ------------------------------------------------------ The pillars */}
-        <section className="mint-band tone-plum prism-wash relative overflow-hidden">
+        <section className="mint-band tone-forest prism-wash relative overflow-hidden">
           <ParallaxLayer
             depth={0.45}
             className="pointer-events-none absolute inset-x-0 bottom-0 z-0 opacity-60"
@@ -268,7 +272,7 @@ function Home() {
                   >
                     <span
                       className="absolute inset-x-0 top-0 h-[4px]"
-                      style={{ background: tone }}
+                      style={{ backgroundImage: `linear-gradient(90deg, ${tone}, var(--accent))` }}
                       aria-hidden
                     />
                     <div className="flex items-baseline justify-between gap-3">
@@ -298,7 +302,7 @@ function Home() {
         </section>
 
         {/* ------------------------------------------------ Sector calibration */}
-        <section className="blush-band tone-amber relative overflow-hidden">
+        <section className="blush-band tone-burnt relative overflow-hidden">
           <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
             <p className="figure text-[0.65rem] uppercase tracking-[0.28em] text-accent">
               Calibration
@@ -330,7 +334,7 @@ function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-70px" }}
                 transition={{ duration: 0.7, delay: 0.35, ease }}
-                className="glass flex flex-col justify-between p-6 text-amber"
+                className="glass flex flex-col justify-between p-6 text-accent"
               >
                 <div className="h-44 w-full">
                   <ScoreColumns className="h-full w-full" />
@@ -345,7 +349,7 @@ function Home() {
         </section>
 
         {/* -------------------------------------------------- Espresso: method */}
-        <section className="ink tone-lime aurora-wash scanlines relative overflow-hidden">
+        <section className="ink tone-mocha aurora-wash scanlines relative overflow-hidden">
           <ParallaxLayer depth={0.4} className="pointer-events-none absolute -left-32 top-0 -z-10 w-[36rem] opacity-50">
             <OrbitField />
           </ParallaxLayer>
@@ -359,26 +363,26 @@ function Home() {
             </h2>
             <span className="band-rule mt-5 block" aria-hidden />
             <div className="mt-14 grid gap-10 sm:grid-cols-3">
-              <DisplayNumeral value="54" caption="Metrics resolved per full assessment" tone="var(--ochre-glow)" />
-              <DisplayNumeral value="7" caption="Independent scoring engines" tone="var(--cyan-glow)" />
-              <DisplayNumeral value="0" caption="Figures transmitted or retained" tone="var(--lime-glow)" />
+              <DisplayNumeral value="54" caption="Metrics resolved per full assessment" tone="var(--gold-glow)" />
+              <DisplayNumeral value="7" caption="Independent scoring engines" tone="var(--forest-glow)" />
+              <DisplayNumeral value="0" caption="Figures transmitted or retained" tone="var(--burnt-glow)" />
             </div>
             <div className="mt-14 grid gap-px bg-border md:grid-cols-3">
               {[
                 {
                   t: "Evidence before opinion",
                   d: "Every input is sourced from a named artefact — Profit and Loss statement, Stripe or QuickBooks ledger, CRM pipeline, operations log — so the diagnosis rests on instrumented figures.",
-                  tone: "var(--cyan)",
+                  tone: "var(--burnt)",
                 },
                 {
                   t: "Diagnostic language throughout",
                   d: "Where a reading falls outside its healthy range, you get where in the value chain it originates, what commonly contributes, and how it presents in practice — observation stated plainly.",
-                  tone: "var(--amber)",
+                  tone: "var(--gold-glow)",
                 },
                 {
                   t: "Everything stays in the browser",
                   d: "Open the instrument and begin. Every figure is held in session memory and discarded the moment the tab closes.",
-                  tone: "var(--lime)",
+                  tone: "var(--mocha)",
                 },
               ].map((c, i) => (
                 <motion.div
