@@ -16,7 +16,7 @@ export const Route = createFileRoute("/about")({
       {
         property: "og:description",
         content:
-          "A 7-pillar, 54-metric business diagnostic built on AI-augmented research synthesis, designed by Mr Sajal Roy.",
+          "A 7-pillar, 54-metric business diagnostic built on AI-augmented research synthesis, conceptualized by Mr Sajal Roy.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
