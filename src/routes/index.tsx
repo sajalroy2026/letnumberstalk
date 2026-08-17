@@ -237,12 +237,12 @@ function Home() {
         <section className="mint-band tone-plum prism-wash relative overflow-hidden">
           <ParallaxLayer
             depth={0.45}
-            className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 opacity-45"
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-0 opacity-60"
           >
             <BenchmarkTerrain />
           </ParallaxLayer>
 
-          <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
+          <div className="relative z-10 mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
             <p className="figure text-[0.65rem] uppercase tracking-[0.28em] text-accent">
               Structure
             </p>
@@ -332,7 +332,9 @@ function Home() {
                 transition={{ duration: 0.7, delay: 0.35, ease }}
                 className="glass flex flex-col justify-between p-6 text-amber"
               >
-                <ScoreColumns />
+                <div className="h-44 w-full">
+                  <ScoreColumns className="h-full w-full" />
+                </div>
                 <p className="mt-4 text-xs leading-[1.7] text-foreground/75">
                   Each profile carries its own thresholds, so a reading is measured against the
                   economics of the business you actually operate.
