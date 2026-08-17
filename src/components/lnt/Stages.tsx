@@ -676,7 +676,14 @@ function StageShell({
 
 export function AssessmentFlow() {
   const { stage } = useSession();
+
+  // Every stage transition returns the reader to the top of the new chapter.
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [stage]);
+
   return (
+
     <AnimatePresence mode="wait">
       {stage === "sector" ? <SectorStage key="sector" /> : null}
       {stage === "pillars" ? <PillarSelectStage key="pillars" /> : null}
