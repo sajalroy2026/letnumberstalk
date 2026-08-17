@@ -573,3 +573,183 @@ export function PillarSpectrum({
     </figure>
   );
 }
+
+/* ------------------------------------------------- Hero composition (3D) */
+
+/**
+ * The opening instrument: layered geometric planes reacting to pointer and
+ * scroll, with the weighted pillar orbit suspended in the middle plane.
+ * Purely abstract — no figurative or human imagery anywhere in the system.
+ */
+export function HeroComposition({ className }: { className?: string }) {
+  const wrap = useRef<HTMLDivElement>(null);
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const rotY = useSpring(useTransform(mx, [-0.5, 0.5], [-11, 11]), {
+    stiffness: 70,
+    damping: 22,
+  });
+  const rotX = useSpring(useTransform(my, [-0.5, 0.5], [9, -9]), {
+    stiffness: 70,
+    damping: 22,
+  });
+
+  const onMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = wrap.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    mx.set((e.clientX - r.left) / r.width - 0.5);
+    my.set((e.clientY - r.top) / r.height - 0.5);
+  };
+
+  return (
+    <div
+      ref={wrap}
+      onPointerMove={onMove}
+      onPointerLeave={() => {
+        mx.set(0);
+        my.set(0);
+      }}
+      className={cn("relative isolate [perspective:1600px]", className)}
+    >
+      <motion.div
+        style={{ rotateX: rotX, rotateY: rotY, transformStyle: "preserve-3d" }}
+        className="relative"
+      >
+        {/* far plane — benchmark corridor */}
+        <motion.div
+          initial={{ opacity: 0, y: 34 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease }}
+          className="absolute inset-x-4 top-6 h-40 border border-border/70"
+          style={{ transform: "translateZ(-90px)", background: "var(--gradient-warm)", opacity: 0.16 }}
+          aria-hidden
+        />
+        {/* mid plane — ledger bars */}
+        <motion.svg
+          viewBox="0 0 320 120"
+          className="absolute inset-x-0 bottom-2 h-28 w-full"
+          style={{ transform: "translateZ(-40px)" }}
+          aria-hidden
+        >
+          {PILLAR_META.map((p, i) => (
+            <motion.rect
+              key={p.id}
+              x={18 + i * 42}
+              width="20"
+              rx="0"
+              fill={pillarColor(p.id)}
+              opacity={0.85}
+              initial={{ height: 0, y: 110 }}
+              animate={{ height: 20 + p.weight * 260, y: 110 - (20 + p.weight * 260) }}
+              transition={{ duration: 1.1, delay: 0.35 + i * 0.08, ease }}
+            />
+          ))}
+          <line x1="0" y1="110" x2="320" y2="110" stroke="var(--border)" strokeWidth="1" />
+        </motion.svg>
+
+        {/* near plane — the orbit */}
+        <div style={{ transform: "translateZ(60px)" }}>
+          <PillarConstellation />
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------- Sector plate */
+
+/** Full illustrated tile per industry profile — abstract geometry, own accent. */
+export function SectorPlate({ id, active }: { id: string; active?: boolean }) {
+  const tone: Record<string, string> = {
+    services: "var(--teal)",
+    manufacturing: "var(--rust)",
+    retail: "var(--ochre)",
+    saas: "var(--slate-blue)",
+    startup: "var(--oxblood)",
+  };
+  const c = tone[id] ?? "var(--accent)";
+  return (
+    <svg
+      viewBox="0 0 200 110"
+      className="h-24 w-full"
+      aria-hidden
+      style={{ opacity: active ? 1 : 0.92 }}
+    >
+      <rect x="0" y="0" width="200" height="110" fill="var(--secondary)" />
+      {id === "services" && (
+        <>
+          <circle cx="52" cy="55" r="30" fill={c} opacity="0.9" />
+          <path d="M52 25 A30 30 0 0 1 82 55 L52 55 Z" fill="var(--background)" opacity="0.85" />
+          <rect x="100" y="30" width="70" height="8" fill={c} opacity="0.55" />
+          <rect x="100" y="50" width="48" height="8" fill={c} opacity="0.8" />
+          <rect x="100" y="70" width="60" height="8" fill="var(--foreground)" opacity="0.25" />
+        </>
+      )}
+      {id === "manufacturing" && (
+        <>
+          <rect x="22" y="58" width="26" height="34" fill={c} />
+          <rect x="54" y="42" width="26" height="50" fill={c} opacity="0.75" />
+          <rect x="86" y="26" width="26" height="66" fill={c} opacity="0.55" />
+          <circle cx="152" cy="42" r="22" fill="none" stroke={c} strokeWidth="6" />
+          <circle cx="152" cy="42" r="6" fill={c} />
+          <path d="M14 92 H186" stroke="var(--foreground)" strokeOpacity="0.3" strokeWidth="2" />
+        </>
+      )}
+      {id === "retail" && (
+        <>
+          <path d="M28 40 H172 L160 92 H40 Z" fill={c} opacity="0.85" />
+          <path d="M78 40 V28 a22 22 0 0 1 44 0 v12" fill="none" stroke="var(--foreground)" strokeOpacity="0.4" strokeWidth="4" />
+          <rect x="60" y="58" width="80" height="4" fill="var(--background)" opacity="0.8" />
+          <rect x="72" y="70" width="56" height="4" fill="var(--background)" opacity="0.6" />
+        </>
+      )}
+      {id === "saas" && (
+        <>
+          <rect x="24" y="24" width="152" height="62" fill="none" stroke={c} strokeWidth="4" />
+          <path d="M32 78 L70 52 L98 66 L136 32 L168 46" fill="none" stroke={c} strokeWidth="5" />
+          <circle cx="136" cy="32" r="7" fill={c} />
+          <rect x="24" y="24" width="152" height="10" fill={c} opacity="0.35" />
+        </>
+      )}
+      {id === "startup" && (
+        <>
+          <path d="M100 14 C124 42 132 62 128 88 L100 74 L72 88 C68 62 76 42 100 14 Z" fill={c} />
+          <circle cx="100" cy="50" r="11" fill="var(--background)" />
+          <path d="M64 96 L48 108 M136 96 L152 108" stroke={c} strokeWidth="5" />
+        </>
+      )}
+    </svg>
+  );
+}
+
+/* -------------------------------------------------------- Display numeral */
+
+/** Oversized numeral used as a compositional anchor. */
+export function DisplayNumeral({
+  value,
+  caption,
+  tone = "var(--accent)",
+  className,
+}: {
+  value: string;
+  caption: string;
+  tone?: string;
+  className?: string;
+}) {
+  return (
+    <div className={cn("min-w-0", className)}>
+      <motion.p
+        initial={{ opacity: 0, y: 22 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.8, ease }}
+        className="figure text-6xl leading-none sm:text-7xl"
+        style={{ color: tone }}
+      >
+        {value}
+      </motion.p>
+      <p className="mt-3 text-xs uppercase tracking-[0.2em] text-muted-foreground">{caption}</p>
+    </div>
+  );
+}
