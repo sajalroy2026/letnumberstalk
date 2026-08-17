@@ -1671,9 +1671,10 @@ const DIAL_LABEL: Record<PillarId, string> = {
 };
 
 const TAU = Math.PI * 2;
+const r2 = (n: number) => Math.round(n * 100) / 100;
 const polar = (cx: number, cy: number, r: number, deg: number) => {
   const a = ((deg - 90) * TAU) / 360;
-  return [cx + r * Math.cos(a), cy + r * Math.sin(a)] as const;
+  return [r2(cx + r * Math.cos(a)), r2(cy + r * Math.sin(a))] as const;
 };
 const arcPath = (cx: number, cy: number, r: number, a0: number, a1: number) => {
   const [x0, y0] = polar(cx, cy, r, a0);
