@@ -1731,12 +1731,8 @@ export function PillarEmblems({ className }: { className?: string }) {
           rotateX: sx,
           rotateY: sy,
           transformStyle: "preserve-3d",
-          backgroundColor: "oklch(0.196 0.056 268)",
-          boxShadow:
-            "0 40px 90px -46px oklch(0.1 0.03 268 / 0.95), inset 0 1px 0 0 oklch(0.98 0 0 / 0.14)",
-          border: "1px solid oklch(0.98 0 0 / 0.16)",
         }}
-        className="relative w-full overflow-hidden"
+        className="relative w-full overflow-visible"
       >
         <svg viewBox="0 0 760 600" className="block h-auto w-full" role="img" aria-label="Seven weighted pillars of the diagnostic">
           <defs>
