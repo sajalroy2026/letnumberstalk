@@ -500,9 +500,8 @@ export function ReportStage() {
             </motion.section>
           ) : (
             <p className="mt-8 measure text-base leading-relaxed text-muted-foreground">
-              {assessments.length} of 7 pillars were assessed, so independent pillar scores are
-              presented without a blended figure. Assessing all 7 produces the Integrated Business
-              Health Score.
+              {assessments.length} of 7 pillars were assessed, so this report presents independent
+              pillar scores. Assessing all 7 produces the Integrated Business Health Score.
             </p>
           )}
 
