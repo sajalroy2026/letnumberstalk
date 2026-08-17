@@ -402,20 +402,32 @@ export function ReportStage() {
           initial={{ opacity: 0, scale: 0.97, rotateX: 10 }}
           animate={{ opacity: 1, scale: 1, rotateX: 0 }}
           transition={{ duration: 0.9, delay: 0.15, ease }}
-          className="plate print-plain mt-10 rounded-md p-10 text-center"
+          className="plate print-plain mt-10 grid items-center gap-10 rounded-md p-10 md:grid-cols-[auto_minmax(0,1fr)]"
         >
-          <p className="text-xs uppercase tracking-[0.28em] text-muted-foreground">
-            Integrated Business Health Score
-          </p>
-          <p className="mt-4 font-display text-8xl leading-none text-foreground">{shown}</p>
-          <p className="mt-4 text-sm text-muted-foreground">
-            Weighted composite across all seven pillars.
-          </p>
+          <div className="justify-self-center">
+            <ScoreDial
+              score={report.integratedScore}
+              tier={tierOf(report.integratedScore)}
+              label="Integrated"
+            />
+          </div>
+          <div className="min-w-0">
+            <p className="text-xs uppercase tracking-[0.28em] text-muted-foreground">
+              Integrated Business Health Score
+            </p>
+            <p className="mt-3 measure text-sm leading-relaxed text-muted-foreground">
+              Weighted composite across 7 pillars, each pillar contributing at its defined weight.
+              Sector profile: {sectorName}.
+            </p>
+            <div className="mt-6">
+              <PillarWeightRing />
+            </div>
+          </div>
         </motion.section>
       ) : (
-        <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground">
-          {assessments.length} of seven pillars were assessed, so independent pillar scores are
-          presented without a blended figure. Assessing all seven produces the Integrated Business
+        <p className="mt-8 measure text-base leading-relaxed text-muted-foreground">
+          {assessments.length} of 7 pillars were assessed, so independent pillar scores are
+          presented without a blended figure. Assessing all 7 produces the Integrated Business
           Health Score.
         </p>
       )}
