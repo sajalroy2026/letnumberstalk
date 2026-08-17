@@ -378,7 +378,7 @@ export function PillarConstellation({ className }: { className?: string }) {
                 stroke="var(--border)"
                 strokeWidth="0.75"
               />
-              <circle cx={s.nx} cy={s.ny} r={3.2} fill="var(--accent)" />
+              <circle cx={s.nx} cy={s.ny} r={3.6} fill={pillarColor(s.id)} />
             </g>
           ))}
         </motion.g>
@@ -388,7 +388,8 @@ export function PillarConstellation({ className }: { className?: string }) {
             key={s.id}
             d={s.path}
             fill="none"
-            stroke={i % 2 === 0 ? "var(--accent)" : "var(--healthy)"}
+            stroke={pillarColor(s.id)}
+
             strokeWidth={6 + s.weight * 26}
             strokeLinecap="butt"
             initial={{ pathLength: 0, opacity: 0 }}
