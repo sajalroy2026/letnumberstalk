@@ -20,7 +20,15 @@ MBB fused with mid-century modern, resolved as an **editorial magazine** system 
 - **Accent discipline**: one authority tone (deep ink-navy) and one decisive accent (warm rust/copper). Diagnostic tiers get their own quiet signal set — muted green, ochre, burnt orange, deep red — never bright.
 - **Type**: Libre Baskerville headings, IBM Plex Sans body, IBM Plex Mono for every figure, formula, band edge and points count. Numbers set in mono is what makes it read as an instrument.
 - **Layout**: magazine — featured score plate plus a grid of readings, wide editorial margins, measured column widths, no full-bleed text.
-- **Motion**: restrained and heavy. Slow reveals, weighted score settles, page-turn chaptering between pillars. Nothing bouncy. Reduced-motion honoured throughout.
+- **Motion — the Nolan register**: restrained, heavy, engineered. Depth-parallax entry, weighted score settles, page-turn chaptering between pillars, layered plates that move on separate z-planes. Slow, deliberate easing; nothing bouncy or playful. Reduced-motion honoured throughout.
+- **Not text-only**: every screen carries a visual argument — value-chain diagrams, pillar-weight rings, benchmark position markers showing where the entered figure sits on the band scale, tier meters, a seven-pillar composite figure on the report cover. Illustration and diagram carry as much weight as copy.
+
+## Voice and attribution
+
+- **Numerals, never words.** "54 metrics", "7 pillars", "5 sector profiles". Sweeping the whole codebase for spelled-out numbers.
+- **High-gravitas register** throughout — the language of a partner-level discovery call, not product marketing. Definitions, sourcing and formula copy get the same register as headline copy; no casual tone anywhere.
+- **Footer note** states the diagnostic capability is built on AI-augmented research synthesis and a fusion of product management and management consulting frameworks.
+- **Attribution**: Mr Sajal Roy — Enterprise Systems Architect. Contact rendered as `Mail — roysajal5@gmail.com`. A LinkedIn slot is built into the same block, left empty until you supply the URL.
 
 ## Naming
 
@@ -28,12 +36,13 @@ MBB fused with mid-century modern, resolved as an **editorial magazine** system 
 
 ## Fixes, concretely
 
-1. **Metric card restraint.** Definition stays visible (one line). Formula, scoring band, sourcing and sector benchmarks all collapse behind four equal chips: `Formula` · `Scoring band` · `Where to find this` · `Sector benchmarks`. Only one opens at a time. The card becomes an input and a reading — everything else is on demand.
-2. **Areas to Look Into in the report.** Every metric outside its healthy range gets its full Areas block fused directly beneath its row in the report — value-chain location, contributing factors, illustrative examples, verbatim from the Logic Spec. The consolidated Areas set also appears in the download.
-3. **Report as a document.** Cover plate with the Integrated Score, a pillar breakdown where each pillar is a chapter with its own score plate and its readings beneath, Caution as a distinct bordered block, then disclosure. Print stylesheet tuned so the download is a real document, not a screenshot of a webpage.
-4. **About sections with standing.** Promoted to their own full-width editorial spread — portrait-column layout, pull quote, credential line — on the About route and at the close of the report.
-5. **Footer.** Constrained measure (~70ch), three-column structure, disclosure as a distinct fine-print band under a rule.
-6. **Responsive parity.** Metric cards, benchmark tables and score plates rebuilt on the grid pattern so nothing clips at 375px. Benchmark tables scroll within their own frame.
+1. **Metric card as an interactive instrument.** Definition stays visible (one line, tightened register). Formula, scoring band, sourcing and sector benchmarks collapse behind four equal chips: `Definition` · `Formula` · `Where to find this` · `Sector benchmarks`. One opens at a time, animated. The formula panel renders in proper mathematical notation with the entered figures substituted live. The benchmark panel keeps its current table (which works) and gains a position marker showing where the reading falls.
+2. **Areas to Look Into in the report.** Every metric scoring below its healthy range gets its full Areas block fused directly beneath its row — value-chain location of the finding, commonly contributing factors, illustrative examples, verbatim from the Logic Spec. A small value-chain diagram highlights the stage the finding sits in. Consolidated Areas appear once per pillar chapter and again in the integrated summary.
+3. **The downloadable PDF carries all of it.** Cover plate, integrated score, pillar chapters, every metric reading, every Areas to Look Into block for weak scores, the Caution block, disclosure, and both About sections. Print stylesheet tuned so it reads as a bound deliverable — running heads, page rules, no clipped tables.
+4. **About sections with standing.** Full-width editorial spread — portrait column, pull quote, credential line for Mr Sajal Roy, Enterprise Systems Architect — on the About route and at the close of the report.
+5. **Footer.** Constrained measure (~70ch), three-column structure, methodology note and attribution block, disclosure as a distinct fine-print band under a rule.
+6. **Responsive parity.** Metric cards, benchmark tables, diagrams and score plates rebuilt on the grid pattern so nothing clips at 375px. Diagrams scale, never scroll off.
+
 
 ## Visitor analytics
 
