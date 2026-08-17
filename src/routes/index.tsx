@@ -138,13 +138,13 @@ function Home() {
               >
                 <Link
                   to="/assess"
-                  className="rule-copper px-9 py-3.5 text-xs uppercase tracking-[0.22em] text-primary-foreground shadow-[var(--shadow-lift)] transition-transform hover:-translate-y-0.5"
+                  className="sheen rule-copper px-9 py-3.5 text-xs uppercase tracking-[0.22em] text-primary-foreground shadow-[var(--shadow-lift)] transition-transform hover:-translate-y-0.5"
                 >
                   Begin the assessment
                 </Link>
                 <Link
                   to="/about"
-                  className="text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
+                  className="text-xs uppercase tracking-[0.2em] text-muted-foreground underline decoration-accent/50 underline-offset-8 transition-colors hover:text-foreground"
                 >
                   How it works
                 </Link>
@@ -157,9 +157,9 @@ function Home() {
                 className="mt-14 grid max-w-2xl grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-4"
               >
                 <Stat value={String(METRIC_CONTENT.length)} label="Metrics" tone="var(--teal)" />
-                <Stat value="7" label="Weighted pillars" tone="var(--rust)" />
-                <Stat value={String(SECTORS.length)} label="Industry profiles" tone="var(--ochre)" />
-                <Stat value="0" label="Figures stored" tone="var(--slate-blue)" />
+                <Stat value="7" label="Weighted pillars" tone="var(--amber)" />
+                <Stat value={String(SECTORS.length)} label="Industry profiles" tone="var(--plum)" />
+                <Stat value="0" label="Figures stored" tone="var(--lime)" />
               </motion.dl>
             </div>
 
