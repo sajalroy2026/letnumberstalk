@@ -129,7 +129,7 @@
   --gold: oklch(0.578 0.108 82);
   --burnt: oklch(0.548 0.138 46);
   --forest: oklch(0.452 0.098 158);
-  --oxblood-core: oklch(0.428 0.186 21);
+  --oxblood-core: oklch(0.372 0.176 23);
   --mocha: oklch(0.448 0.056 52);
 
 
@@ -151,7 +151,7 @@
   --gold-glow: oklch(0.792 0.116 88);
   --burnt-glow: oklch(0.732 0.142 54);
   --forest-glow: oklch(0.722 0.116 156);
-  --oxblood-glow: oklch(0.668 0.198 22);
+  --oxblood-glow: oklch(0.612 0.196 24);
   --mocha-glow: oklch(0.762 0.058 58);
 
 
@@ -291,15 +291,56 @@
 
 /* Pale oxblood band — the deepest warm counterpoint, at ground weight. */
 .plum-band {
-  --background: oklch(0.944 0.03 26);
-  --card: oklch(0.984 0.012 26);
-  --secondary: oklch(0.9 0.044 24);
-  --muted: oklch(0.904 0.04 24);
-  --elevated: oklch(0.984 0.012 26);
-  --border: oklch(0.85 0.056 22);
-  --gradient-depth: radial-gradient(125% 95% at 50% -12%, oklch(0.966 0.022 34) 0%, oklch(0.906 0.05 20) 78%);
+  --background: oklch(0.258 0.126 22);
+  --foreground: oklch(0.974 0.012 60);
+  --card: oklch(0.308 0.126 22);
+  --card-foreground: oklch(0.974 0.012 60);
+  --popover: oklch(0.308 0.126 22);
+  --popover-foreground: oklch(0.974 0.012 60);
+  --primary: oklch(0.812 0.116 88);
+  --primary-foreground: oklch(0.202 0.098 22);
+  --secondary: oklch(0.328 0.126 22);
+  --secondary-foreground: oklch(0.974 0.012 60);
+  --muted: oklch(0.328 0.126 22);
+  --muted-foreground: oklch(0.872 0.036 46);
+  --accent: oklch(0.812 0.116 88);
+  --accent-foreground: oklch(0.202 0.098 22);
+  --accent-glow: oklch(0.888 0.098 92);
+  --border: oklch(0.98 0.01 60 / 22%);
+  --input: oklch(0.98 0.01 60 / 34%);
+  --ring: oklch(0.812 0.116 88);
+  --elevated: oklch(0.308 0.126 22);
+  --paper: oklch(0.308 0.126 22);
+  --paper-foreground: oklch(0.974 0.012 60);
+  --healthy: oklch(0.762 0.116 156);
+  --acceptable: oklch(0.812 0.116 88);
+  --concern: oklch(0.792 0.132 60);
+  --critical: oklch(0.812 0.108 40);
+  /* Lifted family so figures and rules read on the deep red ground. */
+  --navy: oklch(0.868 0.042 258);
+  --navy-mid: oklch(0.828 0.062 246);
+  --steel: oklch(0.842 0.058 244);
+  --gold: oklch(0.812 0.116 88);
+  --burnt: oklch(0.792 0.132 56);
+  --forest: oklch(0.762 0.116 156);
+  --oxblood-core: oklch(0.848 0.098 30);
+  --mocha: oklch(0.832 0.05 58);
+  --mocha-glow: oklch(0.888 0.04 62);
+  --shadow-plate: 0 1px 0 0 oklch(0.98 0 0 / 0.08), 0 20px 44px -34px oklch(0.08 0.04 22 / 0.8);
+  --shadow-lift: 0 28px 62px -30px oklch(0.08 0.04 22 / 0.8);
+  --gradient-glass: linear-gradient(150deg, oklch(0.98 0.01 60 / 0.12), oklch(0.98 0.01 60 / 0.04));
+  /* Flat ground: the deep red carries no wash of its own. */
+  --gradient-depth: none;
   background-color: var(--background);
+  background-image: none;
   color: var(--foreground);
+}
+
+/* The flat red band overrides any atmospheric wash applied alongside it. */
+.plum-band.aurora-wash,
+.plum-band.warm-wash,
+.plum-band.prism-wash {
+  background-image: none;
 }
 
 /* Gold band — warm, bright ground for high-energy chapters. */
