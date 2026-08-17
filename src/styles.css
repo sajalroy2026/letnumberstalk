@@ -288,7 +288,72 @@
   color: var(--foreground);
 }
 
+/* Mint band — cool bright ground, analytical chapters. */
+.mint-band {
+  --background: oklch(0.952 0.042 162);
+  --card: oklch(0.982 0.018 162);
+  --secondary: oklch(0.916 0.05 162);
+  --muted: oklch(0.916 0.05 162);
+  --elevated: oklch(0.982 0.018 162);
+  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.976 0.026 168) 0%, oklch(0.924 0.05 156) 72%);
+  background-color: var(--background);
+  color: var(--foreground);
+}
 
+/* Blush band — warm bright ground, human chapters. */
+.blush-band {
+  --background: oklch(0.954 0.036 22);
+  --card: oklch(0.984 0.016 22);
+  --secondary: oklch(0.918 0.046 22);
+  --muted: oklch(0.918 0.046 22);
+  --elevated: oklch(0.984 0.016 22);
+  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.978 0.022 30) 0%, oklch(0.926 0.046 18) 72%);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/*
+ * Rotating accent system. Any subtree marked with a .tone-* class re-binds the
+ * local accent pair, so rules, numerals, badges, focus rings, chart strokes and
+ * figure highlights all shift together chapter by chapter.
+ */
+.tone-teal,
+.tone-amber,
+.tone-plum,
+.tone-cyan,
+.tone-lime,
+.tone-coral,
+.tone-rust {
+  --ring: var(--accent);
+  --gradient-rust: linear-gradient(135deg, var(--accent-glow), var(--accent));
+  --gradient-warm: linear-gradient(120deg, var(--accent-glow), var(--accent) 62%, color-mix(in oklab, var(--accent) 55%, var(--foreground)));
+}
+
+.tone-teal {
+  --accent: var(--teal);
+  --accent-glow: var(--teal-glow);
+}
+.tone-amber {
+  --accent: var(--amber);
+  --accent-glow: var(--amber-glow);
+}
+.tone-plum {
+  --accent: var(--plum);
+  --accent-glow: var(--plum-glow);
+}
+.tone-cyan {
+  --accent: var(--cyan);
+  --accent-glow: var(--cyan-glow);
+}
+.tone-lime {
+  --accent: var(--lime);
+  --accent-glow: var(--lime-glow);
+}
+.tone-coral,
+.tone-rust {
+  --accent: var(--rust);
+  --accent-glow: var(--rust-glow);
+}
 
 
 .dark {
