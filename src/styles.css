@@ -329,6 +329,28 @@
   .no-print {
     display: none !important;
   }
+  .ink {
+    --background: #ffffff;
+    --foreground: #16233a;
+    --card: #ffffff;
+    --card-foreground: #16233a;
+    --secondary: #f2ece1;
+    --muted-foreground: #4a5568;
+    --primary: #16233a;
+    --primary-foreground: #ffffff;
+    --accent: #b8592c;
+    --border: rgba(22, 35, 58, 0.25);
+    --healthy: #1f6f63;
+    --acceptable: #a97e18;
+    --concern: #b8592c;
+    --critical: #8c2f21;
+    background: #ffffff !important;
+    color: #16233a !important;
+  }
+  .grid-field::before {
+    display: none !important;
+  }
+
   .print-plain {
     background: #fff !important;
     color: #14181f !important;
