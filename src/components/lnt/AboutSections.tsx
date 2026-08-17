@@ -32,8 +32,8 @@ export function AboutSections() {
           <div className="no-print">
             <PillarWeightRing />
             <p className="mt-5 border-l-2 border-accent/70 pl-5 font-display text-lg leading-relaxed text-foreground">
-              “A diagnosis is not an opinion. It is what the figures already say, read against the
-              right comparison set.”
+              “A diagnosis is what the figures already say, read against the right comparison
+              set.”
             </p>
           </div>
         </div>

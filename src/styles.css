@@ -77,8 +77,9 @@
   --color-plum: var(--plum);
   --color-cyan: var(--cyan);
   --color-lime: var(--lime);
-  --font-display: "Libre Baskerville", Georgia, serif;
-  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-accent-glow: var(--accent-glow);
+  --font-display: "Fraunces", "Libre Baskerville", Georgia, serif;
+  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
@@ -87,52 +88,62 @@
   --radius: 0.125rem;
 
   /* Warm luminous system: ivory ground, indigo-espresso ink, bright accent family */
-  --background: oklch(0.972 0.017 88);
-  --foreground: oklch(0.245 0.026 285);
-  --card: oklch(0.988 0.009 90);
-  --card-foreground: oklch(0.245 0.026 285);
-  --popover: oklch(0.988 0.009 90);
-  --popover-foreground: oklch(0.245 0.026 285);
-  --primary: oklch(0.585 0.115 196);
-  --primary-foreground: oklch(0.985 0.01 90);
-  --secondary: oklch(0.918 0.031 84);
-  --secondary-foreground: oklch(0.245 0.026 285);
-  --muted: oklch(0.918 0.031 84);
-  --muted-foreground: oklch(0.475 0.032 285);
-  --accent: oklch(0.638 0.178 40);
-  --accent-foreground: oklch(0.985 0.01 90);
-  --destructive: oklch(0.535 0.185 22);
-  --destructive-foreground: oklch(0.985 0.01 90);
-  --border: oklch(0.245 0.026 285 / 16%);
-  --input: oklch(0.245 0.026 285 / 24%);
-  --ring: oklch(0.638 0.178 40);
+  --background: oklch(0.978 0.015 88);
+  --foreground: oklch(0.192 0.028 285);
+  --card: oklch(0.992 0.008 90);
+  --card-foreground: oklch(0.192 0.028 285);
+  --popover: oklch(0.992 0.008 90);
+  --popover-foreground: oklch(0.192 0.028 285);
+  --primary: oklch(0.508 0.108 208);
+  --primary-foreground: oklch(0.988 0.008 90);
+  --secondary: oklch(0.922 0.029 84);
+  --secondary-foreground: oklch(0.192 0.028 285);
+  --muted: oklch(0.922 0.029 84);
+  --muted-foreground: oklch(0.398 0.028 285);
+  --accent: oklch(0.552 0.185 38);
+  --accent-foreground: oklch(0.988 0.008 90);
+  --accent-glow: oklch(0.742 0.168 52);
+  --destructive: oklch(0.492 0.192 22);
+  --destructive-foreground: oklch(0.988 0.008 90);
+  --border: oklch(0.192 0.028 285 / 18%);
+  --input: oklch(0.192 0.028 285 / 28%);
+  --ring: oklch(0.552 0.185 38);
 
-  /* Diagnostic tiers — brighter, still legible on ivory */
-  --healthy: oklch(0.585 0.115 196);
-  --acceptable: oklch(0.702 0.152 78);
-  --concern: oklch(0.638 0.178 40);
-  --critical: oklch(0.512 0.182 20);
+  /* Diagnostic tiers — AA on ivory */
+  --healthy: oklch(0.508 0.108 208);
+  --acceptable: oklch(0.588 0.132 78);
+  --concern: oklch(0.552 0.185 38);
+  --critical: oklch(0.462 0.188 20);
 
-  /* Expressive accent family */
-  --rust: oklch(0.638 0.178 40);
-  --teal: oklch(0.585 0.115 196);
-  --ochre: oklch(0.788 0.162 82);
-  --amber: oklch(0.792 0.158 68);
-  --oxblood: oklch(0.478 0.162 20);
-  --plum: oklch(0.545 0.168 330);
-  --cyan: oklch(0.712 0.118 226);
-  --lime: oklch(0.808 0.152 122);
-  --slate-blue: oklch(0.712 0.078 236);
-  --putty: oklch(0.918 0.031 84);
+  /* Expressive accent family — text-safe values */
+  --rust: oklch(0.552 0.185 38);
+  --teal: oklch(0.508 0.108 208);
+  --ochre: oklch(0.588 0.132 78);
+  --amber: oklch(0.612 0.148 66);
+  --oxblood: oklch(0.442 0.158 20);
+  --plum: oklch(0.492 0.185 330);
+  --cyan: oklch(0.532 0.112 234);
+  --lime: oklch(0.548 0.128 142);
+  --slate-blue: oklch(0.512 0.062 240);
+  --putty: oklch(0.922 0.029 84);
 
-  /* Pillar identity colours — colour as information */
-  --pillar-financial: oklch(0.585 0.115 196);
-  --pillar-risk: oklch(0.638 0.178 40);
-  --pillar-market: oklch(0.712 0.118 226);
-  --pillar-operational: oklch(0.752 0.158 78);
-  --pillar-strategic: oklch(0.545 0.168 330);
-  --pillar-organizational: oklch(0.632 0.145 148);
-  --pillar-technology: oklch(0.565 0.152 288);
+  /* Luminous counterparts — figures, glows, gradient stops only */
+  --rust-glow: oklch(0.742 0.172 52);
+  --teal-glow: oklch(0.762 0.118 202);
+  --ochre-glow: oklch(0.822 0.152 86);
+  --amber-glow: oklch(0.832 0.158 74);
+  --plum-glow: oklch(0.702 0.176 332);
+  --cyan-glow: oklch(0.792 0.118 226);
+  --lime-glow: oklch(0.858 0.152 132);
+
+  /* Pillar identity colours — colour as information, AA on light grounds */
+  --pillar-financial: oklch(0.508 0.108 208);
+  --pillar-risk: oklch(0.552 0.185 38);
+  --pillar-market: oklch(0.532 0.112 234);
+  --pillar-operational: oklch(0.578 0.132 76);
+  --pillar-strategic: oklch(0.492 0.185 330);
+  --pillar-organizational: oklch(0.538 0.132 150);
+  --pillar-technology: oklch(0.512 0.158 290);
 
   /* Surfaces and depth */
   --paper: oklch(0.988 0.009 90);
@@ -184,12 +195,20 @@
   --secondary: oklch(0.292 0.042 286);
   --secondary-foreground: oklch(0.968 0.014 88);
   --muted: oklch(0.292 0.042 286);
-  --muted-foreground: oklch(0.822 0.022 86);
+  --muted-foreground: oklch(0.892 0.018 86);
   --accent: oklch(0.742 0.168 48);
   --accent-foreground: oklch(0.198 0.034 285);
   --border: oklch(0.938 0.02 88 / 20%);
   --input: oklch(0.938 0.02 88 / 32%);
   --ring: oklch(0.742 0.168 48);
+  --accent-glow: oklch(0.872 0.152 78);
+  --rust-glow: oklch(0.822 0.168 54);
+  --teal-glow: oklch(0.858 0.118 198);
+  --ochre-glow: oklch(0.892 0.148 88);
+  --amber-glow: oklch(0.888 0.152 76);
+  --plum-glow: oklch(0.792 0.168 332);
+  --cyan-glow: oklch(0.872 0.108 226);
+  --lime-glow: oklch(0.908 0.148 128);
   --healthy: oklch(0.788 0.128 192);
   --acceptable: oklch(0.858 0.152 86);
   --concern: oklch(0.742 0.168 48);
@@ -269,7 +288,72 @@
   color: var(--foreground);
 }
 
+/* Mint band — cool bright ground, analytical chapters. */
+.mint-band {
+  --background: oklch(0.952 0.042 162);
+  --card: oklch(0.982 0.018 162);
+  --secondary: oklch(0.916 0.05 162);
+  --muted: oklch(0.916 0.05 162);
+  --elevated: oklch(0.982 0.018 162);
+  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.976 0.026 168) 0%, oklch(0.924 0.05 156) 72%);
+  background-color: var(--background);
+  color: var(--foreground);
+}
 
+/* Blush band — warm bright ground, human chapters. */
+.blush-band {
+  --background: oklch(0.954 0.036 22);
+  --card: oklch(0.984 0.016 22);
+  --secondary: oklch(0.918 0.046 22);
+  --muted: oklch(0.918 0.046 22);
+  --elevated: oklch(0.984 0.016 22);
+  --gradient-depth: radial-gradient(120% 90% at 50% -10%, oklch(0.978 0.022 30) 0%, oklch(0.926 0.046 18) 72%);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/*
+ * Rotating accent system. Any subtree marked with a .tone-* class re-binds the
+ * local accent pair, so rules, numerals, badges, focus rings, chart strokes and
+ * figure highlights all shift together chapter by chapter.
+ */
+.tone-teal,
+.tone-amber,
+.tone-plum,
+.tone-cyan,
+.tone-lime,
+.tone-coral,
+.tone-rust {
+  --ring: var(--accent);
+  --gradient-rust: linear-gradient(135deg, var(--accent-glow), var(--accent));
+  --gradient-warm: linear-gradient(120deg, var(--accent-glow), var(--accent) 62%, color-mix(in oklab, var(--accent) 55%, var(--foreground)));
+}
+
+.tone-teal {
+  --accent: var(--teal);
+  --accent-glow: var(--teal-glow);
+}
+.tone-amber {
+  --accent: var(--amber);
+  --accent-glow: var(--amber-glow);
+}
+.tone-plum {
+  --accent: var(--plum);
+  --accent-glow: var(--plum-glow);
+}
+.tone-cyan {
+  --accent: var(--cyan);
+  --accent-glow: var(--cyan-glow);
+}
+.tone-lime {
+  --accent: var(--lime);
+  --accent-glow: var(--lime-glow);
+}
+.tone-coral,
+.tone-rust {
+  --accent: var(--rust);
+  --accent-glow: var(--rust-glow);
+}
 
 
 .dark {
@@ -506,25 +590,100 @@
 }
 
 
+/* Legibility scrim — keeps copy crisp when a figure sits behind it. */
+@utility scrim {
+  position: relative;
+  isolation: isolate;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -1.5rem;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(
+      70% 80% at 30% 50%,
+      color-mix(in oklab, var(--background) 88%, transparent),
+      transparent 78%
+    );
+  }
+}
 
+/* Ambient optical motion — low amplitude, always running behind content. */
+@keyframes lnt-drift {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(1.6%, -2.2%, 0) scale(1.03); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+@keyframes lnt-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes lnt-pulse-soft {
+  0%, 100% { opacity: 0.42; }
+  50% { opacity: 0.86; }
+}
+@keyframes lnt-sweep {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(220%); }
+}
 
+@utility ambient-drift {
+  animation: lnt-drift 22s ease-in-out infinite;
+}
+@utility ambient-drift-slow {
+  animation: lnt-drift 38s ease-in-out infinite;
+}
+@utility ambient-spin {
+  animation: lnt-spin 90s linear infinite;
+  transform-origin: 50% 50%;
+}
+@utility ambient-pulse {
+  animation: lnt-pulse-soft 6s ease-in-out infinite;
+}
 
+/* Optical light sweep across a panel — a single cinematic pass on entry. */
+@utility sheen {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      100deg,
+      transparent 30%,
+      color-mix(in oklab, var(--accent-glow) 30%, transparent) 50%,
+      transparent 70%
+    );
+    animation: lnt-sweep 5.5s cubic-bezier(0.16, 1, 0.3, 1) 0.6s infinite;
+  }
+}
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    font-size: 106.25%;
   }
   body {
     font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    letter-spacing: 0.002em;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
   h1, h2, h3, .font-display {
     font-family: var(--font-display);
+    letter-spacing: -0.015em;
+  }
+  p {
+    text-wrap: pretty;
   }
   ::selection {
     background: color-mix(in oklab, var(--accent) 24%, transparent);
   }
 }
+
 
 @media (prefers-reduced-motion: reduce) {
   *,

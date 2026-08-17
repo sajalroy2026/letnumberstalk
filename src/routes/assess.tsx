@@ -17,7 +17,7 @@ export const Route = createFileRoute("/assess")({
       {
         property: "og:description",
         content:
-          "7 weighted pillars, 54 metrics, 5 industry profiles. No account, no data leaves your browser.",
+          "7 weighted pillars, 54 metrics, 5 industry profiles, computed entirely inside your browser.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

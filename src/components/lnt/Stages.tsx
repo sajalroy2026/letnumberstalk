@@ -198,7 +198,7 @@ export function PillarStage() {
         total={selectedPillars.length}
         name={meta.name}
         weight={meta.weight}
-        note={`${PILLAR_NOTE[pillarId]} Enter what is known — every blank metric is left out of the calculation entirely rather than counted as zero.`}
+        note={`${PILLAR_NOTE[pillarId]} Enter what is known — the calculation re-weights across exactly the metrics you supply.`}
       />
       <PillarIdentityRail
         name={meta.name}
@@ -245,7 +245,7 @@ export function PillarStage() {
           {!assessment.meetsCriticalMinimum ? (
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               A meaningful reading for this pillar needs at least {tier.floor} metrics — {tier.floorText}.
-              Anything entered below that is held, not scored.
+              Figures entered so far are held for the session and score once that floor is reached.
             </p>
           ) : null}
         </div>
@@ -500,9 +500,8 @@ export function ReportStage() {
             </motion.section>
           ) : (
             <p className="mt-8 measure text-base leading-relaxed text-muted-foreground">
-              {assessments.length} of 7 pillars were assessed, so independent pillar scores are
-              presented without a blended figure. Assessing all 7 produces the Integrated Business
-              Health Score.
+              {assessments.length} of 7 pillars were assessed, so this report presents independent
+              pillar scores. Assessing all 7 produces the Integrated Business Health Score.
             </p>
           )}
 
@@ -568,7 +567,7 @@ export function ReportStage() {
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   {a.entered} metrics were entered, below the {COVERAGE_TIERS[a.pillarId]!.floor}{" "}
                   needed for a meaningful reading — {COVERAGE_TIERS[a.pillarId]!.floorText}. The
-                  figures entered are held, not scored.
+                  figures entered are held for the session and score once that floor is reached.
                 </p>
               </div>
             )}

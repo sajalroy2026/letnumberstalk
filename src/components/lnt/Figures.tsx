@@ -838,7 +838,10 @@ export function SectorPlate({ id, active }: { id: string; active?: boolean }) {
 
 /* -------------------------------------------------------- Display numeral */
 
-/** Oversized numeral used as a compositional anchor. */
+/**
+ * Oversized numeral used as a compositional anchor. Numeric values resolve
+ * on entry — the figure counts and settles rather than simply appearing.
+ */
 export function DisplayNumeral({
   value,
   caption,
@@ -850,22 +853,29 @@ export function DisplayNumeral({
   tone?: string;
   className?: string;
 }) {
+  const numeric = Number(value);
+  const isNumeric = value.trim() !== "" && Number.isFinite(numeric);
+  const [entered, setEntered] = useState(false);
+  const shown = useCountUp(entered && isNumeric ? numeric : 0, 1500);
+
   return (
     <div className={cn("min-w-0", className)}>
       <motion.p
-        initial={{ opacity: 0, y: 22 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 22, filter: "blur(10px)" }}
+        whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        onViewportEnter={() => setEntered(true)}
         viewport={{ once: true, margin: "-60px" }}
-        transition={{ duration: 0.8, ease }}
+        transition={{ duration: 0.9, ease }}
         className="figure text-6xl leading-none sm:text-7xl"
         style={{ color: tone }}
       >
-        {value}
+        {isNumeric ? shown : value}
       </motion.p>
       <p className="mt-3 text-xs uppercase tracking-[0.2em] text-muted-foreground">{caption}</p>
     </div>
   );
 }
+
 
 /* ---------------------------------------------------- Cinematic depth wrap */
 
@@ -1029,6 +1039,175 @@ export function OrbitField({ className }: { className?: string }) {
             cx={150 + r}
             cy={150}
             transform={`rotate(${-18 - i * 12} 150 150)`}
+          />
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+/* ------------------------------------------------- Cinematic chart figures */
+
+/**
+ * A live analytical trace: the series draws itself in, the corridor breathes,
+ * and a marker travels the curve. Purely figurative — carries no session data.
+ */
+export function FlowGraph({
+  className,
+  tone = "var(--accent)",
+  glow = "var(--accent-glow)",
+  seed = 0,
+}: {
+  className?: string;
+  tone?: string;
+  glow?: string;
+  seed?: number;
+}) {
+  const pts = Array.from({ length: 13 }, (_, i) => {
+    const x = 20 + i * 30;
+    const wave = Math.sin(i * 0.72 + seed) * 22 + Math.sin(i * 1.9 + seed * 2) * 9;
+    return [x, 110 - wave - i * 2.2] as const;
+  });
+  const line = pts.map(([x, y], i) => `${i ? "L" : "M"}${x} ${y.toFixed(1)}`).join(" ");
+  const gid = `flow-${Math.round(seed * 1000)}`;
+
+  return (
+    <svg viewBox="0 0 400 190" className={cn("w-full", className)} aria-hidden>
+      <defs>
+        <linearGradient id={`${gid}-f`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={glow} stopOpacity="0.42" />
+          <stop offset="100%" stopColor={glow} stopOpacity="0" />
+        </linearGradient>
+      </defs>
+
+      {[0, 1, 2, 3].map((r) => (
+        <line
+          key={r}
+          x1="16"
+          x2="384"
+          y1={38 + r * 38}
+          y2={38 + r * 38}
+          stroke="currentColor"
+          strokeOpacity="0.12"
+          strokeWidth="0.8"
+        />
+      ))}
+
+      {/* benchmark corridor drawing in */}
+      <motion.rect
+        x="16"
+        width="368"
+        y="52"
+        rx="3"
+        fill={tone}
+        fillOpacity="0.09"
+        initial={{ height: 0 }}
+        whileInView={{ height: 54 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.1, ease }}
+      />
+
+      <motion.path
+        d={`${line} L 380 178 L 20 178 Z`}
+        fill={`url(#${gid}-f)`}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.4, delay: 0.5, ease }}
+      />
+      <motion.path
+        d={line}
+        fill="none"
+        stroke={tone}
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        initial={{ pathLength: 0 }}
+        whileInView={{ pathLength: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.8, ease }}
+      />
+
+      {pts.filter((_, i) => i % 3 === 0).map(([x, y], i) => (
+        <motion.circle
+          key={x}
+          cx={x}
+          cy={y}
+          r="3.6"
+          fill={glow}
+          stroke={tone}
+          strokeWidth="1.2"
+          initial={{ opacity: 0, scale: 0 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.9 + i * 0.12, ease }}
+        />
+      ))}
+    </svg>
+  );
+}
+
+/** Bars growing from a shared baseline, then breathing at low amplitude. */
+export function BarSwarm({
+  className,
+  tones = ["var(--teal)", "var(--amber)", "var(--plum)", "var(--cyan)", "var(--lime)", "var(--rust)"],
+}: {
+  className?: string;
+  tones?: string[];
+}) {
+  const heights = [46, 78, 34, 96, 62, 110, 52, 84, 40];
+  return (
+    <svg viewBox="0 0 300 140" className={cn("w-full", className)} aria-hidden>
+      <line x1="8" x2="292" y1="128" y2="128" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1" />
+      {heights.map((h, i) => (
+        <motion.rect
+          key={i}
+          x={14 + i * 32}
+          width="18"
+          rx="2"
+          fill={tones[i % tones.length]}
+          fillOpacity="0.85"
+          initial={{ height: 0, y: 128 }}
+          whileInView={{ height: [0, h, h * 0.92, h], y: [128, 128 - h, 128 - h * 0.92, 128 - h] }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 1.5, delay: i * 0.07, ease }}
+        />
+      ))}
+    </svg>
+  );
+}
+
+/** Drifting constellation of measurement points — ambient optical texture. */
+export function SignalField({ className }: { className?: string }) {
+  const nodes = Array.from({ length: 26 }, (_, i) => ({
+    x: 12 + ((i * 61) % 376),
+    y: 14 + ((i * 97) % 196),
+    r: 1.4 + ((i * 7) % 5) * 0.5,
+    tone: ["var(--cyan)", "var(--lime)", "var(--amber)", "var(--plum)"][i % 4],
+  }));
+  return (
+    <svg viewBox="0 0 400 220" className={cn("w-full ambient-drift-slow", className)} aria-hidden>
+      {nodes.map((n, i) => (
+        <g key={i}>
+          {i > 0 && i % 3 === 0 ? (
+            <line
+              x1={n.x}
+              y1={n.y}
+              x2={nodes[i - 1]!.x}
+              y2={nodes[i - 1]!.y}
+              stroke={n.tone}
+              strokeOpacity="0.28"
+              strokeWidth="0.7"
+            />
+          ) : null}
+          <motion.circle
+            cx={n.x}
+            cy={n.y}
+            r={n.r}
+            fill={n.tone}
+            initial={{ opacity: 0.3 }}
+            animate={{ opacity: [0.28, 0.9, 0.28] }}
+            transition={{ duration: 4 + (i % 5), repeat: Infinity, ease: "easeInOut", delay: i * 0.12 }}
           />
         </g>
       ))}
