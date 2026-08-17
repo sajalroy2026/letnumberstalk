@@ -77,8 +77,8 @@
   --color-plum: var(--plum);
   --color-cyan: var(--cyan);
   --color-lime: var(--lime);
-  --font-display: "Libre Baskerville", Georgia, serif;
-  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", "Libre Baskerville", Georgia, serif;
+  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
