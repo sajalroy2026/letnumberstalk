@@ -125,6 +125,13 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  // Anonymous page-visit reading. No entered figures, no personal data.
+  useEffect(() => {
+    if (pathname.startsWith("/analytics")) return;
+    track("visit");
+  }, [pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>
