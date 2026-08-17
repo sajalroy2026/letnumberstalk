@@ -76,7 +76,7 @@ function Home() {
 
       <main>
         {/* --------------------------------------------- Hero: copy | figure */}
-        <section className="ink tone-amber aurora-wash relative overflow-hidden">
+        <section className="plum-band tone-plum aurora-wash relative overflow-hidden">
           <ParallaxLayer
             depth={0.25}
             className="pointer-events-none absolute inset-x-0 top-0 z-0 opacity-20"
@@ -93,8 +93,9 @@ function Home() {
                 transition={{ duration: 0.7, ease }}
                 className="figure text-[0.68rem] uppercase tracking-[0.32em] text-accent"
               >
-                The Business Health Instrument
+                Diagnostic intelligence for boardroom leaders
               </motion.p>
+
               <motion.h1
                 initial={{ opacity: 0, y: 30, filter: "blur(12px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
