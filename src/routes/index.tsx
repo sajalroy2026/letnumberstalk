@@ -66,7 +66,7 @@ const SECTOR_BRIEFS: Record<string, { tone: string; text: string }> = {
     text: "A recurring-revenue-and-retention economy. The benchmark set is calibrated to net revenue retention, gross churn, LTV:CAC, payback period and gross margin at software economics — materially higher growth and margin thresholds than any physical-goods profile. Deferred revenue and cohort behaviour dominate the forward view. Typical of subscription software platforms, usage-priced APIs and managed digital products.",
   },
   startup: {
-    tone: "var(--pillar-risk")",
+    tone: "var(--pillar-risk)",
     text: "A runway-and-evidence economy. Pre-profitability by design, so the calibration privileges growth velocity, cash runway, burn multiple, customer concentration and early retention signal over absolute profitability. Terminal-risk surveillance carries greater weight here than in any other profile. Typical of pre-seed through Series A ventures still establishing repeatable demand and unit economics.",
   },
 };
