@@ -378,7 +378,7 @@ function Home() {
                           >
                             {p.name} · {count} metrics
                           </p>
-                          <p className="mt-3 text-[0.85rem] font-medium leading-[1.65] text-foreground">
+                          <p className="mt-4 max-w-[30ch] text-[0.95rem] font-medium leading-[1.6] text-foreground">
                             {METRIC_CONTENT.filter((m) => m.pillar === p.id)
                               .slice(0, 6)
                               .map((m) => m.name)
