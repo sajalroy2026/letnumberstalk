@@ -57,7 +57,7 @@ export function AboutSections() {
         <div className="hairline mt-6" aria-hidden />
 
         <div className="mt-8 grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.45fr)]">
-          <aside className="sand-plate print-avoid-break self-start p-8">
+          <aside className="sand-plate plate-lift print-avoid-break self-start p-8">
             <div
               className="grid h-20 w-20 place-items-center rounded-full border border-accent/50 bg-[linear-gradient(150deg,color-mix(in_oklab,var(--gold)_58%,var(--card)),var(--card))] font-display text-2xl text-foreground shadow-[var(--shadow-plate)]"
               aria-hidden
