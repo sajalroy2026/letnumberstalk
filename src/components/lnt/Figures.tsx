@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
+import { animate, motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
 import { PILLAR_META } from "@/lib/assessment/spec.generated";
@@ -1626,12 +1626,14 @@ export function OpticField({ className }: { className?: string }) {
     return base + Math.sin(t * Math.PI * 2 * 3) * 14 + Math.sin(t * Math.PI * 2) * 8;
   });
   const orbitRadius = useTransform(orbit, (t) => 236 + Math.sin(t * Math.PI * 2 * 2) * 18);
-  const markerX = useTransform([orbitAngle, orbitRadius], ([a, r]: number[]) =>
-    Math.sin((a * Math.PI) / 180) * r,
-  );
-  const markerY = useTransform([orbitAngle, orbitRadius], ([a, r]: number[]) =>
-    -Math.cos((a * Math.PI) / 180) * r,
-  );
+  const markerX = useTransform([orbitAngle, orbitRadius], (v) => {
+    const [a = 0, r = 236] = v as number[];
+    return C + Math.sin((a * Math.PI) / 180) * r;
+  });
+  const markerY = useTransform([orbitAngle, orbitRadius], (v) => {
+    const [a = 0, r = 236] = v as number[];
+    return CY - Math.cos((a * Math.PI) / 180) * r;
+  });
   const markerRot = orbitAngle;
 
 
