@@ -2018,3 +2018,98 @@ export function BenchmarkBand({ className }: { className?: string }) {
     </div>
   );
 }
+
+/* ------------------------------------------------------------ Ticker rain */
+
+const TICKER_VALUES = [
+  "3.2B", "5M", "200K", "70%", "1.4x", "18d", "42%", "890K", "12.6M", "0.8x",
+  "9.4%", "3.7x", "64d", "1.2B", "310K", "27%", "6.5M", "88%", "2.1x", "45K",
+  "13d", "7.8%", "540K", "4.4M", "31%", "1.9x", "22d", "760K", "58%", "11.3M",
+];
+
+/** Deterministic hash so server and client render the same lattice. */
+const seedAt = (i: number, salt: number) =>
+  ((Math.sin(i * 12.9898 + salt * 78.233) * 43758.5453) % 1 + 1) % 1;
+
+/**
+ * TickerRain — Bloomberg-terminal number rain. Vertical columns of financial
+ * readouts fade in, hold, and fade out on staggered cycles. Purely decorative
+ * and pointer-transparent; masked so the centre stays clear for the
+ * instrument and the copy column.
+ */
+export function TickerRain({
+  columns = 9,
+  className,
+}: {
+  columns?: number;
+  className?: string;
+}) {
+  const reduce = useReducedMotion();
+
+  return (
+    <div
+      className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}
+      aria-hidden
+      style={{
+        maskImage:
+          "radial-gradient(closest-side at 50% 46%, transparent 42%, black 74%), linear-gradient(to bottom, transparent 0%, black 12%, black 84%, transparent 100%)",
+        WebkitMaskImage:
+          "radial-gradient(closest-side at 50% 46%, transparent 42%, black 74%), linear-gradient(to bottom, transparent 0%, black 12%, black 84%, transparent 100%)",
+        maskComposite: "intersect",
+        WebkitMaskComposite: "source-in",
+      }}
+    >
+      {Array.from({ length: columns }).map((_, c) => {
+        const left = ((c + 0.5) / columns) * 100;
+        const cells = 5 + Math.round(seedAt(c, 1) * 3);
+        return (
+          <div
+            key={c}
+            className="absolute top-0 flex h-full flex-col justify-around"
+            style={{ left: `${left.toFixed(2)}%`, transform: "translateX(-50%)" }}
+          >
+            {Array.from({ length: cells }).map((_, k) => {
+              const v = TICKER_VALUES[(c * 7 + k * 3) % TICKER_VALUES.length];
+              const delay = seedAt(c * 13 + k, 2) * 6;
+              const dur = 3.4 + seedAt(c * 5 + k, 3) * 4;
+              const tone = [
+                "var(--gold)",
+                "var(--forest)",
+                "var(--burnt)",
+                "var(--steel)",
+                "var(--oxblood-core)",
+              ][(c + k) % 5];
+              return (
+                <motion.span
+                  key={k}
+                  className="figure whitespace-nowrap text-[0.68rem] tracking-[0.16em] sm:text-[0.78rem]"
+                  style={{ color: tone }}
+                  initial={{ opacity: 0 }}
+                  animate={
+                    reduce
+                      ? { opacity: 0.35 }
+                      : { opacity: [0, 0.85, 0.85, 0], y: [6, 0, 0, -6] }
+                  }
+                  transition={
+                    reduce
+                      ? { duration: 0 }
+                      : {
+                          duration: dur,
+                          times: [0, 0.22, 0.7, 1],
+                          repeat: Infinity,
+                          repeatDelay: 1.2 + seedAt(c + k, 4) * 3,
+                          delay,
+                          ease: "easeInOut",
+                        }
+                  }
+                >
+                  {v}
+                </motion.span>
+              );
+            })}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
