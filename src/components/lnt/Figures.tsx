@@ -1800,8 +1800,8 @@ export function OpticField({ className }: { className?: string }) {
                 r="11"
                 animate={
                   reduce
-                    ? { fill: tones[0] }
-                    : { fill: [...tones, tones[0]] }
+                    ? { fill: "var(--gold-glow)" }
+                    : { fill: [...tones, "var(--gold-glow)"] as string[] }
                 }
                 transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
               />
