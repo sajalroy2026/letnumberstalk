@@ -67,16 +67,3 @@ export function FlipTile({
     </div>
   );
 }
-
-/** Small persistent affordance marking a tile as turnable. */
-export function FlipHint({ open, tone }: { open: boolean; tone: string }) {
-  return (
-    <span
-      className="figure pointer-events-none absolute bottom-3 right-3 text-[0.55rem] uppercase tracking-[0.18em]"
-      style={{ color: tone }}
-      aria-hidden
-    >
-      {open ? "Back" : "Tap to open"}
-    </span>
-  );
-}
