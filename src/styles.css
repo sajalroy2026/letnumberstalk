@@ -920,3 +920,14 @@
 }
 
 
+
+/* --------------------------------------------------- Flip tile primitives */
+@utility flip-scene {
+  perspective: 1400px;
+}
+
+@utility flip-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
