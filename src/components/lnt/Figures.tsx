@@ -1873,19 +1873,19 @@ export function OpticField({ className }: { className?: string }) {
                 y={rd.y}
                 textAnchor={rd.x > C ? "end" : "start"}
                 className="figure fill-foreground"
-                fontSize="15"
-                letterSpacing="3"
-                opacity="0.8"
+                fontSize="19"
+                letterSpacing="3.4"
+                opacity="0.85"
               >
                 {rd.k}
               </text>
               <text
                 x={rd.x}
-                y={rd.y + 36}
+                y={rd.y + 46}
                 textAnchor={rd.x > C ? "end" : "start"}
                 className="font-display"
                 fill={tones[i % tones.length]}
-                fontSize="40"
+                fontSize="56"
                 fontWeight="700"
               >
                 {rd.v}
