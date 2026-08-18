@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { useState } from "react";
 
+import { FlipTile } from "@/components/lnt/FlipTile";
 import { SiteFooter, SiteHeader } from "@/components/lnt/SiteChrome";
 import { METRIC_CONTENT, PILLAR_META } from "@/lib/assessment/spec.generated";
 import { SECTORS } from "@/lib/assessment/scoring";
@@ -17,6 +18,7 @@ import {
   PrismStack,
   SectorPlate,
   SignalField,
+  TickerRain,
   pillarColor,
   useCountUp,
 } from "@/components/lnt/Figures";
@@ -45,6 +47,29 @@ export const Route = createFileRoute("/")({
 });
 
 const ease = [0.16, 1, 0.3, 1] as const;
+
+const SECTOR_BRIEFS: Record<string, { tone: string; text: string }> = {
+  services: {
+    tone: "var(--pillar-financial)",
+    text: "A margin-and-utilisation economy. Capacity is billable human time, so the benchmark set is calibrated to gross margin, realisation, chargeable utilisation and revenue per fully loaded FTE rather than unit throughput. Working capital sits in receivables and work-in-progress, making days sales outstanding a first-order liquidity signal. Typical of consulting practices, agencies, law and accounting firms, engineering services and specialist staffing houses.",
+  },
+  manufacturing: {
+    tone: "var(--pillar-operational)",
+    text: "A throughput-and-asset economy. Value accrues where fixed capacity is converted into saleable output, so thresholds are anchored to cycle time, first-pass yield, rework, inventory turns and asset utilisation. Margins are structurally thinner than services, and the benchmark set reads growth and profitability accordingly. Typical of discrete and process manufacturers, industrial fabricators, contract producers and assembly operations.",
+  },
+  retail: {
+    tone: "var(--pillar-operational)",
+    text: "A velocity-and-basket economy. Thin percentage margins are compensated by turn frequency, so calibration weights inventory turns, sell-through, contribution per order, repeat purchase rate and blended acquisition cost against lifetime value. Demand seasonality and channel mix shift the read materially. Typical of direct-to-consumer brands, ecommerce operators, physical store estates and omnichannel retailers.",
+  },
+  saas: {
+    tone: "var(--pillar-market)",
+    text: "A recurring-revenue-and-retention economy. The benchmark set is calibrated to net revenue retention, gross churn, LTV:CAC, payback period and gross margin at software economics — materially higher growth and margin thresholds than any physical-goods profile. Deferred revenue and cohort behaviour dominate the forward view. Typical of subscription software platforms, usage-priced APIs and managed digital products.",
+  },
+  startup: {
+    tone: "var(--pillar-risk)",
+    text: "A runway-and-evidence economy. Pre-profitability by design, so the calibration privileges growth velocity, cash runway, burn multiple, customer concentration and early retention signal over absolute profitability. Terminal-risk surveillance carries greater weight here than in any other profile. Typical of pre-seed through Series A ventures still establishing repeatable demand and unit economics.",
+  },
+};
 
 const DELIVERS = [
   {
@@ -84,7 +109,7 @@ function Home() {
             <SignalField />
           </ParallaxLayer>
 
-          <div className="relative z-10 mx-auto grid max-w-6xl items-stretch gap-12 px-5 pb-20 pt-16 sm:px-8 sm:pt-24 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
+          <div className="relative z-10 mx-auto grid max-w-6xl items-stretch gap-12 px-5 pb-20 pt-6 sm:px-8 sm:pt-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
             <div className="max-w-2xl">
 
               <motion.p
@@ -100,7 +125,7 @@ function Home() {
                 initial={{ opacity: 0, y: 30, filter: "blur(12px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 transition={{ duration: 1.1, delay: 0.1, ease }}
-                className="mt-6 font-display text-4xl leading-[1.08] text-foreground sm:text-6xl"
+                className="mt-5 font-hero text-[2.6rem] font-semibold leading-[1.04] tracking-[-0.02em] text-foreground sm:text-6xl"
               >
                 Let the numbers state the condition of the business.
               </motion.h1>
@@ -170,7 +195,8 @@ function Home() {
               transition={{ duration: 1.2, ease }}
               className="relative mx-auto h-[26rem] w-full max-w-[36rem] sm:h-[32rem] lg:h-full lg:min-h-[38rem] lg:max-w-none"
             >
-              <OpticField />
+              <TickerRain className="z-0" columns={9} />
+              <OpticField className="relative z-10" />
             </motion.div>
 
 
@@ -270,32 +296,70 @@ function Home() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-80px" }}
                     transition={{ duration: 0.6, delay: i * 0.05, ease }}
-                    className="tilt-card relative overflow-hidden border border-border bg-card p-6 shadow-[var(--shadow-plate)]"
+                    className="min-h-[15.5rem]"
                   >
-                    <span
-                      className="absolute inset-x-0 top-0 h-[4px]"
-                      style={{ backgroundImage: `linear-gradient(90deg, ${tone}, var(--accent))` }}
-                      aria-hidden
+                    <FlipTile
+                      label={`${p.name} — reveal the ${count} metrics assessed`}
+                      className="h-full min-h-[15.5rem]"
+                      front={
+                        <div className="tilt-card relative h-full overflow-hidden border border-border bg-card p-6 shadow-[var(--shadow-plate)]">
+                          <span
+                            className="absolute inset-x-0 top-0 h-[4px]"
+                            style={{ backgroundImage: `linear-gradient(90deg, ${tone}, var(--accent))` }}
+                            aria-hidden
+                          />
+                          <div className="flex items-baseline justify-between gap-3">
+                            <h3 className="font-display text-lg leading-snug text-foreground">
+                              {p.name}
+                            </h3>
+                            <span className="figure text-3xl" style={{ color: tone }}>
+                              {Math.round(p.weight * 100)}%
+                            </span>
+                          </div>
+                          <div className="mt-5 h-1.5 w-full bg-secondary" aria-hidden>
+                            <motion.div
+                              className="h-full"
+                              style={{ background: tone }}
+                              initial={{ width: 0 }}
+                              whileInView={{ width: `${Math.round(p.weight * 100 * 4)}%` }}
+                              viewport={{ once: true }}
+                              transition={{ duration: 1, delay: 0.15 + i * 0.05, ease }}
+                            />
+                          </div>
+                          <p className="figure mt-3 text-[0.65rem] uppercase tracking-[0.18em] text-muted-foreground">
+                            {count} metrics
+                          </p>
+                          <span
+                            className="figure absolute bottom-4 right-5 text-[0.55rem] uppercase tracking-[0.2em]"
+                            style={{ color: tone }}
+                            aria-hidden
+                          >
+                            Open ⟳
+                          </span>
+                        </div>
+                      }
+                      back={
+                        <div
+                          className="relative h-full overflow-hidden border p-5 shadow-[var(--shadow-plate)]"
+                          style={{
+                            backgroundColor: tone,
+                            borderColor: tone,
+                            color: "var(--primary-foreground)",
+                          }}
+                        >
+                          <p className="figure text-[0.58rem] uppercase tracking-[0.22em] opacity-90">
+                            {p.name} · {count} metrics
+                          </p>
+                          <ul className="mt-3 max-h-[10.5rem] overflow-y-auto pr-1 text-[0.66rem] leading-[1.45] sm:columns-2 sm:gap-4">
+                            {METRIC_CONTENT.filter((m) => m.pillar === p.id).map((m) => (
+                              <li key={m.id} className="break-inside-avoid pb-1 opacity-95">
+                                {m.name}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      }
                     />
-                    <div className="flex items-baseline justify-between gap-3">
-                      <h3 className="font-display text-lg leading-snug text-foreground">{p.name}</h3>
-                      <span className="figure text-3xl" style={{ color: tone }}>
-                        {Math.round(p.weight * 100)}%
-                      </span>
-                    </div>
-                    <div className="mt-5 h-1.5 w-full bg-secondary" aria-hidden>
-                      <motion.div
-                        className="h-full"
-                        style={{ background: tone }}
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${Math.round(p.weight * 100 * 4)}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: 0.15 + i * 0.05, ease }}
-                      />
-                    </div>
-                    <p className="figure mt-3 text-[0.65rem] uppercase tracking-[0.18em] text-muted-foreground">
-                      {count} metrics
-                    </p>
                   </motion.div>
                 );
               })}
@@ -314,23 +378,59 @@ function Home() {
             </h2>
             <span className="band-rule mt-5 block" aria-hidden />
             <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {SECTORS.map((s, i) => (
-                <motion.div
-                  key={s.id}
-                  initial={{ opacity: 0, y: 26, rotateX: 10 }}
-                  whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                  viewport={{ once: true, margin: "-70px" }}
-                  transition={{ duration: 0.7, delay: i * 0.07, ease }}
-                  className="glass overflow-hidden"
-                >
-                  <SectorPlate id={s.id} />
-
-                  <div className="border-t border-border p-5">
-                    <h3 className="font-display text-lg text-foreground">{s.name}</h3>
-                    <p className="mt-2 text-xs leading-[1.7] text-foreground/75">{s.description}</p>
-                  </div>
-                </motion.div>
-              ))}
+              {SECTORS.map((s, i) => {
+                const brief = SECTOR_BRIEFS[s.id];
+                return (
+                  <motion.div
+                    key={s.id}
+                    initial={{ opacity: 0, y: 26, rotateX: 10 }}
+                    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                    viewport={{ once: true, margin: "-70px" }}
+                    transition={{ duration: 0.7, delay: i * 0.07, ease }}
+                    className="min-h-[19rem]"
+                  >
+                    <FlipTile
+                      label={`${s.name} — reveal the calibration brief`}
+                      className="h-full min-h-[19rem]"
+                      front={
+                        <div className="glass relative h-full overflow-hidden">
+                          <SectorPlate id={s.id} />
+                          <div className="border-t border-border p-5">
+                            <h3 className="font-display text-lg text-foreground">{s.name}</h3>
+                            <p className="mt-2 text-xs leading-[1.7] text-foreground/75">
+                              {s.description}
+                            </p>
+                          </div>
+                          <span
+                            className="figure absolute bottom-3 right-4 text-[0.55rem] uppercase tracking-[0.2em]"
+                            style={{ color: brief?.tone }}
+                            aria-hidden
+                          >
+                            Open ⟳
+                          </span>
+                        </div>
+                      }
+                      back={
+                        <div
+                          className="relative h-full overflow-hidden border p-5 shadow-[var(--shadow-plate)]"
+                          style={{
+                            backgroundColor: brief?.tone,
+                            borderColor: brief?.tone,
+                            color: "var(--primary-foreground)",
+                          }}
+                        >
+                          <p className="figure text-[0.58rem] uppercase tracking-[0.22em] opacity-90">
+                            {s.name} · calibration brief
+                          </p>
+                          <p className="mt-3 max-h-[13rem] overflow-y-auto pr-1 text-[0.72rem] leading-[1.65] opacity-95">
+                            {brief?.text}
+                          </p>
+                        </div>
+                      }
+                    />
+                  </motion.div>
+                );
+              })}
               <motion.div
                 initial={{ opacity: 0, y: 26 }}
                 whileInView={{ opacity: 1, y: 0 }}

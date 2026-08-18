@@ -1579,6 +1579,16 @@ const polar = (cx: number, cy: number, r: number, deg: number) => {
   return [r2(cx + r * Math.cos(a)), r2(cy + r * Math.sin(a))] as const;
 };
 
+const RADAR_BLIPS = [
+  { r: 232, deg: 18, size: 5 },
+  { r: 168, deg: 74, size: 3.5 },
+  { r: 252, deg: 126, size: 4 },
+  { r: 132, deg: 168, size: 5.5 },
+  { r: 208, deg: 214, size: 3.5 },
+  { r: 174, deg: 266, size: 4.5 },
+  { r: 246, deg: 312, size: 4 },
+];
+
 /**
  * OpticField — the hero instrument.
  * A continuously running optical field: measurement rings turning at
@@ -1673,6 +1683,10 @@ export function OpticField({ className }: { className?: string }) {
               <stop offset="0%" stopColor="var(--gold-glow)" stopOpacity="0.75" />
               <stop offset="100%" stopColor="var(--gold-glow)" stopOpacity="0" />
             </linearGradient>
+            <linearGradient id="of-radar" x1="1" y1="1" x2="0" y2="0">
+              <stop offset="0%" stopColor="var(--gold-glow)" stopOpacity="0" />
+              <stop offset="100%" stopColor="var(--gold-glow)" stopOpacity="0.5" />
+            </linearGradient>
             <radialGradient id="of-core" cx="50%" cy="50%">
               <stop offset="0%" stopColor="var(--gold-glow)" stopOpacity="0.22" />
               <stop offset="100%" stopColor="var(--gold-glow)" stopOpacity="0" />
@@ -1737,16 +1751,69 @@ export function OpticField({ className }: { className?: string }) {
             </motion.g>
           ))}
 
-          {/* scanning sweep */}
+          {/* radar spokes */}
+          <g opacity="0.28">
+            {Array.from({ length: 12 }).map((_, i) => {
+              const [x1, y1] = polar(C, CY, 268, i * 30);
+              return (
+                <line
+                  key={i}
+                  x1={C}
+                  y1={CY}
+                  x2={x1}
+                  y2={y1}
+                  stroke="currentColor"
+                  className="text-foreground"
+                  strokeWidth={i % 3 === 0 ? 1 : 0.5}
+                />
+              );
+            })}
+          </g>
+
+          {/* radar sweep arm with decaying trail */}
           {!reduce && (
             <motion.g
               style={{ transformOrigin: `${C}px ${CY}px` }}
               animate={{ rotate: 360 }}
-              transition={{ duration: 11, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 9, repeat: Infinity, ease: "linear" }}
             >
-              <rect x={C - 1.5} y={CY - 268} width="3" height="268" fill="url(#of-sweep)" />
+              <path
+                d={`M ${C} ${CY} L ${polar(C, CY, 268, -54)[0]} ${polar(C, CY, 268, -54)[1]} A 268 268 0 0 1 ${C} ${CY - 268} Z`}
+                fill="url(#of-radar)"
+              />
+              <line
+                x1={C}
+                y1={CY}
+                x2={C}
+                y2={CY - 268}
+                stroke="var(--gold-glow)"
+                strokeWidth="2.4"
+                opacity="0.9"
+              />
             </motion.g>
           )}
+
+          {/* contact blips */}
+          {RADAR_BLIPS.map((b, i) => {
+            const [bx, by] = polar(C, CY, b.r, b.deg);
+            return (
+              <motion.circle
+                key={`${b.r}-${b.deg}`}
+                cx={bx}
+                cy={by}
+                r={b.size}
+                fill={tones[i % tones.length]}
+                animate={reduce ? {} : { opacity: [0.15, 1, 0.15], scale: [0.8, 1.35, 0.8] }}
+                style={{ transformOrigin: `${bx}px ${by}px` }}
+                transition={{
+                  duration: 9,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: (b.deg / 360) * 9,
+                }}
+              />
+            );
+          })}
 
           {/* live diagnostic curve — redraws continuously */}
           <motion.path
@@ -1787,20 +1854,20 @@ export function OpticField({ className }: { className?: string }) {
                 y={rd.y}
                 textAnchor={rd.x > C ? "end" : "start"}
                 className="figure fill-foreground"
-                fontSize="11"
-                letterSpacing="2.6"
-                opacity="0.72"
+                fontSize="15"
+                letterSpacing="3"
+                opacity="0.8"
               >
                 {rd.k}
               </text>
               <text
                 x={rd.x}
-                y={rd.y + 26}
+                y={rd.y + 36}
                 textAnchor={rd.x > C ? "end" : "start"}
                 className="font-display"
                 fill={tones[i % tones.length]}
-                fontSize="26"
-                fontWeight="600"
+                fontSize="40"
+                fontWeight="700"
               >
                 {rd.v}
               </text>
@@ -1948,6 +2015,101 @@ export function BenchmarkBand({ className }: { className?: string }) {
           HEALTHY BAND
         </text>
       </svg>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------ Ticker rain */
+
+const TICKER_VALUES = [
+  "3.2B", "5M", "200K", "70%", "1.4x", "18d", "42%", "890K", "12.6M", "0.8x",
+  "9.4%", "3.7x", "64d", "1.2B", "310K", "27%", "6.5M", "88%", "2.1x", "45K",
+  "13d", "7.8%", "540K", "4.4M", "31%", "1.9x", "22d", "760K", "58%", "11.3M",
+];
+
+/** Deterministic hash so server and client render the same lattice. */
+const seedAt = (i: number, salt: number) =>
+  ((Math.sin(i * 12.9898 + salt * 78.233) * 43758.5453) % 1 + 1) % 1;
+
+/**
+ * TickerRain — Bloomberg-terminal number rain. Vertical columns of financial
+ * readouts fade in, hold, and fade out on staggered cycles. Purely decorative
+ * and pointer-transparent; masked so the centre stays clear for the
+ * instrument and the copy column.
+ */
+export function TickerRain({
+  columns = 9,
+  className,
+}: {
+  columns?: number;
+  className?: string;
+}) {
+  const reduce = useReducedMotion();
+
+  return (
+    <div
+      className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}
+      aria-hidden
+      style={{
+        maskImage:
+          "radial-gradient(closest-side at 50% 46%, transparent 42%, black 74%), linear-gradient(to bottom, transparent 0%, black 12%, black 84%, transparent 100%)",
+        WebkitMaskImage:
+          "radial-gradient(closest-side at 50% 46%, transparent 42%, black 74%), linear-gradient(to bottom, transparent 0%, black 12%, black 84%, transparent 100%)",
+        maskComposite: "intersect",
+        WebkitMaskComposite: "source-in",
+      }}
+    >
+      {Array.from({ length: columns }).map((_, c) => {
+        const left = ((c + 0.5) / columns) * 100;
+        const cells = 5 + Math.round(seedAt(c, 1) * 3);
+        return (
+          <div
+            key={c}
+            className="absolute top-0 flex h-full flex-col justify-around"
+            style={{ left: `${left.toFixed(2)}%`, transform: "translateX(-50%)" }}
+          >
+            {Array.from({ length: cells }).map((_, k) => {
+              const v = TICKER_VALUES[(c * 7 + k * 3) % TICKER_VALUES.length];
+              const delay = seedAt(c * 13 + k, 2) * 6;
+              const dur = 3.4 + seedAt(c * 5 + k, 3) * 4;
+              const tone = [
+                "var(--gold-glow)",
+                "var(--forest-glow)",
+                "var(--burnt-glow)",
+                "var(--steel-glow)",
+                "var(--mocha-glow)",
+              ][(c + k) % 5];
+              return (
+                <motion.span
+                  key={k}
+                  className="figure whitespace-nowrap text-[0.68rem] tracking-[0.16em] sm:text-[0.78rem]"
+                  style={{ color: tone }}
+                  initial={{ opacity: 0 }}
+                  animate={
+                    reduce
+                      ? { opacity: 0.35 }
+                      : { opacity: [0, 1, 1, 0], y: [6, 0, 0, -6] }
+                  }
+                  transition={
+                    reduce
+                      ? { duration: 0 }
+                      : {
+                          duration: dur,
+                          times: [0, 0.22, 0.7, 1],
+                          repeat: Infinity,
+                          repeatDelay: 1.2 + seedAt(c + k, 4) * 3,
+                          delay,
+                          ease: "easeInOut",
+                        }
+                  }
+                >
+                  {v}
+                </motion.span>
+              );
+            })}
+          </div>
+        );
+      })}
     </div>
   );
 }
