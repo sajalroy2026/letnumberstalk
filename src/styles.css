@@ -981,9 +981,7 @@
 
   /* Long-form prose sets in two justified columns, magazine fashion. */
   .print-prose {
-    columns: 2;
-    column-gap: 8mm;
-    column-fill: auto;
+    max-width: none !important;
     text-align: justify;
     hyphens: auto;
     -webkit-hyphens: auto;
