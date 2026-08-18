@@ -1625,16 +1625,19 @@ export function OpticField({ className }: { className?: string }) {
     // uneven pace: gentle ±14° modulation over three sub-cycles per revolution
     return base + Math.sin(t * Math.PI * 2 * 3) * 14 + Math.sin(t * Math.PI * 2) * 8;
   });
-  const orbitRadius = useTransform(orbit, (t) => 236 + Math.sin(t * Math.PI * 2 * 2) * 18);
+  /* inner orbit band — travels between the two innermost rings */
+  const orbitRadius = useTransform(orbit, (t) => 152 + Math.sin(t * Math.PI * 2 * 2) * 16);
   const markerX = useTransform([orbitAngle, orbitRadius], (v) => {
-    const [a = 0, r = 236] = v as number[];
+    const [a = 0, r = 152] = v as number[];
     return C + Math.sin((a * Math.PI) / 180) * r;
   });
   const markerY = useTransform([orbitAngle, orbitRadius], (v) => {
-    const [a = 0, r = 236] = v as number[];
+    const [a = 0, r = 152] = v as number[];
     return CY - Math.cos((a * Math.PI) / 180) * r;
   });
-  const markerRot = orbitAngle;
+  /* heading turned inward so the triangle points at the central readings */
+  const markerRot = useTransform(orbitAngle, (a) => a + 180);
+
 
 
 

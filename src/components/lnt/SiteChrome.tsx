@@ -84,10 +84,11 @@ export function SiteFooter() {
 
         <div className="hairline mt-12" aria-hidden />
 
-        <p className="mt-6 measure text-xs leading-relaxed text-muted-foreground">
+        <p className="mt-6 max-w-[92ch] text-[1.02rem] leading-[1.85] text-foreground/85">
           No login required. Every figure entered is held in browser memory for the duration of the session and is
           discarded when the tab closes. Open the instrument and begin.
         </p>
+
       </div>
     </footer>
   );
@@ -97,7 +98,7 @@ export function Disclosure() {
   return (
     <section
       aria-label={DISCLOSURE.title}
-      className="print-plain print-avoid-break border border-border border-l-4 border-l-accent bg-card px-7 py-7 shadow-[var(--shadow-plate)]"
+      className="print-plain print-avoid-break disclosure-plate plate-lift border-l-4 border-l-accent px-7 py-7"
     >
       <h2 className="font-display text-xl tracking-[-0.01em] text-foreground">{DISCLOSURE.title}</h2>
       <p className="mt-4 measure text-[0.95rem] leading-[1.8] text-foreground/90">{DISCLOSURE.body}</p>
