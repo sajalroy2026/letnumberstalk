@@ -22,7 +22,7 @@ export function AboutSections() {
         <div className="hairline mt-6" aria-hidden />
 
         <div className="mt-8 grid gap-12 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)]">
-          <div className="space-y-5">
+          <div className="sage-plate space-y-5 p-7">
             {ABOUT_PLATFORM.paragraphs.map((p, i) => (
               <p key={i} className="measure text-[1.02rem] leading-[1.8] tracking-[0.002em] text-foreground">
                 {p}
@@ -30,14 +30,17 @@ export function AboutSections() {
             ))}
           </div>
           <div className="no-print space-y-6">
-            <InstrumentStack />
-            <BenchmarkBand />
+            <div className="citrine-plate space-y-6 p-6">
+              <InstrumentStack />
+              <BenchmarkBand />
+            </div>
             <p className="mt-5 border-l-2 border-accent/70 pl-5 font-display text-xl leading-[1.5] tracking-[-0.01em] text-foreground">
               “A diagnosis is what the figures already say, read against the right comparison
               set.”
             </p>
           </div>
         </div>
+
       </motion.section>
 
       <motion.section
