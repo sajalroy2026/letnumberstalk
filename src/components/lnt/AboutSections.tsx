@@ -30,7 +30,7 @@ export function AboutSections() {
             ))}
           </div>
           <div className="no-print space-y-6">
-            <div className="citrine-plate space-y-6 p-6">
+            <div className="citrine-plate plate-lift space-y-6 p-6">
               <InstrumentStack />
               <BenchmarkBand />
             </div>
