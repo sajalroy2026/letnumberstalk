@@ -987,23 +987,66 @@
 @utility sage-plate {
   background-image: linear-gradient(
     200deg,
-    color-mix(in oklab, var(--forest) 16%, var(--card)),
-    color-mix(in oklab, var(--gold) 8%, var(--card)) 58%,
+    color-mix(in oklab, var(--forest) 26%, var(--card)),
+    color-mix(in oklab, var(--gold) 14%, var(--card)) 58%,
     var(--card)
   );
-  border: 1px solid color-mix(in oklab, var(--forest) 34%, transparent);
-  box-shadow: var(--shadow-plate);
+  border: 1px solid color-mix(in oklab, var(--forest) 46%, transparent);
+  box-shadow: var(--shadow-lift);
 }
 
 /* Light citrine plate — About figure column */
 @utility citrine-plate {
   background-image: linear-gradient(
     145deg,
-    color-mix(in oklab, var(--gold) 18%, var(--card)),
-    color-mix(in oklab, var(--steel, var(--card)) 10%, var(--card)) 62%,
+    color-mix(in oklab, var(--gold) 30%, var(--card)),
+    color-mix(in oklab, var(--burnt) 10%, var(--card)) 62%,
     var(--card)
   );
-  border: 1px solid color-mix(in oklab, var(--gold) 40%, transparent);
-  box-shadow: var(--shadow-plate);
+  border: 1px solid color-mix(in oklab, var(--gold) 52%, transparent);
+  box-shadow: var(--shadow-lift);
 }
+
+/* Soft steel-sage plate — the practice narrative column */
+@utility mist-plate {
+  background-image: linear-gradient(
+    165deg,
+    color-mix(in oklab, var(--steel, var(--forest)) 22%, var(--card)),
+    color-mix(in oklab, var(--forest) 10%, var(--card)) 56%,
+    var(--card)
+  );
+  border: 1px solid color-mix(in oklab, var(--steel, var(--forest)) 40%, transparent);
+  box-shadow: var(--shadow-lift);
+}
+
+/* Tinted disclosure plate */
+@utility disclosure-plate {
+  background-image: linear-gradient(
+    120deg,
+    color-mix(in oklab, var(--oxblood-core, var(--burnt)) 10%, var(--card)),
+    color-mix(in oklab, var(--gold) 12%, var(--card)) 70%,
+    var(--card)
+  );
+  border: 1px solid color-mix(in oklab, var(--gold) 38%, transparent);
+  box-shadow: var(--shadow-lift);
+}
+
+/* ------------------------------------------------- Fluid interaction motion */
+@utility plate-lift {
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+@utility plate-lift:hover {
+  transform: translate3d(0, -3px, 0);
+  box-shadow: var(--shadow-lift);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 
