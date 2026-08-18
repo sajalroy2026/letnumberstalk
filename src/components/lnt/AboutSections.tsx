@@ -22,7 +22,7 @@ export function AboutSections() {
         <div className="hairline mt-6" aria-hidden />
 
         <div className="mt-8 grid gap-12 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)]">
-          <div className="sage-plate space-y-5 p-7">
+          <div className="sage-plate plate-lift space-y-5 p-7">
             {ABOUT_PLATFORM.paragraphs.map((p, i) => (
               <p key={i} className="measure text-[1.02rem] leading-[1.8] tracking-[0.002em] text-foreground">
                 {p}
