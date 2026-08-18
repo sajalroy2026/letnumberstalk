@@ -354,23 +354,59 @@ function Home() {
             </h2>
             <span className="band-rule mt-5 block" aria-hidden />
             <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {SECTORS.map((s, i) => (
-                <motion.div
-                  key={s.id}
-                  initial={{ opacity: 0, y: 26, rotateX: 10 }}
-                  whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                  viewport={{ once: true, margin: "-70px" }}
-                  transition={{ duration: 0.7, delay: i * 0.07, ease }}
-                  className="glass overflow-hidden"
-                >
-                  <SectorPlate id={s.id} />
-
-                  <div className="border-t border-border p-5">
-                    <h3 className="font-display text-lg text-foreground">{s.name}</h3>
-                    <p className="mt-2 text-xs leading-[1.7] text-foreground/75">{s.description}</p>
-                  </div>
-                </motion.div>
-              ))}
+              {SECTORS.map((s, i) => {
+                const brief = SECTOR_BRIEFS[s.id];
+                return (
+                  <motion.div
+                    key={s.id}
+                    initial={{ opacity: 0, y: 26, rotateX: 10 }}
+                    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                    viewport={{ once: true, margin: "-70px" }}
+                    transition={{ duration: 0.7, delay: i * 0.07, ease }}
+                    className="min-h-[19rem]"
+                  >
+                    <FlipTile
+                      label={`${s.name} — reveal the calibration brief`}
+                      className="h-full min-h-[19rem]"
+                      front={
+                        <div className="glass relative h-full overflow-hidden">
+                          <SectorPlate id={s.id} />
+                          <div className="border-t border-border p-5">
+                            <h3 className="font-display text-lg text-foreground">{s.name}</h3>
+                            <p className="mt-2 text-xs leading-[1.7] text-foreground/75">
+                              {s.description}
+                            </p>
+                          </div>
+                          <span
+                            className="figure absolute bottom-3 right-4 text-[0.55rem] uppercase tracking-[0.2em]"
+                            style={{ color: brief?.tone }}
+                            aria-hidden
+                          >
+                            Open ⟳
+                          </span>
+                        </div>
+                      }
+                      back={
+                        <div
+                          className="relative h-full overflow-hidden border p-5 shadow-[var(--shadow-plate)]"
+                          style={{
+                            backgroundColor: brief?.tone,
+                            borderColor: brief?.tone,
+                            color: "var(--primary-foreground)",
+                          }}
+                        >
+                          <p className="figure text-[0.58rem] uppercase tracking-[0.22em] opacity-90">
+                            {s.name} · calibration brief
+                          </p>
+                          <p className="mt-3 max-h-[13rem] overflow-y-auto pr-1 text-[0.72rem] leading-[1.65] opacity-95">
+                            {brief?.text}
+                          </p>
+                        </div>
+                      }
+                    />
+                  </motion.div>
+                );
+              })}
               <motion.div
                 initial={{ opacity: 0, y: 26 }}
                 whileInView={{ opacity: 1, y: 0 }}
