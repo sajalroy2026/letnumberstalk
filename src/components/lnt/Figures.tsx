@@ -1745,31 +1745,16 @@ export function OpticField({ className }: { className?: string }) {
             })}
           </g>
 
-          {/* travelling marker — triangular pointer and luminous node, full orbit */}
-          <motion.g
-            style={{ transformOrigin: `${C}px ${CY}px` }}
-            animate={reduce ? { rotate: -34 } : { rotate: [0, 128, 214, 360] }}
-            transition={
-              reduce
-                ? { duration: 0 }
-                : { duration: 28, repeat: Infinity, ease: "easeInOut", times: [0, 0.38, 0.62, 1] }
-            }
-          >
-
+          {/* travelling marker — orbits the rings, pointing outward along the tangent */}
+          <motion.g style={{ x: markerX, y: markerY, rotate: markerRot }}>
             <motion.g
               animate={reduce ? {} : { opacity: [0.85, 1, 0.85] }}
               transition={{ duration: 3.4, repeat: Infinity, ease: "easeInOut" }}
             >
-              <circle
-                cx={C}
-                cy={CY - 236}
-                r="26"
-                fill="var(--gold-glow)"
-                opacity="0.18"
-              />
+              <circle cx={0} cy={0} r="26" fill="var(--gold-glow)" opacity="0.18" />
               <motion.circle
-                cx={C}
-                cy={CY - 236}
+                cx={0}
+                cy={0}
                 r="11"
                 animate={
                   reduce
@@ -1778,12 +1763,10 @@ export function OpticField({ className }: { className?: string }) {
                 }
                 transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
               />
-              <path
-                d={`M ${C} ${CY - 268} L ${C - 13} ${CY - 244} L ${C + 13} ${CY - 244} Z`}
-                fill="var(--gold-glow)"
-              />
+              <path d={`M 0 -32 L -13 -8 L 13 -8 Z`} fill="var(--gold-glow)" />
             </motion.g>
           </motion.g>
+
 
           {/* contact blips */}
           {RADAR_BLIPS.map((b, i) => {
