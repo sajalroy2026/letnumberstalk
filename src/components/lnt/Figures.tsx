@@ -1636,7 +1636,7 @@ export function OpticField({ className }: { className?: string }) {
     return CY - Math.cos((a * Math.PI) / 180) * r;
   });
   /* heading turned inward so the triangle points at the central readings */
-  const markerRot = useTransform(orbitAngle, (a) => a + 180);
+  const markerRot = useTransform(orbitAngle, (a) => a);
 
 
 

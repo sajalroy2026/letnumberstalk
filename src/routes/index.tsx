@@ -48,26 +48,51 @@ export const Route = createFileRoute("/")({
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-const SECTOR_BRIEFS: Record<string, { tone: string; text: string }> = {
+const SECTOR_BRIEFS: Record<string, { tone: string; lead: string; points: string[] }> = {
   services: {
     tone: "var(--pillar-financial)",
-    text: "A margin-and-utilisation economy. Capacity is billable human time, so the benchmark set is calibrated to gross margin, realisation, chargeable utilisation and revenue per fully loaded FTE rather than unit throughput. Working capital sits in receivables and work-in-progress, making days sales outstanding a first-order liquidity signal. Typical of consulting practices, agencies, law and accounting firms, engineering services and specialist staffing houses.",
+    lead: "A margin-and-utilisation economy.",
+    points: [
+      "Chargeable utilisation and realisation",
+      "Revenue per fully loaded FTE",
+      "Days sales outstanding as liquidity signal",
+    ],
   },
   manufacturing: {
     tone: "var(--pillar-operational)",
-    text: "A throughput-and-asset economy. Value accrues where fixed capacity is converted into saleable output, so thresholds are anchored to cycle time, first-pass yield, rework, inventory turns and asset utilisation. Margins are structurally thinner than services, and the benchmark set reads growth and profitability accordingly. Typical of discrete and process manufacturers, industrial fabricators, contract producers and assembly operations.",
+    lead: "A throughput-and-asset economy.",
+    points: [
+      "Cycle time and first-pass yield",
+      "Inventory turns and asset utilisation",
+      "Thinner structural margin thresholds",
+    ],
   },
   retail: {
     tone: "var(--pillar-operational)",
-    text: "A velocity-and-basket economy. Thin percentage margins are compensated by turn frequency, so calibration weights inventory turns, sell-through, contribution per order, repeat purchase rate and blended acquisition cost against lifetime value. Demand seasonality and channel mix shift the read materially. Typical of direct-to-consumer brands, ecommerce operators, physical store estates and omnichannel retailers.",
+    lead: "A velocity-and-basket economy.",
+    points: [
+      "Inventory turns and sell-through",
+      "Contribution per order, repeat rate",
+      "Acquisition cost read against lifetime value",
+    ],
   },
   saas: {
     tone: "var(--pillar-market)",
-    text: "A recurring-revenue-and-retention economy. The benchmark set is calibrated to net revenue retention, gross churn, LTV:CAC, payback period and gross margin at software economics — materially higher growth and margin thresholds than any physical-goods profile. Deferred revenue and cohort behaviour dominate the forward view. Typical of subscription software platforms, usage-priced APIs and managed digital products.",
+    lead: "A recurring-revenue economy.",
+    points: [
+      "Net revenue retention and gross churn",
+      "LTV:CAC and payback period",
+      "Software-grade growth and margin bars",
+    ],
   },
   startup: {
     tone: "var(--pillar-risk)",
-    text: "A runway-and-evidence economy. Pre-profitability by design, so the calibration privileges growth velocity, cash runway, burn multiple, customer concentration and early retention signal over absolute profitability. Terminal-risk surveillance carries greater weight here than in any other profile. Typical of pre-seed through Series A ventures still establishing repeatable demand and unit economics.",
+    lead: "A runway-and-evidence economy.",
+    points: [
+      "Growth velocity and burn multiple",
+      "Cash runway and customer concentration",
+      "Terminal-risk surveillance weighted highest",
+    ],
   },
 };
 
