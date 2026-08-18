@@ -84,10 +84,11 @@ export function SiteFooter() {
 
         <div className="hairline mt-12" aria-hidden />
 
-        <p className="mt-6 measure text-xs leading-relaxed text-muted-foreground">
+        <p className="mt-6 max-w-[92ch] text-[1.02rem] leading-[1.85] text-foreground/85">
           No login required. Every figure entered is held in browser memory for the duration of the session and is
           discarded when the tab closes. Open the instrument and begin.
         </p>
+
       </div>
     </footer>
   );
