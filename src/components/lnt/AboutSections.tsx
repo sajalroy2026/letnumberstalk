@@ -56,7 +56,7 @@ export function AboutSections() {
         <div className="mt-8 grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.45fr)]">
           <aside className="sand-plate print-avoid-break p-8">
             <div
-              className="rule-ink grid h-20 w-20 place-items-center rounded-full font-display text-2xl text-primary-foreground"
+              className="grid h-20 w-20 place-items-center rounded-full border border-accent/50 bg-[linear-gradient(150deg,color-mix(in_oklab,var(--gold)_58%,var(--card)),var(--card))] font-display text-2xl text-foreground shadow-[var(--shadow-plate)]"
               aria-hidden
             >
               SR
