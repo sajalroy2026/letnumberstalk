@@ -3,7 +3,7 @@ import { useId, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
-const ease = [0.16, 1, 0.3, 1] as const;
+
 
 /**
  * FlipTile — a click/keyboard operated card that turns in place to reveal a
