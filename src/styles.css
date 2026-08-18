@@ -1018,17 +1018,13 @@
   box-shadow: var(--shadow-lift);
 }
 
-/* Tinted disclosure plate */
+/* Disclosure — light ground with an accent edge only */
 @utility disclosure-plate {
-  background-image: linear-gradient(
-    120deg,
-    color-mix(in oklab, var(--gold) 26%, oklch(0.997 0.012 92)),
-    color-mix(in oklab, var(--gold) 10%, oklch(0.999 0.008 92)) 72%,
-    oklch(0.999 0.004 92)
-  );
-  border: 1px solid color-mix(in oklab, var(--oxblood-core, var(--burnt)) 34%, transparent);
-  box-shadow: var(--shadow-lift);
+  background-color: oklch(0.998 0.003 92);
+  border: 1px solid color-mix(in oklab, var(--foreground) 10%, transparent);
+  box-shadow: var(--shadow-plate);
 }
+
 
 /* ------------------------------------------------- Fluid interaction motion */
 @utility plate-lift {
