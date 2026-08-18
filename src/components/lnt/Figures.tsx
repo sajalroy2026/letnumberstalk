@@ -1579,6 +1579,16 @@ const polar = (cx: number, cy: number, r: number, deg: number) => {
   return [r2(cx + r * Math.cos(a)), r2(cy + r * Math.sin(a))] as const;
 };
 
+const RADAR_BLIPS = [
+  { r: 232, deg: 18, size: 5 },
+  { r: 168, deg: 74, size: 3.5 },
+  { r: 252, deg: 126, size: 4 },
+  { r: 132, deg: 168, size: 5.5 },
+  { r: 208, deg: 214, size: 3.5 },
+  { r: 174, deg: 266, size: 4.5 },
+  { r: 246, deg: 312, size: 4 },
+];
+
 /**
  * OpticField — the hero instrument.
  * A continuously running optical field: measurement rings turning at
@@ -1673,6 +1683,10 @@ export function OpticField({ className }: { className?: string }) {
               <stop offset="0%" stopColor="var(--gold-glow)" stopOpacity="0.75" />
               <stop offset="100%" stopColor="var(--gold-glow)" stopOpacity="0" />
             </linearGradient>
+            <linearGradient id="of-radar" x1="1" y1="1" x2="0" y2="0">
+              <stop offset="0%" stopColor="var(--gold-glow)" stopOpacity="0" />
+              <stop offset="100%" stopColor="var(--gold-glow)" stopOpacity="0.5" />
+            </linearGradient>
             <radialGradient id="of-core" cx="50%" cy="50%">
               <stop offset="0%" stopColor="var(--gold-glow)" stopOpacity="0.22" />
               <stop offset="100%" stopColor="var(--gold-glow)" stopOpacity="0" />
@@ -1737,16 +1751,69 @@ export function OpticField({ className }: { className?: string }) {
             </motion.g>
           ))}
 
-          {/* scanning sweep */}
+          {/* radar spokes */}
+          <g opacity="0.28">
+            {Array.from({ length: 12 }).map((_, i) => {
+              const [x1, y1] = polar(C, CY, 268, i * 30);
+              return (
+                <line
+                  key={i}
+                  x1={C}
+                  y1={CY}
+                  x2={x1}
+                  y2={y1}
+                  stroke="currentColor"
+                  className="text-foreground"
+                  strokeWidth={i % 3 === 0 ? 1 : 0.5}
+                />
+              );
+            })}
+          </g>
+
+          {/* radar sweep arm with decaying trail */}
           {!reduce && (
             <motion.g
               style={{ transformOrigin: `${C}px ${CY}px` }}
               animate={{ rotate: 360 }}
-              transition={{ duration: 11, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 9, repeat: Infinity, ease: "linear" }}
             >
-              <rect x={C - 1.5} y={CY - 268} width="3" height="268" fill="url(#of-sweep)" />
+              <path
+                d={`M ${C} ${CY} L ${polar(C, CY, 268, -54)[0]} ${polar(C, CY, 268, -54)[1]} A 268 268 0 0 1 ${C} ${CY - 268} Z`}
+                fill="url(#of-radar)"
+              />
+              <line
+                x1={C}
+                y1={CY}
+                x2={C}
+                y2={CY - 268}
+                stroke="var(--gold-glow)"
+                strokeWidth="2.4"
+                opacity="0.9"
+              />
             </motion.g>
           )}
+
+          {/* contact blips */}
+          {RADAR_BLIPS.map((b, i) => {
+            const [bx, by] = polar(C, CY, b.r, b.deg);
+            return (
+              <motion.circle
+                key={`${b.r}-${b.deg}`}
+                cx={bx}
+                cy={by}
+                r={b.size}
+                fill={tones[i % tones.length]}
+                animate={reduce ? {} : { opacity: [0.15, 1, 0.15], scale: [0.8, 1.35, 0.8] }}
+                style={{ transformOrigin: `${bx}px ${by}px` }}
+                transition={{
+                  duration: 9,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: (b.deg / 360) * 9,
+                }}
+              />
+            );
+          })}
 
           {/* live diagnostic curve — redraws continuously */}
           <motion.path
@@ -1787,20 +1854,20 @@ export function OpticField({ className }: { className?: string }) {
                 y={rd.y}
                 textAnchor={rd.x > C ? "end" : "start"}
                 className="figure fill-foreground"
-                fontSize="11"
-                letterSpacing="2.6"
-                opacity="0.72"
+                fontSize="15"
+                letterSpacing="3"
+                opacity="0.8"
               >
                 {rd.k}
               </text>
               <text
                 x={rd.x}
-                y={rd.y + 26}
+                y={rd.y + 36}
                 textAnchor={rd.x > C ? "end" : "start"}
                 className="font-display"
                 fill={tones[i % tones.length]}
-                fontSize="26"
-                fontWeight="600"
+                fontSize="40"
+                fontWeight="700"
               >
                 {rd.v}
               </text>
