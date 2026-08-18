@@ -194,7 +194,7 @@ function Home() {
               initial={{ opacity: 0, filter: "blur(10px)" }}
               animate={{ opacity: 1, filter: "blur(0px)" }}
               transition={{ duration: 1.2, ease }}
-              className="relative mx-auto h-[26rem] w-full max-w-[36rem] sm:h-[32rem] lg:h-full lg:min-h-[38rem] lg:max-w-none"
+              className="relative mx-auto h-[26rem] w-full max-w-[36rem] self-start sm:h-[32rem] lg:-mt-6 lg:h-[38rem] lg:max-w-none"
             >
               <TickerRain className="z-0" columns={9} />
               <OpticField className="relative z-10" />
@@ -303,7 +303,7 @@ function Home() {
                       label={`${p.name} — reveal the ${count} metrics assessed`}
                       className="h-full min-h-[15.5rem]"
                       front={
-                        <div className="lucid-tile lucid-tile-hover relative flex h-full flex-col justify-between overflow-hidden p-6">
+                        <div className="lucid-tile lucid-tile-hover relative flex h-full flex-col items-center justify-center gap-6 overflow-hidden p-6 text-center">
                           <span
                             className="absolute inset-x-0 top-0 h-[3px] opacity-80"
                             style={{ backgroundImage: `linear-gradient(90deg, ${tone}, transparent)` }}
@@ -312,7 +312,7 @@ function Home() {
                           <h3 className="font-display text-2xl leading-[1.15] text-foreground sm:text-[1.75rem]">
                             {p.name}
                           </h3>
-                          <div>
+                          <div className="w-full">
                             <div className="flex items-baseline justify-between gap-3">
                               <span className="figure text-[0.65rem] uppercase tracking-[0.2em] text-foreground/70">
                                 {count} metrics
@@ -341,19 +341,19 @@ function Home() {
                         </div>
                       }
                       back={
-                        <div className="lucid-back relative h-full overflow-hidden p-6">
+                        <div className="lucid-back relative flex h-full flex-col items-center justify-center overflow-hidden p-6 text-center">
                           <span
                             className="absolute inset-x-0 top-0 h-[3px] opacity-80"
                             style={{ backgroundImage: `linear-gradient(90deg, ${tone}, transparent)` }}
                             aria-hidden
                           />
                           <p
-                            className="figure text-[0.6rem] uppercase tracking-[0.24em]"
+                            className="figure text-[0.62rem] font-semibold uppercase tracking-[0.24em]"
                             style={{ color: tone }}
                           >
                             {p.name} · {count} metrics
                           </p>
-                          <p className="mt-3 text-[0.82rem] leading-[1.6] text-foreground">
+                          <p className="mt-3 text-[0.85rem] font-medium leading-[1.65] text-foreground">
                             {METRIC_CONTENT.filter((m) => m.pillar === p.id)
                               .slice(0, 6)
                               .map((m) => m.name)
@@ -398,7 +398,7 @@ function Home() {
                       front={
                         <div className="lucid-tile lucid-tile-hover relative h-full overflow-hidden">
                           <SectorPlate id={s.id} />
-                          <div className="border-t border-foreground/10 p-5">
+                          <div className="border-t border-foreground/10 p-5 text-center">
                             <h3 className="font-display text-2xl leading-tight text-foreground">
                               {s.name}
                             </h3>
@@ -415,7 +415,7 @@ function Home() {
                         </div>
                       }
                       back={
-                        <div className="lucid-back relative h-full overflow-hidden p-6">
+                        <div className="lucid-back relative flex h-full flex-col items-center justify-center overflow-hidden p-6 text-center">
                           <span
                             className="absolute inset-x-0 top-0 h-[3px] opacity-80"
                             style={{
@@ -424,12 +424,12 @@ function Home() {
                             aria-hidden
                           />
                           <p
-                            className="figure text-[0.6rem] uppercase tracking-[0.24em]"
+                            className="figure text-[0.62rem] font-semibold uppercase tracking-[0.24em]"
                             style={{ color: brief?.tone }}
                           >
                             {s.name} · calibration brief
                           </p>
-                          <p className="mt-3 text-[0.78rem] leading-[1.7] text-foreground">
+                          <p className="mt-3 text-[0.8rem] font-medium leading-[1.7] text-foreground">
                             {brief?.text}
                           </p>
                         </div>

@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
+import { animate, motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
 import { PILLAR_META } from "@/lib/assessment/spec.generated";
@@ -1606,6 +1606,37 @@ export function OpticField({ className }: { className?: string }) {
   const C = 380;
   const CY = 320;
 
+  /* Marker orbit — one continuous angle drives position and heading. The radius
+     and pace wobble on a second, incommensurate cycle so no two passes trace the
+     same sweep, while the loop seam stays perfectly smooth. */
+  const orbit = useMotionValue(0);
+  useEffect(() => {
+    if (reduce) return;
+    const controls = animate(orbit, 1, {
+      duration: 14,
+      repeat: Infinity,
+      ease: "linear",
+    });
+    return () => controls.stop();
+  }, [orbit, reduce]);
+
+  const orbitAngle = useTransform(orbit, (t) => {
+    const base = t * 360;
+    // uneven pace: gentle ±14° modulation over three sub-cycles per revolution
+    return base + Math.sin(t * Math.PI * 2 * 3) * 14 + Math.sin(t * Math.PI * 2) * 8;
+  });
+  const orbitRadius = useTransform(orbit, (t) => 236 + Math.sin(t * Math.PI * 2 * 2) * 18);
+  const markerX = useTransform([orbitAngle, orbitRadius], (v) => {
+    const [a = 0, r = 236] = v as number[];
+    return C + Math.sin((a * Math.PI) / 180) * r;
+  });
+  const markerY = useTransform([orbitAngle, orbitRadius], (v) => {
+    const [a = 0, r = 236] = v as number[];
+    return CY - Math.cos((a * Math.PI) / 180) * r;
+  });
+  const markerRot = orbitAngle;
+
+
 
 
 
@@ -1745,31 +1776,16 @@ export function OpticField({ className }: { className?: string }) {
             })}
           </g>
 
-          {/* travelling marker — triangular pointer and luminous node, full orbit */}
-          <motion.g
-            style={{ transformOrigin: `${C}px ${CY}px` }}
-            animate={reduce ? { rotate: -34 } : { rotate: [0, 128, 214, 360] }}
-            transition={
-              reduce
-                ? { duration: 0 }
-                : { duration: 28, repeat: Infinity, ease: "easeInOut", times: [0, 0.38, 0.62, 1] }
-            }
-          >
-
+          {/* travelling marker — orbits the rings, pointing outward along the tangent */}
+          <motion.g style={{ x: markerX, y: markerY, rotate: markerRot }}>
             <motion.g
               animate={reduce ? {} : { opacity: [0.85, 1, 0.85] }}
               transition={{ duration: 3.4, repeat: Infinity, ease: "easeInOut" }}
             >
-              <circle
-                cx={C}
-                cy={CY - 236}
-                r="26"
-                fill="var(--gold-glow)"
-                opacity="0.18"
-              />
+              <circle cx={0} cy={0} r="26" fill="var(--gold-glow)" opacity="0.18" />
               <motion.circle
-                cx={C}
-                cy={CY - 236}
+                cx={0}
+                cy={0}
                 r="11"
                 animate={
                   reduce
@@ -1778,12 +1794,10 @@ export function OpticField({ className }: { className?: string }) {
                 }
                 transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
               />
-              <path
-                d={`M ${C} ${CY - 268} L ${C - 13} ${CY - 244} L ${C + 13} ${CY - 244} Z`}
-                fill="var(--gold-glow)"
-              />
+              <path d={`M 0 -32 L -13 -8 L 13 -8 Z`} fill="var(--gold-glow)" />
             </motion.g>
           </motion.g>
+
 
           {/* contact blips */}
           {RADAR_BLIPS.map((b, i) => {

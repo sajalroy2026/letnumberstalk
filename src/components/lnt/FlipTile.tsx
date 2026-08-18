@@ -43,13 +43,7 @@ export function FlipTile({
         animate={
           reduce ? {} : { rotateY: open ? 180 : 0, scale: open ? 1.02 : 1, z: open ? 40 : 0 }
         }
-        transition={{
-          type: "spring",
-          stiffness: 42,
-          damping: 16,
-          mass: 1.05,
-          restDelta: 0.0005,
-        }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         style={{ transformStyle: "preserve-3d", willChange: "transform" }}
         className="relative h-full w-full cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
 
