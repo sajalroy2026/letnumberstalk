@@ -676,7 +676,7 @@ function StageShell({
       <h1 className="mt-4 font-display text-3xl leading-tight text-foreground sm:text-5xl">
         {title}
       </h1>
-      <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">{lede}</p>
+      <p className="mt-5 max-w-2xl text-base leading-relaxed text-foreground/90">{lede}</p>
       <div className="mt-12">{children}</div>
     </motion.div>
   );
