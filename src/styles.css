@@ -1037,10 +1037,11 @@
     transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
-}
-@utility plate-lift:hover {
-  transform: translate3d(0, -3px, 0);
-  box-shadow: var(--shadow-lift);
+
+  &:hover {
+    transform: translate3d(0, -3px, 0);
+    box-shadow: var(--shadow-lift);
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
