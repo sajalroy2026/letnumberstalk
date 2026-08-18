@@ -107,7 +107,7 @@
   --secondary: oklch(0.928 0.014 248);
   --secondary-foreground: oklch(0.208 0.058 266);
   --muted: oklch(0.928 0.014 248);
-  --muted-foreground: oklch(0.412 0.032 258);
+  --muted-foreground: oklch(0.318 0.038 260);
   --accent: oklch(0.352 0.074 254);
   --accent-foreground: oklch(0.985 0.004 250);
   --accent-glow: oklch(0.742 0.062 250);
@@ -846,7 +846,21 @@
 
 @media print {
   @page {
-    margin: 14mm;
+    size: A4;
+    margin: 16mm 15mm 18mm;
+
+    @bottom-right {
+      content: counter(page);
+      font-size: 8pt;
+      color: #444;
+    }
+  }
+
+  @page :first {
+    margin: 0;
+    @bottom-right {
+      content: "";
+    }
   }
 
   /* The report prints in brand colour, not flattened greyscale. */
@@ -857,9 +871,49 @@
     print-color-adjust: exact !important;
   }
 
+  html,
   body {
     background: var(--background) !important;
     color: var(--foreground) !important;
+    font-size: 9.6pt;
+    line-height: 1.5;
+    orphans: 3;
+    widows: 3;
+  }
+
+  p,
+  li,
+  dd,
+  dt,
+  td,
+  th,
+  span {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* Editorial hierarchy — headings never strand at the foot of a page. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid-page;
+    break-inside: avoid;
+    page-break-after: avoid;
+  }
+
+  h1 {
+    font-size: 26pt;
+    line-height: 1.08;
+  }
+  h2 {
+    font-size: 15pt;
+    line-height: 1.15;
+    letter-spacing: 0.005em;
+  }
+  h3 {
+    font-size: 11.5pt;
+    line-height: 1.2;
   }
 
   .no-print {
@@ -882,7 +936,7 @@
   .glass {
     backdrop-filter: none !important;
     background-image: none !important;
-    background-color: var(--card) !important;
+    background-color: color-mix(in oklab, var(--card) 88%, transparent) !important;
   }
 
   /* Body chapters print on a light ground for legibility, accents intact. */
@@ -893,16 +947,23 @@
     background-image: none !important;
   }
 
-  /* The cover keeps its full ink plate. */
+  /* The cover keeps its full ink plate and owns page 1 alone. */
   .print-cover {
-    background-image: none !important;
-    background-color: var(--background) !important;
-    color: var(--foreground) !important;
+    break-after: page;
+    page-break-after: always;
+    padding: 16mm 15mm !important;
+    min-height: 258mm;
   }
 
   .print-plain {
     box-shadow: none !important;
     backdrop-filter: none !important;
+  }
+
+  /* Content flows continuously — only small units are kept whole. */
+  .print-flow {
+    break-inside: auto;
+    page-break-inside: auto;
   }
 
   .print-break {
@@ -916,6 +977,52 @@
     height: auto !important;
     opacity: 1 !important;
     overflow: visible !important;
+  }
+
+  /* Long-form prose sets in two justified columns, magazine fashion. */
+  .print-prose {
+    max-width: none !important;
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    font-size: 9.2pt;
+    line-height: 1.52;
+    color: var(--foreground) !important;
+  }
+
+  .print-prose > * {
+    break-inside: auto;
+  }
+
+  /* Tighten the web rhythm into a print rhythm — no dead vertical space. */
+  main section,
+  main > div > section {
+    margin-top: 7mm !important;
+  }
+
+  .mt-10,
+  .mt-12,
+  .mt-14,
+  .mt-16 {
+    margin-top: 6mm !important;
+  }
+
+  .py-16,
+  .pt-14,
+  .pb-24 {
+    padding-top: 4mm !important;
+    padding-bottom: 4mm !important;
+  }
+
+  .p-8,
+  .sm\:p-10 {
+    padding: 5mm !important;
+  }
+
+  .space-y-10 > * + *,
+  .space-y-6 > * + *,
+  .space-y-4 > * + * {
+    margin-top: 4mm !important;
   }
 }
 

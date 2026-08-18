@@ -222,7 +222,7 @@ export function PillarStage() {
 
         <div className="border border-border bg-card p-5 shadow-[var(--shadow-plate)]">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <span className="text-sm text-muted-foreground">
+            <span className="text-sm text-foreground/90">
               {assessment.entered} of {metrics.length} metrics entered · minimum for a meaningful
               score: {tier.floor}
             </span>
@@ -245,7 +245,7 @@ export function PillarStage() {
             />
           </div>
           {!assessment.meetsCriticalMinimum ? (
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-3 text-sm leading-relaxed text-foreground/90">
               A meaningful reading for this pillar needs at least {tier.floor} metrics — {tier.floorText}.
               Figures entered so far are held for the session and score once that floor is reached.
             </p>
@@ -428,7 +428,7 @@ export function PillarScorePlate({
           <Stat label="Confidence" value={assessment.confidence} />
         </dl>
       </div>
-      <p className="mt-6 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+      <p className="mt-6 max-w-3xl text-sm leading-relaxed text-foreground/90">
         Scored across the {assessment.entered} metrics entered, re-weighted so unentered metrics
         neither add nor subtract. Weight of this pillar in the integrated composite:{" "}
         {Math.round(assessment.weight * 100)}%.
@@ -536,7 +536,7 @@ export function ReportStage() {
           aria-label="Caution"
         >
           <h2 className="text-xs uppercase tracking-[0.28em] text-critical">Caution</h2>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+          <p className="mt-3 text-sm leading-relaxed text-foreground/90">
             2 indicators carry terminal risk for a business. The readings below crossed their
             critical thresholds. This is supplementary context to the pillar breakdown above.
           </p>
@@ -549,7 +549,9 @@ export function ReportStage() {
                   <span className="text-xs uppercase tracking-[0.2em] text-primary">
                     Areas to look into
                   </span>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.areas}</p>
+                  <p className="print-prose mt-2 text-sm leading-relaxed text-foreground">
+                    {c.areas}
+                  </p>
                 </div>
               </div>
             ))}
@@ -566,7 +568,7 @@ export function ReportStage() {
             ) : (
               <div className="print-plain border border-border bg-card p-8">
                 <p className="font-display text-xl text-foreground">{a.name}</p>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-2 text-sm leading-relaxed text-foreground/90">
                   {a.entered} metrics were entered, below the {COVERAGE_TIERS[a.pillarId]!.floor}{" "}
                   needed for a meaningful reading — {COVERAGE_TIERS[a.pillarId]!.floorText}. The
                   figures entered are held for the session and score once that floor is reached.
@@ -622,10 +624,10 @@ export function ReportStage() {
 function MetricResultRow({ result }: { result: MetricResult }) {
   const metric = METRICS_BY_ID[result.metricId];
   return (
-    <div className="print-avoid-break print-plain border border-border/70 bg-card/40">
-      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-6 gap-y-1 px-5 py-3">
-        <span className="min-w-0 text-sm text-foreground">{result.name}</span>
-        <span className="figure shrink-0 text-xs text-muted-foreground">
+    <div className="print-flow print-plain border border-border/70 bg-card/40">
+      <div className="print-avoid-break grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-6 gap-y-1 px-5 py-3">
+        <span className="min-w-0 text-sm font-medium text-foreground">{result.name}</span>
+        <span className="figure shrink-0 text-xs text-foreground/80">
           {result.points} / {result.maxPoints} pts
         </span>
         <span className={cn("text-xs uppercase tracking-[0.14em]", tierColor[result.tier])}>
@@ -634,13 +636,15 @@ function MetricResultRow({ result }: { result: MetricResult }) {
       </div>
       {result.showAreas && metric ? (
         <div className="border-t border-border/70 bg-secondary/40 px-5 py-5">
-          <p className="text-[0.62rem] uppercase tracking-[0.26em] text-accent">
+          <p className="text-[0.62rem] font-semibold uppercase tracking-[0.26em] text-accent">
             Areas to look into
           </p>
-          <div className="mt-3">
+          <div className="print-avoid-break mt-3">
             <ValueChain highlight={stageForPillar(metric.pillar)} />
           </div>
-          <p className="mt-4 measure text-sm leading-relaxed text-foreground/85">{metric.areas}</p>
+          <p className="print-prose mt-4 measure text-sm leading-relaxed text-foreground">
+            {metric.areas}
+          </p>
         </div>
       ) : null}
     </div>
@@ -672,7 +676,7 @@ function StageShell({
       <h1 className="mt-4 font-display text-3xl leading-tight text-foreground sm:text-5xl">
         {title}
       </h1>
-      <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">{lede}</p>
+      <p className="mt-5 max-w-2xl text-base leading-relaxed text-foreground/90">{lede}</p>
       <div className="mt-12">{children}</div>
     </motion.div>
   );

@@ -63,7 +63,7 @@ export function MetricCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.65, delay: Math.min(index * 0.04, 0.24), ease }}
-      className="print-avoid-break print-plain border border-border bg-card shadow-[var(--shadow-plate)]"
+      className="print-flow print-plain border border-border bg-card shadow-[var(--shadow-plate)]"
     >
       <div className="border-b border-border px-6 py-5 sm:px-8">
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4">
@@ -74,7 +74,7 @@ export function MetricCard({
             {metric.maxPoints} pts{metric.essential ? " · essential" : ""}
           </span>
         </div>
-        <p className="mt-2.5 measure text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-2.5 measure text-sm leading-relaxed text-foreground/90">
           {metric.definition}
         </p>
       </div>
@@ -108,7 +108,7 @@ export function MetricCard({
                     <span className="figure text-[0.7rem] text-accent">0{c.value}</span>
                     <span className="text-sm font-medium text-foreground">{c.label}</span>
                   </span>
-                  <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">
+                  <span className="mt-1 block text-xs leading-relaxed text-foreground/85">
                     {c.description}
                   </span>
                 </button>
@@ -175,7 +175,7 @@ export function MetricCard({
               <p className="mt-5 text-[0.62rem] uppercase tracking-[0.22em] text-muted-foreground">
                 Scoring band
               </p>
-              <p className="mt-1.5 measure text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-1.5 measure text-sm leading-relaxed text-foreground/90">
                 {metric.bandText}
               </p>
             </Panel>
@@ -184,11 +184,11 @@ export function MetricCard({
 
           {openPanel === "sourcing" ? (
             <Panel key="sourcing" label="Where to source">
-              <p className="measure text-sm leading-relaxed text-foreground/85">
+              <p className="measure text-sm leading-relaxed text-foreground">
                 {metric.guidance}
               </p>
               {note ? (
-                <p className="mt-3 measure text-xs italic leading-relaxed text-muted-foreground">
+                <p className="mt-3 measure text-xs italic leading-relaxed text-foreground/85">
                   {note}
                 </p>
               ) : null}
@@ -291,19 +291,19 @@ export function MetricCard({
               <span>Healthy</span>
             </div>
 
-            <p className="mt-5 measure text-sm leading-relaxed text-foreground/85">
+            <p className="mt-5 measure text-sm leading-relaxed text-foreground">
               {metric.reading}
             </p>
 
             {result.showAreas ? (
               <div className="mt-6 border-l-2 border-accent bg-card px-5 py-5">
-                <p className="text-[0.62rem] uppercase tracking-[0.26em] text-accent">
+                <p className="text-[0.62rem] font-semibold uppercase tracking-[0.26em] text-accent">
                   Areas to look into
                 </p>
                 <div className="mt-3">
                   <ValueChain highlight={stageForPillar(metric.pillar)} />
                 </div>
-                <p className="mt-4 measure text-sm leading-relaxed text-foreground/85">
+                <p className="print-prose mt-4 measure text-sm leading-relaxed text-foreground">
                   {metric.areas}
                 </p>
               </div>

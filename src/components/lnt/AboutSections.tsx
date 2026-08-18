@@ -13,7 +13,7 @@ export function AboutSections() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.9, ease }}
-        className="print-avoid-break"
+        className="print-flow print-break"
       >
         <p className="text-[0.65rem] uppercase tracking-[0.3em] text-accent">The instrument</p>
         <h2 className="mt-4 font-display text-[2rem] leading-[1.1] tracking-[-0.02em] text-foreground sm:text-[2.6rem]">
@@ -22,7 +22,7 @@ export function AboutSections() {
         <div className="hairline mt-6" aria-hidden />
 
         <div className="mt-8 grid gap-12 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)]">
-          <div className="space-y-5">
+          <div className="print-prose space-y-5">
             {ABOUT_PLATFORM.paragraphs.map((p, i) => (
               <p key={i} className="measure text-[1.02rem] leading-[1.8] tracking-[0.002em] text-foreground">
                 {p}
@@ -48,7 +48,7 @@ export function AboutSections() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.9, ease }}
-        className="print-avoid-break"
+        className="print-flow"
       >
         <p className="text-[0.65rem] uppercase tracking-[0.3em] text-accent">The practice</p>
         <h2 className="mt-4 font-display text-[2rem] leading-[1.1] tracking-[-0.02em] text-foreground sm:text-[2.6rem]">
@@ -97,7 +97,7 @@ export function AboutSections() {
             </p>
           </aside>
 
-          <div className="space-y-5">
+          <div className="print-prose space-y-5">
             {ABOUT_ARCHITECT.paragraphs.map((p, i) => (
               <p key={i} className="measure text-[1.02rem] leading-[1.8] tracking-[0.002em] text-foreground">
                 {p}
