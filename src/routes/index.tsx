@@ -17,6 +17,7 @@ import {
   PrismStack,
   SectorPlate,
   SignalField,
+  TickerRain,
   pillarColor,
   useCountUp,
 } from "@/components/lnt/Figures";
@@ -84,7 +85,7 @@ function Home() {
             <SignalField />
           </ParallaxLayer>
 
-          <div className="relative z-10 mx-auto grid max-w-6xl items-stretch gap-12 px-5 pb-20 pt-16 sm:px-8 sm:pt-24 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
+          <div className="relative z-10 mx-auto grid max-w-6xl items-stretch gap-12 px-5 pb-20 pt-6 sm:px-8 sm:pt-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
             <div className="max-w-2xl">
 
               <motion.p
@@ -100,7 +101,7 @@ function Home() {
                 initial={{ opacity: 0, y: 30, filter: "blur(12px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 transition={{ duration: 1.1, delay: 0.1, ease }}
-                className="mt-6 font-display text-4xl leading-[1.08] text-foreground sm:text-6xl"
+                className="mt-5 font-hero text-[2.6rem] font-semibold leading-[1.04] tracking-[-0.02em] text-foreground sm:text-6xl"
               >
                 Let the numbers state the condition of the business.
               </motion.h1>
@@ -170,7 +171,8 @@ function Home() {
               transition={{ duration: 1.2, ease }}
               className="relative mx-auto h-[26rem] w-full max-w-[36rem] sm:h-[32rem] lg:h-full lg:min-h-[38rem] lg:max-w-none"
             >
-              <OpticField />
+              <TickerRain className="z-0" columns={9} />
+              <OpticField className="relative z-10" />
             </motion.div>
 
 
