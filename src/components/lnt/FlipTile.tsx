@@ -40,12 +40,16 @@ export function FlipTile({
             setOpen((v) => !v);
           }
         }}
-        animate={
-          reduce ? {} : { rotateY: open ? 180 : 0, scale: open ? 1.02 : 1, z: open ? 40 : 0 }
-        }
-        transition={{ type: "spring", stiffness: 260, damping: 26, mass: 0.7 }}
-        style={{ transformStyle: "preserve-3d", willChange: "transform" }}
+        animate={reduce ? {} : { rotateY: open ? 180 : 0 }}
+        transition={{ type: "spring", stiffness: 240, damping: 28, mass: 0.7 }}
+        onAnimationStart={() => setAnimating(true)}
+        onAnimationComplete={() => setAnimating(false)}
+        style={{
+          transformStyle: "preserve-3d",
+          willChange: animating ? "transform" : "auto",
+        }}
         className="relative h-full w-full cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+
 
       >
         <div
