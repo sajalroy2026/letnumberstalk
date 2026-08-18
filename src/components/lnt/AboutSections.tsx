@@ -12,7 +12,7 @@ export function AboutSections() {
         initial={{ opacity: 0, y: 26 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.8, ease }}
+        transition={{ duration: 0.9, ease }}
         className="print-avoid-break"
       >
         <p className="text-[0.65rem] uppercase tracking-[0.3em] text-accent">The instrument</p>
@@ -22,7 +22,7 @@ export function AboutSections() {
         <div className="hairline mt-6" aria-hidden />
 
         <div className="mt-8 grid gap-12 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)]">
-          <div className="sage-plate plate-lift space-y-5 p-7">
+          <div className="space-y-5">
             {ABOUT_PLATFORM.paragraphs.map((p, i) => (
               <p key={i} className="measure text-[1.02rem] leading-[1.8] tracking-[0.002em] text-foreground">
                 {p}
@@ -47,7 +47,7 @@ export function AboutSections() {
         initial={{ opacity: 0, y: 26 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.8, ease }}
+        transition={{ duration: 0.9, ease }}
         className="print-avoid-break"
       >
         <p className="text-[0.65rem] uppercase tracking-[0.3em] text-accent">The practice</p>
@@ -97,8 +97,7 @@ export function AboutSections() {
             </p>
           </aside>
 
-          <div className="mist-plate plate-lift space-y-5 p-7">
-
+          <div className="space-y-5">
             {ABOUT_ARCHITECT.paragraphs.map((p, i) => (
               <p key={i} className="measure text-[1.02rem] leading-[1.8] tracking-[0.002em] text-foreground">
                 {p}

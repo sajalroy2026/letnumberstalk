@@ -22,6 +22,7 @@ export function FlipTile({
   label: string;
 }) {
   const [open, setOpen] = useState(false);
+  const [animating, setAnimating] = useState(false);
   const reduce = useReducedMotion();
   const id = useId();
 
