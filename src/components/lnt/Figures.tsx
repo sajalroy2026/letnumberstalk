@@ -1606,6 +1606,35 @@ export function OpticField({ className }: { className?: string }) {
   const C = 380;
   const CY = 320;
 
+  /* Marker orbit — one continuous angle drives position and heading. The radius
+     and pace wobble on a second, incommensurate cycle so no two passes trace the
+     same sweep, while the loop seam stays perfectly smooth. */
+  const orbit = useMotionValue(0);
+  useEffect(() => {
+    if (reduce) return;
+    const controls = animate(orbit, 1, {
+      duration: 14,
+      repeat: Infinity,
+      ease: "linear",
+    });
+    return () => controls.stop();
+  }, [orbit, reduce]);
+
+  const orbitAngle = useTransform(orbit, (t) => {
+    const base = t * 360;
+    // uneven pace: gentle ±14° modulation over three sub-cycles per revolution
+    return base + Math.sin(t * Math.PI * 2 * 3) * 14 + Math.sin(t * Math.PI * 2) * 8;
+  });
+  const orbitRadius = useTransform(orbit, (t) => 236 + Math.sin(t * Math.PI * 2 * 2) * 18);
+  const markerX = useTransform([orbitAngle, orbitRadius], ([a, r]: number[]) =>
+    Math.sin((a * Math.PI) / 180) * r,
+  );
+  const markerY = useTransform([orbitAngle, orbitRadius], ([a, r]: number[]) =>
+    -Math.cos((a * Math.PI) / 180) * r,
+  );
+  const markerRot = orbitAngle;
+
+
 
 
 
