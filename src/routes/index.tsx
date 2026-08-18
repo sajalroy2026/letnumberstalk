@@ -249,7 +249,7 @@ function Home() {
                 initial={{ opacity: 0, x: -32 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-70px" }}
-                transition={{ duration: 0.9, ease }}
+                transition={{ duration: 1.1, ease }}
                 className="text-accent"
               >
                 <FlowGraph tone="var(--gold)" glow="var(--gold-glow)" seed={0.4} />
@@ -263,10 +263,10 @@ function Home() {
                   {DELIVERS.map((c, i) => (
                     <motion.article
                       key={c.t}
-                      initial={{ opacity: 0, scale: 0.94 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true, margin: "-40px" }}
-                      transition={{ duration: 0.5, delay: i * 0.08, ease }}
+                      initial={{ opacity: 0, y: 22, scale: 0.97 }}
+                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                      viewport={{ once: true, margin: "-60px" }}
+                      transition={{ duration: 0.85, delay: i * 0.1, ease }}
                       className="glass relative p-6"
                     >
                       <span
@@ -321,7 +321,7 @@ function Home() {
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-80px" }}
-                    transition={{ duration: 0.6, delay: i * 0.05, ease }}
+                    transition={{ duration: 0.9, delay: i * 0.09, ease }}
                     className="min-h-[15.5rem]"
                   >
                     <FlipTile
@@ -373,12 +373,12 @@ function Home() {
                             aria-hidden
                           />
                           <p
-                            className="figure text-[0.62rem] font-semibold uppercase tracking-[0.24em]"
+                            className="figure text-[0.68rem] font-semibold uppercase tracking-[0.24em]"
                             style={{ color: tone }}
                           >
                             {p.name} · {count} metrics
                           </p>
-                          <p className="mt-4 max-w-[30ch] text-[0.95rem] font-medium leading-[1.6] text-foreground">
+                          <p className="mt-4 max-w-[30ch] text-[1.02rem] font-medium leading-[1.7] text-foreground">
                             {METRIC_CONTENT.filter((m) => m.pillar === p.id)
                               .slice(0, 6)
                               .map((m) => m.name)
@@ -414,7 +414,7 @@ function Home() {
                     initial={{ opacity: 0, y: 26, rotateX: 10 }}
                     whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
                     viewport={{ once: true, margin: "-70px" }}
-                    transition={{ duration: 0.7, delay: i * 0.07, ease }}
+                    transition={{ duration: 0.95, delay: i * 0.1, ease }}
                     className="min-h-[21rem]"
                   >
                     <FlipTile
@@ -449,19 +449,19 @@ function Home() {
                             aria-hidden
                           />
                           <p
-                            className="figure text-[0.62rem] font-semibold uppercase tracking-[0.24em]"
+                            className="figure text-[0.68rem] font-semibold uppercase tracking-[0.24em]"
                             style={{ color: brief?.tone }}
                           >
                             {s.name} · calibration brief
                           </p>
-                          <p className="mt-4 max-w-[26ch] font-display text-[1.05rem] font-semibold leading-[1.4] text-foreground">
+                          <p className="mt-4 max-w-[26ch] font-display text-[1.15rem] font-semibold leading-[1.4] text-foreground">
                             {brief?.lead}
                           </p>
                           <ul className="mt-4 max-w-[30ch] space-y-2.5">
                             {brief?.points.map((pt) => (
                               <li
                                 key={pt}
-                                className="text-[0.92rem] font-medium leading-[1.5] text-foreground"
+                                className="text-[1rem] font-medium leading-[1.6] text-foreground"
                               >
                                 {pt}
                               </li>
@@ -477,7 +477,7 @@ function Home() {
                 initial={{ opacity: 0, y: 26 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-70px" }}
-                transition={{ duration: 0.7, delay: 0.35, ease }}
+                transition={{ duration: 0.95, delay: 0.4, ease }}
                 className="glass flex flex-col justify-between p-6 text-accent"
               >
                 <div className="h-44 w-full">
@@ -534,7 +534,7 @@ function Home() {
                   initial={{ opacity: 0, y: 26 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.6, delay: i * 0.08, ease }}
+                  transition={{ duration: 0.9, delay: i * 0.1, ease }}
                   className="bg-background p-7"
                 >
                   <span className="block h-[3px] w-10" style={{ background: c.tone }} aria-hidden />
