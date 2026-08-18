@@ -116,9 +116,10 @@ function Home() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease }}
-                className="figure text-[0.68rem] uppercase tracking-[0.32em] text-accent"
+                className="figure text-[0.9rem] font-semibold uppercase tracking-[0.2em] text-[var(--gold-glow)] sm:text-[1rem]"
               >
-                Diagnostic intelligence for boardroom leaders
+                Diagnostic intelligence for Founders and Boardroom Leaders
+
               </motion.p>
 
               <motion.h1

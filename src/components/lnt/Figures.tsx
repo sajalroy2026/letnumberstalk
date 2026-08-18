@@ -1606,21 +1606,8 @@ export function OpticField({ className }: { className?: string }) {
   const C = 380;
   const CY = 320;
 
-  const curve = (phase: number, amp: number) => {
-    const pts: string[] = [];
-    for (let i = 0; i <= 40; i++) {
-      const x = 70 + (i / 40) * 620;
-      const t = i / 40;
-      const y =
-        CY +
-        180 -
-        t * 210 -
-        Math.sin(t * 7 + phase) * amp -
-        Math.sin(t * 3.1 + phase * 0.6) * (amp * 0.7);
-      pts.push(`${x.toFixed(1)} ${y.toFixed(1)}`);
-    }
-    return `M ${pts.join(" L ")}`;
-  };
+
+
 
   const rings = [
     { r: 268, w: 1, o: 0.12, dur: 78, dir: 1, dash: "2 16" },
@@ -1674,19 +1661,7 @@ export function OpticField({ className }: { className?: string }) {
           aria-label="A continuously scanning diagnostic field of measurement rings, readouts and a rising health curve"
         >
           <defs>
-            <linearGradient id="of-curve" x1="0" y1="1" x2="1" y2="0">
-              <stop offset="0%" stopColor="var(--steel-glow)" />
-              <stop offset="46%" stopColor="var(--gold-glow)" />
-              <stop offset="100%" stopColor="var(--forest-glow)" />
-            </linearGradient>
-            <linearGradient id="of-sweep" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="var(--gold-glow)" stopOpacity="0.75" />
-              <stop offset="100%" stopColor="var(--gold-glow)" stopOpacity="0" />
-            </linearGradient>
-            <linearGradient id="of-radar" x1="1" y1="1" x2="0" y2="0">
-              <stop offset="0%" stopColor="var(--gold-glow)" stopOpacity="0" />
-              <stop offset="100%" stopColor="var(--gold-glow)" stopOpacity="0.5" />
-            </linearGradient>
+
             <radialGradient id="of-core" cx="50%" cy="50%">
               <stop offset="0%" stopColor="var(--gold-glow)" stopOpacity="0.22" />
               <stop offset="100%" stopColor="var(--gold-glow)" stopOpacity="0" />
@@ -1770,19 +1745,17 @@ export function OpticField({ className }: { className?: string }) {
             })}
           </g>
 
-          {/* travelling marker — softened trail, triangular pointer, luminous node */}
+          {/* travelling marker — triangular pointer and luminous node, full orbit */}
           <motion.g
             style={{ transformOrigin: `${C}px ${CY}px` }}
-            animate={reduce ? { rotate: -34 } : { rotate: 360 }}
-            transition={reduce ? { duration: 0 } : { duration: 11, repeat: Infinity, ease: "linear" }}
+            animate={reduce ? { rotate: -34 } : { rotate: [0, 128, 214, 360] }}
+            transition={
+              reduce
+                ? { duration: 0 }
+                : { duration: 28, repeat: Infinity, ease: "easeInOut", times: [0, 0.38, 0.62, 1] }
+            }
           >
-            {!reduce && (
-              <path
-                d={`M ${C} ${CY} L ${polar(C, CY, 262, -46)[0]} ${polar(C, CY, 262, -46)[1]} A 262 262 0 0 1 ${C} ${CY - 262} Z`}
-                fill="url(#of-radar)"
-                opacity="0.55"
-              />
-            )}
+
             <motion.g
               animate={reduce ? {} : { opacity: [0.85, 1, 0.85] }}
               transition={{ duration: 3.4, repeat: Infinity, ease: "easeInOut" }}
@@ -1834,32 +1807,8 @@ export function OpticField({ className }: { className?: string }) {
             );
           })}
 
-          {/* live diagnostic curve — redraws continuously */}
-          <motion.path
-            fill="none"
-            stroke="url(#of-curve)"
-            strokeWidth="3"
-            strokeLinecap="round"
-            animate={
-              reduce
-                ? { d: curve(0, 20) }
-                : { d: [curve(0, 22), curve(2.1, 32), curve(4.2, 18), curve(6.28, 22)] }
-            }
-            transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-          />
-          <motion.path
-            fill="none"
-            stroke="var(--oxblood-glow)"
-            strokeWidth="1.4"
-            opacity="0.5"
-            strokeDasharray="5 9"
-            animate={
-              reduce
-                ? { d: curve(1.2, 12) }
-                : { d: [curve(1.2, 12), curve(3.4, 22), curve(5.5, 10), curve(7.48, 12)] }
-            }
-            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-          />
+
+
 
           {/* drifting readouts */}
           {readouts.map((rd, i) => (

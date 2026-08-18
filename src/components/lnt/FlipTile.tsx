@@ -3,7 +3,7 @@ import { useId, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
-const ease = [0.16, 1, 0.3, 1] as const;
+
 
 /**
  * FlipTile — a click/keyboard operated card that turns in place to reveal a
@@ -41,11 +41,18 @@ export function FlipTile({
           }
         }}
         animate={
-          reduce ? {} : { rotateY: open ? 180 : 0, scale: open ? 1.015 : 1, z: open ? 30 : 0 }
+          reduce ? {} : { rotateY: open ? 180 : 0, scale: open ? 1.02 : 1, z: open ? 40 : 0 }
         }
-        transition={{ duration: 1.05, ease }}
-        style={{ transformStyle: "preserve-3d" }}
+        transition={{
+          type: "spring",
+          stiffness: 42,
+          damping: 16,
+          mass: 1.05,
+          restDelta: 0.0005,
+        }}
+        style={{ transformStyle: "preserve-3d", willChange: "transform" }}
         className="relative h-full w-full cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+
       >
         <div
           className={cn(
