@@ -2073,11 +2073,11 @@ export function TickerRain({
               const delay = seedAt(c * 13 + k, 2) * 6;
               const dur = 3.4 + seedAt(c * 5 + k, 3) * 4;
               const tone = [
-                "var(--gold)",
-                "var(--forest)",
-                "var(--burnt)",
-                "var(--steel)",
-                "var(--oxblood-core)",
+                "var(--gold-glow)",
+                "var(--forest-glow)",
+                "var(--burnt-glow)",
+                "var(--steel-glow)",
+                "var(--mocha-glow)",
               ][(c + k) % 5];
               return (
                 <motion.span
@@ -2088,7 +2088,7 @@ export function TickerRain({
                   animate={
                     reduce
                       ? { opacity: 0.35 }
-                      : { opacity: [0, 0.85, 0.85, 0], y: [6, 0, 0, -6] }
+                      : { opacity: [0, 1, 1, 0], y: [6, 0, 0, -6] }
                   }
                   transition={
                     reduce
