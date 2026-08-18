@@ -395,17 +395,18 @@ function Home() {
                       label={`${s.name} — reveal the calibration brief`}
                       className="h-full min-h-[19rem]"
                       front={
-                        <div className="glass relative h-full overflow-hidden">
+                        <div className="lucid-tile lucid-tile-hover relative h-full overflow-hidden">
                           <SectorPlate id={s.id} />
-                          <div className="border-t border-border p-5">
-                            <h3 className="font-display text-lg text-foreground">{s.name}</h3>
-                            <p className="mt-2 text-xs leading-[1.7] text-foreground/75">
+                          <div className="border-t border-foreground/10 p-5">
+                            <h3 className="font-display text-2xl leading-tight text-foreground">
+                              {s.name}
+                            </h3>
+                            <p className="mt-2 text-[0.8rem] leading-[1.7] text-foreground/80">
                               {s.description}
                             </p>
                           </div>
                           <span
-                            className="figure absolute bottom-3 right-4 text-[0.55rem] uppercase tracking-[0.2em]"
-                            style={{ color: brief?.tone }}
+                            className="figure absolute bottom-3 right-4 text-[0.55rem] uppercase tracking-[0.24em] text-foreground/60"
                             aria-hidden
                           >
                             Open ⟳
@@ -413,18 +414,21 @@ function Home() {
                         </div>
                       }
                       back={
-                        <div
-                          className="relative h-full overflow-hidden border p-5 shadow-[var(--shadow-plate)]"
-                          style={{
-                            backgroundColor: brief?.tone,
-                            borderColor: brief?.tone,
-                            color: "var(--primary-foreground)",
-                          }}
-                        >
-                          <p className="figure text-[0.58rem] uppercase tracking-[0.22em] opacity-90">
+                        <div className="lucid-back relative h-full overflow-hidden p-6">
+                          <span
+                            className="absolute inset-x-0 top-0 h-[3px] opacity-80"
+                            style={{
+                              backgroundImage: `linear-gradient(90deg, ${brief?.tone}, transparent)`,
+                            }}
+                            aria-hidden
+                          />
+                          <p
+                            className="figure text-[0.6rem] uppercase tracking-[0.24em]"
+                            style={{ color: brief?.tone }}
+                          >
                             {s.name} · calibration brief
                           </p>
-                          <p className="mt-3 max-h-[13rem] overflow-y-auto pr-1 text-[0.72rem] leading-[1.65] opacity-95">
+                          <p className="mt-3 text-[0.78rem] leading-[1.7] text-foreground">
                             {brief?.text}
                           </p>
                         </div>
