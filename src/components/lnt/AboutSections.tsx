@@ -97,7 +97,7 @@ export function AboutSections() {
             </p>
           </aside>
 
-          <div className="citrine-plate space-y-5 p-7">
+          <div className="mist-plate plate-lift space-y-5 p-7">
 
             {ABOUT_ARCHITECT.paragraphs.map((p, i) => (
               <p key={i} className="measure text-[1.02rem] leading-[1.8] tracking-[0.002em] text-foreground">
