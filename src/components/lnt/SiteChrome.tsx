@@ -99,8 +99,8 @@ export function Disclosure() {
       aria-label={DISCLOSURE.title}
       className="print-plain print-avoid-break border border-border border-l-4 border-l-accent bg-card px-7 py-7 shadow-[var(--shadow-plate)]"
     >
-      <h2 className="font-display text-lg text-foreground">{DISCLOSURE.title}</h2>
-      <p className="mt-4 measure text-sm leading-[1.75] text-foreground">{DISCLOSURE.body}</p>
+      <h2 className="font-display text-xl tracking-[-0.01em] text-foreground">{DISCLOSURE.title}</h2>
+      <p className="mt-4 measure text-[0.95rem] leading-[1.8] text-foreground/90">{DISCLOSURE.body}</p>
     </section>
   );
 }

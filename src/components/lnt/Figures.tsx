@@ -1770,28 +1770,47 @@ export function OpticField({ className }: { className?: string }) {
             })}
           </g>
 
-          {/* radar sweep arm with decaying trail */}
-          {!reduce && (
-            <motion.g
-              style={{ transformOrigin: `${C}px ${CY}px` }}
-              animate={{ rotate: 360 }}
-              transition={{ duration: 9, repeat: Infinity, ease: "linear" }}
-            >
+          {/* travelling marker — softened trail, triangular pointer, luminous node */}
+          <motion.g
+            style={{ transformOrigin: `${C}px ${CY}px` }}
+            animate={reduce ? { rotate: -34 } : { rotate: 360 }}
+            transition={reduce ? { duration: 0 } : { duration: 11, repeat: Infinity, ease: "linear" }}
+          >
+            {!reduce && (
               <path
-                d={`M ${C} ${CY} L ${polar(C, CY, 268, -54)[0]} ${polar(C, CY, 268, -54)[1]} A 268 268 0 0 1 ${C} ${CY - 268} Z`}
+                d={`M ${C} ${CY} L ${polar(C, CY, 262, -46)[0]} ${polar(C, CY, 262, -46)[1]} A 262 262 0 0 1 ${C} ${CY - 262} Z`}
                 fill="url(#of-radar)"
+                opacity="0.55"
               />
-              <line
-                x1={C}
-                y1={CY}
-                x2={C}
-                y2={CY - 268}
-                stroke="var(--gold-glow)"
-                strokeWidth="2.4"
-                opacity="0.9"
+            )}
+            <motion.g
+              animate={reduce ? {} : { opacity: [0.85, 1, 0.85] }}
+              transition={{ duration: 3.4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <circle
+                cx={C}
+                cy={CY - 236}
+                r="26"
+                fill="var(--gold-glow)"
+                opacity="0.18"
+              />
+              <motion.circle
+                cx={C}
+                cy={CY - 236}
+                r="11"
+                animate={
+                  reduce
+                    ? { fill: "var(--gold-glow)" }
+                    : { fill: [...tones, "var(--gold-glow)"] as string[] }
+                }
+                transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+              />
+              <path
+                d={`M ${C} ${CY - 268} L ${C - 13} ${CY - 244} L ${C + 13} ${CY - 244} Z`}
+                fill="var(--gold-glow)"
               />
             </motion.g>
-          )}
+          </motion.g>
 
           {/* contact blips */}
           {RADAR_BLIPS.map((b, i) => {
@@ -1854,19 +1873,19 @@ export function OpticField({ className }: { className?: string }) {
                 y={rd.y}
                 textAnchor={rd.x > C ? "end" : "start"}
                 className="figure fill-foreground"
-                fontSize="15"
-                letterSpacing="3"
-                opacity="0.8"
+                fontSize="19"
+                letterSpacing="3.4"
+                opacity="0.85"
               >
                 {rd.k}
               </text>
               <text
                 x={rd.x}
-                y={rd.y + 36}
+                y={rd.y + 46}
                 textAnchor={rd.x > C ? "end" : "start"}
                 className="font-display"
                 fill={tones[i % tones.length]}
-                fontSize="40"
+                fontSize="56"
                 fontWeight="700"
               >
                 {rd.v}

@@ -931,3 +931,54 @@
   -webkit-backface-visibility: hidden;
   transform-style: preserve-3d;
 }
+
+/* --------------------------------------------- Lucid floating tile system */
+@utility lucid-tile {
+  position: relative;
+  background-image:
+    linear-gradient(
+      160deg,
+      color-mix(in oklab, var(--background) 72%, transparent),
+      color-mix(in oklab, var(--background) 34%, transparent)
+    );
+  backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid color-mix(in oklab, var(--foreground) 14%, transparent);
+  box-shadow: var(--shadow-plate);
+  transition:
+    transform 620ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 620ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 420ms ease;
+}
+
+@utility lucid-tile-hover {
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lift);
+    border-color: color-mix(in oklab, var(--accent) 52%, transparent);
+  }
+}
+
+@utility lucid-back {
+  position: relative;
+  background-image:
+    linear-gradient(
+      200deg,
+      color-mix(in oklab, var(--background) 82%, transparent),
+      color-mix(in oklab, var(--background) 52%, transparent)
+    );
+  backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid color-mix(in oklab, var(--foreground) 16%, transparent);
+  box-shadow: var(--shadow-plate);
+}
+
+/* --------------------------------------------------- About architect card */
+@utility sand-plate {
+  background-image: linear-gradient(
+    155deg,
+    color-mix(in oklab, var(--gold) 22%, var(--card)),
+    color-mix(in oklab, var(--gold) 7%, var(--card)) 52%,
+    var(--card)
+  );
+  border: 1px solid color-mix(in oklab, var(--gold) 46%, transparent);
+  box-shadow: var(--shadow-lift);
+}

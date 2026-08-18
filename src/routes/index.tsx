@@ -302,61 +302,63 @@ function Home() {
                       label={`${p.name} — reveal the ${count} metrics assessed`}
                       className="h-full min-h-[15.5rem]"
                       front={
-                        <div className="tilt-card relative h-full overflow-hidden border border-border bg-card p-6 shadow-[var(--shadow-plate)]">
+                        <div className="lucid-tile lucid-tile-hover relative flex h-full flex-col justify-between overflow-hidden p-6">
                           <span
-                            className="absolute inset-x-0 top-0 h-[4px]"
-                            style={{ backgroundImage: `linear-gradient(90deg, ${tone}, var(--accent))` }}
+                            className="absolute inset-x-0 top-0 h-[3px] opacity-80"
+                            style={{ backgroundImage: `linear-gradient(90deg, ${tone}, transparent)` }}
                             aria-hidden
                           />
-                          <div className="flex items-baseline justify-between gap-3">
-                            <h3 className="font-display text-lg leading-snug text-foreground">
-                              {p.name}
-                            </h3>
-                            <span className="figure text-3xl" style={{ color: tone }}>
-                              {Math.round(p.weight * 100)}%
+                          <h3 className="font-display text-2xl leading-[1.15] text-foreground sm:text-[1.75rem]">
+                            {p.name}
+                          </h3>
+                          <div>
+                            <div className="flex items-baseline justify-between gap-3">
+                              <span className="figure text-[0.65rem] uppercase tracking-[0.2em] text-foreground/70">
+                                {count} metrics
+                              </span>
+                              <span className="figure text-4xl font-semibold" style={{ color: tone }}>
+                                {Math.round(p.weight * 100)}%
+                              </span>
+                            </div>
+                            <div className="mt-4 h-[3px] w-full bg-foreground/10" aria-hidden>
+                              <motion.div
+                                className="h-full"
+                                style={{ background: tone }}
+                                initial={{ width: 0 }}
+                                whileInView={{ width: `${Math.round(p.weight * 100 * 4)}%` }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 1, delay: 0.15 + i * 0.05, ease }}
+                              />
+                            </div>
+                            <span
+                              className="figure mt-3 block text-[0.55rem] uppercase tracking-[0.24em] text-foreground/60"
+                              aria-hidden
+                            >
+                              Open ⟳
                             </span>
                           </div>
-                          <div className="mt-5 h-1.5 w-full bg-secondary" aria-hidden>
-                            <motion.div
-                              className="h-full"
-                              style={{ background: tone }}
-                              initial={{ width: 0 }}
-                              whileInView={{ width: `${Math.round(p.weight * 100 * 4)}%` }}
-                              viewport={{ once: true }}
-                              transition={{ duration: 1, delay: 0.15 + i * 0.05, ease }}
-                            />
-                          </div>
-                          <p className="figure mt-3 text-[0.65rem] uppercase tracking-[0.18em] text-muted-foreground">
-                            {count} metrics
-                          </p>
-                          <span
-                            className="figure absolute bottom-4 right-5 text-[0.55rem] uppercase tracking-[0.2em]"
-                            style={{ color: tone }}
-                            aria-hidden
-                          >
-                            Open ⟳
-                          </span>
                         </div>
                       }
                       back={
-                        <div
-                          className="relative h-full overflow-hidden border p-5 shadow-[var(--shadow-plate)]"
-                          style={{
-                            backgroundColor: tone,
-                            borderColor: tone,
-                            color: "var(--primary-foreground)",
-                          }}
-                        >
-                          <p className="figure text-[0.58rem] uppercase tracking-[0.22em] opacity-90">
+                        <div className="lucid-back relative h-full overflow-hidden p-6">
+                          <span
+                            className="absolute inset-x-0 top-0 h-[3px] opacity-80"
+                            style={{ backgroundImage: `linear-gradient(90deg, ${tone}, transparent)` }}
+                            aria-hidden
+                          />
+                          <p
+                            className="figure text-[0.6rem] uppercase tracking-[0.24em]"
+                            style={{ color: tone }}
+                          >
                             {p.name} · {count} metrics
                           </p>
-                          <ul className="mt-3 max-h-[10.5rem] overflow-y-auto pr-1 text-[0.66rem] leading-[1.45] sm:columns-2 sm:gap-4">
-                            {METRIC_CONTENT.filter((m) => m.pillar === p.id).map((m) => (
-                              <li key={m.id} className="break-inside-avoid pb-1 opacity-95">
-                                {m.name}
-                              </li>
-                            ))}
-                          </ul>
+                          <p className="mt-3 text-[0.82rem] leading-[1.6] text-foreground">
+                            {METRIC_CONTENT.filter((m) => m.pillar === p.id)
+                              .slice(0, 6)
+                              .map((m) => m.name)
+                              .join(" · ")}
+                            {count > 6 ? " · etc." : ""}
+                          </p>
                         </div>
                       }
                     />
@@ -387,23 +389,24 @@ function Home() {
                     whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
                     viewport={{ once: true, margin: "-70px" }}
                     transition={{ duration: 0.7, delay: i * 0.07, ease }}
-                    className="min-h-[19rem]"
+                    className="min-h-[21rem]"
                   >
                     <FlipTile
                       label={`${s.name} — reveal the calibration brief`}
-                      className="h-full min-h-[19rem]"
+                      className="h-full min-h-[21rem]"
                       front={
-                        <div className="glass relative h-full overflow-hidden">
+                        <div className="lucid-tile lucid-tile-hover relative h-full overflow-hidden">
                           <SectorPlate id={s.id} />
-                          <div className="border-t border-border p-5">
-                            <h3 className="font-display text-lg text-foreground">{s.name}</h3>
-                            <p className="mt-2 text-xs leading-[1.7] text-foreground/75">
+                          <div className="border-t border-foreground/10 p-5">
+                            <h3 className="font-display text-2xl leading-tight text-foreground">
+                              {s.name}
+                            </h3>
+                            <p className="mt-2 text-[0.8rem] leading-[1.7] text-foreground/80">
                               {s.description}
                             </p>
                           </div>
                           <span
-                            className="figure absolute bottom-3 right-4 text-[0.55rem] uppercase tracking-[0.2em]"
-                            style={{ color: brief?.tone }}
+                            className="figure absolute bottom-3 right-4 text-[0.55rem] uppercase tracking-[0.24em] text-foreground/60"
                             aria-hidden
                           >
                             Open ⟳
@@ -411,18 +414,21 @@ function Home() {
                         </div>
                       }
                       back={
-                        <div
-                          className="relative h-full overflow-hidden border p-5 shadow-[var(--shadow-plate)]"
-                          style={{
-                            backgroundColor: brief?.tone,
-                            borderColor: brief?.tone,
-                            color: "var(--primary-foreground)",
-                          }}
-                        >
-                          <p className="figure text-[0.58rem] uppercase tracking-[0.22em] opacity-90">
+                        <div className="lucid-back relative h-full overflow-hidden p-6">
+                          <span
+                            className="absolute inset-x-0 top-0 h-[3px] opacity-80"
+                            style={{
+                              backgroundImage: `linear-gradient(90deg, ${brief?.tone}, transparent)`,
+                            }}
+                            aria-hidden
+                          />
+                          <p
+                            className="figure text-[0.6rem] uppercase tracking-[0.24em]"
+                            style={{ color: brief?.tone }}
+                          >
                             {s.name} · calibration brief
                           </p>
-                          <p className="mt-3 max-h-[13rem] overflow-y-auto pr-1 text-[0.72rem] leading-[1.65] opacity-95">
+                          <p className="mt-3 text-[0.78rem] leading-[1.7] text-foreground">
                             {brief?.text}
                           </p>
                         </div>
