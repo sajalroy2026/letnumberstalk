@@ -479,7 +479,7 @@ export function ChapterPlate({
             {name}
           </h1>
           <span className="band-rule mt-4 block" aria-hidden />
-          <p className="mt-4 measure text-sm leading-relaxed text-muted-foreground sm:text-base">
+          <p className="mt-4 measure text-sm leading-relaxed text-foreground/90 sm:text-base">
             {note}
           </p>
         </div>
