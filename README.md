@@ -2,7 +2,7 @@
 
 PRODUCT
 
-LetNumbersTalk is a client-side web application delivering a 57-metric, seven-pillar business health assessment for founders and business operators. It computes weighted diagnostic scores across seven pillars, benchmarked against five industry profiles, and surfaces contextual guidance for every metric.
+LetNumbersTalk is a client-side web application delivering a 54-metric, seven-pillar business health assessment for founders and business operators. It computes weighted diagnostic scores across seven pillars, benchmarked against five industry profiles, and surfaces contextual guidance for every metric.
 
 I'm attaching two documents that are the complete and binding specification for this build:
 
@@ -16,7 +16,7 @@ CORE STRUCTURE
 
 7 pillars, independently weighted: Financial Health (22%), Risk Management (20%), Market Position (18%), Operational Efficiency (15%), Strategic Positioning (13%), Organizational Capability (7%), Technology & Systems (5%).
 
-57 metrics total distributed across those pillars, each with its own scoring function.
+54 metrics total distributed across those pillars, each with its own scoring function.
 
 5 industry profiles: Services, Manufacturing, Retail/D2C, SaaS/Subscription, Startup. No sixth "general" fallback exists — every benchmark comparison is sector-specific.
 
@@ -74,7 +74,7 @@ IntegratedReport — the Integrated Score, Caution block if triggered, and conso
 
 VISUAL AND INTERACTION DESIGN
 
-Visual language: a composite of McKinsey, BCG, and Bain — McKinsey's restraint, BCG's analytical warmth, Bain's decisiveness — through a mid-century modern aesthetic. The User experience should be immersive and cinematic, with deliberate, purposeful transitions as the user progresses — with full quality parity on mobile and desktop.
+Visual language:  a mid-century modern aesthetic. The User experience should be immersive and cinematic, with deliberate, purposeful transitions as the user progresses — with full quality parity on mobile and desktop.
 
 REQUEST
 
