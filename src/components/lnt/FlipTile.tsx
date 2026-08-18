@@ -40,8 +40,10 @@ export function FlipTile({
             setOpen((v) => !v);
           }
         }}
-        animate={reduce ? {} : { rotateY: open ? 180 : 0 }}
-        transition={{ duration: 0.75, ease }}
+        animate={
+          reduce ? {} : { rotateY: open ? 180 : 0, scale: open ? 1.015 : 1, z: open ? 30 : 0 }
+        }
+        transition={{ duration: 1.05, ease }}
         style={{ transformStyle: "preserve-3d" }}
         className="relative h-full w-full cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       >
