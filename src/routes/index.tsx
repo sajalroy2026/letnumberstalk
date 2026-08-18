@@ -454,9 +454,19 @@ function Home() {
                           >
                             {s.name} · calibration brief
                           </p>
-                          <p className="mt-3 text-[0.8rem] font-medium leading-[1.7] text-foreground">
-                            {brief?.text}
+                          <p className="mt-4 max-w-[26ch] font-display text-[1.05rem] font-semibold leading-[1.4] text-foreground">
+                            {brief?.lead}
                           </p>
+                          <ul className="mt-4 max-w-[30ch] space-y-2.5">
+                            {brief?.points.map((pt) => (
+                              <li
+                                key={pt}
+                                className="text-[0.92rem] font-medium leading-[1.5] text-foreground"
+                              >
+                                {pt}
+                              </li>
+                            ))}
+                          </ul>
                         </div>
                       }
                     />
