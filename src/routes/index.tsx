@@ -389,11 +389,11 @@ function Home() {
                     whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
                     viewport={{ once: true, margin: "-70px" }}
                     transition={{ duration: 0.7, delay: i * 0.07, ease }}
-                    className="min-h-[19rem]"
+                    className="min-h-[21rem]"
                   >
                     <FlipTile
                       label={`${s.name} — reveal the calibration brief`}
-                      className="h-full min-h-[19rem]"
+                      className="h-full min-h-[21rem]"
                       front={
                         <div className="lucid-tile lucid-tile-hover relative h-full overflow-hidden">
                           <SectorPlate id={s.id} />
