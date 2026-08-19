@@ -1,31 +1,19 @@
-# Remove Lovable Heart Icon / Replace Favicon
+# Remove the Lovable Favicon Icon
 
 ## Current state
 - `public/favicon.ico` is the default Lovable heart icon.
 - `src/routes/__root.tsx` links to `/favicon.ico`.
-- No custom Open Graph image is set, so shared links may fall back to a Lovable-generated preview containing the heart mark.
 
 ## Plan
 
-1. **Generate a custom favicon**
-   - Design a square 64x64 PNG favicon that matches the site's Navy/Gold/Burnt Orange/Forest Green/Oxblood palette and boardroom gravitas.
-   - Use a simple, bold mark (e.g., a stylised "L" / monogram or a 7-pillar armature glyph) that reads cleanly at 16x16 and 32x32.
+1. **Delete the default favicon file**
+   - Remove `public/favicon.ico`.
 
-2. **Install the favicon**
-   - Save the generated image as `public/favicon.png`.
-   - Remove the existing `public/favicon.ico` default Lovable file.
-   - Update `src/routes/__root.tsx` to reference the new PNG favicon:
-     ```tsx
-     { rel: "icon", type: "image/png", href: "/favicon.png" }
-     ```
+2. **Remove the favicon link**
+   - Delete the `{ rel: "icon", href: "/favicon.ico", type: "image/x-icon" }` entry from `src/routes/__root.tsx`.
 
-3. **Replace the share preview image**
-   - Generate a 1200x630 Open Graph image using the same visual language, with the attribution "LetNumbersTalk — By Mr. Sajal Roy".
-   - Add `og:image`, `og:image:width`, `og:image:height`, `og:image:alt`, and `twitter:image` meta tags to `src/routes/__root.tsx`.
-
-4. **Verify**
-   - Confirm the new favicon loads at `/favicon.png`.
-   - Confirm no `/favicon.ico` reference remains in the source.
+3. **Do not add a replacement icon**
+   - No new favicon, no transparent placeholder, no generated icon.
 
 ## Outcome
-The Lovable heart icon will no longer appear in the browser tab or when sharing the link; it will be replaced by a custom, on-brand favicon and share card.
+The browser tab will show no site icon, and the Lovable heart will no longer appear. Note: some platforms may still generate a generic preview image when the link is shared; removing that preview entirely would require a separate Open Graph image decision.
