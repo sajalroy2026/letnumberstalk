@@ -1,19 +1,29 @@
-# Remove the Lovable Favicon Icon
+# Set Up Google Search Console for letnumberstalk.com
 
 ## Current state
-- `public/favicon.ico` is the default Lovable heart icon.
-- `src/routes/__root.tsx` links to `/favicon.ico`.
+- The Google Search Console connector is now linked to the project.
+- A META verification token has been requested from Google.
+- The verification tag needs to be added to the homepage `<head>`, then Google must be told to verify it.
 
 ## Plan
 
-1. **Delete the default favicon file**
-   - Remove `public/favicon.ico`.
+1. **Add the verification meta tag**
+   - Insert the Google-provided verification tag into `src/routes/__root.tsx` so it appears in the server-rendered `<head>` of every page.
 
-2. **Remove the favicon link**
-   - Delete the `{ rel: "icon", href: "/favicon.ico", type: "image/x-icon" }` entry from `src/routes/__root.tsx`.
+2. **Publish the site**
+   - The verification tag must be live on `https://letnumberstalk.com/` before Google can confirm it.
 
-3. **Do not add a replacement icon**
-   - No new favicon, no transparent placeholder, no generated icon.
+3. **Verify ownership with Google**
+   - Call the Search Console verification endpoint using the linked connector.
+
+4. **Add the site to Search Console**
+   - Register `https://letnumberstalk.com/` as a verified property.
+
+5. **Submit the sitemap**
+   - Submit `https://letnumberstalk.com/sitemap.xml` to Search Console.
+
+6. **Update the SEO finding**
+   - Mark the GSC finding as fixed once verification and sitemap submission succeed.
 
 ## Outcome
-The browser tab will show no site icon, and the Lovable heart will no longer appear. Note: some platforms may still generate a generic preview image when the link is shared; removing that preview entirely would require a separate Open Graph image decision.
+Google Search Console will be fully connected, the domain verified, and the sitemap submitted. The remaining failing SEO finding will be resolved.
