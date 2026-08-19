@@ -86,6 +86,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "A 7-pillar, 54-metric business health diagnostic for founders and boardroom leaders.",
       },
       { name: "author", content: "Sajal Roy" },
+      {
+        name: "google-site-verification",
+        content: "MzEdR5mEnpMrWMpRI0m71dPEKWONM2LjWdYBciRn124",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
