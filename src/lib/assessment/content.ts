@@ -20,7 +20,9 @@ export const ABOUT_ARCHITECT = {
   ],
   credentials: [
     "Microsoft Certified AI Transformation Leader",
+    "Enterprise Operations Excellence and Program Governance",
     "Management and Strategy Consulting Practitioner",
+
     "SAFe 6 Agilist",
     "Certified Scrum Master",
     "ICP-ACC Agile Coach",
