@@ -4,13 +4,23 @@ import { colors } from "../lib/colors";
 
 export const Scene07Close = () => {
   const frame = useCurrentFrame();
-  const collapse = spring({ frame: frame - 5, fps: 30, config: { damping: 25, stiffness: 120 } });
-  const point = interpolate(frame, [0, 30], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: (t) => 1 - Math.pow(1 - t, 4) });
-  const reveal = spring({ frame: frame - 35, fps: 30, config: { damping: 18, stiffness: 100 } });
+  const point = interpolate(frame, [0, 30], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+    easing: (t) => 1 - Math.pow(1 - t, 4),
+  });
+  const reveal = spring({ frame: frame - 45, fps: 30, config: { damping: 18, stiffness: 100 } });
+  const pointFade = interpolate(frame, [35, 55], [1, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
 
   const rings = Array.from({ length: 6 }).map((_, i) => {
-    const r = 40 + i * 60;
-    const opacity = interpolate(frame, [5 + i * 3, 25 + i * 3], [0.6, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+    const r = 30 + i * 45;
+    const opacity = interpolate(frame, [5 + i * 3, 25 + i * 3], [0.55, 0], {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    });
     return { r, opacity };
   });
 
@@ -28,22 +38,29 @@ export const Scene07Close = () => {
           <circle
             key={i}
             cx={540}
-            cy={960}
-            r={ring.r * (1 - point * 0.85)}
+            cy={720}
+            r={ring.r * (1 - point * 0.88)}
             fill="none"
             stroke={colors.gold}
             strokeWidth={2}
-            opacity={ring.opacity}
+            opacity={ring.opacity * pointFade}
           />
         ))}
-        <circle cx={540} cy={960} r={8 + point * 6} fill={colors.gold} opacity={point} />
+        <circle
+          cx={540}
+          cy={720}
+          r={6 + point * 8}
+          fill={colors.gold}
+          opacity={pointFade}
+        />
       </svg>
 
       <div
         style={{
           textAlign: "center",
           opacity: reveal,
-          transform: `scale(${0.92 + reveal * 0.08})`,
+          transform: `scale(${0.92 + reveal * 0.08}) translateY(${(1 - reveal) * 30}px)`,
+          marginTop: 320,
         }}
       >
         <div
