@@ -1,6 +1,10 @@
 # LetNumbersTalk — 28-Second Cinematic Promo Film
 
-A code-rendered motion-graphics film (not an AI text-to-video clip), so every number, pillar name, and colour is exactly the product's own. Output: a 1920x1080, 30fps MP4 you can download and post.
+A code-rendered motion-graphics film (not an AI text-to-video clip), so every number, pillar name, and colour is exactly the product's own. Output: a vertical 9:16 1080x1920, 30fps MP4 you can download and post.
+
+Vertical-specific treatment: layouts re-composed for the tall frame — stacked type blocks, the radar instrument centred with figures entering from top and bottom edges, the 57-metric grid scrolling vertically through the lens, and safe margins kept clear of social-platform UI. No human figures anywhere; purely instrumentation, type, and geometry.
+
+Nolan-grade illusion layer: match-cuts where a shape becomes a different object across the cut, inverted/mirrored frames that fold in on themselves, time-reversal beats (a collapse replayed backwards as a build), nested frames-within-frames pushing infinitely inward, and constant multi-directional superimpositions — ghost layers sliding in from left, right, top, and bottom simultaneously at different speeds, with occasional deliberate slow holds for contrast.
 
 ## Why code-rendered, not AI video
 
