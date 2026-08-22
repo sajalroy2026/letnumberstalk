@@ -1,34 +1,33 @@
-# Make the report download reliable on mobile
+# Download report in Instagram's in-app browser — technical assessment
 
-## What the test showed
+## Finding
 
-I re-ran the flow on a phone-sized viewport (411x738, touch events, real taps) for all 7 pillars. In every case the Download report button was on top of the stack, received the tap, and fired the print call — no overlay intercepting it, no JavaScript errors. So the button itself is wired correctly for every pillar.
+There is nothing broken in the code. The automated sweep across all 7 pillars, on a phone-sized touch viewport, showed the Download report button receiving the tap and firing the print call every single time, with no errors. Your own test confirms it: the same link works in mobile Chrome and fails only when opened from an Instagram story.
 
-That means what you saw is not a per-pillar bug. It is the known weak spot of the current mechanism: the button calls the browser's native print dialog, and on phones that behaves inconsistently.
+The cause sits outside the app. Instagram (and Facebook, LinkedIn, TikTok) render links in an embedded webview, not a real browser. Those webviews do not implement the browser print pipeline, so the call to open the print/Save-as-PDF dialog is discarded silently — no error is raised, nothing is thrown, and the page has no reliable way to know it was ignored. No backend, server, hosting, or configuration change can turn that dialog on; it does not exist in that webview.
 
-- In-app browsers (LinkedIn, Instagram, Facebook, some email apps) silently ignore the print call — nothing happens at all.
-- iOS Safari routes it through the share sheet, which can take several seconds on a long report and looks like nothing happened.
-- Android Chrome renders a print preview of a long, image-heavy document, which can stall briefly on slower devices.
-- The button is 38px tall, just under the 44px minimum comfortable tap target, so a near-miss tap is possible.
+## What can actually be done
 
-## Changes to make
+Given you want no appearance or structural change, the honest answer is: one small, invisible code change is possible, and everything beyond it would alter the UI.
 
-1. **Bigger, unmistakable tap target.** Raise the Download report button (and the Start a new session button beside it) to a minimum 48px height on small screens, with full-width layout on phones.
+**Option A — leave the code exactly as is.**
+The button is correct. Anyone who opens the link in Safari or Chrome gets the report. Instagram users can already use the webview's own "Open in browser" menu item. Zero risk, zero change.
 
-2. **Immediate visual feedback on tap.** On press, the button enters a short "Preparing report…" state so a slow print dialog never reads as a dead button.
+**Option B — silent in-app-browser fallback (no visual change).**
+Inside the existing click handler only, detect an in-app webview from the user agent (Instagram, Facebook, LinkedIn, TikTok, Snapchat markers) and, when detected, attempt to hand the current URL to the system browser before printing. On Android this uses an `intent://` handoff that opens Chrome; on iOS the webview usually falls back to its own "Open in Safari" affordance. If no in-app browser is detected, behaviour stays byte-for-byte identical to today.
 
-3. **Detect when print is unavailable and say so.** If the browser blocks or ignores the print call (typical of in-app browsers), show a short inline notice under the button explaining that the report needs to be opened in Safari or Chrome, with a one-tap "Copy link" so the user can move it out of the in-app browser.
+Trade-off to be clear about: the Android handoff is reliable, the iOS one is not — Apple gives webviews no programmatic escape hatch. So Option B fixes roughly the Android half of the problem and leaves iOS unchanged.
 
-4. **Mobile hint line.** Under the button on small screens, a quiet line of copy: "Choose Save as PDF in the print dialog." This removes the ambiguity about what should happen next.
+## Rejected
 
-5. **Keep desktop behaviour identical.** No change to how the report prints or paginates — only the button's affordance and feedback change.
+- Generating the PDF in JavaScript instead of via the print dialog: this would add a dependency and, more importantly, in-app webviews also block file downloads, so it would not fix the Instagram case while degrading the report's typography and pagination.
+- Rendering the PDF on the server: contradicts the zero-infrastructure, nothing-leaves-the-browser guarantee the product is built on, since the user's figures would have to be transmitted.
+- Any on-screen notice, hint line, button resize, or progress state: excluded per your instruction.
 
-## Technical notes
+## Non-technical mitigation
 
-- All work sits in the report stage of `src/components/lnt/Stages.tsx` plus small print/utility styles in `src/styles.css`. Scoring, content, and the print stylesheet stay untouched.
-- Unavailability detection: call `window.print()` inside a try/catch and set a short timer that checks whether `beforeprint`/`afterprint` fired; if neither fires and no error surfaces within a couple of seconds, show the fallback notice rather than assuming failure outright.
-- No new dependencies; still entirely client-side with nothing transmitted anywhere.
+The most effective fix costs no code: when sharing on Instagram, add "open in browser to download the report" to the story text, or share the link in a bio/link-in-bio destination that opens externally.
 
-## Verification
+## Recommendation
 
-After the change I'll re-run the mobile sweep across all 7 pillars, confirm the print call still fires on tap in each, and capture a screenshot of the button at phone width plus the fallback notice state.
+Option A unless you want the Android handoff, in which case Option B — it is roughly 15 lines inside one existing handler and changes nothing a user sees.
