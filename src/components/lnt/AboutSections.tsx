@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 
 import { ABOUT_ARCHITECT, ABOUT_PLATFORM, METHODOLOGY_NOTE } from "@/lib/assessment/content";
 import { BenchmarkBand, InstrumentStack } from "@/components/lnt/Figures";
-import portrait from "@/assets/sajal-roy-v3.png.asset.json";
+import portrait from "@/assets/sajal-roy-v4.png.asset.json";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
