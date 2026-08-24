@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 
 import { ABOUT_ARCHITECT, ABOUT_PLATFORM, METHODOLOGY_NOTE } from "@/lib/assessment/content";
 import { BenchmarkBand, InstrumentStack } from "@/components/lnt/Figures";
-import portrait from "@/assets/sajal-roy.jpg.asset.json";
+import portrait from "@/assets/sajal-roy-v2.png.asset.json";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -96,16 +96,6 @@ export function AboutSections() {
                 className="font-semibold text-foreground underline decoration-[var(--oxblood-core)]/70 underline-offset-4"
               >
                 {ABOUT_ARCHITECT.contact}
-              </a>
-            </p>
-            <p className="mt-2 text-[0.95rem] font-medium leading-[1.6] text-foreground">
-              <a
-                href={ABOUT_ARCHITECT.workspaceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-semibold text-foreground underline decoration-[var(--oxblood-core)]/70 underline-offset-4"
-              >
-                {ABOUT_ARCHITECT.workspaceLabel}
               </a>
             </p>
           </aside>
