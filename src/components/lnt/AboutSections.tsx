@@ -58,11 +58,13 @@ export function AboutSections() {
 
         <div className="mt-8 grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.45fr)]">
           <aside className="sand-plate plate-lift print-avoid-break self-start p-8">
-            <div
-              className="grid h-20 w-20 place-items-center rounded-full border border-accent/50 bg-[linear-gradient(150deg,color-mix(in_oklab,var(--gold)_58%,var(--card)),var(--card))] font-display text-2xl text-foreground shadow-[var(--shadow-plate)]"
-              aria-hidden
-            >
-              SR
+            <div className="h-20 w-20 overflow-hidden rounded-full border border-accent/50 shadow-[var(--shadow-plate)]">
+              <img
+                src={portrait.url}
+                alt={ABOUT_ARCHITECT.name}
+                loading="lazy"
+                className="h-full w-full object-cover object-top"
+              />
             </div>
             <p className="mt-5 font-display text-2xl tracking-[-0.01em] text-foreground">{ABOUT_ARCHITECT.name}</p>
             <p className="mt-1 text-[0.8rem] font-bold uppercase tracking-[0.2em] text-[var(--oxblood-core)]">
