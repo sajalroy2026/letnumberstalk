@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 
 import { ABOUT_ARCHITECT, ABOUT_PLATFORM, METHODOLOGY_NOTE } from "@/lib/assessment/content";
 import { BenchmarkBand, InstrumentStack } from "@/components/lnt/Figures";
+import portrait from "@/assets/sajal-roy.jpg.asset.json";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -58,11 +59,13 @@ export function AboutSections() {
 
         <div className="mt-8 grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.45fr)]">
           <aside className="sand-plate plate-lift print-avoid-break self-start p-8">
-            <div
-              className="grid h-20 w-20 place-items-center rounded-full border border-accent/50 bg-[linear-gradient(150deg,color-mix(in_oklab,var(--gold)_58%,var(--card)),var(--card))] font-display text-2xl text-foreground shadow-[var(--shadow-plate)]"
-              aria-hidden
-            >
-              SR
+            <div className="h-20 w-20 overflow-hidden rounded-full border border-accent/50 shadow-[var(--shadow-plate)]">
+              <img
+                src={portrait.url}
+                alt={ABOUT_ARCHITECT.name}
+                loading="lazy"
+                className="h-full w-full object-cover object-top"
+              />
             </div>
             <p className="mt-5 font-display text-2xl tracking-[-0.01em] text-foreground">{ABOUT_ARCHITECT.name}</p>
             <p className="mt-1 text-[0.8rem] font-bold uppercase tracking-[0.2em] text-[var(--oxblood-core)]">
@@ -93,6 +96,16 @@ export function AboutSections() {
                 className="font-semibold text-foreground underline decoration-[var(--oxblood-core)]/70 underline-offset-4"
               >
                 {ABOUT_ARCHITECT.contact}
+              </a>
+            </p>
+            <p className="mt-2 text-[0.95rem] font-medium leading-[1.6] text-foreground">
+              <a
+                href={ABOUT_ARCHITECT.workspaceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-foreground underline decoration-[var(--oxblood-core)]/70 underline-offset-4"
+              >
+                {ABOUT_ARCHITECT.workspaceLabel}
               </a>
             </p>
           </aside>
