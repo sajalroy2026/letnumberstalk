@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 
 import { ABOUT_ARCHITECT, ABOUT_PLATFORM, METHODOLOGY_NOTE } from "@/lib/assessment/content";
 import { BenchmarkBand, InstrumentStack } from "@/components/lnt/Figures";
-import portrait from "@/assets/sajal-roy-v2.png.asset.json";
+import portrait from "@/assets/sajal-roy-v3.png.asset.json";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -64,7 +64,7 @@ export function AboutSections() {
                 src={portrait.url}
                 alt={ABOUT_ARCHITECT.name}
                 loading="lazy"
-                className="h-full w-full object-cover object-top"
+                className="h-full w-full object-cover object-center opacity-95"
               />
             </div>
             <p className="mt-5 font-display text-2xl tracking-[-0.01em] text-foreground">{ABOUT_ARCHITECT.name}</p>
