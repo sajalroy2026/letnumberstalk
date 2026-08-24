@@ -64,7 +64,7 @@ export function AboutSections() {
                 src={portrait.url}
                 alt={ABOUT_ARCHITECT.name}
                 loading="lazy"
-                className="h-full w-full object-cover object-top"
+                className="h-full w-full object-cover object-center opacity-95"
               />
             </div>
             <p className="mt-5 font-display text-2xl tracking-[-0.01em] text-foreground">{ABOUT_ARCHITECT.name}</p>
