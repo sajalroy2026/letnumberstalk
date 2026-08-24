@@ -98,6 +98,16 @@ export function AboutSections() {
                 {ABOUT_ARCHITECT.contact}
               </a>
             </p>
+            <p className="mt-2 text-[0.95rem] font-medium leading-[1.6] text-foreground">
+              <a
+                href={ABOUT_ARCHITECT.workspaceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-foreground underline decoration-[var(--oxblood-core)]/70 underline-offset-4"
+              >
+                {ABOUT_ARCHITECT.workspaceLabel}
+              </a>
+            </p>
           </aside>
 
           <div className="print-prose space-y-5">
