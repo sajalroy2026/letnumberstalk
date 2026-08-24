@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { track } from "@/lib/analytics/track";
 
 import { MetricCard } from "./MetricCard";
-import { Disclosure } from "./SiteChrome";
+import { Disclosure, ReportAttribution } from "./SiteChrome";
 import { AboutSections } from "./AboutSections";
 import { COVERAGE_TIERS, SECTORS } from "@/lib/assessment/scoring";
 import { metricsForPillar, METRICS_BY_ID, PILLAR_ORDER } from "@/lib/assessment/engine";
@@ -614,6 +614,7 @@ export function ReportStage() {
       <div className="mt-16 space-y-10">
         <AboutSections />
         <Disclosure />
+        <ReportAttribution />
       </div>
       </div>
     </div>

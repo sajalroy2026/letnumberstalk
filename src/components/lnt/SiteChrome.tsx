@@ -37,7 +37,7 @@ export function SiteHeader() {
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border bg-background">
+    <footer className="no-print border-t border-border bg-background">
       <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8">
         <div className="grid gap-10 md:grid-cols-3">
           <div>
@@ -90,6 +90,41 @@ export function SiteFooter() {
 
       </div>
     </footer>
+  );
+}
+
+export function ReportAttribution() {
+  return (
+    <section
+      aria-label="Attribution"
+      className="print-plain print-avoid-break border-t border-border pt-7"
+    >
+      <p className="text-[0.65rem] uppercase tracking-[0.26em] text-accent">Conceptualized by</p>
+      <p className="mt-2 font-display text-lg tracking-[-0.01em] text-foreground">
+        {ABOUT_ARCHITECT.name}
+      </p>
+      <p className="text-[0.9rem] text-foreground/90">{ABOUT_ARCHITECT.role}</p>
+      <p className="mt-3 text-[0.9rem] text-foreground/90">
+        Mail —{" "}
+        <a
+          href={`mailto:${ABOUT_ARCHITECT.contact}`}
+          className="font-medium text-foreground underline decoration-accent/60 underline-offset-4"
+        >
+          {ABOUT_ARCHITECT.contact}
+        </a>
+      </p>
+      <p className="mt-1.5 text-[0.9rem] leading-relaxed text-foreground/90">
+        {ABOUT_ARCHITECT.workspaceLabel} —{" "}
+        <a
+          href={ABOUT_ARCHITECT.workspaceUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium text-foreground underline decoration-accent/60 underline-offset-4"
+        >
+          linktr.ee/sajalroy
+        </a>
+      </p>
+    </section>
   );
 }
 

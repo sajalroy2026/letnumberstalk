@@ -63,7 +63,7 @@ export function AboutSections() {
               <img
                 src={portrait.url}
                 alt={ABOUT_ARCHITECT.name}
-                loading="lazy"
+                loading="eager"
                 className="h-full w-full object-cover object-center opacity-95"
               />
             </div>

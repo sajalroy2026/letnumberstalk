@@ -34,7 +34,7 @@ function AssessPage() {
         <main className="surface-depth">
           <AssessmentFlow />
         </main>
-        <div className="ink">
+        <div className="ink no-print">
           <SiteFooter />
         </div>
       </div>
