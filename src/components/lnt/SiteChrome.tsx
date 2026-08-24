@@ -114,14 +114,13 @@ export function ReportAttribution() {
         </a>
       </p>
       <p className="mt-1.5 text-[0.9rem] leading-relaxed text-foreground/90">
-        {ABOUT_ARCHITECT.workspaceLabel} —{" "}
         <a
           href={ABOUT_ARCHITECT.workspaceUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="font-medium text-foreground underline decoration-accent/60 underline-offset-4"
         >
-          linktr.ee/sajalroy
+          {ABOUT_ARCHITECT.workspaceLabel}
         </a>
       </p>
     </section>
