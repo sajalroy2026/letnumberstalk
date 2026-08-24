@@ -68,17 +68,16 @@ export function SiteFooter() {
                 {ABOUT_ARCHITECT.contact}
               </a>
             </p>
-            {ABOUT_ARCHITECT.linkedin ? (
-              <p className="mt-1.5 text-sm text-muted-foreground">
-                LinkedIn —{" "}
-                <a
-                  href={ABOUT_ARCHITECT.linkedin}
-                  className="text-foreground underline decoration-accent/60 underline-offset-4"
-                >
-                  Profile
-                </a>
-              </p>
-            ) : null}
+            <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+              <a
+                href={ABOUT_ARCHITECT.workspaceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground underline decoration-accent/60 underline-offset-4"
+              >
+                {ABOUT_ARCHITECT.workspaceLabel}
+              </a>
+            </p>
           </div>
         </div>
 
