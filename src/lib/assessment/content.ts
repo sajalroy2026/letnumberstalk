@@ -33,6 +33,8 @@ export const ABOUT_ARCHITECT = {
   name: "Mr Sajal Roy",
   role: "Enterprise Systems Architect",
   linkedin: "",
+  workspaceUrl: "https://linktr.ee/sajalroy",
+  workspaceLabel: "Spotify Podcast | LinkedIn Newsletter | Socials",
 };
 
 export const METHODOLOGY_NOTE =
